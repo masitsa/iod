@@ -1,9 +1,41 @@
+<?php 
+	
+	$contacts = $this->site_model->get_contacts();
+	
+	if(count($contacts) > 0)
+	{
+		$email = $contacts['email'];
+		$email2 = $contacts['email'];
+		$facebook = $contacts['facebook'];
+		$twitter = $contacts['twitter'];
+		$linkedin = $contacts['linkedin'];
+		$logo = $contacts['logo'];
+		$company_name = $contacts['company_name'];
+		$phone = $contacts['phone'];
+		
+		if(!empty($facebook))
+		{
+			$facebook = '<li class="facebook"><a href="'.$facebook.'" target="_blank" title="Facebook">Facebook</a></li>';
+		}
+		
+	}
+	else
+	{
+		$email = '';
+		$facebook = '';
+		$twitter = '';
+		$linkedin = '';
+		$logo = '';
+		$company_name = '';
+		$google = '';
+	}
+?>
         <!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>Dobi | <?php echo $title;?></title>
-		<meta name="keywords" content="Dobi wash clothes laundry laundrette" />
-		<meta name="description" content="Dobi admin">
+		<title><?php echo $contacts['company_name'];?> | <?php echo $title;?></title>
+		<meta name="keywords" content="<?php echo $contacts['company_name'];?> mobile apps clicks marketing" />
+		<meta name="description" content="<?php echo $contacts['company_name'];?> admin">
 		<meta name="author" content="alvaro masitsa">
 
 		<!-- Mobile Metas -->
@@ -19,11 +51,13 @@
 		<link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
         
         <link href="<?php echo base_url()."assets/themes/jasny/css/jasny-bootstrap.css"?>" rel="stylesheet"/>
+        <link rel="stylesheet" href="<?php echo base_url()."assets/themes/bluish";?>/style/jquery.cleditor.css">
 
 		<!-- Specific Page Vendor CSS -->		
         <link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
         <link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
         <link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/morris/morris.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."assets/themes/jasny/";?>css/jasny-bootstrap.css">
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/stylesheets/theme.css" />

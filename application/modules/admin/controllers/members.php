@@ -37,8 +37,8 @@ class Members extends admin
 	*/
 	public function index($order = 'member_first_name', $order_method = 'ASC') 
 	{
-		$where = 'company.company_id = member.company_id';
-		$table = 'member, company';
+		$where = 'member_status = 1';
+		$table = 'member';
 		
 		$member_search = $this->session->userdata('member_search');
 		if(!empty($member_search))

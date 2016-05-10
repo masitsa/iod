@@ -57,7 +57,8 @@ class Gallery_model extends CI_Model
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->order_by('department.department_name');
+		$this->db->order_by('gallery_id');
+		$this->db->group_by('gallery_name');
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
@@ -120,4 +121,31 @@ class Gallery_model extends CI_Model
 			return FALSE;
 		}
 	}
+	/*
+	*	Save a product's gallery image
+	*	@param int $product_id
+	*	@param char $image
+	*	@param char $thumb
+	*
+	*/
+	public function save_gallery_file($image, $thumb)
+	{
+		//save the image data to the database
+		$data = array(
+			'gallery_image_name' => $image,
+			'gallery_image_thumb' => $thumb,
+			'gallery_name' => $this->input->post('gallery_name'),
+			'gallery_status' => 1
+		);
+		
+		if($this->db->insert('gallery', $data))
+		{
+			return $this->db->insert_id();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
 }

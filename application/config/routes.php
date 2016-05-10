@@ -116,5 +116,31 @@ $route['admin/receipts/(:any)/(:any)/(:num)'] = 'admin/accounts/receipts/$1/$2/$
 $route['admin/search-receipts'] = 'admin/accounts/search_receipts';
 $route['admin/close-payable-search'] = 'admin/accounts/close_receipts_search';
 
+
+//sections
+$route['administration/sections'] = 'admin/sections/index';
+$route['administration/sections/(:any)/(:any)/(:num)'] = 'admin/sections/index/$1/$2/$3';
+$route['administration/add-section'] = 'admin/sections/add_section';
+$route['administration/edit-section/(:num)'] = 'admin/sections/edit_section/$1';
+
+$route['administration/edit-section/(:num)/(:num)'] = 'admin/sections/edit_section/$1/$2';
+$route['administration/delete-section/(:num)'] = 'admin/sections/delete_section/$1';
+$route['administration/delete-section/(:num)/(:num)'] = 'admin/sections/delete_section/$1/$2';
+$route['administration/activate-section/(:num)'] = 'admin/sections/activate_section/$1';
+$route['administration/activate-section/(:num)/(:num)'] = 'admin/sections/activate_section/$1/$2';
+$route['administration/deactivate-section/(:num)'] = 'admin/sections/deactivate_section/$1';
+$route['administration/deactivate-section/(:num)/(:num)'] = 'admin/sections/deactivate_section/$1/$2';
+
+//add members
+$route['members/add-member'] = 'admin/members/add_member';
+//imort of members
+$route['members'] = 'admin/members/index';
+$route['members/validate-import'] = 'admin/members/do_members_import';
+$route['import/members-template'] = 'admin/members/import_members_template';
+$route['members/import-members'] = 'admin/members/import_members';
+
+//contact 
+$route['administration/contacts']='admin/contacts/show_contacts';
+$route['admin/company-profile'] = 'admin/contacts/show_contacts';
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

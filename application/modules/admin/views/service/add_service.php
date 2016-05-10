@@ -1,4 +1,9 @@
-   
+<section class="panel">
+    <header class="panel-heading">
+        <h2 class="panel-title">Add Service</h2>
+         <a href="<?php echo site_url().'administration/all-services';?>" class="btn btn-success btn-sm pull-right" style="margin-top:-25px;">Back to Service</a>
+    </header>
+	<div class="panel-body">
         <!-- Jasny -->
         <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
@@ -41,30 +46,7 @@
 				?>
                 <div class="row">
                 	<div class="col-md-6">
-                        <div class="form-group">
-                            <label for="service_name">Department</label>
-                            <select class="form-control" name="department_id">
-                            	<?php
-                                	if($active_departments->num_rows() > 0)
-									{
-										$dept_id = set_value('department_id');
-										foreach($active_departments->result() as $res)
-										{
-											$department_id = $res->department_id;
-											$department_name = $res->department_name;
-											if($dept_id ==$department_id)
-											{
-												echo '<option value="'.$department_id.'" selected="selected">'.$department_name.'</option>';
-											}
-											else
-											{
-												echo '<option value="'.$department_id.'">'.$department_name.'</option>';
-											}
-										}
-									}
-								?>
-                            </select>
-                        </div>
+                      
                         <div class="form-group">
                             <label for="service_name">Service name</label>
                             <input type="text" class="form-control" name="service_name" placeholder="Service Name" value="<?php echo set_value("service_name");?>">
@@ -83,22 +65,37 @@
                         </div>
                 	</div>
                 </div>
-                
+                <div class="row">
+                	<div class="col-md-12">
+                	</div>
+                </div>
                 <div class="row">
                 	<div class="col-md-12">
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="service_description">Service description</label>
-                            <div class="col-md-10" style="height:500px; margin-bottom:20px;">
+                            <div class="col-md-10" style=" margin-bottom:20px;">
                             	<textarea class="cleditor" name="service_description"><?php echo set_value("service_description");?></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                	<div class="col-md-12">
+                        <div class="form-group">
+		                	 <label class="col-lg-4 control-label" for="image">Gallery Image</label>
+		                    <div class="col-lg-8">
+		                    <?php echo form_upload(array( 'name'=>'gallery[]', 'multiple'=>true, 'class'=>'btn'));?>
+		                    </div>
+                		</div>
+                	</div>
+                </div>
 				
 				<div class="form-group center-align">
-					<input type="submit" value="Add Service" class="login_btn btn btn-success btn-lg">
+					<input type="submit" value="Add Service" class="login_btn btn btn-success btn-sm">
 				</div>
 				<?php
 					echo form_close();
 				?>
 		</div>
+	</div>
+</section>

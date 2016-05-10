@@ -72,7 +72,7 @@ class Service_model extends CI_Model
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->order_by('department.department_name, service.service_name');
+		$this->db->order_by('service.service_name');
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
@@ -145,5 +145,24 @@ class Service_model extends CI_Model
 		$query = $this->db->get($table);
 		
 		return $query;
+	}
+	public function save_service_file($service_id,$image, $thumb)
+	{
+		//save the image data to the database
+		$data = array(
+			'service_gallery_image_name' => $image,
+			'service_gallery_image_thumb' => $thumb,
+			'service_id' => $service_id,
+			'service_gallery_status' => 1
+		);
+		
+		if($this->db->insert('service_gallery', $data))
+		{
+			return $this->db->insert_id();
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 }

@@ -9,7 +9,7 @@
 <file name="add_user.php" server="148.251.2.43/public_html/" local="130597462620000000" remote="130656301800000000" Dst="0" />
 <file name="all_users.php" server="148.251.2.43/public_html/" local="130597462600000000" remote="130656301800000000" Dst="0" />
 <file name="edit_user.php" server="148.251.2.43/public_html/" local="130597462600000000" remote="130656301800000000" Dst="0" />
-<file name="add_user.php" server="ftp.setson.co.ke/iod/" local="130825626308422861" remote="131058020400000000" Dst="0" />
-<file name="all_users.php" server="ftp.setson.co.ke/iod/" local="130825628001804361" remote="131058020400000000" Dst="0" />
-<file name="edit_user.php" server="ftp.setson.co.ke/iod/" local="130825626610000000" remote="131058020400000000" Dst="0" />
+<file name="add_user.php" server="192.186.246.118/public_html/installify/" local="130825626308422861" remote="130969668600000000" Dst="0" />
+<file name="all_users.php" server="192.186.246.118/public_html/installify/" local="130825628001804361" remote="130969668600000000" Dst="0" />
+<file name="edit_user.php" server="192.186.246.118/public_html/installify/" local="130825626610000000" remote="130969668600000000" Dst="0" />
 </dwsync>

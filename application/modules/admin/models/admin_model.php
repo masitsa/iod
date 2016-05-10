@@ -3,57 +3,57 @@
 class Admin_model extends CI_Model 
 {
 	/*
-	*	Get admin module parents
+	*	Get admin section parents
 	*
 	*/
-	public function get_admin_module_parents()
+	public function get_admin_section_parents()
 	{
-		$this->db->where(array('module_user' => 1, 'module_parent' => 0));
-		$this->db->order_by('module_position');
-		return $this->db->get('module');
+		$this->db->where(array('section_status' => 1, 'section_parent' => 0));
+		$this->db->order_by('section_position');
+		return $this->db->get('section');
 	}
 	
 	/*
-	*	Get admin module children
+	*	Get admin section children
 	*
 	*/
-	public function get_admin_module_children()
+	public function get_admin_section_children()
 	{
-		$this->db->where(array('module_user' => 1, 'module_parent >' => 0));
-		$this->db->order_by('module_parent');
-		return $this->db->get('module');
+		$this->db->where(array('section_user' => 1, 'section_parent >' => 0));
+		$this->db->order_by('section_parent');
+		return $this->db->get('section');
 	}
 	
 	/*
 	*	Check if parent has children
 	*
 	*/
-	public function check_children($children, $module_id)
+	public function check_children($children, $section_id, $web_name)
 	{
-		$module_children = array();
+		$section_children = array();
 		
 		if($children->num_rows() > 0)
 		{
 			foreach($children->result() as $res)
 			{
-				$parent = $res->module_parent;
+				$parent = $res->section_parent;
 				
-				if($parent == $module_id)
+				if($parent == $section_id)
 				{
-					$module_name = $res->module_name;
+					$section_name = $res->section_name;
 					
 					$child_array = array
 					(
-						'module_name' => $module_name,
-						'link' => site_url().'admin/'.strtolower($this->site_model->create_web_name($module_name)),
+						'section_name' => $section_name,
+						'link' => site_url().$web_name.'/'.strtolower($this->site_model->create_web_name($section_name)),
 					);
 					
-					array_push($module_children, $child_array);
+					array_push($section_children, $child_array);
 				}
 			}
 		}
 		
-		return $module_children;
+		return $section_children;
 	}
 	
 	public function get_breadcrumbs()

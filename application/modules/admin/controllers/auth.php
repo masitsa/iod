@@ -29,7 +29,7 @@ class Auth extends MX_Controller
 			//check if user has valid login credentials
 			if($this->auth_model->validate_user())
 			{
-				redirect('all-members');
+				redirect('dashboard');
 			}
 			
 			else
@@ -62,15 +62,15 @@ class Auth extends MX_Controller
 				$data['user_email'] = "";
 			}
 		}
-		$data['content'] = $this->load->view('templates/login');
 		$data['title'] = $this->site_model->display_page_title();
 		
-		$this->load->view('site/templates/general_page', $data);
+		$this->load->view('templates/login', $data);
 	}
 	
 	public function logout_admin()
 	{
 		$this->session->sess_destroy();
+		
 		redirect('login-admin');
 	}
 }

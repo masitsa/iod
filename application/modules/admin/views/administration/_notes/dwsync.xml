@@ -37,12 +37,12 @@
 <file name="notifications.php" server="148.251.2.43/public_html/" local="130516131000000000" remote="130656301800000000" Dst="0" />
 <file name="summary.php" server="148.251.2.43/public_html/" local="130536157020000000" remote="130656301800000000" Dst="0" />
 <file name="table.php" server="148.251.2.43/public_html/" local="130516128800000000" remote="130656301800000000" Dst="0" />
-<file name="bar_graph.php" server="ftp.setson.co.ke/iod/" local="130538193960000000" remote="131058019800000000" Dst="0" />
-<file name="calender.php" server="ftp.setson.co.ke/iod/" local="130525061440000000" remote="131058019800000000" Dst="0" />
-<file name="line_graph.php" server="ftp.setson.co.ke/iod/" local="130538188200000000" remote="131058019800000000" Dst="0" />
-<file name="logs.php" server="ftp.setson.co.ke/iod/" local="130525138300000000" remote="131058019800000000" Dst="0" />
-<file name="notifications.php" server="ftp.setson.co.ke/iod/" local="130516131000000000" remote="131058019800000000" Dst="0" />
-<file name="real_time.php" server="ftp.setson.co.ke/iod/" local="130538204700000000" remote="131058019800000000" Dst="0" />
-<file name="summary.php" server="ftp.setson.co.ke/iod/" local="130536157020000000" remote="131058019800000000" Dst="0" />
-<file name="table.php" server="ftp.setson.co.ke/iod/" local="130516128800000000" remote="131058019800000000" Dst="0" />
+<file name="bar_graph.php" server="192.186.246.118/public_html/installify/" local="130538193960000000" remote="130969668000000000" Dst="0" />
+<file name="calender.php" server="192.186.246.118/public_html/installify/" local="130525061440000000" remote="130969668000000000" Dst="0" />
+<file name="line_graph.php" server="192.186.246.118/public_html/installify/" local="130538188200000000" remote="130969668000000000" Dst="0" />
+<file name="logs.php" server="192.186.246.118/public_html/installify/" local="130525138300000000" remote="130969668000000000" Dst="0" />
+<file name="notifications.php" server="192.186.246.118/public_html/installify/" local="130516131000000000" remote="130969668000000000" Dst="0" />
+<file name="real_time.php" server="192.186.246.118/public_html/installify/" local="130538204700000000" remote="130969668000000000" Dst="0" />
+<file name="summary.php" server="192.186.246.118/public_html/installify/" local="130536157020000000" remote="130969668000000000" Dst="0" />
+<file name="table.php" server="192.186.246.118/public_html/installify/" local="130516128800000000" remote="130969668000000000" Dst="0" />
 </dwsync>

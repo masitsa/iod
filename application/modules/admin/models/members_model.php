@@ -312,5 +312,9 @@ class Members_model extends CI_Model
 			return FALSE;
 		}
 	}
+		
+	public function all_parent_members()
+	{
+	}
 }
 ?>

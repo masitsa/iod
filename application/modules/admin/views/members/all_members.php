@@ -8,7 +8,20 @@
 			$count = $page;
 			
 			$result .= 
+			
 			'
+			<div class="row">
+    		<div class="col-md-12">
+			<section class="panel panel-featured panel-featured-info">
+				<header class="panel-heading">
+					<h2 class="panel-title pull-left"><?php echo $title;?></h2>
+					 <div class="widget-icons pull-right">
+					 <a href="import-members" class="btn btn-warning btn-sm fa fa-plus"> Import Members</a>
+                      </div>
+		    	</header>
+		    </section>
+			</div>
+			</div>
 			<table class="table table-bordered table-striped table-condensed">
 				<thead>
 					<tr>
@@ -29,7 +42,7 @@
 			
 			foreach ($query->result() as $row)
 			{
-				$company_name = $row->company_name;
+				$company_name = $row->company;
 				$member_id = $row->member_id;
 				$member_first_name = $row->member_first_name;
 				$last_name = $row->member_surname;
@@ -303,7 +316,7 @@
 																	<table class="table table-striped table-bordered table-hover">
 																		<tr>
 																			<th>Company</th>
-																			<td>'.$row->company_name.'</td>
+																			<td>'.$row->company.'</td>
 																		</tr>
 																		<tr>
 																			<th>Designation</th>

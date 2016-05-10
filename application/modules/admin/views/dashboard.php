@@ -11,7 +11,7 @@
 													<strong>
 														<select class="form-control" id="salesSelector">
 															<?php
-                                                            if($category_parents->num_rows() > 0)
+                                                            /*if($category_parents->num_rows() > 0)
 															{
 																$count = 0;
 																foreach($category_parents->result() as $res)
@@ -26,7 +26,7 @@
 																		echo '<option value="Porto Drupal" selected>'.$res->category_name.'</option>';
 																	}
 																}
-															}
+															}*/
 															?>
 														</select>
 													</strong>

@@ -5,6 +5,7 @@ require_once "./application/modules/admin/controllers/admin.php";
 class Services extends admin {
 	var $service_path;
 	var $service_location;
+
 	
 	function __construct()
 	{
@@ -28,8 +29,8 @@ class Services extends admin {
 	*/
 	public function index() 
 	{
-		$where = 'service.department_id = department.department_id';
-		$table = 'service, department';
+		$where = 'service.service_status > 0';
+		$table = 'service';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
@@ -82,7 +83,7 @@ class Services extends admin {
 		}
 		$data['title'] = 'All Services';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function add_service()
@@ -108,7 +109,6 @@ class Services extends admin {
 		
 		$this->form_validation->set_rules('service_name', 'Service name', 'trim|xss_clean');
 		$this->form_validation->set_rules('service_description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('department_id', 'Department', 'numeric|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
@@ -124,11 +124,15 @@ class Services extends admin {
 				
 				$table = "service";
 				$this->db->insert($table, $data2);
+				$service_id = $this->db->insert_id();
 				$this->session->unset_userdata('service_file_name');
 				$this->session->unset_userdata('service_thumb_name');
 				$this->session->unset_userdata('service_error_message');
 				$this->session->set_userdata('success_message', 'Service has been added');
-				
+
+				$resize['width'] = 800;
+				$resize['height'] = 600;
+				$response = $this->file_model->upload_service($service_id, $this->service_path, $resize);
 				redirect('administration/all-services');
 			}
 		}
@@ -145,7 +149,7 @@ class Services extends admin {
 		$data['content'] = $this->load->view("service/add_service", $v_data, TRUE);
 		$data['title'] = 'Add Service';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function edit_service($service_id, $page)
@@ -207,7 +211,10 @@ class Services extends admin {
 				$this->session->unset_userdata('service_error_message');
 				$this->session->set_userdata('success_message', 'Service has been edited');
 				
-				redirect('administration/all-services/'.$page);
+				$resize['width'] = 800;
+				$resize['height'] = 600;
+				$response = $this->file_model->upload_service($service_id, $this->service_path, $resize);
+				redirect('administration/all-services');
 			}
 		}
 		
@@ -223,7 +230,7 @@ class Services extends admin {
 		$data['content'] = $this->load->view("service/edit_service", $v_data, TRUE);
 		$data['title'] = 'Edit Service';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
     
 	/*
