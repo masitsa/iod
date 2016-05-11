@@ -2,6 +2,17 @@
 
 class Site_model extends CI_Model 
 {
+	public function get_slides()
+	{
+  		$table = "slideshow";
+		$where = "slideshow_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+	
 	public function display_page_title()
 	{
 		$page = explode("/",uri_string());
@@ -56,11 +67,10 @@ class Site_model extends CI_Model
 		
 		$home = '';
 		$about = '';
-		$shop = '';
-		$blog = '';
+		$services = '';
+		$projects = '';
 		$contact = '';
-		$spareparts = '';
-		$wash = '';
+		$gallery = '';
 		
 		if($name == 'home')
 		{
@@ -71,108 +81,124 @@ class Site_model extends CI_Model
 		{
 			$about = 'active';
 		}
-		
-		if($name == 'dobi')
+		if($name == 'services')
 		{
-			$spareparts = 'active';
+			$services = 'active';
 		}
-		
-		if($name == 'wash')
+		if($name == 'projects')
 		{
-			$wash = 'active';
+			$projects = 'active';
 		}
-		
 		if($name == 'contact')
 		{
 			$contact = 'active';
 		}
-		$neighbourhoods_query = $this->customer_model->get_neighbourhoods();
-		$v_data['neighbourhood_parents'] = $neighbourhoods_query['neighbourhood_parents'];
-		$v_data['neighbourhood_children'] = $neighbourhoods_query['neighbourhood_children'];
+		if($name == 'gallery')
+		{
+			$gallery = 'active';
+		}
 		
+		//get departments
+		$query = $this->get_active_services();
+		$sub_menu_services = '';
+		if($query->num_rows() > 0)
+		{
+			foreach($query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$web_name = $this->create_web_name($service_name);
+				$sub_menu_services .= '
+										<li>
+											<a href="'.site_url().'services/'.$web_name.'">'.$service_name.'</a>
+										</li>';
+			}
+		}
 		$navigation = 
 		'
-			<li class="'.$home.'"><a href="'.site_url().'home">Home</a></li>
-			<li class="'.$wash.'"><a href="'.site_url().'wash">Wash</a></li>
-			<!--<li class="dropdown mega-menu-item mega-menu-fullwidth">
-				<a class="dropdown-toggle" href="#">
-					Dobis
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<div class="mega-menu-content">
-							<div class="row">
-								<div class="col-md-3">
-									<span class="mega-menu-sub-title">Category</span>
-									<ul class="sub-menu">
-										<li>
-											<ul class="sub-menu">
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								
-								<div class="col-md-3">
-									<span class="mega-menu-sub-title">Category</span>
-									<ul class="sub-menu">
-										<li>
-											<ul class="sub-menu">
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-3">
-									<span class="mega-menu-sub-title">Category</span>
-									<ul class="sub-menu">
-										<li>
-											<ul class="sub-menu">
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-3">
-									<span class="mega-menu-sub-title">Category</span>
-									<ul class="sub-menu">
-										<li>
-											<ul class="sub-menu">
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-												<li><a href="#">Sub category</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>	
-							</div>
-						</div>
-					</li>
-				</ul>
-			</li>-->
-			<li class="'.$about.'"><a href="'.site_url().'about">About</a></li>
-			<li class="'.$contact.'"><a href="'.site_url().'contact">Contact</a></li>
+			<li><a class="'.$home.'" href="'.site_url().'home">Home</a></li>
+			<li><a class="'.$about.'" href="'.site_url().'about">About</a></li>
 			
-		';
+			<!-- Service Menu -->
+			<li>
+				<a class="'.$services.'"  href="#">Services</a>
+				<ul class="dropdown-menu">
+					'.$sub_menu_services.'
+				</ul>
+			</li>
+			<!-- Service Menu -->
+			<!-- Portfolio Menu 
+			<li><a class="'.$projects.'" href="'.site_url().'projects">Projects</a></li>-->
+			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
+			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
+			
+			';
 		
 		return $navigation;
 	}
 	
+	public function get_active_services()
+	{
+  		$table = "service";
+		$where = "service.service_status = 1";
+		
+		$this->db->select('service.*');
+		$this->db->where($where);
+		$this->db->group_by('service_name');
+		$this->db->order_by('position', 'ASC');
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+	public function get_active_service_gallery($service_id)
+	{
+		$table = "service_gallery";
+		$where = "service_id = ".$service_id;
+		
+		$this->db->select('service_gallery.*');
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+	public function get_active_gallery()
+	{
+		$table = "gallery";
+		$where = "gallery_status > 0";
+		
+		$this->db->select('gallery.*');
+		$this->db->where($where);
+		
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+	public function get_active_service_gallery_names()
+	{
+		$table = "gallery";
+		$where = "gallery_status > 0";
+		
+		$this->db->select('gallery.*');
+		$this->db->where($where);
+		$this->db->group_by('gallery_name');
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 	public function create_web_name($field_name)
 	{
 		$web_name = str_replace(" ", "-", $field_name);
 		
 		return $web_name;
+	}
+	public function get_services($table, $where, $limit = NULL)
+	{
+		$this->db->where($where);
+		$this->db->select('service.*');
+		$this->db->order_by('service_name', 'ASC');
+		$query = $this->db->get($table);
+		
+		
+		return $query;
 	}
 	
 	public function decode_web_name($web_name)
@@ -255,7 +281,7 @@ class Site_model extends CI_Model
 		$page = explode("/",uri_string());
 		$total = count($page);
 		$last = $total - 1;
-		$crumbs = '<li><a href="'.site_url().'home">Home </a></li>';
+		$crumbs = '<li><a href="'.site_url().'home">HOME </a></li>';
 		
 		for($r = 0; $r < $total; $r++)
 		{
@@ -320,19 +346,73 @@ class Site_model extends CI_Model
 		$this->db->order_by('neighbourhood_name');
 		return $this->db->get('neighbourhood');
 	}
-	public function get_active_services()
+	public function get_testimonials()
 	{
-  		$table = "service";
-		$where = "service.service_status = 1";
-		
-		$this->db->select('service.*');
-		$this->db->where($where);
-		$this->db->group_by('service_name');
-		$this->db->order_by('position', 'ASC');
-		$query = $this->db->get($table);
-		
-		return $query;
+		$this->db->where('post.blog_category_id = blog_category.blog_category_id AND (blog_category.blog_category_name LIKE "%testimonials%") AND post.post_status = 1');
+		$this->db->order_by('post.created','ASC');
+		return $this->db->get('post,blog_category');
 	}
+	public function get_faqs()
+	{
+		$this->db->where('post.blog_category_id = blog_category.blog_category_id AND (blog_category.blog_category_name LIKE "%faqs%") AND post.post_status = 1');
+		$this->db->order_by('post.created','ASC');
+		return $this->db->get('post,blog_category');
+	}
+	public function get_front_end_items()
+	{
+		$this->db->where('post.blog_category_id = blog_category.blog_category_id AND (blog_category.blog_category_name LIKE "%front%") AND post.post_status = 1');
+		$this->db->order_by('post.created','ASC');
+		$this->db->limit(1);
+		return $this->db->get('post,blog_category');
+	}
+	
+	public function valid_url($url)
+	{
+		$pattern = "|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i";
+		//$pattern = "/^((ht|f)tp(s?)\:\/\/|~/|/)?([w]{2}([\w\-]+\.)+([\w]{2,5}))(:[\d]{1,5})?/";
+        if (!preg_match($pattern, $url))
+		{
+            return FALSE;
+        }
+ 
+        return TRUE;
+	}
+	
+	public function get_days($date)
+	{
+		$now = time(); // or your date as well
+		$your_date = strtotime($date);
+		$datediff = $now - $your_date;
+		return floor($datediff/(60*60*24));
+	}
+	
+	public function limit_text($text, $limit) 
+	{
+		$pieces = explode(" ", $text);
+		$total_words = count($pieces);
+		
+		if ($total_words > $limit) 
+		{
+			$return = "<i>";
+			$count = 0;
+			for($r = 0; $r < $total_words; $r++)
+			{
+				$count++;
+				if(($count%$limit) == 0)
+				{
+					$return .= $pieces[$r]."</i><br/><i>";
+				}
+				else{
+					$return .= $pieces[$r]." ";
+				}
+			}
+		}
+		
+		else{
+			$return = "<i>".$text;
+		}
+		return $return.'</i><br/>';
+    }
 }
 
 ?>

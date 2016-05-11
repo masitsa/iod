@@ -12,6 +12,7 @@ class Slideshow extends admin {
 		$this->load->model('users_model');
 		$this->load->model('slideshow_model');
 		$this->load->model('file_model');
+		$this->load->library('image_lib');
 		
 		//path to image directory
 		$this->slideshow_path = realpath(APPPATH . '../assets/slideshow');
@@ -30,7 +31,7 @@ class Slideshow extends admin {
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'administration/all-slides';
+		$config['base_url'] = base_url().'slideshow';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 5;
@@ -78,7 +79,7 @@ class Slideshow extends admin {
 		}
 		$data['title'] = 'Slideshow';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function add_slide()
@@ -123,7 +124,7 @@ class Slideshow extends admin {
 				$this->session->unset_userdata('slideshow_error_message');
 				$this->session->set_userdata('success_message', 'Slide has been added');
 				
-				redirect('administration/all-slides');
+				redirect('slideshow');
 			}
 		}
 		
@@ -144,7 +145,7 @@ class Slideshow extends admin {
 		$data['content'] = $this->load->view("slideshow/add_slide", $v_data, TRUE);
 		$data['title'] = 'Add Slide';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function edit_slide($slideshow_id, $page)
@@ -205,7 +206,7 @@ class Slideshow extends admin {
 				$this->session->unset_userdata('slideshow_error_message');
 				$this->session->set_userdata('success_message', 'Slide has been edited');
 				
-				redirect('administration/all-slides/'.$page);
+				redirect('slideshow/'.$page);
 			}
 		}
 		
@@ -220,7 +221,7 @@ class Slideshow extends admin {
 		$data['content'] = $this->load->view("slideshow/edit_slide", $v_data, TRUE);
 		$data['title'] = 'Edit Slide';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
     
 	/*
@@ -257,7 +258,7 @@ class Slideshow extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Slide could not be deleted');
 		}
-		redirect('administration/all-slides/'.$page);
+		redirect('slideshow/'.$page);
 	}
     
 	/*
@@ -277,7 +278,7 @@ class Slideshow extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Slide could not be activated');
 		}
-		redirect('administration/all-slides/'.$page);
+		redirect('slideshow/'.$page);
 	}
     
 	/*
@@ -297,7 +298,7 @@ class Slideshow extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Slide could not be disabled');
 		}
-		redirect('administration/all-slides/'.$page);
+		redirect('slideshow/'.$page);
 	}
 }
 ?>
