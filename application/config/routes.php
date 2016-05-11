@@ -142,5 +142,56 @@ $route['members/import-members'] = 'admin/members/import_members';
 //contact 
 $route['administration/contacts']='admin/contacts/show_contacts';
 $route['admin/company-profile'] = 'admin/contacts/show_contacts';
+
+//about us routes
+$route['front-page-about'] = 'admin/blog/front_post/32';
+
+//company services
+$route['company-services'] = 'admin/services/index';
+$route['administration/all-services'] = 'admin/services/index';
+$route['administration/all-services/(:num)'] = 'admin/services/index/$1';//with a page number
+$route['administration/add-service'] = 'admin/services/add_service';
+$route['administration/edit-service/(:num)/(:num)'] = 'admin/services/edit_service/$1/$2';
+$route['administration/activate-service/(:num)/(:num)'] = 'admin/services/activate_service/$1/$2';
+$route['administration/deactivate-service/(:num)/(:num)'] = 'admin/services/deactivate_service/$1/$2';
+$route['administration/delete-service/(:num)/(:num)'] = 'admin/services/delete_service/$1/$2';
+
+//company routes
+$route['company-gallery'] = 'admin/gallery';
+$route['administration/all-gallery-images'] = 'admin/gallery/index';
+$route['administration/all-gallery-images/(:num)'] = 'admin/gallery/index/$1';//with a page number
+$route['administration/add-gallery'] = 'admin/gallery/add_gallery';
+$route['administration/edit-gallery/(:num)/(:num)'] = 'admin/gallery/edit_gallery/$1/$2';
+$route['administration/activate-gallery/(:num)/(:num)'] = 'admin/gallery/activate_gallery/$1/$2';
+$route['administration/deactivate-gallery/(:num)/(:num)'] = 'admin/gallery/deactivate_gallery/$1/$2';
+$route['administration/delete-gallery/(:num)/(:num)'] = 'admin/gallery/delete_gallery/$1/$2';
+
+//blog routes
+$route['posts'] = 'admin/blog';
+$route['blog/posts'] = 'admin/blog';
+$route['blog/categories'] = 'admin/blog/categories';
+$route['add-post'] = 'admin/blog/add_post';
+$route['edit-post/(:num)'] = 'admin/blog/edit_post/$1';
+$route['delete-post/(:num)'] = 'admin/blog/delete_post/$1';
+$route['activate-post/(:num)'] = 'admin/blog/activate_post/$1';
+$route['deactivate-post/(:num)'] = 'admin/blog/deactivate_post/$1';
+$route['post-comments/(:num)'] = 'admin/blog/post_comments/$1';
+$route['blog/comments/(:num)'] = 'admin/blog/comments/$1';
+$route['blog/comments'] = 'admin/blog/comments';
+$route['add-comment/(:num)'] = 'admin/blog/add_comment/$1';
+$route['delete-comment/(:num)/(:num)'] = 'admin/blog/delete_comment/$1/$2';
+$route['activate-comment/(:num)/(:num)'] = 'admin/blog/activate_comment/$1/$2';
+$route['deactivate-comment/(:num)/(:num)'] = 'admin/blog/deactivate_comment/$1/$2';
+$route['add-blog-category'] = 'admin/blog/add_blog_category';
+$route['edit-blog-category/(:num)'] = 'admin/blog/edit_blog_category/$1';
+$route['delete-blog-category/(:num)'] = 'admin/blog/delete_blog_category/$1';
+$route['activate-blog-category/(:num)'] = 'admin/blog/activate_blog_category/$1';
+$route['deactivate-blog-category/(:num)'] = 'admin/blog/deactivate_blog_category/$1';
+$route['delete-comment/(:num)'] = 'admin/blog/delete_comment/$1';
+$route['activate-comment/(:num)'] = 'admin/blog/activate_comment/$1';
+$route['deactivate-comment/(:num)'] = 'admin/blog/deactivate_comment/$1';
+
+//projects
+$route['projects'] = 'site/projects';
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

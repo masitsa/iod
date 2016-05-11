@@ -320,6 +320,19 @@ class Site_model extends CI_Model
 		$this->db->order_by('neighbourhood_name');
 		return $this->db->get('neighbourhood');
 	}
+	public function get_active_services()
+	{
+  		$table = "service";
+		$where = "service.service_status = 1";
+		
+		$this->db->select('service.*');
+		$this->db->where($where);
+		$this->db->group_by('service_name');
+		$this->db->order_by('position', 'ASC');
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 }
 
 ?>
