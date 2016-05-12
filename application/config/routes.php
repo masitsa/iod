@@ -46,6 +46,7 @@ $route['404_override'] = '';
 /*
 *	Site Routes
 */
+$route['home'] = 'site/home_page';
 $route['login'] = 'member/auth/login_member';
 $route['logout'] = 'member/auth/logout_member';
 
@@ -209,3 +210,21 @@ $route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
+
+
+//trainings
+$route['trainings'] = 'admin/trainings/index';
+$route['trainings/(:num)'] = 'admin/trainings/index/$1';//with a page number
+$route['administration/add-training'] = 'admin/trainings/add_training';
+$route['administration/edit-training/(:num)/(:num)'] = 'admin/trainings/edit_training/$1/$2';
+$route['administration/activate-training/(:num)/(:num)'] = 'admin/trainings/activate_training/$1/$2';
+$route['administration/deactivate-training/(:num)/(:num)'] = 'admin/trainings/deactivate_training/$1/$2';
+$route['administration/delete-training/(:num)/(:num)'] = 'admin/trainings/delete_training/$1/$2';
+
+$route['slideshow'] = 'admin/slideshow/index';
+$route['administration/all-slides/(:num)'] = 'admin/slideshow/index/$1';//with a page number
+$route['administration/add-slide'] = 'admin/slideshow/add_slide';
+$route['administration/edit-slide/(:num)/(:num)'] = 'admin/slideshow/edit_slide/$1/$2';
+$route['administration/activate-slide/(:num)/(:num)'] = 'admin/slideshow/activate_slide/$1/$2';
+$route['administration/deactivate-slide/(:num)/(:num)'] = 'admin/slideshow/deactivate_slide/$1/$2';
+$route['administration/delete-slide/(:num)/(:num)'] = 'admin/slideshow/delete_slide/$1/$2';
