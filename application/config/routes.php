@@ -193,5 +193,19 @@ $route['deactivate-comment/(:num)'] = 'admin/blog/deactivate_comment/$1';
 
 //projects
 $route['projects'] = 'site/projects';
+
+/*
+*	Users Routes
+*/
+$route['users/administrators'] = 'admin/users';
+$route['users/administrators/(:any)/(:any)/(:num)'] = 'admin/users/index/$1/$2/$3';
+$route['add-user'] = 'admin/users/add_user';
+$route['edit-user/(:num)'] = 'admin/users/edit_user/$1';
+$route['delete-user/(:num)'] = 'admin/users/delete_user/$1';
+$route['activate-user/(:num)'] = 'admin/users/activate_user/$1';
+$route['deactivate-user/(:num)'] = 'admin/users/deactivate_user/$1';
+$route['reset-user-password/(:num)'] = 'admin/users/reset_password/$1';
+$route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
+
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
