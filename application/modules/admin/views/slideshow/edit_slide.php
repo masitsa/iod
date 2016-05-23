@@ -1,4 +1,14 @@
    
+          <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title"><?php echo $title;?></h2>
+                </header>
+                <div class="panel-body">
+                	<div class="row" style="margin-bottom:20px;">
+                        <div class="col-lg-12">
+                            <a href="<?php echo site_url().'slideshow';?>" class="btn btn-success btn-sm pull-right">Back</a>
+                        </div>
+                    </div>   
         <!-- Jasny -->
         <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
@@ -46,6 +56,14 @@
                             <input type="text" class="form-control" name="slideshow_name" placeholder="Enter Title" value="<?php echo $slide_row->slideshow_name;?>">
                         </div>
                         <div class="form-group">
+                            <label for="slideshow_name">Button Text</label>
+                            <input type="text" class="form-control" name="slideshow_button_text" placeholder="Button Text" value="<?php echo $slide_row->slideshow_button_text;?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="slideshow_name">Link</label>
+                            <input type="text" class="form-control" name="slideshow_link" placeholder="Link" value="<?php echo $slide_row->slideshow_link;?>">
+                        </div>
+                        <div class="form-group">
                             <label for="slideshow_description">Description</label>
                             <textarea class="form-control" name="slideshow_description"><?php echo $slide_row->slideshow_description;?></textarea>
                         </div>
@@ -72,4 +90,5 @@
 				<?php
 					form_close();
 				?>
-		</div>
+                </div>
+            </section>

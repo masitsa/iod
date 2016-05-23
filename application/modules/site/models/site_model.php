@@ -71,6 +71,10 @@ class Site_model extends CI_Model
 		$projects = '';
 		$contact = '';
 		$gallery = '';
+		$membership = '';
+		$blog = '';
+		$events = '';
+		$resources = '';
 		
 		if($name == 'home')
 		{
@@ -97,6 +101,22 @@ class Site_model extends CI_Model
 		{
 			$gallery = 'active';
 		}
+		if($name == 'blog')
+		{
+			$blog = 'active';
+		}
+		if($name == 'membership')
+		{
+			$membership = 'active';
+		}
+		if($name == 'events')
+		{
+			$events = 'active';
+		}
+		if($name == 'resources')
+		{
+			$resources = 'active';
+		}
 		
 		//get departments
 		$query = $this->get_active_services();
@@ -116,18 +136,33 @@ class Site_model extends CI_Model
 		$navigation = 
 		'
 			<li><a class="'.$home.'" href="'.site_url().'home">Home</a></li>
-			<li><a class="'.$about.'" href="'.site_url().'about">About</a></li>
+			<li>
+				<a class="'.$about.'" href="'.site_url().'about">About</a>
+				<ul>
+					<li><a href="calendar">The Institute</a></li>
+					<li><a href="speakers">Our Board</a></li>
+				</ul>
+			</li>
 			
 			<!-- Service Menu -->
 			<li>
 				<a class="'.$services.'"  href="#">Services</a>
-				<ul class="dropdown-menu">
+				<ul>
 					'.$sub_menu_services.'
 				</ul>
 			</li>
 			<!-- Service Menu -->
-			<!-- Portfolio Menu 
-			<li><a class="'.$projects.'" href="'.site_url().'projects">Projects</a></li>-->
+			<!-- Portfolio Menu -->
+			<li><a class="'.$membership.'" href="'.site_url().'projects">Membership</a></li>
+			<li><a class="'.$blog.'" href="'.site_url().'projects">Blog</a></li>
+			<li>
+				<a class="'.$events.'" href="'.site_url().'projects">Events</a>
+				<ul>
+					<li><a href="calendar">Calendar</a></li>
+					<li><a href="facilitators">Facilitators</a></li>
+				</ul>
+			</li>
+			<li><a class="'.$resources.'" href="'.site_url().'projects">Resources</a></li>
 			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
 			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
 			

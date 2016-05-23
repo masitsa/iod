@@ -3,7 +3,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>IOD Ke. | <?php echo $title;?></title>
-    <link rel="stylesheet" href="<?php echo base_url()."assets/themes/";?>fontawesome/css/font-awesome.css">
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/bootstrap.min.css" rel="stylesheet">
 	<!-- Full Calender CSS -->
@@ -15,7 +14,7 @@
 	<!-- Bx-Slider StyleSheet CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/jquery.bxslider.css" rel="stylesheet"> 
 	<!-- Font Awesome StyleSheet CSS -->
-	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url()."assets/themes/";?>fontawesome/css/font-awesome.css">
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>svg/style.css" rel="stylesheet">
 	<!-- Widget CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/widget.css" rel="stylesheet">
