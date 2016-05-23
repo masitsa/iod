@@ -1,14 +1,6 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Localhost
-Source Server Version : 50624
-Source Host           : localhost:3306
-Source Database       : iod
-
-Target Server Type    : MYSQL
-Target Server Version : 50624
-File Encoding         : 65001
 
 Date: 2016-04-19 18:23:16
 */
