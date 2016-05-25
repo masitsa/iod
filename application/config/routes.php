@@ -215,3 +215,18 @@ $route['administration/edit-slide/(:num)/(:num)'] = 'admin/slideshow/edit_slide/
 $route['administration/activate-slide/(:num)/(:num)'] = 'admin/slideshow/activate_slide/$1/$2';
 $route['administration/deactivate-slide/(:num)/(:num)'] = 'admin/slideshow/deactivate_slide/$1/$2';
 $route['administration/delete-slide/(:num)/(:num)'] = 'admin/slideshow/delete_slide/$1/$2';
+
+
+/*
+*	Site contacts Routes
+*/
+$route['contact'] = 'site/contact';
+$route['gallery'] = 'site/gallery';
+$route['event'] = 'site/trainings';
+$route['blog'] = 'site/blog/index';
+$route['event/facilitators'] = 'site/facilitators';
+$route['about/board'] = 'site/board';
+$route['about'] = 'site/about';
+$route['services'] = 'site/services';
+$route['services/(:any)'] = 'site/service_item/$1';
+

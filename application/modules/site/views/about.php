@@ -21,28 +21,14 @@
           $vision = $contacts['vision'];
     }
 ?>
-<div class="row" >
-  <div class="page-header page-title-left page-title-pattern">
-  			<div class="image-bg content-in fixed" data-background="<?php echo base_url()?>assets/img/top_page2.jpg"><div class="overlay-dark"></div></div>
-            <div class="container" id="breadcrum-modification" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="title white"><?php echo $title?></h1>
-                        <h5></h5>
-                        <ul class="breadcrumb">
-                            <?php echo $this->site_model->get_breadcrumbs();?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <?php
-        //if users exist display them
 
+  <?php
+        //if users exist display them
+        $item_data = "";
         if ($items->num_rows() > 0)
         {   
            $counter = 0;
-           $item_data = "";
+           
             foreach ($items->result() as $row)
             {
                 $counter++;
@@ -73,138 +59,227 @@
             }
         }
         ?>
-        <!-- page-header -->
-        <section id="who-we-are" class="page-section border-tb">
-            <div class="container who-we-are">
-                <div class="section-title text-left">
-                    <!-- Title -->
-                    <h2 class="title">Who We Are</h2>
-                </div>
+
+
+ <!--Banner Wrap Start-->
+        <div class="kf_inr_banner">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
-                        <?php echo $item_data;?>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <ul class="arrow-style">
-                                    <li>Mission</li>
-                                    <p><?php echo $mission;?></p>
-                                    <li>Vision.</li>
-                                    <p><?php echo $vision?></p>
-                                </ul>
+                    <div class="col-md-12">
+                        <!--KF INR BANNER DES Wrap Start-->
+                        <div class="kf_inr_ban_des">
+                            <div class="inr_banner_heading">
+                                <h3><?php echo $title?></h3>
                             </div>
-                          
-                        </div>
-                        <h3>
-                            <a href="#" class="hover">Download Our Brochure - 
-                            <i class="icon-file-pdf red"></i></a>
-                        </h3>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12 service-list content-block">
-                                <h4>why choose us</h4>
+                           
+                            <div class="kf_inr_breadcrumb">
                                 <ul>
-                                    <li>
-                                        <i class="icon-alarm3 text-color"></i>
-                                        <p>We available 24/7 feel free to contact us.</p>
-                                    </li>
-                                    <li>
-                                        <i class="icon-shield2 text-color"></i>
-                                        <p>We are genius because of experience.</p>
-                                    </li>
-                                    <li>
-                                        <i class="icon-price-tag text-color"></i>
-                                        <p>Offer low price compare with other builders</p>
-                                    </li>
-                                    <li>
-                                        <i class="icon-headphones text-color"></i>
-                                        <p>We provide free estimation for all projects</p>
-                                    </li>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">about us</a></li>
                                 </ul>
                             </div>
                         </div>
-                          <?php
-                            $services = $this->site_model->get_active_services();
-                            $checking_items = '';
-                            if($services->num_rows() > 0)
-                            {   $count = 0;
-                                foreach($services->result() as $res)
-                                {
-                                    $service_name = $res->service_name;
-                                    $service_description = $res->service_description;
-                                     $mini_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 10));
-                                     $maxi_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 30));
-                                    $web_name = $this->site_model->create_web_name($service_name);
-                                    $checking_items .='<a href="'.base_url().'services/'.$web_name.'" class="list-group-item">'.$service_name.'</a> ';
-                                }
-                            }
-                            ?>
-                        <div class="widget list-border">
-                            <div class="widget-title">
-                                <h3 class="title">Our Services</h3>
-                            </div>
-                            <div id="MainMenu1">
-                                <div class="list-group panel">
-                                    <div class="collapse in" id="demo">
-                                        <?php echo $checking_items;?>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- category-list -->
-                        </div>
+                        <!--KF INR BANNER DES Wrap End-->
                     </div>
-                </div>
-            </div>
-        </section>
-        <!-- who-we-are -->
-       <section id="fun-factor" class="page-section transparent">			
-			<div class="image-bg content-in fixed" data-background="<?php echo base_url();?>assets/img/background.jpg"><div class="overlay-dark"></div></div>
-            <div class="container">
-                <div class="row text-right fact-counter white">
-                    <div class="col-sm-6 col-md-4 bottom-xs-pad-30 fun-icon">
-                        <!-- Icon -->
-                        <div class="count-number text-color" data-count="8">
-                            <span class="counter"></span>
-                        </div>
-                        <!-- Title -->
-                        <h3>Projects 
-                        <span>Delivered</span></h3>
-                    </div>
-                    <div class="col-sm-6 col-md-4 bottom-xs-pad-30">
-                        <!-- Icon -->
-                        <div class="count-number text-color" data-count="8">
-                            <span class="counter"></span>
-                        </div>
-                        <!-- Title -->
-                        <h3>Happy 
-                        <span>Clients</span></h3>
-                    </div>
-                    <div class="col-sm-6 col-md-4 bottom-xs-pad-30">
-                        <!-- Icon -->
-                        <div class="count-number text-color" data-count="3">
-                            <span class="counter"></span>
-                        </div>
-                        <!-- Title -->
-                        <h3>Counties
-                        <span>Covered</span></h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- fun-factor -->
-        <!-- clients -->
-        <div id="get-quote" class="bg-color black text-center">
-            <div class="container">
-                <div class="row get-a-quote">
-                    <div class="col-md-12">Get A Free Quote / Need Help ? 
-                    <a class="black" href="<?php echo base_url();?>contact">Contact Us</a></div>
-                </div>
-                <div class="move-top bg-color page-scroll">
-                    <a href="#page">
-                        <i class="glyphicon glyphicon-arrow-up"></i>
-                    </a>
                 </div>
             </div>
         </div>
-        <!-- request -->
-</div>
+
+        <!--Banner Wrap End-->
+
+        <!--Content Wrap Start-->
+        <div class="kf_content_wrap">
+                    
+            <!--ABOUT UNIVERSITY START-->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="abt_univ_wrap">
+                                <!-- HEADING 1 START-->
+                                <div class="kf_edu2_heading1">
+                                    <h3>Welcome To <?php echo $company_name;?></h3>
+                                </div>
+                                <!-- HEADING 1 END-->
+
+                                <div class="abt_univ_des">
+
+                                    <?php echo $item_data;?>
+                                    <a href="#" class="btn-3">Know More</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                        <!-- INTERO DES START-->
+                            <div class="abt_univ_des">
+                                <h6>Our Mission</h6>
+                                <p><?php echo $mission;?></p>
+                            </div>
+                        <!-- INTERO DES END-->
+                            <div class="abt_univ_des">
+                                <h6>Our Vision</h6>
+                                <p><?php echo $vision;?></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!--ABOUT UNIVERSITY END-->
+
+
+            <!--KF INTRO WRAP START-->
+            <section class="abut-padiing">
+                <div class="kf_intro_des_wrap aboutus_page">
+                    <div class="container">
+                        <div class="row">
+                            <!-- HEADING 2 START-->
+                            <div class="col-md-12">
+                                <div class="kf_edu2_heading2">
+                                    <h3>our services</h3>
+                                </div>
+                            </div>
+                            <!-- HEADING 2 END-->
+
+                            <div class="col-md-3 col-sm-6">
+                                <!-- INTERO DES START-->
+                                <div class="kf_intro_des">
+                                    <div class="kf_intro_des_caption">
+                                        <span><i class=" icon-earth132 "></i></span>
+                                        <h6>Corporate Governance</h6>
+                                        <p>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris itae erat.</p>
+                                        <a href="#">view more</a>
+                                    </div>
+                                </div>
+                                <!-- INTERO DES END-->
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--KF INTRO WRAP END-->
+
+          
+
+            <!-- FACULTY WRAP START-->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <!-- HEADING 1 START-->
+                        <div class="col-md-12">
+                            <div class="kf_edu2_heading1">
+                                <h3>Our Partners</h3>
+                            </div>
+                        </div>
+                        <!-- HEADING 1 END-->
+
+                        <!-- FACULTY SLIDER WRAP START-->
+                        <div class="edu2_faculty_wrap">
+                            <div id="owl-demo-8" class="owl-carousel owl-theme">
+                                <div class="item">
+                                    <!-- FACULTY DES START-->
+                                    <div class="edu2_faculty_des">
+                                        <figure><img src="extra-images/faculty-mb1.jpg" alt=""/>
+                                            <figcaption>
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="edu2_faculty_des2">
+                                            <h6><a href="#">Simon Grishaber</a></h6>
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- FACULTY DES END-->
+                                </div>
+
+                                <div class="item">
+                                    <!-- FACULTY DES START-->
+                                    <div class="edu2_faculty_des">
+                                        <figure><img src="extra-images/faculty-mb2.jpg" alt=""/>
+                                            <figcaption>
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="edu2_faculty_des2">
+                                            <h6><a href="#">Simon Grishaber</a></h6>
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- FACULTY DES END-->
+                                </div>
+
+                                <div class="item">
+                                    <!-- FACULTY DES START-->
+                                    <div class="edu2_faculty_des">
+                                        <figure><img src="extra-images/faculty-mb3.jpg" alt=""/>
+                                            <figcaption>
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="edu2_faculty_des2">
+                                            <h6><a href="#">Simon Grishaber</a></h6>
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- FACULTY DES END-->
+                                </div>
+
+                                <div class="item">
+                                    <!-- FACULTY DES START-->
+                                    <div class="edu2_faculty_des">
+                                        <figure><img src="extra-images/faculty-mb4.jpg" alt=""/>
+                                            <figcaption>
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="edu2_faculty_des2">
+                                            <h6><a href="#">Simon Grishaber</a></h6>
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- FACULTY DES END-->
+                                </div>
+
+                                <div class="item">
+                                    <!-- FACULTY DES START-->
+                                    <div class="edu2_faculty_des">
+                                        <figure><img src="extra-images/faculty-mb1.jpg" alt=""/>
+                                            <figcaption>
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="edu2_faculty_des2">
+                                            <h6><a href="#">Simon Grishaber</a></h6>
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- FACULTY DES END-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FACULTY SLIDER WRAP END-->
+                    </div>
+                </div>
+            </section>
+            <!-- FACULTY WRAP START-->
+        </div>
+        <!--Content Wrap End-->

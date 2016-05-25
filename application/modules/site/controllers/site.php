@@ -5,6 +5,7 @@ class Site extends MX_Controller
 	var $slideshow_location;
 	var $service_location;
 	var $gallery_location;
+	var $training_location;
 	
 	function __construct()
 	{
@@ -19,6 +20,7 @@ class Site extends MX_Controller
 		$this->slideshow_location = base_url().'assets/slideshow/';
 		$this->service_location = base_url().'assets/service/';
 		$this->gallery_location = base_url().'assets/gallery/';
+		$this->training_location = base_url().'assets/training/';
 	}
 	
 	public function without_jquery()
@@ -76,7 +78,8 @@ class Site extends MX_Controller
 		$v_data['items'] = $this->site_model->get_front_end_items();
 		$v_data['slides'] = $this->site_model->get_slides();
 		$v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
-		$v_data['trainings'] = $this->training_model->get_recent_trainings(3);
+		$v_data['trainings'] = $this->training_model->get_recent_trainings(5);
+		$v_data['training_location'] = $this->training_location;
 		$v_data['faqs'] = $this->site_model->get_faqs();
 		$data['title'] = $this->site_model->display_page_title();
 		$v_data['service_location'] = $this->service_location;
@@ -278,6 +281,25 @@ class Site extends MX_Controller
 		$this->load->view("site/templates/general_page", $data);
 	}
 
+
+	/*
+	*
+	*	about
+	*
+	*/
+	public function board() 
+	{	
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		$v_data['items'] = $this->site_model->get_front_end_items();
+		$data['title'] = $this->site_model->display_page_title();
+		$v_data['title'] = $data['title'];
+		$data['contacts'] = $contacts;
+		$data['content'] = $this->load->view("board", $v_data, TRUE);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
+
 	/*
 	*
 	*	about
@@ -296,7 +318,7 @@ class Site extends MX_Controller
 		$this->load->view("site/templates/general_page", $data);
 	}
 
-/*
+   /*
 	*
 	*	about
 	*
@@ -312,7 +334,45 @@ class Site extends MX_Controller
 		$data['contacts'] = $contacts;
 		$data['content'] = $this->load->view("gallery", $v_data, TRUE);
 		
-		$this->load->view("site/templates/gallery_page", $data);
+		$this->load->view("site/templates/general_page", $data);
+	}
+
+	/*
+	*
+	*	about
+	*
+	*/
+	public function event() 
+	{	
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$v_data['gallery_location'] = $this->gallery_location;
+		$v_data['title'] = $data['title'];
+		$data['contacts'] = $contacts;
+		$data['content'] = $this->load->view("event", $v_data, TRUE);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
+
+	/*
+	*
+	*	about
+	*
+	*/
+	public function facilitators() 
+	{	
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$v_data['gallery_location'] = $this->gallery_location;
+		$v_data['title'] = $data['title'];
+		$data['contacts'] = $contacts;
+		$data['content'] = $this->load->view("facilitators", $v_data, TRUE);
+		
+		$this->load->view("site/templates/general_page", $data);
 	}
 
 	/*
@@ -619,6 +679,62 @@ class Site extends MX_Controller
 		{
 			echo 'false';
 		}
+	}
+	/*
+	*
+	*	Default action is to show all the registered training
+	*
+	*/
+	public function trainings() 
+	{
+		$where = 'training_id > 0';
+		$table = 'training';
+		$segment = 2;
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'trainings';
+		$config['total_rows'] = $this->users_model->count_items($table, $where);
+		$config['uri_segment'] = $segment;
+		$config['per_page'] = 20;
+		$config['num_links'] = 5;
+		
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = 'Next';
+		$config['next_tag_close'] = '</span>';
+		
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        $data["links"] = $this->pagination->create_links();
+		$query = $this->training_model->get_all_trainings($table, $where, $config["per_page"], $page);
+		
+		$data['title'] = $v_data['title'] = 'All Trainings';
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		$v_data['query'] = $query;
+		$v_data['page'] = $page;
+		$v_data['training_location'] = $this->training_location;
+		$data['content'] = $this->load->view('event', $v_data, true);
+		
+		$this->load->view("site/templates/general_page", $data);
 	}
 }
 ?>

@@ -89,9 +89,9 @@ class Site_model extends CI_Model
 		{
 			$services = 'active';
 		}
-		if($name == 'projects')
+		if($name == 'events')
 		{
-			$projects = 'active';
+			$events = 'active';
 		}
 		if($name == 'contact')
 		{
@@ -139,14 +139,14 @@ class Site_model extends CI_Model
 			<li>
 				<a class="'.$about.'" href="'.site_url().'about">About</a>
 				<ul>
-					<li><a href="calendar">The Institute</a></li>
-					<li><a href="speakers">Our Board</a></li>
+					<li><a href="'.site_url().'about">The Institute</a></li>
+					<li><a href="'.site_url().'about/board">Our Board</a></li>
 				</ul>
 			</li>
 			
 			<!-- Service Menu -->
 			<li>
-				<a class="'.$services.'"  href="#">Services</a>
+				<a class="'.$services.'"  href="'.site_url().'services">Services</a>
 				<ul>
 					'.$sub_menu_services.'
 				</ul>
@@ -154,12 +154,12 @@ class Site_model extends CI_Model
 			<!-- Service Menu -->
 			<!-- Portfolio Menu -->
 			<li><a class="'.$membership.'" href="'.site_url().'projects">Membership</a></li>
-			<li><a class="'.$blog.'" href="'.site_url().'projects">Blog</a></li>
+			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
 			<li>
-				<a class="'.$events.'" href="'.site_url().'projects">Events</a>
+				<a class="'.$events.'" href="'.site_url().'event">Events</a>
 				<ul>
 					<li><a href="calendar">Calendar</a></li>
-					<li><a href="facilitators">Facilitators</a></li>
+					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
 				</ul>
 			</li>
 			<li><a class="'.$resources.'" href="'.site_url().'projects">Resources</a></li>

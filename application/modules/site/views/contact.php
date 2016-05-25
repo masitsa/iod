@@ -40,234 +40,77 @@
 	}
 ?>
 
- <div class="page-header page-title-left page-title-pattern">
- 	<div class="image-bg content-in fixed" data-background="<?php echo base_url()?>assets/img/top_page2.jpg"><div class="overlay-dark"></div></div>
-    <div class="container" id="breadcrum-modification" style="padding-top: 60px;">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="title white"><?php echo $title?></h1>
-                <h5></h5>
-                <ul class="breadcrumb">
-                    <?php echo $this->site_model->get_breadcrumbs();?>
-                </ul>
-            </div>
+<!--Content Wrap Start-->
+<div class="kf_content_wrap">
+    <!--LOCATION MAP Wrap Start-->
+    <div class="kf_location_wrap overlay">
+        <div id="map-canvas" class="map-canvas">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8527541847375!2d36.78480584990425!3d-1.2605522359486399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1763f94bbe07%3A0x99634989c4997a05!2sAll+Africa+Conference+of+Churches!5e0!3m2!1sen!2ske!4v1464154893311" width="600" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="location_des">
+            <h6><?php echo $company_name;?></h6>
+            <ul class="location_meta">
+                <li><i class="fa fa-phone"></i> <a href="#"><?php echo $phone;?></a></li>
+                <li><i class="fa fa-map-marker"></i>  P.O.Box (<?php echo $post_code;?>) <?php echo $address;?>, <?php echo $location;?> <?php echo $building?> <?php echo $floor;?></li>
+                <li><i class="fa fa-envelope-o"></i>  <a href="#"> <?php echo $email;?></a></li>
+            </ul>
         </div>
     </div>
-</div>
-
-<!-- page-header -->
-
-<section id="contact-us" class="page-section">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-sm-6 col-md-6">
-
+    <!--LOCATION MAP Wrap END-->
+    <section>
+        <div class="container">
+            <div class="contct_wrap">
                 <div class="row">
-
-                    <div class="col-sm-6 col-md-6">
-
-                        <h5 class="title">
-
-                        <i class="icon-address text-color"></i>Mailing Address</h5>
-
-                        <?php echo $location;?>, <?php echo $building;?>, <?php echo $floor;?>
-
-                        <br />P.O. <?php echo $address;?> - <?php echo $post_code;?>
-
-                        <br /><?php echo $city?>, Kenya.
-
-                    </div>
-
-                    <div class="col-sm-6 col-md-6">
-
-                        <h5 class="title">
-
-                        <i class="icon-contacts text-color"></i>Contact Info</h5>
-
-                        <div>Phone : <?php echo $phone;?></div>
-
-                        <div>Mobile : <?php echo $phone;?></div>
-
-                        <div>Email : 
-
-                        <a href="mailto:support@yoursite.com"><?php echo $email;?></a></div>
-
-                    </div>
-
-                </div>
-
-                <hr />
-                <?php
-
-                if ($items->num_rows() > 0)
-                {   
-                   $counter = 0;
-                   $item_data = "";
-                    foreach ($items->result() as $row)
-                    {
-                        $counter++;
-                        $post_id = $row->post_id;
-                        $blog_category_name = $row->blog_category_name;
-                        $blog_category_id = $row->blog_category_id;
-                        $post_title = $row->post_title;
-                        $web_name = $this->site_model->create_web_name($post_title);
-                        $post_status = $row->post_status;
-                        $post_views = $row->post_views;
-                        $image = base_url().'assets/images/posts/'.$row->post_image;
-                        if($row->post_image == "" || $row->post_image == NULL)
-                        {
-                            // $image ="http://placehold.it/450x250?text=Comparison+graph";
-                            $image = base_url().'assets/themes/metal/img/sections/bg/intro.jpg';
-                        }
-                        $created_by = $row->created_by;
-                        $modified_by = $row->modified_by;
-                        $description = $row->post_content;
-                        $mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 250));
-                        $created = $row->created;
-                        $day = date('j',strtotime($created));
-                        $month = date('M Y',strtotime($created));
-                        $created_on = date('jS M Y',strtotime($row->created));
-                        
-                        $categories = '';
-                        $item_data ='<p class="description upper">'.$mini_desc.'</p>';
-                    }
-                }
-                echo $item_data;
-                ?>
-
-               
-
-            </div>
-
-            <div class="col-md-6 col-md-6">
-
-                <h3 class="title">Contact Form</h3>
-
-				<p class="form-message"></p>
-
-                <div class="contact-form">
-
-                    <!-- Form Begins -->
-
-					<form role="form" name="contactform" id="contactform" method="post" action="php/contact-form.php">
-
-                        <div class="row">
-
-                            <div class="col-md-6">
-
-                                <!-- Field 1 -->
-
-                                <div class="input-text form-group">
-
-                                    <input type="text" name="contact_name" id="contact_name" class="input-name form-control"
-
-                                    placeholder="Full Name" />
-
+                    <div class="col-md-8">
+                        <form>
+                            <div class="contact_des">
+                                 <div class="contact_heading">
+                                    <h4>Contact info</h4>
+                                </div>
+                                <div class="inputs_des des_2">
+                                    <input type="text" placeholder="Name" required><i class="fa fa-user"></i>
                                 </div>
 
-                            </div>
-
-                            <div class="col-md-6">
-
-                                <!-- Field 2 -->
-
-                                <div class="input-email form-group">
-
-                                    <input type="email" name="contact_email" id="contact_email" class="input-email form-control"
-
-                                    placeholder="Email" />
-
+                                <div class="inputs_des des_2">
+                                    <input type="email" placeholder="E-mail" required>
+                                    <i class="fa fa-envelope-o"></i>
                                 </div>
-
+                                <div class="inputs_des des_2">
+                                    <input type="text" placeholder="Phone" required>
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="inputs_des des_3">
+                                    <textarea></textarea>
+                                    <i class="fa fa-comments-o"></i>
+                                </div>
+                                <div class="inputs_des des_2">
+                                    <button type="submit">Send</button>
+                                </div>
                             </div>
-
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact_heading">
+                            <h4>Contact info</h4>
                         </div>
-
-                        <!-- Field 3 -->
-
-                        <div class="input-email form-group">
-
-                            <input type="text" name="contact_phone" id="contact_phone" class="input-phone form-control" placeholder="Phone" />
-
+                        <ul class="contact_meta">
+                            <li><i class="fa fa-home"></i> P.O.Box (<?php echo $post_code;?>) <?php echo $address;?>, <?php echo $location;?> <?php echo $building?> <?php echo $floor;?></li>
+                            <li><i class="fa fa-phone"></i><a href="contactus-2.html#"> <?php echo $phone;?></a></li>
+                            <li><i class="fa fa-envelope-o"></i><a href="contactus-2.html#"> I<?php echo $email;?></a></li>
+                        </ul>
+                        <div class="contact_heading social">
+                            <h4>Get Social</h4>
                         </div>
-
-                        <!-- Field 4 -->
-
-                        <div class="textarea-message form-group">
-
-                            <textarea name="contact_message" id="contact_message" class="textarea-message form-control" placeholder="Message"
-
-                            rows="6"></textarea>
-
-                        </div>
-
-                        <!-- Button -->
-
-                        <button id="test-btn" class="btn btn-default" type="submit">Send Now 
-
-                        <i class="icon-paper-plane"></i></button>
-
-					</form>
-
-                    <!-- Form Ends -->
-
+                        <ul class="cont_socil_meta">
+                            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
-    </div>
-
-</section>
-
-<!-- page-section -->
-
-<section id="map">
-
-    <div class="map-section">
-
-        <div class="map-canvas" data-zoom="12" data-lat="-1.2196369" data-lng="36.8863984" data-type="roadmap"
-
-        data-title="Austin"
-
-        data-content="Olinet Apartments Off Thika Road&lt;br&gt; Contact: +254736590509 &lt;br&gt; &lt;a href=&#39;mailto: info@setson.co.ke&#39;&gt; info@setson.co.ke&lt;/a&gt;"
-
-        style="height: 376px;"></div>
-
-    </div>
-
-</section>
-
-<!-- map -->
-
-<div id="get-quote" class="bg-color black text-center">
-
-    <div class="container">
-
-        <div class="row get-a-quote">
-
-            <div class="col-md-12">Get A Free Quote / Need Help ? 
-
-            <a class="black" href="#">Contact Us</a></div>
-
-        </div>
-
-        <div class="move-top bg-color page-scroll">
-
-            <a href="#page">
-
-                <i class="glyphicon glyphicon-arrow-up"></i>
-
-            </a>
-
-        </div>
-
-    </div>
-
+    </section>
 </div>
-
-<!-- request -->
+<!--Content Wrap End-->
+   

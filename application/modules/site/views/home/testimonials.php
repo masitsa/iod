@@ -32,15 +32,16 @@
               
             $result .= '
                          <div class="item">
-                            <div class="card grey darken-2">
-                                <div class="card-content white-text">
-                                    <span class="card-title">'.$post_title.'</span>
-                                    <img src="'.$image.'" class="responsive-img" alt="Testimonials">
-                                    <p>'.$description.'</p>
+                            <!-- TESTEMONIAL SLIDER WRAP START-->
+                            <div class="edu_testemonial_wrap">
+                                <figure><img src="'.$image.'" alt=""/></figure>
+                                <div class="kode-text">
+                                    <p>T'.$description.'</p>
+                                    <a href="#">'.$post_title.'<span>- Happy Member</span></a>
                                 </div>
                             </div>
+                            <!-- TESTEMONIAL SLIDER WRAP END-->
                         </div>
-                   
                 ';
             }
         }
@@ -50,38 +51,26 @@
         }
        
       ?> 
-<div class="white section-content">
-	<div class="container">
-        		
-        <h3 class="header center-align grey-text darken-2 margin-height-60">Testimonials</h3>
-        
-        <div class="row">
-        	
-            <div class="m12">
-                <div class="owl-carousel">
-                    <?php echo $result;?>
-                    
-                </div>
-                	
-                <div class="owl-controls">
-                    <!--<div class="owl-nav">
-                        <div class="owl-prev">prev</div>
-                        <div class="owl-next">next</div>
-                    </div>-->
-                    <div class="owl-dots">
-                        <div class="owl-dot active"><span></span></div>
-                        <div class="owl-dot"><span></span></div>
-                        <div class="owl-dot"><span></span></div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="margin-height-60"></div>
-    </div>
-</div>
 
-<div class="container white">
-    <div class="divider"></div>
-</div>
+<!--OUR TESTEMONIAL WRAP START-->
+<section class="background_color">
+    <div class="container">
+        <div class="row">
+            <!-- HEADING 2 START-->
+            <div class="col-md-12">
+                <div class="training_heading">
+                    <h4>Our Testimonial</h4>
+                </div>
+            </div>
+            <!-- HEADING 2 END-->
+            <!-- TESTEMONIAL SLIDER WRAP START-->
+            <div class="edu2_testemonial_slider_wrap">
+                <div id="owl-demo-9">
+                   <?php echo $result;?>
+                </div>
+            </div>
+            <!-- TESTEMONIAL SLIDER WRAP END-->
+        </div>
+    </div>
+</section>
+<!--OUR TESTEMONIAL WRAP END-->
