@@ -222,9 +222,25 @@ $route['administration/deactivate-training/(:num)/(:num)'] = 'admin/trainings/de
 $route['administration/delete-training/(:num)/(:num)'] = 'admin/trainings/delete_training/$1/$2';
 
 $route['slideshow'] = 'admin/slideshow/index';
+$route['slideshow/(:num)'] = 'admin/slideshow/index/$1';
 $route['administration/all-slides/(:num)'] = 'admin/slideshow/index/$1';//with a page number
 $route['administration/add-slide'] = 'admin/slideshow/add_slide';
 $route['administration/edit-slide/(:num)/(:num)'] = 'admin/slideshow/edit_slide/$1/$2';
 $route['administration/activate-slide/(:num)/(:num)'] = 'admin/slideshow/activate_slide/$1/$2';
 $route['administration/deactivate-slide/(:num)/(:num)'] = 'admin/slideshow/deactivate_slide/$1/$2';
 $route['administration/delete-slide/(:num)/(:num)'] = 'admin/slideshow/delete_slide/$1/$2';
+
+
+/*
+*	Site contacts Routes
+*/
+$route['contact'] = 'site/contact';
+$route['gallery'] = 'site/gallery';
+$route['event'] = 'site/trainings';
+$route['blog'] = 'site/blog/index';
+$route['event/facilitators'] = 'site/facilitators';
+$route['about/board'] = 'site/board';
+$route['about'] = 'site/about';
+$route['services'] = 'site/services';
+$route['services/(:any)'] = 'site/service_item/$1';
+

@@ -5,8 +5,8 @@ class Contacts_model extends CI_Model
 	public function upload_company_logo($logo_path, $edit = NULL)
 	{
 		//upload product's gallery images
-		$resize['width'] = 300;
-		$resize['height'] = 100;
+		$resize['width'] = 500;
+		$resize['height'] = 500;
 		
 		if(!empty($_FILES['logo']['tmp_name']))
 		{

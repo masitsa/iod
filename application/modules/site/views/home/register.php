@@ -14,7 +14,6 @@
 						<div class="col-md-8">
 							<div class="edu2_training_wrap">
 								<h2>Register as one of our members today</h2>
-								<h3>Institute of Directors Kenya</h3>
 								<!--COUNTDOWN START-->
 								<ul class="countdown">
 									<li>

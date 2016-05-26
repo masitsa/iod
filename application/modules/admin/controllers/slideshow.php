@@ -65,6 +65,7 @@ class Slideshow extends admin {
         $data["links"] = $this->pagination->create_links();
 		$query = $this->slideshow_model->get_all_slides($table, $where, $config["per_page"], $page);
 		
+		$data['title'] = $v_data['title'] = 'Slideshow';
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
@@ -77,7 +78,6 @@ class Slideshow extends admin {
 		{
 			$data['content'] = '<a href="'.site_url().'administration/add-slide" class="btn btn-success pull-right">Add Slide</a>There are no slides';
 		}
-		$data['title'] = 'Slideshow';
 		
 		$this->load->view('templates/general_page', $data);
 	}
@@ -106,6 +106,8 @@ class Slideshow extends admin {
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
 		$this->form_validation->set_rules('slideshow_name', 'Title', 'trim|xss_clean');
 		$this->form_validation->set_rules('slideshow_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('slideshow_button_text', 'Button Text', 'trim|xss_clean');
+		$this->form_validation->set_rules('slideshow_link', 'Link', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
@@ -114,7 +116,9 @@ class Slideshow extends admin {
 				$data2 = array(
 					'slideshow_name'=>$this->input->post("slideshow_name"),
 					'slideshow_description'=>$this->input->post("slideshow_description"),
-					'slideshow_image_name'=>$this->session->userdata('slideshow_file_name')
+					'slideshow_image_name'=>$this->session->userdata('slideshow_file_name'),
+					'slideshow_button_text'=>$this->input->post("slideshow_button_text"),
+					'slideshow_link'=>$this->session->userdata('slideshow_link')
 				);
 				
 				$table = "slideshow";
@@ -141,9 +145,9 @@ class Slideshow extends admin {
 			$v_data['slideshow_location'] = $this->slideshow_location.$this->session->userdata('slideshow_file_name');
 		}
 		$v_data['error'] = $slideshow_error;
+		$data['title'] = $v_data['title'] = 'Add Slide';
 		
 		$data['content'] = $this->load->view("slideshow/add_slide", $v_data, TRUE);
-		$data['title'] = 'Add Slide';
 		
 		$this->load->view('templates/general_page', $data);
 	}
@@ -180,6 +184,8 @@ class Slideshow extends admin {
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
 		$this->form_validation->set_rules('slideshow_name', 'Title', 'trim|xss_clean');
 		$this->form_validation->set_rules('slideshow_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('slideshow_button_text', 'Button Text', 'trim|xss_clean');
+		$this->form_validation->set_rules('slideshow_link', 'Link', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
@@ -195,7 +201,9 @@ class Slideshow extends admin {
 				$data2 = array(
 					'slideshow_name'=>$this->input->post("slideshow_name"),
 					'slideshow_description'=>$this->input->post("slideshow_description"),
-					'slideshow_image_name'=>$slideshow
+					'slideshow_image_name'=>$slideshow,
+					'slideshow_button_text'=>$this->input->post("slideshow_button_text"),
+					'slideshow_link'=>$this->session->userdata('slideshow_link')
 				);
 				
 				$table = "slideshow";
@@ -218,8 +226,8 @@ class Slideshow extends admin {
 		}
 		$v_data['error'] = $slideshow_error;
 		
+		$data['title'] = $v_data['title'] = 'Edit Slide';
 		$data['content'] = $this->load->view("slideshow/edit_slide", $v_data, TRUE);
-		$data['title'] = 'Edit Slide';
 		
 		$this->load->view('templates/general_page', $data);
 	}
