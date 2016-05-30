@@ -736,5 +736,11 @@ class Site extends MX_Controller
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
+	
+	public function view_event_details($training_name)
+	{
+		$training_title = $this->site_model->decode_web_name($training_name);
+		$title = $training_title ;
+	}
 }
 ?>

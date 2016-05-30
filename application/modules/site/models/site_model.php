@@ -448,6 +448,13 @@ class Site_model extends CI_Model
 		}
 		return $return.'</i><br/>';
     }
+	
+	public function view_single_post($post_title)
+	{
+		$this->db->where('post_title = $post_title');
+		$this->db->select('*');
+		$query = $this->db->get('post');
+	}
 }
 
 ?>

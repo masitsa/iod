@@ -244,3 +244,7 @@ $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
 
+//
+$route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
+$route['event/view-single-event/(:any)'] = 'site/view_event_details/$1';
+
