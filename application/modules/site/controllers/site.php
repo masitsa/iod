@@ -736,5 +736,56 @@ class Site extends MX_Controller
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
+	public function resource()
+	{
+		$where = 'resource_category_id > 0';
+		$table = 'resource_category';
+		$segment = 2;
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'resource';
+		$config['total_rows'] = $this->users_model->count_items($table, $where);
+		$config['uri_segment'] = $segment;
+		$config['per_page'] = 20;
+		$config['num_links'] = 5;
+		
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = 'Next';
+		$config['next_tag_close'] = '</span>';
+		
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        $data["links"] = $this->pagination->create_links();
+		$query = $this->site_model->get_all_resources($table, $where, $config["per_page"], $page);
+		
+		$data['title'] = $v_data['title'] = 'Resources';
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		$v_data['query'] = $query;
+		$v_data['page'] = $page;
+		$v_data['training_location'] = $this->training_location;
+		$data['content'] = $this->load->view('resource', $v_data, true);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
 }
 ?>

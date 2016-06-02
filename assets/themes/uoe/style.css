@@ -660,14 +660,14 @@ section,
 	text-align: center;
 }
 .edu2_main_bn_wrap figcaption span{
-	font-size: 24px;
-	font-weight: normal;
-	position: relative;
 	color: #fff;
-	text-transform: capitalize;
-	padding-bottom: 13px;
 	display: inline-block;
+	font-size: 25px;
+	font-weight: normal;
 	margin-bottom: 4px;
+	padding-bottom: 13px;
+	position: relative;
+	text-transform: capitalize;
 }
 .edu2_main_bn_wrap figcaption span:before{
 	content: "";
@@ -679,6 +679,8 @@ section,
 	width: 120px;
 	background-color: #d3d3d3;
 	margin:0 auto; 
+
+	
 }
 .edu2_main_bn_wrap figcaption h2{
 	font-weight: 700;
@@ -689,8 +691,8 @@ section,
 }
 .edu2_main_bn_wrap figcaption p{
 	color: #fff;
-	margin: 0 0 30px 0;
-	font-size: 20px;
+	margin: 0 0 20px 0;
+	font-size: 18px;
 	text-transform: capitalize;
 }
 .edu2_main_bn_wrap .owl-theme .owl-controls .owl-page span{
@@ -703,7 +705,7 @@ section,
 	display: inline-block;
 }
 .edu2_main_bn_wrap .owl-theme .owl-pagination {
-    bottom: 70px;
+    bottom: 5px;
     left: 0;
     margin: 0;
     position: absolute;
@@ -3419,11 +3421,21 @@ section,
 	border-radius: 100%;
 }
 .edu2_col_3_ftr a{
-	display: inline-block;
+	/*display: inline-block;
 	font-size: 16px;
 	font-weight: bold;
 	color: #333;
-	padding: 2px 0 0 15px;
+	padding: 2px 0 0 15px;*/
+	background-color: #e79800 !important;
+	display: block;
+	padding: 15px 20px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 14px;
+	color: #fff;
+	width: 100%;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 .edu2_col_3_ftr .rating{
 	margin:0; 
@@ -4642,7 +4654,9 @@ section,
 	line-height: 30px;
 }
 .inputs_des textarea,
-.inputs_des input[type="text"]{
+.inputs_des input[type="text"],
+.inputs_des input[type="password"],
+.inputs_des input[type="email"]{
 	float: left;
 	width: 100%;
 	border: 1px solid #dedede;
@@ -4654,6 +4668,19 @@ section,
 	resize:none;
 }
 .contact_des button{
+	display: block;
+	padding: 15px 20px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 14px;
+	color: #fff;
+	width: 100%;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+a .button{
+	background-color: #e79800 !important;
 	display: block;
 	padding: 15px 20px;
 	text-align: center;

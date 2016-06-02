@@ -153,8 +153,15 @@ class Site_model extends CI_Model
 			</li>
 			<!-- Service Menu -->
 			<!-- Portfolio Menu -->
-			<li><a class="'.$membership.'" href="'.site_url().'projects">Membership</a></li>
-			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
+			<li>
+				<a class="'.$membership.'" href="'.site_url().'membership">Membership</a>
+				<ul>
+					<li><a href="'.site_url().'membership/benefits">Members Benefits</a></li>
+					<li><a href="'.site_url().'membership/eligibility">Eligibility</a></li>
+					<li><a href="'.site_url().'membership/categories">Categories</a></li>
+					<li><a href="'.site_url().'membership/application">Application</a></li>
+				</ul>
+			</li>
 			<li>
 				<a class="'.$events.'" href="'.site_url().'event">Events</a>
 				<ul>
@@ -162,7 +169,8 @@ class Site_model extends CI_Model
 					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
 				</ul>
 			</li>
-			<li><a class="'.$resources.'" href="'.site_url().'projects">Resources</a></li>
+			<li><a class="'.$resources.'" href="'.site_url().'resource">Resources</a></li>
+			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
 			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
 			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
 			
@@ -448,6 +456,17 @@ class Site_model extends CI_Model
 		}
 		return $return.'</i><br/>';
     }
+    public function get_all_resources($table, $where, $per_page, $page)
+	{
+		//retrieve all trainings
+		$this->db->from($table);
+		$this->db->select('*');
+		$this->db->where($where);
+		$this->db->order_by('resource_category.resource_category_id', 'DESC');
+		$query = $this->db->get('', $per_page, $page);
+		
+		return $query;
+	}
 }
 
 ?>

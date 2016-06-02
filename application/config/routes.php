@@ -229,4 +229,5 @@ $route['about/board'] = 'site/board';
 $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
+$route['resource'] = 'site/resource';
 
