@@ -74,6 +74,7 @@ footer{
 section,
 .kf_footer_bg{
 	padding:70px 0px;	
+	/*padding:0px 0px;	*/
 }
 .inner-content-holder{
 	float: left;
@@ -508,7 +509,7 @@ section,
     width: 45%;
 }
 .edu2_main_bn_wrap.banner_2 figcaption span::before{
-	margin:inherit;; 
+	margin:inherit;
 }
 .edu2_main_bn_wrap.banner_2 .owl-pagination{
 	display: none;
@@ -635,6 +636,7 @@ section,
 	float: left;
 	width: 100%;
 	position: relative;
+	margin-top: 15px !important;
 }
 .edu2_main_bn_wrap figure{
 	float: left;

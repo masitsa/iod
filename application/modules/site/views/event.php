@@ -6,7 +6,7 @@
             	<!--KF INR BANNER DES Wrap Start-->
                 <div class="kf_inr_ban_des">
                 	<div class="inr_banner_heading">
-						<h3>Courses List</h3>
+						<h3>Event Lists</h3>
                 	</div>
                    
                     <div class="kf_inr_breadcrumb">
@@ -57,8 +57,10 @@ if($query->num_rows() > 0)
 							<ul class="post-option">
 									<li> <a href="#">From :</a>'.$start_date.' <a href="#">To :</a>'.$end_date.' </li>
 							</ul>
-							<a href="#" class="readmore">read more<i class="fa fa-long-arrow-right"></i></a>
-							<span>11</span>
+							<a class="readmore" href="'.site_url().'view-single-event/'.$training_name.'">
+								read more
+								<i class="fa fa-long-arrow-right"></i>
+							</a>
 						</div>
 							
 						<figure><img src="'.$training_location.''.$training_image_name.'" alt=""/>

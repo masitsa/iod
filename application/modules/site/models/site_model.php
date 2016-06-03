@@ -456,6 +456,7 @@ class Site_model extends CI_Model
 		}
 		return $return.'</i><br/>';
     }
+
     public function get_all_resources($table, $where, $per_page, $page)
 	{
 		//retrieve all trainings
@@ -466,6 +467,13 @@ class Site_model extends CI_Model
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
+	}
+	
+	public function view_single_post($post_title)
+	{
+		$this->db->where('post_title = $post_title');
+		$this->db->select('*');
+		return $query = $this->db->get('post');
 	}
 }
 

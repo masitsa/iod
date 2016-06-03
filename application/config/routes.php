@@ -194,6 +194,20 @@ $route['deactivate-comment/(:num)'] = 'admin/blog/deactivate_comment/$1';
 
 //projects
 $route['projects'] = 'site/projects';
+
+/*
+*	Users Routes
+*/
+$route['users/administrators'] = 'admin/users';
+$route['users/administrators/(:any)/(:any)/(:num)'] = 'admin/users/index/$1/$2/$3';
+$route['add-user'] = 'admin/users/add_user';
+$route['edit-user/(:num)'] = 'admin/users/edit_user/$1';
+$route['delete-user/(:num)'] = 'admin/users/delete_user/$1';
+$route['activate-user/(:num)'] = 'admin/users/activate_user/$1';
+$route['deactivate-user/(:num)'] = 'admin/users/deactivate_user/$1';
+$route['reset-user-password/(:num)'] = 'admin/users/reset_password/$1';
+$route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
+
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
 
@@ -230,4 +244,8 @@ $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
 $route['resource'] = 'site/resource';
+
+//
+$route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
+$route['event/view-single-event/(:any)'] = 'site/view_event_details/$1';
 

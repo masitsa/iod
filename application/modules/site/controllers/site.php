@@ -736,6 +736,7 @@ class Site extends MX_Controller
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
+
 	public function resource()
 	{
 		$where = 'resource_category_id > 0';
@@ -786,6 +787,12 @@ class Site extends MX_Controller
 		$data['content'] = $this->load->view('resource', $v_data, true);
 		
 		$this->load->view("site/templates/general_page", $data);
+	}
+	
+	public function view_event_details($training_name)
+	{
+		$training_title = $this->site_model->decode_web_name($training_name);
+		$title = $training_title ;
 	}
 }
 ?>
