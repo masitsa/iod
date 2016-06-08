@@ -6,6 +6,8 @@ class Site extends MX_Controller
 	var $service_location;
 	var $gallery_location;
 	var $training_location;
+	var $partners_location;
+	var $resource_location;
 	
 	function __construct()
 	{
@@ -21,6 +23,8 @@ class Site extends MX_Controller
 		$this->service_location = base_url().'assets/service/';
 		$this->gallery_location = base_url().'assets/gallery/';
 		$this->training_location = base_url().'assets/training/';
+		$this->partners_location = base_url().'assets/partners/';
+		$this->resource_location = base_url().'assets/resource/';
 	}
 	
 	public function without_jquery()
@@ -77,9 +81,13 @@ class Site extends MX_Controller
 		$v_data['testimonials'] = $this->site_model->get_testimonials();
 		$v_data['items'] = $this->site_model->get_front_end_items();
 		$v_data['slides'] = $this->site_model->get_slides();
+		$v_data['partners'] = $this->site_model->get_partners();
+		$v_data['resource'] = $this->site_model->get_resource(5);
 		$v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
 		$v_data['trainings'] = $this->training_model->get_recent_trainings(5);
 		$v_data['training_location'] = $this->training_location;
+		$v_data['resource_location'] = $this->resource_location;
+		$v_data['partners_location'] = $this->partners_location;
 		$v_data['faqs'] = $this->site_model->get_faqs();
 		$data['title'] = $this->site_model->display_page_title();
 		$v_data['service_location'] = $this->service_location;
@@ -318,6 +326,25 @@ class Site extends MX_Controller
 		$this->load->view("site/templates/general_page", $data);
 	}
 
+	/*
+	*
+	*	about
+	*
+	*/
+	public function membership() 
+	{	
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$v_data['title'] = $data['title'];
+		$data['contacts'] = $contacts;
+		$data['content'] = $this->load->view("services", $v_data, TRUE);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
+
+
    /*
 	*
 	*	about
@@ -425,6 +452,43 @@ class Site extends MX_Controller
 		$v_data['title'] = $data['title'];
 		$data['contacts'] = $contacts;
 		$data['content'] = $this->load->view("single_service", $v_data, TRUE);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
+
+
+	public function membership_item($service_web_name) 
+	{	
+
+		$table = "service";
+		$where = 'service.service_status = 1';
+		$v_data['service_location'] = $this->service_location;
+		
+		if($service_web_name != NULL)
+		{
+			$service_name = $this->site_model->decode_web_name($service_web_name);
+			$where .= ' AND service.service_name = \''.$service_name.'\'';
+			$v_data['services_item'] = $this->site_model->get_services($table, $where, NULL);
+			$data['title'] = $service_name;
+			$v_data['title'] = $service_name;
+		}
+		
+		else
+		{
+			$data['title'] = 'Our Services';
+			$v_data['title'] = 'Our Services';
+			$v_data['services_item'] = $this->site_model->get_services($table, $where, 12);
+		}
+		$v_data['service_location'] = $this->service_location;
+
+
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$v_data['title'] = $data['title'];
+		$data['contacts'] = $contacts;
+		$data['content'] = $this->load->view("single_membership", $v_data, TRUE);
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
@@ -793,6 +857,18 @@ class Site extends MX_Controller
 	{
 		$training_title = $this->site_model->decode_web_name($training_name);
 		$title = $training_title ;
+
+		$v_data['title'] = $title;
+		$trainig_id = $this->site_model->get_event_id($title);
+		$query = $this->site_model->get_event($trainig_id);
+		$contacts = $this->site_model->get_contacts();
+		// $v_data['comments_query'] = $this->blog_model->get_post_comments($post_id);
+		// $v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
+		$v_data['training_location'] = $this->training_location;
+		$v_data['contacts'] = $contacts;
+		$v_data['query'] = $query;
+		$data['content'] = $this->load->view('single_event', $v_data, true);
+		$this->load->view("site/templates/general_page", $data);
 	}
 }
 ?>

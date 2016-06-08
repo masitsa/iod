@@ -101,6 +101,7 @@ class Blog extends MX_Controller {
 		$contacts = $this->site_model->get_contacts();
 		$v_data['contacts'] = $contacts;
 		$v_data['web_name'] = $web_name;
+
 		if($post_id)
 		{
 			$this->blog_model->update_views_count($post_id);
@@ -278,6 +279,7 @@ class Blog extends MX_Controller {
 		$query = $this->blog_model->get_post($post_id);
 		$contacts = $this->site_model->get_contacts();
 		$v_data['comments_query'] = $this->blog_model->get_post_comments($post_id);
+		$v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
 		$v_data['contacts'] = $contacts;
 		$v_data['query'] = $query;
 		$data['content'] = $this->load->view('blog/single_post', $v_data, true);

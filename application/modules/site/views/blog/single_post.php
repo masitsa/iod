@@ -138,45 +138,32 @@ $count = 0;
                 </div>
             </div>
         </div>
+<div class="inner-content-holder">
+			<div class="container">
+				<div class="row">
+					<!--EDUCATION BLOG PAGE START-->
+					<div class="col-md-8">
+						<div class="edu2_blog_page">
+    							<!--EDUCATION BLOG PAGE WRAP START-->
+    						<div class="edu2_blogpg_wrap">
+    							<figure>
+    								<img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""/>
+    							</figure>
 
-        <!--Banner Wrap End-->
-
-    	<!--Content Wrap Start-->
-    	<div class="kf_content_wrap">
-    		<section>
-    			<div class="container">
-    				<div class="row">
-    					<div class="col-md-12">
-
-    						<!--KF_BLOG DETAIL_WRAP START-->
-    						<div class="kf_blog_detail_wrap">
-
-    							<!-- BLOG DETAIL THUMBNAIL START-->
-    							<div class="blog_detail_thumbnail">
-	    							<figure>
-	    								<img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""/>
-	    								<figcaption><a href="blog-detail.html#">education</a></figcaption>
-	    							</figure>
-	    						</div>
-	    						<!-- BLOG DETAIL THUMBNAIL END-->
-
-    							<!--KF_BLOG DETAIL_DES START-->
-    							<div class="kf_blog_detail_des">
-	    							<div class="blog-detl_heading">
-	    								<h5><?php echo $post_title;?></h5>
-	    							</div>
-
-    								<ul class="blog_detail_meta">
-    									<li><i class="fa fa-calendar"></i><a href="blog-detail.html#"><?php echo $created; ?></a></li>
-    									<li><i class="fa fa-comments-o"></i><a href="blog-detail.html#"><?php echo $post_comments;?> Comments</a></li>
-    								</ul>
-
-	    							<p><?php echo $post_content;?> </p>
-	    							<p class="margin-bottom"><?php echo $post_content;?></p>
-
-	    						</div>
-	    						<!--KF_BLOG DETAIL_DES END--
-	    						<!--SECTION COMMENT START-->
+								<div class="edu2_blogpg_des">
+									<figure><img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""></figure>
+									<ul>
+										<li><i class="fa fa-calendar"></i><?php echo $created; ?></li>
+										<li><i class="fa fa-comments-o"></i><a href="our-blog.html#"><?php echo $post_comments;?> Comments</a></li>
+										<li><i class="fa fa-user"></i><a href="our-blog.html#">Admin</a></li>
+									</ul>
+									<h5><?php echo $post_title;?></h5>
+									<p><?php echo $post_content;?> </p>
+								</div>
+							</div>
+							<!--EDUCATION BLOG PAGE WRAP END-->
+						</div>
+						<!--SECTION COMMENT START-->
 	    						<div class="section-comment">
 	    							<div class="blog-detl_heading">
 	    								<h5>Comments</h5>
@@ -209,11 +196,80 @@ $count = 0;
 	    							</form>
 	    						</div>
 	    						<!-- BLOG PG FORM END-->
-    						</div>
-    						<!--KF_BLOG DETAIL_WRAP END-->
-    					</div>
-    				</div>
-    			</div>
-    		</section>
+
+
+					</div>
+					<!--EDUCATION BLOG PAGE END-->
+
+				    <!--KF_EDU_SIDEBAR_WRAP START-->
+					<div class="col-md-4">
+                        <div class="kf-sidebar">
+
+                            
+
+                            <!--KF SIDEBAR RECENT POST WRAP START-->
+                            <div class="widget widget-recent-posts">
+                                <h2>Recent Posts</h2>
+                                <ul class="sidebar_rpost_des">
+                                    <!--LIST ITEM START-->
+                                    <?php
+                                    $recent_blog = '';
+
+									//if users exist display them
+
+									if ($latest_posts->num_rows() > 0)
+									{	
+										//get all administrators
+										
+										foreach ($latest_posts->result() as $row)
+										{
+											$post_id = $row->post_id;
+											$post_title = $row->post_title;
+											$web_name = $this->site_model->create_web_name($post_title);
+											$post_status = $row->post_status;
+											$post_views = $row->post_views;
+											$image = base_url().'assets/images/posts/'.$row->post_image;
+											$created_by = $row->created_by;
+											$modified_by = $row->modified_by;
+											$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
+											$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
+											$description = $row->post_content;
+											$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 20));
+											$created = $row->created;
+											$day = date('j',strtotime($created));
+											$month = date('M',strtotime($created));
+											$created_on = date('jS M Y',strtotime($row->created));
+
+											$recent_blog .= '
+															<li>
+						                                        <figure style="margin-right:5px;">
+						                                            <img src="'.$image.'" alt="">
+						                                        </figure>
+						                                        <div class="kode-text">
+						                                            <h6><a href="'.base_url().'blog/view-single/'.$web_name.'">'.$post_title.'</a></h6>
+						                                            <span><i class="fa fa-clock-o"></i>'.$created_on.'</span>
+						                                        </div>
+						                                    </li>
+															';
+										}
+
+									}
+									echo $recent_blog;
+                                    ?>
+                                    
+                                </ul>
+                            </div>
+                            <!--KF SIDEBAR RECENT POST WRAP END-->
+
+
+
+
+                        </div>
+                    </div>
+					<!--KF EDU SIDEBAR WRAP END-->
+
+				</div>
+			</div>
     	</div>
-        <!--Content Wrap End-->
+
+        <!--Banner Wrap End-->

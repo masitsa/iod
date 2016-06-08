@@ -14,5 +14,8 @@
 <?php
 // echo $this->load->view('home/gallery', '', TRUE); 
 ?>
-<?php echo $this->load->view('home/register', '', TRUE); ?>
-<?php echo $this->load->view('home/testimonials', '', TRUE); ?>
+<?php 
+
+//echo $this->load->view('home/register', '', TRUE); ?>
+<?php echo $this->load->view('home/partners','',TRUE);?>
+<?php //echo $this->load->view('home/testimonials', '', TRUE); ?>

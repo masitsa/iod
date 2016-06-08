@@ -636,6 +636,7 @@ section,
 	float: left;
 	width: 100%;
 	position: relative;
+	margin-left: 25px; 
 	margin-top: 15px !important;
 }
 .edu2_main_bn_wrap figure{
@@ -762,7 +763,7 @@ section,
 	float: left;
 	width: 100%;
 	text-align: :left;
-	padding:30px 0 30px;
+	padding:10px 0 10px;
 	background-image: url(images/inrbg.jpg);
 	background-size: cover;
 	background-origin: center;
@@ -1083,7 +1084,8 @@ section,
 .kf_intro_des_caption{
 	float: left;
 	width: 100%;
-	padding: 0px 15px;
+	/*padding: 0px 15px;*/
+	padding: 0px 0px;
 	text-align: center;
 }
 .kf_intro_des_caption h6{
@@ -1121,7 +1123,7 @@ section,
 	font-weight: bold;
 	color: #666666;
 	text-transform: capitalize;
-	margin-bottom: 45px;
+	/*margin-bottom: 45px;*/
 	font-size: 14px;
 }
 .kf_intro_des figure figcaption{
@@ -2275,9 +2277,34 @@ section,
 	padding:0px;
 }
 .widget-recent-posts li{
-	float: left;
-	width: 100%;
-	margin-bottom: 30px;
+	border-bottom: 1px dotted #2f2f2f !important;
+    float: left;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+.service-list
+{
+	border-bottom: 1px dotted #2f2f2f !important;
+	margin-bottom: 10px;
+}
+.service-list a, .widget-recent-posts .kode-text a.buttton
+{
+	font-size: 13px;
+	font-weight: bold;
+	color: #e79800 !important;
+	text-transform: uppercase;
+}
+.widget-recent-posts .kode-text a.buttton
+{
+	margin-top: 2px;
+}
+.service-list h6
+{
+	/*font-size: 13px;*/
+	font-weight: bold;
+	color: #e79800 !important;
+	text-transform: uppercase;
 }
 .widget-recent-posts ul li:last-child{
 	margin-bottom: 0;
@@ -2306,7 +2333,7 @@ section,
 }
 .widget-recent-posts .kode-text{
 	float: none;
-	padding: 0 0 0 100px;
+	padding: 0 0 0 70px;
 	margin-top: 0px;
 }
 .widget-recent-posts h6{
@@ -2314,14 +2341,14 @@ section,
 	margin-bottom: 15px;
 }
 .widget-recent-posts span{
-	font-size: 16px;
+	font-size: 10px;
 	font-weight: normal;
 	font-style: italic;
 	color: #999999;
 }
 .widget-recent-posts span i{
 	font-style: normal;
-	font-size: 16px;
+	font-size: 10px;
 	margin-right: 5px;
 }
 /*KF SIDE BAR RECENT POST WRAP END*/
@@ -2332,10 +2359,19 @@ section,
 	margin-bottom: 46px;
 }
 .widget-categories ul{
-	float:left;
+	/*float:left;
 	width:100%;
 	margin:0px;
-	padding:0px;
+	padding:0px;*/
+	float: left;
+    margin: 0;
+    padding-left: 50px;
+    text-align: left;
+    width: 100%;
+}
+.widget-categories ul.blog
+{
+	padding-left: 0px !important;
 }
 .widget-categories ul li{
 	float: left;
@@ -2372,9 +2408,10 @@ section,
 	margin:0px 0px 0px -6px;
 }
 .widget-courses-list ul li{
-	margin: 0 0px 6px 5px;
-	float:left;
-	width:97px;
+	float: left;
+    margin: 0 0 5px;
+    padding: 5px;
+    width: 98px;
 }
 .widget-courses-list figure a{
 	position: absolute;
@@ -5749,4 +5786,45 @@ input:checked + .radio-value {
 	font-size:17px;
 	text-align:center;
 	color:#999;
+}
+.row
+{
+	margin-bottom: 10px !important;
+}
+
+
+
+.list-date {
+    background: #e79800 none repeat scroll 0 0 !important;
+}
+.list-date {
+    background: #e79800 none repeat scroll 0 0 !important;
+    box-sizing: border-box;
+    display: inline;
+    float: left;
+    font-weight: bold;
+    margin: 0 0 0 0;
+    overflow: hidden;
+    padding: 2px;
+    text-align: center;
+    width: 15%;
+}
+.list-date .list-dayname {
+    background: #fff none repeat scroll 0 0;
+    box-sizing: border-box;
+    color: #666;
+    display: block;
+    font-size: 9px;
+    padding: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+.list-date .list-daynumber {
+    color: #fff;
+    display: block;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    width: 100%;
 }

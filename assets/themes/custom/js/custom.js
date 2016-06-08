@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  $('#media').carousel({
+    pause: true,
+    interval: false,
+  });
+});
 $( document ).ready(function() {
     /* Timeout alert messages */
 	window.setTimeout(function() { 
