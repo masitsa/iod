@@ -17,88 +17,116 @@
                 ?>
             </div>
             
-            <div class="col-xs-12 col-sm-12 col-md-6">
-                <h3>About<small> You</small></h3>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h3>About You</h3>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="member_first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" value="<?php echo set_value('member_first_name');?>">
+                	<div class="col-md-6>">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="member_first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" value="<?php echo set_value('member_first_name');?>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="member_surname" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" value="<?php echo set_value('member_surname');?>">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="member_surname" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" value="<?php echo set_value('member_surname');?>">
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="member_title" class="form-control input-lg" placeholder="Title" tabindex="2" value="<?php echo set_value('member_title');?>">
-                </div>
-                <div class="form-group">
-                    <div class="input-group date" data-provide="datepicker">
-                    	<input type="text" name="date_of_birth" class="form-control input-lg datepicker" placeholder="Date of Birth" tabindex="3" value="<?php echo set_value('date_of_birth');?>" data-date-format="mm/dd/yyyy">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="nationality" class="form-control input-lg" placeholder="Nationality" tabindex="3" value="<?php echo set_value('nationality');?>">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="qualifications" class="form-control input-lg" placeholder="Qualifications" tabindex="3" value="<?php echo set_value('qualifications');?>">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="member_phone" id="phone" class="form-control input-lg" placeholder="Phone" tabindex="3" value="<?php echo set_value('member_phone');?>">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="member_email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" value="<?php echo set_value('member_email');?>">
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="member_password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" value="<?php echo set_value('member_password');?>">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-6">
-                <h3>Company<small> Details</small></h3>
-                <div class="form-group">
-                    <select name="company_id" class="form-control input-lg" required>
-						<?php
-                        echo '<option value="">--Select Company--</option>';
-                        if($companies->num_rows() > 0)
-                        {
-                            $result = $companies->result();
-                            
-                            foreach($result as $res)
-                            {
-                                if($res->company_id == set_value('company_id'))
-                                {
-                                    echo '<option value="'.$res->company_id.'" selected>'.$res->company_name.'</option>';
-                                }
-                                else
-                                {
-                                    echo '<option value="'.$res->company_id.'">'.$res->company_name.'</option>';
-                                }
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
+                    
+						<div class="form-group">
+							<input type="text" name="member_title" class="form-control input-lg" placeholder="Title" tabindex="2" value="<?php echo set_value('member_title');?>">
+						</div>
+						<div class="form-group">
+							<div class="input-group date" data-provide="datepicker">
+								<input type="text" name="date_of_birth" class="form-control input-lg datepicker" placeholder="Date of Birth" tabindex="3" value="<?php echo set_value('date_of_birth');?>" data-date-format="mm/dd/yyyy">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="text" name="nationality" class="form-control input-lg" placeholder="Nationality" tabindex="3" value="<?php echo set_value('nationality');?>">
+						</div>
+						<div class="form-group">
+							<input type="text" name="qualifications" class="form-control input-lg" placeholder="Qualifications" tabindex="3" value="<?php echo set_value('qualifications');?>">
+						</div>
+						<div class="form-group">
+							<input type="text" name="member_phone" id="phone" class="form-control input-lg" placeholder="Phone" tabindex="3" value="<?php echo set_value('member_phone');?>">
+						</div>
+						<div class="form-group">
+							<input type="email" name="member_email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" value="<?php echo set_value('member_email');?>">
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="form-group">
+									<input type="password" name="member_password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" value="<?php echo set_value('member_password');?>">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="form-group">
+									<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6>">
+						<div class="col-xs-12 col-sm-8 col-md-12">
+							<h3>Company Details</h3>
+							<div class="row">
+								<div class="col-xs-12 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="text" name="company_name" id="company_name" class="form-control input-lg" placeholder="Company" tabindex="5" value="<?php echo set_value('company_name');?>">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="password" name="company_physical_address" id="company_physical_address" class="form-control input-lg" placeholder="Company Physical Address" tabindex="6" value="<?php echo set_value('company_physical_address');?>">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="password" name="company_postal_address" id="company_postal_address" class="form-control input-lg" placeholder="Company Postal Address" tabindex="5" value="<?php echo set_value('company_postal_address');?>">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="password" name="company_postal_code" id="company_postal_code" class="form-control input-lg" placeholder="Company Post Code" tabindex="6">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="password" name="company_town" id="company_town" class="form-control input-lg" placeholder="Company Town" tabindex="6">
+									</div>
+								</div>
+							</div>
+						</div>
 
-                <div class="form-group">
-                    <input type="text" name="designation" class="form-control input-lg" placeholder="Designation" tabindex="3" value="<?php echo set_value('designation');?>">
-                </div>
-            </div>
-        </div>
-        
+						<div class="form-group">
+							<input type="text" name="company_email" class="form-control input-lg" placeholder="Company Email" tabindex="3" value="<?php echo set_value('company_email');?>">
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="form-group">
+									<input type="text" name="company_name" id="company_phone" class="form-control input-lg" placeholder="Company Phone" tabindex="5" value="<?php echo set_value('company_phone');?>">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="form-group">
+									<input type="text" name="company_cell_phone" id="company_cell_phone" class="form-control input-lg" placeholder="Company Cell Phone" tabindex="6" value="<?php echo set_value('company_cell_phone');?>">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="text" name="company_facsimile" class="form-control input-lg" placeholder="Company Facsimile" tabindex="3" value="<?php echo set_value('company_facsimile');?>">
+						</div>
+						<div class="form-group">
+							<input type="text" name="company_facsimile" class="form-control input-lg" placeholder="Company Activity" tabindex="3" value="<?php echo set_value('company_facsimile');?>">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         <div class="row">
             <div class="col-xs-4 col-sm-3 col-md-3">
                 <span class="button-checkbox">
