@@ -243,9 +243,32 @@ $route['about/board'] = 'site/board';
 $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
+$route['membership'] = 'site/membership';
+$route['membership/(:any)'] = 'site/membership_item/$1';
 $route['resource'] = 'site/resource';
 
 //
 $route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
-$route['event/view-single-event/(:any)'] = 'site/view_event_details/$1';
+$route['view-single-event/(:any)'] = 'site/view_event_details/$1';
+
+
+$route['partners'] = 'admin/partners/index';
+$route['partners/(:num)'] = 'admin/partners/index/$1';
+$route['administration/all-partners/(:num)'] = 'admin/partners/index/$1';//with a page number
+$route['administration/add-partner'] = 'admin/partners/add_partner';
+$route['administration/edit-partner/(:num)/(:num)'] = 'admin/partners/edit_partner/$1/$2';
+$route['administration/activate-partner/(:num)/(:num)'] = 'admin/partners/activate_partner/$1/$2';
+$route['administration/deactivate-partner/(:num)/(:num)'] = 'admin/partners/deactivate_partner/$1/$2';
+$route['administration/delete-partner/(:num)/(:num)'] = 'admin/partners/delete_partner/$1/$2';
+
+
+
+$route['resource'] = 'admin/resource/index';
+$route['resource/(:num)'] = 'admin/resource/index/$1';
+$route['administration/all-resources/(:num)'] = 'admin/resource/index/$1';//with a page number
+$route['administration/add-resource'] = 'admin/resource/add_resource';
+$route['administration/edit-resource/(:num)/(:num)'] = 'admin/resource/edit_resource/$1/$2';
+$route['administration/activate-resource/(:num)/(:num)'] = 'admin/resource/activate_resource/$1/$2';
+$route['administration/deactivate-resource/(:num)/(:num)'] = 'admin/resource/deactivate_resource/$1/$2';
+$route['administration/delete-resource/(:num)/(:num)'] = 'admin/resource/delete_resource/$1/$2';
 

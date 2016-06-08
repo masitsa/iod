@@ -14,12 +14,12 @@
         $floor = $contacts['floor'];
         $location = $contacts['location'];
 
-         $working_weekday = $contacts['working_weekday'];
-        $working_weekend = $contacts['working_weekend'];
+		$working_weekday = $contacts['working_weekday'];
+		$working_weekend = $contacts['working_weekend'];
 
-         $mission = $contacts['mission'];
-          $vision = $contacts['vision'];
-          $about = $contacts['about'];
+		$mission = $contacts['mission'];
+		$vision = $contacts['vision'];
+		$about = $contacts['about'];
     }
 ?>
 <section>
@@ -27,17 +27,72 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="abt_univ_wrap">
-					<!-- HEADING 1 START-->
-					<div class="kf_edu2_heading1">
-						<h3>ABOUT IOD</h3>
-					</div>
-					<!-- HEADING 1 END-->
 
-					<div class="abt_univ_des">
-						<p><?php echo $about;?></p>
-						<a href="<?php echo site_url();?>about" class="btn-3">Know More</a>
+					<div class="kf_courses_tabs">
+						<!-- Nav tabs -->
+						<ul role="tablist" class="nav nav-tabs">
+							
+							<li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="coursedetails2" href="<?php echo base_url();?>home#coursedetails2" aria-expanded="true">ABOUT IOD KENYA</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="entryrequirment" href="<?php echo base_url();?>home#entryrequirment" aria-expanded="true">OUR SERVICES</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="placements" href="<?php echo base_url();?>home#placements" aria-expanded="true">IOD MEMBERSHIP</a></li>
+						</ul>
 
-					</div>
+						<!-- Tab panes -->
+						<div class="tab-content">
+
+							<div id="coursedetails2" class="tab-pane active" role="tabpanel">
+								<div class="course_heading">
+									<h3>IOD KENYA</h3>
+								</div>
+								<p><?php echo $about;?></p>
+								<a href="<?php echo site_url();?>about" class="btn-3">Know More</a>
+							</div>
+
+							<div id="entryrequirment" class="tab-pane" role="tabpanel">
+								<div class="course_heading">
+									<h3>OUR SERVICES</h3>
+								</div>
+								<?php
+								 $services = $this->site_model->get_active_services();
+			                    $checking_items = '';
+			                    if($services->num_rows() > 0)
+			                    {   $count = 0;
+			                        foreach($services->result() as $res)
+			                        {
+			                            $service_name = $res->service_name;
+			                            $service_description = $res->service_description;
+			                             $mini_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 30));
+			                             $maxi_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 40));
+			                            $web_name = $this->site_model->create_web_name($service_name);
+			                            $checking_items .=
+			                            					'
+			                            					<div class="service-list">
+			                            						<h6>'.$service_name.'</h6>
+																<p>'.$mini_desc.' <a href="'.site_url().'services/'.$web_name.'">  Know More > </a> </p>
+
+															</div>
+			                            					';
+			                         }
+			                    }
+			                    echo $checking_items;
+								?>
+								
+							</div>
+
+							<div id="placements" class="tab-pane " role="tabpanel">
+								<div class="course_heading">
+									<h3>BECOME A MEMBER</h3>
+								</div>
+								<p>
+									 A prospective member submits a duly filled application form and a copy of his/her corporate governance training certificate to the Institute. The Membership Services and Development Committee of the Board meets at least once every quarter to review application forms. 
+								</p>
+								<p>
+									Applicants who fulfill the required criteria are then invited to join the relevant category of membership in the Institute. The new member is supplied with a membership number, a membership certificate and a copy of the Memorandum and Articles of Association of the Institute.
+								</p>
+							</div>
+
+						</div>
+						</div>
 				</div>
 			</div>
 
@@ -68,93 +123,123 @@
 		</div>
 		<div class="col-md-12">
 			<div class="row">
-								<!--COURSE CATEGORIES WRAP START-->
-								<div class="kf_cur_catg_wrap">
-									<!--COURSE CATEGORIES WRAP HEADING START-->
-									<div class="col-md-12">
-										<div class="kf_edu2_heading1">
-											<h3>Course Categories</h3>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES WRAP HEADING END-->
+				<div class="col-md-8">
+					<!-- HEADING 1 START-->
+					
+					<!-- HEADING 2 START-->
+					<div class="col-md-12">
+						<div class="kf_edu2_heading2">
+							<h3>Quick Links</h3>
+						</div>
+					</div>
+					<!-- HEADING 2 END-->
+					<!-- INTERO DES START-->
+					<div class="kf_intro_des">
+						<div class="kf_intro_des_caption">
+							<!-- <span><i class="fa fa-users"></i></span> -->
+							<h6>Membership</h6>
+							<div class="widget widget-categories">
+								<ul>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Who is a member ?</a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Become a member</a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Members categories</a></li>
+								</ul>
+    						</div>
+						</div>
+						<!-- <figure>
+							<img alt="" src="<?php echo base_url();?>assets/img/icon.jpg">
+							<figcaption><a href="index.html#">Learn Courses Online</a></figcaption>
+						</figure> -->
+					</div>
+					<!-- INTERO DES END-->
+					<!-- INTERO DES START-->
+					<div class="kf_intro_des">
+						<div class="kf_intro_des_caption">
+							<!-- <span><i class="fa fa-newspaper-o"></i></span> -->
+							<h6>Newsroom</h6>
+							<div class="widget widget-categories">
+								<ul>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Upcoming events </a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Tenders & Vacancies</a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Our Resources</a></li>
+									
+								</ul>
+    						</div>
+						</div>
+						<!-- <figure>
+							<img alt="" src="<?php echo base_url();?>assets/img/icon.jpg">
+							<figcaption><a href="index.html#">Learn Courses Online</a></figcaption>
+						</figure> -->
+					</div>
+					<!-- INTERO DES END-->
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-1">
-											<span><i class="icon-statistics"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Business</h5>
-												<p>Business Trends changing with latest courses are available with us.</p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
+					<!-- INTERO DES START-->
+					<div class="kf_intro_des">
+						<div class="kf_intro_des_caption">
+							<!-- <span><i class="fa fa-calendar"></i></span> -->
+							<h6>Events</h6>
+							<div class="widget widget-categories">
+								<ul>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Seminars</a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Conferences</a></li>
+									<li><a href="#"><i class="fa fa-caret-right"></i>Special Events</a></li>
+								</ul>
+    						</div>
+						</div>
+						<!-- <figure>
+							<img alt="" src="<?php echo base_url();?>assets/img/icon.jpg" class="" width="50px">
+							<figcaption><a href="index.html#">Learn Courses Online</a></figcaption>
+						</figure> -->
+					</div>
+					<!-- INTERO DES END-->
+				</div>
+				<div class="col-md-4">
+						<div class="kf_edu2_heading2">
+							<h3>Resources</h3>
+						</div>
+						<!--KF_SIDEBAR_SEARCH_WRAP START-->
+						<div class="widget widget-courses-list">
+							<ul>
+							<?php
+								$resource_result = '';
+								if($resource->num_rows() > 0)
+								{
+									$counter = 0;
+									foreach($resource->result() as $resource)
+									{
+									 	$resource_name = $resource->resource_name;
+										$description = $resource->resource_description;
+										$resource_image = $resource->resource_image_name;
+										$resource_link = $resource->resource_link;
+										$resource_button_text = $resource->resource_button_text;
+										$description = $this->site_model->limit_text($description, 8);
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-2">
-											<span><i class="icon-accounting5"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Accounting</h5>
-												<p>Accounting need to be perfect. Come and join with us with best resources.</p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-3">
-											<span><i class="icon-chemistry29"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Science &amp; Technology</h5>
-												<p>Latest technologies online courses are available with new courses. </p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
+										// if ($counter % 3 == 0) {
+										//    echo 'image file';
+										// }
+										$resource_result .= ' 
+															  	<li>
+								                                	<figure>
+								                                    	<img alt="" src="'.$resource_location.''.$resource_image.'">
+																		<a href="#">Download</a>
+																	</figure>
+																</li>';
+									}
+								}
+								else
+								{
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-4">
-											<span><i class="icon-caduceus8"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Health &amp; Psychology</h5>
-												<p>Learn about the Health &amp; Psychology with the complete presentation. </p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
+								}
+								echo $resource_result;
+							?>
+								
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-5">
-											<span><i class="icon-cocktail32"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Food &amp; Drinking</h5>
-												<p>Get the best eating education and practice by taking online courses.</p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
+								
+							</ul>
+						</div>
+				</div>			
+			</div>
 
-									<!--COURSE CATEGORIES DES START-->
-									<div class="col-md-6">
-										<div class="kf_cur_catg_des color-6">
-											<span><i class="fa fa-line-chart"></i></span>
-											<div class="kf_cur_catg_capstion">
-												<h5>Creative Arts &amp; Media</h5>
-												<p>Come and explore your creative arts and media by going further.</p>
-											</div>
-										</div>
-									</div>
-									<!--COURSE CATEGORIES DES END-->
-
-								</div>
-								<!--COURSE CATEGORIES WRAP END-->
-							</div>
-		</div>
-
-		</div>
 	</div>
 </section>

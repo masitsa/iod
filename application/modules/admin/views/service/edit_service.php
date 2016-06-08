@@ -51,6 +51,22 @@
                             <label for="service_name">Service name</label>
                             <input type="text" class="form-control" name="service_name" placeholder="Service Name" value="<?php echo $service_row->service_name;?>">
                         </div>
+                        <div class="form-group">
+	                        <label for="service_name">Department Name</label>
+	                        <select class="form-control" name="department_id">
+	                        	<?php
+	                        		foreach ($active_departments->result() as $key) {
+	                        			# code...
+	                        			$department_id = $key->department_id;
+	                        			$department_name = $key->department_name;
+	                        			?>
+	                        			<option value="<?php echo $department_id;?>" ><?php echo $department_name;?></option>
+	                        			<?php
+	                        		}
+	                        	?>
+	                        	
+	                        </select>
+	                    </div>
 					</div>
                 	<div class="col-md-6">
                         <label class="control-label" for="image">Service Image</label>

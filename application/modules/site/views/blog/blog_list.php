@@ -33,7 +33,7 @@ if ($query->num_rows() > 0)
 		$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
 		$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
 		$description = $row->post_content;
-		$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 50));
+		$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 20));
 		$created = $row->created;
 		$day = date('j',strtotime($created));
 		$month = date('M',strtotime($created));

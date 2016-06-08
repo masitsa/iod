@@ -19,18 +19,24 @@
 					$training_image_name = $value->training_image_name;
 
 					$start_date = date('jS M Y',strtotime($start_date));
+					$month = date('M',strtotime($start_date));
+					$day = date('d',strtotime($start_date));
 					$end_date = date('jS M Y',strtotime($end_date));
+
+					$category_web_name = $this->site_model->create_web_name($training_name);
 					# code...
 					$result_trainings .='<!--LIST ITEM START-->
                                    		<li>
-                                            <figure>
-                                            	<img src="'.$training_location.''.$training_image_name.'" alt="">
-                                                <figcaption><a href="'.$training_location.''.$training_image_name.'"><i class="fa fa-search-plus"></i></a></figcaption>
-                                            </figure>
+                                            <div class="list-date">
+											        <span class="list-dayname">'.$month.'</span>
+											        <span class="list-daynumber">'.$day.'</span>
+											    </div>
                                             <div class="kode-text">
-                                                <h6><a href="courses-detail.html#">'.$training_name.'</a></h6>
-                                                <span><strong>From </strong><i class="fa fa-clock-o"></i>'.$start_date.'</span>
-                                                <span><strong>To </strong> <i class="fa fa-clock-o"></i>'.$end_date.'</span>
+                                                <h6><a href="'.site_url().'view-single-event/'.$category_web_name.'">'.$training_name.' From '.$start_date.' To '.$end_date.'</a> <br />
+                                                	<a href="'.site_url().'view-single-event/'.$category_web_name.'" class="buttton"> Book Now &gt; </a>
+                                                 </h6>
+
+                                                
                                             </div>
     									</li>
                                         <!--LIST ITEM START-->';
@@ -49,7 +55,9 @@
 				<div class="widget widget-recent-posts">
 					<ul class="sidebar_rpost_des">
                     	<?php echo $result_trainings;?>
+
 					</ul>
+					
 				</div>
 			</div>
 			<!-- COURSES DETAIL DES END -->
@@ -63,60 +71,37 @@
 
 			$result_accouncements = '';
 			
-			//if users exist display them
+			if($trainings->num_rows() > 0)
+			{
+				foreach ($trainings->result() as $value) {
+					$training_name = $value->training_name;
+					$start_date = $value->start_date;
+					$end_date = $value->end_date;
+					$training_image_name = $value->training_image_name;
 
-			if ($latest_posts->num_rows() > 0)
-			{	
-				//get all administrators
-				$administrators = $this->users_model->get_all_administrators();
-				if ($administrators->num_rows() > 0)
-				{
-					$admins = $administrators->result();
+					$start_date = date('jS M Y',strtotime($start_date));
+					$month = date('M',strtotime($start_date));
+					$day = date('d',strtotime($start_date));
+					$end_date = date('jS M Y',strtotime($end_date));
+					# code...
+					$result_accouncements .='<!--LIST ITEM START-->
+                                   		<li>
+                                            <div class="list-date">
+											        <span class="list-dayname">'.$month.'</span>
+											        <span class="list-daynumber">'.$day.'</span>
+											    </div>
+                                            <div class="kode-text">
+                                                <h6><a href="courses-detail.html#">'.$training_name.' From '.$start_date.' To '.$end_date.'</a></h6>
+                                                
+                                            </div>
+    									</li>
+                                        <!--LIST ITEM START-->';
 				}
-				
-				else
-				{
-					$admins = NULL;
-				}
-				
-				foreach ($latest_posts->result() as $row)
-				{
-					$post_id = $row->post_id;
-					$blog_category_name = '';//$row->blog_category_name;
-					$blog_category_web_name = $this->site_model->create_web_name($blog_category_name);
-					$blog_category_id = $row->blog_category_id;
-					$post_title = $row->post_title;
-					$web_name = $this->site_model->create_web_name($post_title);
-					$post_status = $row->post_status;
-					$post_views = $row->post_views;
-					$image = base_url().'assets/images/posts/'.$row->post_image;
-					$created_by = $row->created_by;
-					$modified_by = $row->modified_by;
-					$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
-					$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
-					$description = $row->post_content;
-					$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 30));
-					$created = $row->created;
-					$day = date('j',strtotime($created));
-					$month = date('M',strtotime($created));
-					$created_on = date('jS M Y',strtotime($row->created));
-					
-					$categories = '';
-					$count = 0;
-					
-						
-					$result_accouncements .= '<li>
-		                                            <div class="abt_univ_des">
-		                                                <h6><a href="courses-detail.html#">'.$post_title.'</a></h6>
-		                                                <span><i class="fa fa-clock-o"></i>'.$created_on.'</span>
-		                                            </div>
-		    									</li>';
-					}
-				}
-				else
-				{
-					$result_accouncements = "There are no posts :-(";
-				}
+			}
+			else
+			{
+				$result_accouncements = '';
+			}
 			   
 			  ?>
 
