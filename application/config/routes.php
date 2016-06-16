@@ -272,3 +272,10 @@ $route['administration/activate-resource/(:num)/(:num)'] = 'admin/resource/activ
 $route['administration/deactivate-resource/(:num)/(:num)'] = 'admin/resource/deactivate_resource/$1/$2';
 $route['administration/delete-resource/(:num)/(:num)'] = 'admin/resource/delete_resource/$1/$2';
 
+//pesa pal payments
+$route['payment/(:num)/(:any)/(:num)/(:num)'] = 'member/payment/$1/$2/$3/$4';
+$route['member/payment-success/(:num)/(:any)'] = 'member/payment_success/$1/$2';
+
+
+//member _account routes
+$route['update_profile/(:num)'] = 'member/update_profile/$1';

@@ -15,7 +15,7 @@ class Site extends MX_Controller
 		$this->load->model('site/site_model');
 		$this->load->model('auth_model');
 		$this->load->model('admin/blog_model');
-		$this->load->model('banner_model');
+		$this->load->model('site/banner_model');
 		$this->load->model('admin/training_model');
 		$this->load->model('admin/users_model');
 

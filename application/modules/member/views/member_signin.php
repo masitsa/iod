@@ -22,7 +22,7 @@
 				}
 			?>
             <form action="<?php echo $this->uri->uri_string();?>" method="post" role="form">
-                <h2>Member <small>Login</small></h2>
+                <h2>Member Login</h2>
                 <hr class="colorgraph">
                 
                 <div class="form-group">

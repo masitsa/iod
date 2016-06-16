@@ -1,19 +1,44 @@
 <div class="container">
-    <form action="<?php echo $this->uri->uri_string();?>" method="post" role="form">
+<?php $member_id = $this->member_id;
+     echo form_open(''.site_url().'update-profile/'.$member_id.'', array("class" => "form-horizontal", "role" => "form"));?>
         <div class="row">
     
             <div class="col-md-2 col-md-offset-5">
                 <img src="<?php echo base_url().'assets/logo/iod.jpg'?>" class="img-responsive" />
             </div>
         	<div class="col-md-12">
-                <h2>Member <small>Registration</small></h2>
+                <h2>Edit Profile</h2>
                 <hr class="colorgraph">
                 <?php
+				
+				//retrieve the member data
+					$row = $member_details->row();
+					
+					$member_first_name = $row->member_first_name;
+					$member_surname = $row-> member_surname;   
+					$member_title  =  $row-> member_title;
+					$date_of_birth   = $row->date_of_birth;
+					$nationality = $row->nationality;
+					$qualifications = $row->qualifications;
+					$member_phone  = $row->member_phone;
+					$member_email  = $row->member_email;
+					$designation = $row->designation;
                     $validation_errors = validation_errors();
                     if(!empty($validation_errors))
                     {
+						//repopulate the feids
                         echo '<div class="alert alert-danger">'.$validation_errors.'</div>';
+						$member_first_name = set_value('member_first_name');  
+						$member_surname = set_value('member_surname');
+						$member_title  =   set_value('member_title');
+						$date_of_birth   = set_value('date_of_birth');
+						$nationality = set_value('nationality');
+						$qualifications =   set_value('qualifications');
+						$member_phone  = set_value('member_phone');
+						$member_email  = set_value('member_email');
+						$designation = set_value('designation');
                     }
+					
                 ?>
             </div>
             

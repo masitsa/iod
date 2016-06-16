@@ -221,6 +221,16 @@ class Invoices_model extends CI_Model
 		return $query;
 	}
 	
+	//get all payments made
+	public function get_payments($member_id)
+	{
+		$this->db->select('payment.*, invoice_status.invoice_status_name, invoice.*');
+		$this->db->where('payment.invoice_id = invoice.invoice_id AND invoice.invoice_status = invoice_status.invoice_status_id AND payment.member_id = member.member_id AND member.member_id = '.$member_id);
+		$query = $this->db->get('payment, invoice , invoice_status, member');
+		
+		return $query;
+	}
+	
 	/*
 	*	Retrieve all wishlist items of a user
 	*
@@ -795,7 +805,7 @@ class Invoices_model extends CI_Model
 	{
 		//select product code
 		$this->db->from('invoice');
-		$this->db->where("invoice_number LIKE 'IOD/INV/".date('y')."-%'");
+		$this->db->where("invoice_number LIKE 'IOD-INV-".date('y')."-%'");
 		$this->db->select('MAX(invoice_number) AS number');
 		$query = $this->db->get();
 		$preffix = "IOD/INV/".date('y').'-';

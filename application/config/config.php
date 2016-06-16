@@ -386,10 +386,10 @@ $config['modules_locations'] = array(
 */
 $config['appID'] = '396573847220477';
 $config['appSecret'] = '8dbab961c07ef293bfc5d58b8de2b9a8';
-$config['mandrill_key']    = 'yjFJ6K54RN6qZillqrUXXg';
 
-$config['consumer_key']    = '1VsCbDt7UgL7tiZMjXnea8TX3vRb/Lcj';
-$config['consumer_secret']    = '7PxQd2Zei6z/SlrqyMW5gUm8QvQ=';
+$config['mandrill_key'] = 'pUL4Q8ehxIqpZFBQRyuS4A';
+$config['consumer_key'] = 'GXLmfTHjpbrLrAOHBW0SIKn1s+R/6onQ';
+$config['consumer_secret'] = 'ZbZWD3B1wzRYgY91rmSy/L6tjRA=';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
