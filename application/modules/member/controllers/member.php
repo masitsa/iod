@@ -4,7 +4,7 @@
 require_once "./application/libraries/dompdf/autoload.inc.php";
 	
 // reference the Dompdf namespace
-use Dompdf\Dompdf;
+//use Dompdf\Dompdf;
 
 class member extends MX_Controller 
 {
@@ -18,9 +18,11 @@ class member extends MX_Controller
 		
 		$this->load->model('site/site_model');
 		$this->load->model('member/member_model');
+		$this->load->model('site/banner_model');
 		$this->load->model('member/invoices_model');
 		$this->load->model('member/uploads_model');
 		$this->load->model('admin/file_model');
+		$this->load->model('admin/companies_model');
 
 		$this->uploads_path = realpath(APPPATH . '../assets/uploads');
 		$this->uploads_location = base_url().'assets/uploads/';
@@ -48,10 +50,13 @@ class member extends MX_Controller
 	public function my_account()
 	{
 		$member_id = $this->member_id;
+		//echo $member_id;die();
 		$v_data['title'] = $data['title'] = $this->site_model->display_page_title();
 		$v_data['member_id'] = $member_id;
+		$v_data['payments'] = $this->invoices_model->get_payments($member_id);
 		$v_data['invoices'] = $this->invoices_model->get_user_invoices($member_id, 5);
-		$data['content'] = $this->load->view('account/dashboard', $v_data, true);
+		//var_dump($v_data['invoices']);die();
+		$data['content'] = $this->load->view('account/payments', $v_data, true);
 		
 		$this->load->view('site/templates/account', $data);
 	}
@@ -380,4 +385,98 @@ class member extends MX_Controller
 		// Output the generated PDF to Browser
 		$dompdf->stream();
 	}
+	
+	//payment for invoices
+	public function payment($total, $invoice_number, $invoice_id, $member_id)
+	{
+		$this->session->set_userdata('payment_attendee_id', $member_id);
+		$this->load->model('member_model');
+		$iframe = $this->member_model->make_pesapal_payment($total, $invoice_number, $invoice_id, $member_id);
+		$v_data['iframe'] = $iframe;
+		$data['content'] = $this->load->view('site/pesapal_payment', $v_data, true);
+		$data['title'] = 'Payment For Invoice '.$invoice_number;
+		$this->load->view('site/templates/account', $data);
+	}
+	public function payment_success($total,$member_id)
+	{
+		//mark booking as paid in the database
+		$payment_data = $this->input->get();
+		$transaction_tracking_id = $payment_data['pesapal_transaction_tracking_id'];
+		$invoice_id = $payment_data['pesapal_merchant_reference'];
+		
+		if($this->member_model->create_payment($transaction_tracking_id, $invoice_id, $total, $member_id))
+		{
+			$this->session->set_userdata('success_message', 'Payment Made successfully');
+		}
+		
+		else
+		{
+			$this->session->set_userdata('error_message', 'No deduction made. Payment Failed');
+		}
+		
+			redirect('account');
+	}
+	
+	//update member profile
+	public function update_profile($member_id)
+	{
+		//member data validation
+		$this->form_validation->set_rules('member_first_name', 'First name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('member_surname', 'Surname', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('member_password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('member_phone', 'Phone', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('member_email', 'Email', 'trim|valid_email|is_unique[member.member_email]|required|xss_clean');
+		$this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required|xss_clean');
+		$this->form_validation->set_rules('nationality', 'Nationality', 'required|xss_clean');
+		$this->form_validation->set_rules('qualifications', 'Qualifications', 'required|xss_clean');
+		$this->form_validation->set_rules('designation', 'Designation', 'required|xss_clean');
+		$this->form_validation->set_rules('member_title', 'Title', 'required|xss_clean');
+		
+		//company details validation
+		$this->form_validation->set_rules('company_name', 'Company Name', 'required|xss_clean');
+		$this->form_validation->set_rules('company_physical_address', 'Physical Address', 'required|xss_clean');
+		$this->form_validation->set_rules('company_postal_address', 'Postal Address', 'required|xss_clean');
+		$this->form_validation->set_rules('company_postal_code', 'Postal Code', 'required|xss_clean');
+		$this->form_validation->set_rules('company_town', 'Town', 'required|xss_clean');
+		$this->form_validation->set_rules('company_email', 'Email', 'required|xss_clean');
+		$this->form_validation->set_rules('company_phone', 'Phone', 'required|xss_clean');
+		$this->form_validation->set_rules('company_cell_phone', 'Cell Phone', 'required|xss_clean');
+		$this->form_validation->set_rules('company_facsimile', 'Company Fax', 'required|xss_clean');
+		$this->form_validation->set_rules('company_activity', 'Company Activity', 'required|xss_clean');
+		//if form conatins invalid data
+		if ($this->form_validation->run())
+		{
+			if($this->member_model->update_member_details($member_id))
+			{
+				$this->session->set_userdata('success_message', 'Your account has been updated successfully.');
+					
+				redirect('account');
+			}
+			
+			else
+			{
+				$this->session->set_userdata('register_error', 'Unable to update account. Please try again');
+			}
+		}
+		else
+		{
+			$validation_errors = validation_errors();
+			//echo $validation_errors; die();
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				$this->session->set_userdata('validation_error', validation_error());
+			}
+		}
+		$member = $this->member_model->get_member_details($member_id);
+		$v_data['member_details'] = $member;
+		$v_data['companies'] = $this->companies_model->all_companies();
+		$data['title'] = 'Profile Update';
+		$v_data['title'] = $data['title'];
+		
+		$data['content'] = $this->load->view('update_profile', $v_data, true);
+		
+		$this->load->view('site/templates/general_page', $data);
+	}
+    
 }

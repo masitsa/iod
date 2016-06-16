@@ -1,4 +1,5 @@
 <?php
+$contacts = $this->site_model->get_contacts();
 	if(count($contacts) > 0)
 	{
 		$email = $contacts['email'];

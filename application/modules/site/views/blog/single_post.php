@@ -1,11 +1,15 @@
-<?php echo $this->load->view('includes/blog_navigation', '', TRUE); ?>
-
 <?php
-
+if($query->num_rows()>0)
+{
+	foreach($query->result() as $row)
+	{
 $post_id = $row->post_id;
 $blog_category_name = $row->blog_category_name;
 $blog_category_id = $row->blog_category_id;
+$post_image = $row->post_image;
+$post_content = $row->post_content;
 $post_title = $row->post_title;
+$post_comments = $row->post_comments;
 $post_status = $row->post_status;
 $post_views = $row->post_views;
 $image = base_url().'assets/images/posts/'.$row->post_image;
@@ -22,6 +26,8 @@ $created_on = date('jS M Y H:i a',strtotime($row->created));
 
 $categories = '';
 $count = 0;
+	}
+}
 //get all administrators
 	$administrators = $this->users_model->get_all_administrators();
 	if ($administrators->num_rows() > 0)
@@ -88,150 +94,182 @@ $count = 0;
 			$comments .= 
 			'
                  <!-- Comment Item -->
-                    <li class="media comment-item">
-                        <div class="media-body">
-                            <div class="comment-item-data">
-                                <div class="comment-author">
-                                    <a href="#">'.$post_comment_user.'</a>
-                                </div>
-                                Feb 9, 2014, at 10:23<span class="separator">—</span>
-                            </div>
-                            <p>'.$post_comment_description.'</p>
-                            
-                        </div>
-                    </li>
+                    <li>
+											<!-- COMMENT WRAP START-->
+											<div class="comment_wrap">
+    											<div class="comment_des">
+    												<div class="comment_des_hed">
+    													<cite><a href="blog-detail.html#">'.$post_comment_user.'</a><span>'.$date.'</span></cite>
+    													<a class="comment_reply" href="blog-detail.html#"><i class="fa fa-mail-reply"></i>Reply</a>
+    												</div>
+    												<p>'.$post_comment_description.' </p>
+    											</div>
+    										</div>
+    										<!-- COMMENT WRAP END-->
+										</li>
                     <!-- End Comment Item -->
 				
 			';
 		}
 	}
-	
-
 
 
 ?>
-
-<div class="section blog-section active-section">
-    <div class="pagetop">
-        <div class="page-name">
+<!--Banner Wrap Start-->
+        <div class="kf_inr_banner">
             <div class="container">
-                <h1 class="white-text darken-2 right"><?php echo $post_title;?></h1>
+                <div class="row">
+                    <div class="col-md-12">
+                    	<!--KF INR BANNER DES Wrap Start-->
+                        <div class="kf_inr_ban_des">
+                        	<div class="inr_banner_heading">
+								<h3>Blog Detail</h3>
+                        	</div>
+                           
+                            <div class="kf_inr_breadcrumb">
+								<ul>
+									<li><a href="blog-detail.html#">Home</a></li>
+									<li><a href="blog-detail.html#">Blog Detail</a></li>
+								</ul>
+							</div>
+                        </div>
+                        <!--KF INR BANNER DES Wrap End-->
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-        
-    <div class="row grey lighten-4">
-        <div class="col m12">
-            <ul class="breadcrumbs">
-                <li><a href="<?php echo site_url();?>home" title="" class="grey-text darken-2">Home</a></li>
-                <li><a href="<?php echo site_url();?>blog" title="" class="grey-text darken-2">Blog List</a></li>
-                <li><?php echo $post_title;?></li>
-            </ul>
-        </div>
-    </div>
+<div class="inner-content-holder">
+			<div class="container">
+				<div class="row">
+					<!--EDUCATION BLOG PAGE START-->
+					<div class="col-md-8">
+						<div class="edu2_blog_page">
+    							<!--EDUCATION BLOG PAGE WRAP START-->
+    						<div class="edu2_blogpg_wrap">
+    							<figure>
+    								<img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""/>
+    							</figure>
 
-    <div class="container">
-        <div class="row">
-            <div class="col m8">
-                <div class="content">
-                    <div class="entry format-standard">
-                        <div class="entry-top">
-                            <ul class="entry-meta list-inline">
-                                <li><a href="#" title=""><?php echo $created_on;?> by <?php echo $created_by;?></a></li>
-                                <li><a href="#comments" title=""><?php echo $total_comments;?> <?php echo $title;?></a></li>
-                            </ul>
-                            <h3 class="entry-title"><a href="#" title=""><?php echo $post_title;?></a></h3>
-                        </div><!--/.entry-top-->
-                        <div class="entry-media">
-                            <a href="#" title=""><img src="<?php echo $image;?>" alt="" class="img-responsive"></a>
-
-                        </div><!--/.entry-media-->
-                        
-                        <div class="entry-content">
-                            <p><?php echo $description;?>  </p>
-                             <div data-easyshare data-easyshare-url="<?php echo site_url()?>blog/view-single/<?php echo $web_name;?>">
-                                  <!-- Total -->
-                                  <button data-easyshare-button="total">
-                                    <span>Total</span>
-                                  </button>
-                                  <span data-easyshare-total-count>0</span>
-
-                                  <!-- Facebook -->
-                                  <button data-easyshare-button="facebook">
-                                    <span class="fa fa-facebook"></span>
-                                    <span>Share</span>
-                                  </button>
-                                  <span data-easyshare-button-count="facebook">0</span>
-
-                                  <!-- Twitter -->
-                                  <button data-easyshare-button="twitter" data-easyshare-tweet-text="<?php echo $post_title;?>">
-                                    <span class="fa fa-twitter"></span>
-                                    <span>Tweet</span>
-                                  </button>
-                                  <span data-easyshare-button-count="twitter">0</span>
-
-                                  <!-- Google+ -->
-                                  <button data-easyshare-button="google">
-                                    <span class="fa fa-google-plus"></span>
-                                    <span>+1</span>
-                                  </button>
-                                  <span data-easyshare-button-count="google">0</span>
-
-                                  <div data-easyshare-loader>Loading...</div>
+								<div class="edu2_blogpg_des">
+									<figure><img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""></figure>
+									<ul>
+										<li><i class="fa fa-calendar"></i><?php echo $created; ?></li>
+										<li><i class="fa fa-comments-o"></i><a href="our-blog.html#"><?php echo $post_comments;?> Comments</a></li>
+										<li><i class="fa fa-user"></i><a href="our-blog.html#">Admin</a></li>
+									</ul>
+									<h5><?php echo $post_title;?></h5>
+									<p><?php echo $post_content;?> </p>
+								</div>
+							</div>
+							<!--EDUCATION BLOG PAGE WRAP END-->
+						</div>
+						<!--SECTION COMMENT START-->
+	    						<div class="section-comment">
+	    							<div class="blog-detl_heading">
+	    								<h5>Comments</h5>
+                                        
+	    							</div>
+                                    <ul class="coment_list">
+										<?php echo $comments;?>
+    								</ul>
                                 </div>
-                        </div><!--/.entry-content-->
-                        <div class="entry-bottom">
-                            <ul class="list-inline entry-meta text-center">
-                               <?php echo $previous_post;?>
-                                <?php echo $next_post;?>
-                               <!-- <li class="pull-right"><a href="#" title="">Next Post</a></li> -->
-                            </ul><!--/.entry-meta-->
-                        </div><!--/.entry-bottom-->
-                    </div><!--/.entry-->
-                    <div id="comments" class="comment-list">
-                        <h3 class="comment-title"><?php echo $total_comments;?> <?php echo $title;?></h3>
-                        <ul class="media-list text clearlist">
-                            <?php echo $comments;?>
-                            
-                        </ul>
-                        <h3 class="reply-title">Leave a Comment</h3>
-                        <form method="post" action="<?php echo site_url().'site/blog/add_comment/'.$post_id.'/'.$web_name;?>" data-toggle="validator" novalidate="true">
-                            <div class="form-group row">
-                                <div class="form-group col m6">
-                                    <!-- Name -->
-                                    <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" required="">
-                                    <div class="help-block with-errors"></div>
-                                </div><!--/.col-->
-                                <div class="form-group col m6">
-                                    <!-- Email -->
-                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" maxlength="100" data-error="Bruh, that email address is invalid" required="">
-                                    <div class="help-block with-errors"></div>
-                                </div><!--/.col-->
-                            </div><!--/.row-->
+    								<!-- COMM
+    										
+	    						<!-- BLOG PG FORM START-->
+	    						<div class="blog_pg_form">
+	    							<div class="blog-detl_heading">
+	    								<h5>Leave A Message</h5>
+	    							</div>
+	    							<form>
+	    								<div class="row">
+	    									<div class="col-md-6">
+	    										<input type="text" placeholder="Name">
+	    									</div>
+	    									<div class="col-md-6">
+	    										<input type="text" placeholder="E-mail">
+	    									</div>
+	    									<div class="col-md-12">
+	    										<textarea placeholder="Message"></textarea>
+	    									</div>
+	    								</div>
+	    								<button>Send Comment</button>
+	    							</form>
+	    						</div>
+	    						<!-- BLOG PG FORM END-->
 
-                
+
+					</div>
+					<!--EDUCATION BLOG PAGE END-->
+
+				    <!--KF_EDU_SIDEBAR_WRAP START-->
+					<div class="col-md-4">
+                        <div class="kf-sidebar">
+
                             
-                            <!-- Comment -->
-                            <!--<div class="from-group">
-                                <textarea id="inputText" name="post_comment_description" class="input-md form-control" rows="6" placeholder="Comment" maxlength="400"></textarea>
-                            </div>-->
-                            
-                            <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea" name="post_comment_description" maxlength="400" placeholder="Comment" rows="10"></textarea>
-                                <label for="textarea1">Comment</label>
+
+                            <!--KF SIDEBAR RECENT POST WRAP START-->
+                            <div class="widget widget-recent-posts">
+                                <h2>Recent Posts</h2>
+                                <ul class="sidebar_rpost_des">
+                                    <!--LIST ITEM START-->
+                                    <?php
+                                    $recent_blog = '';
+
+									//if users exist display them
+
+									if ($latest_posts->num_rows() > 0)
+									{	
+										//get all administrators
+										
+										foreach ($latest_posts->result() as $row)
+										{
+											$post_id = $row->post_id;
+											$post_title = $row->post_title;
+											$web_name = $this->site_model->create_web_name($post_title);
+											$post_status = $row->post_status;
+											$post_views = $row->post_views;
+											$image = base_url().'assets/images/posts/'.$row->post_image;
+											$created_by = $row->created_by;
+											$modified_by = $row->modified_by;
+											$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
+											$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
+											$description = $row->post_content;
+											$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 20));
+											$created = $row->created;
+											$day = date('j',strtotime($created));
+											$month = date('M',strtotime($created));
+											$created_on = date('jS M Y',strtotime($row->created));
+
+											$recent_blog .= '
+															<li>
+						                                        <figure style="margin-right:5px;">
+						                                            <img src="'.$image.'" alt="">
+						                                        </figure>
+						                                        <div class="kode-text">
+						                                            <h6><a href="'.base_url().'blog/view-single/'.$web_name.'">'.$post_title.'</a></h6>
+						                                            <span><i class="fa fa-clock-o"></i>'.$created_on.'</span>
+						                                        </div>
+						                                    </li>
+															';
+										}
+
+									}
+									echo $recent_blog;
+                                    ?>
+                                    
+                                </ul>
                             </div>
-                            
-                            <!-- Send Button -->
-                            <button type="submit" class="btn btn-punch btn-xs btn-black btn-darker disabled" style="pointer-events: all; cursor: pointer;">Send comment</button>
-                            
-                        </form>
+                            <!--KF SIDEBAR RECENT POST WRAP END-->
+
+
+
+
+                        </div>
                     </div>
-                </div><!--/.content-->
-            </div><!--/.col-->
-            <aside class="col m4 column sidebar">
-                <?php echo $this->load->view('blog/includes/side_bar', '', TRUE);?>
-            </aside><!--/.col-->
-        </div><!--/.row-->
-    </div><!--/.container-->
-</div>
-<?php echo $this->load->view('site/includes/footer', '', TRUE); ?>
+					<!--KF EDU SIDEBAR WRAP END-->
+
+				</div>
+			</div>
+    	</div>
+
+        <!--Banner Wrap End-->

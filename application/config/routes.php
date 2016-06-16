@@ -194,6 +194,20 @@ $route['deactivate-comment/(:num)'] = 'admin/blog/deactivate_comment/$1';
 
 //projects
 $route['projects'] = 'site/projects';
+
+/*
+*	Users Routes
+*/
+$route['users/administrators'] = 'admin/users';
+$route['users/administrators/(:any)/(:any)/(:num)'] = 'admin/users/index/$1/$2/$3';
+$route['add-user'] = 'admin/users/add_user';
+$route['edit-user/(:num)'] = 'admin/users/edit_user/$1';
+$route['delete-user/(:num)'] = 'admin/users/delete_user/$1';
+$route['activate-user/(:num)'] = 'admin/users/activate_user/$1';
+$route['deactivate-user/(:num)'] = 'admin/users/deactivate_user/$1';
+$route['reset-user-password/(:num)'] = 'admin/users/reset_password/$1';
+$route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
+
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
 
@@ -229,4 +243,39 @@ $route['about/board'] = 'site/board';
 $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
+$route['membership'] = 'site/membership';
+$route['membership/(:any)'] = 'site/membership_item/$1';
+$route['resource'] = 'site/resource';
 
+//
+$route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
+$route['view-single-event/(:any)'] = 'site/view_event_details/$1';
+
+
+$route['partners'] = 'admin/partners/index';
+$route['partners/(:num)'] = 'admin/partners/index/$1';
+$route['administration/all-partners/(:num)'] = 'admin/partners/index/$1';//with a page number
+$route['administration/add-partner'] = 'admin/partners/add_partner';
+$route['administration/edit-partner/(:num)/(:num)'] = 'admin/partners/edit_partner/$1/$2';
+$route['administration/activate-partner/(:num)/(:num)'] = 'admin/partners/activate_partner/$1/$2';
+$route['administration/deactivate-partner/(:num)/(:num)'] = 'admin/partners/deactivate_partner/$1/$2';
+$route['administration/delete-partner/(:num)/(:num)'] = 'admin/partners/delete_partner/$1/$2';
+
+
+
+$route['resource'] = 'admin/resource/index';
+$route['resource/(:num)'] = 'admin/resource/index/$1';
+$route['administration/all-resources/(:num)'] = 'admin/resource/index/$1';//with a page number
+$route['administration/add-resource'] = 'admin/resource/add_resource';
+$route['administration/edit-resource/(:num)/(:num)'] = 'admin/resource/edit_resource/$1/$2';
+$route['administration/activate-resource/(:num)/(:num)'] = 'admin/resource/activate_resource/$1/$2';
+$route['administration/deactivate-resource/(:num)/(:num)'] = 'admin/resource/deactivate_resource/$1/$2';
+$route['administration/delete-resource/(:num)/(:num)'] = 'admin/resource/delete_resource/$1/$2';
+
+//pesa pal payments
+$route['payment/(:num)/(:any)/(:num)/(:num)'] = 'member/payment/$1/$2/$3/$4';
+$route['member/payment-success/(:num)/(:any)'] = 'member/payment_success/$1/$2';
+
+
+//member _account routes
+$route['update_profile/(:num)'] = 'member/update_profile/$1';

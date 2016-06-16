@@ -53,7 +53,7 @@
       ?> 
 
 <!--OUR TESTEMONIAL WRAP START-->
-<section class="background_color">
+<section >
     <div class="container">
         <div class="row">
             <!-- HEADING 2 START-->

@@ -12,7 +12,42 @@ class Site_model extends CI_Model
 		
 		return $query;
 	}
+	public function get_partners()
+	{
+  		$table = "partners";
+		$where = "partners_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 	
+	public function get_all_services()
+	{
+		$table = "service";
+		$where = "service_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+
+	}
+	public function get_resource($limit = NULL)
+	{
+		$table = "resource";
+		$where = "resource_status = 1";
+		if($limit !=NULL)
+		{
+			$this->db->limit($limit);
+		}
+		$this->db->where($where);
+		$this->db->order_by('resource_id', 'DESC');
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 	public function display_page_title()
 	{
 		$page = explode("/",uri_string());
@@ -119,18 +154,30 @@ class Site_model extends CI_Model
 		}
 		
 		//get departments
-		$query = $this->get_active_services();
-		$sub_menu_services = '';
-		if($query->num_rows() > 0)
+		
+		// service number two
+		$services_query = $this->get_active_departments('Services');
+		$services_sub_menu_services = '';
+		if($services_query->num_rows() > 0)
 		{
-			foreach($query->result() as $res)
+			foreach($services_query->result() as $res)
 			{
 				$service_name = $res->service_name;
 				$web_name = $this->create_web_name($service_name);
-				$sub_menu_services .= '
-										<li>
-											<a href="'.site_url().'services/'.$web_name.'">'.$service_name.'</a>
-										</li>';
+				$services_sub_menu_services .= '<li><a href="'.site_url().'services/'.$web_name.'">'.$service_name.'</a></li>';
+			}
+		}
+
+		// service number two
+		$membership_query = $this->get_active_departments('Membership');
+		$membership_sub_menu_services = '';
+		if($membership_query->num_rows() > 0)
+		{
+			foreach($membership_query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$web_name = $this->create_web_name($service_name);
+				$membership_sub_menu_services .= '<li><a href="'.site_url().'membership/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
 		$navigation = 
@@ -148,21 +195,25 @@ class Site_model extends CI_Model
 			<li>
 				<a class="'.$services.'"  href="'.site_url().'services">Services</a>
 				<ul>
-					'.$sub_menu_services.'
+					'.$services_sub_menu_services.'
 				</ul>
 			</li>
 			<!-- Service Menu -->
 			<!-- Portfolio Menu -->
-			<li><a class="'.$membership.'" href="'.site_url().'projects">Membership</a></li>
-			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
+			<li>
+				<a class="'.$membership.'" href="#">Membership</a>
+				<ul>
+					'.$membership_sub_menu_services.'
+				</ul>
+			</li>
 			<li>
 				<a class="'.$events.'" href="'.site_url().'event">Events</a>
 				<ul>
-					<li><a href="calendar">Calendar</a></li>
 					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
 				</ul>
 			</li>
-			<li><a class="'.$resources.'" href="'.site_url().'projects">Resources</a></li>
+			<li><a class="'.$resources.'" href="'.site_url().'resource">Resources</a></li>
+			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
 			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
 			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
 			
@@ -170,11 +221,24 @@ class Site_model extends CI_Model
 		
 		return $navigation;
 	}
-	
+	public function get_active_departments($service_name)
+	{
+  		$table = "service, department";
+		$where = "department.department_status = 1 AND service.department_id = department.department_id AND department.department_name = '".$service_name."'";
+		
+		$this->db->select('service.*');
+		$this->db->where($where);
+		$this->db->group_by('service_name');
+		$this->db->order_by('service_id', 'ASC');
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+
 	public function get_active_services()
 	{
   		$table = "service";
-		$where = "service.service_status = 1";
+		$where = "service.service_status = 1 AND department_id = 2";
 		
 		$this->db->select('service.*');
 		$this->db->where($where);
@@ -448,6 +512,48 @@ class Site_model extends CI_Model
 		}
 		return $return.'</i><br/>';
     }
+
+    public function get_all_resources($table, $where, $per_page, $page)
+	{
+		//retrieve all trainings
+		$this->db->from($table);
+		$this->db->select('*');
+		$this->db->where($where);
+		$this->db->order_by('resource_category.resource_category_id', 'DESC');
+		$query = $this->db->get('', $per_page, $page);
+		
+		return $query;
+	}
+	
+	public function view_single_post($post_title)
+	{
+		$this->db->where('post_title = $post_title');
+		$this->db->select('*');
+		return $query = $this->db->get('post');
+	}
+	public function get_event($training_id)
+	{
+		$this->db->where('training_id  = '.$training_id);
+		$this->db->select('*');
+		return $query = $this->db->get('training');
+	}
+
+	public function get_event_id($training_name)
+	{
+		//retrieve all users
+		$this->db->from('training');
+		$this->db->select('training_id');
+		$this->db->where('training_name', $training_name);
+		$query = $this->db->get();
+		$training_id = FALSE;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$training_id = $row->training_id;
+		}
+		
+		return $training_id;
+	}
 }
 
 ?>

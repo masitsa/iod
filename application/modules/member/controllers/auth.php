@@ -5,6 +5,7 @@ class Auth extends MX_Controller
 	{
 		parent:: __construct();
 		$this->load->model('member_model');
+		$this->load->model('site/banner_model');
 		$this->load->model('site/site_model');
 		$this->load->model('admin/companies_model');
 		$this->load->model('member/invoices_model');
@@ -25,19 +26,30 @@ class Auth extends MX_Controller
 		$v_data['member_email_error'] = '';
 		$v_data['member_agree'] = '';
 		
+		//member data validation
 		$this->form_validation->set_rules('member_first_name', 'First name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_surname', 'Surname', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_password', 'Password', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_phone', 'Phone', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_email', 'Email', 'trim|valid_email|is_unique[member.member_email]|required|xss_clean');
-		$this->form_validation->set_rules('member_agree', 'Agree', 'trim|required|xss_clean');
+		//$this->form_validation->set_rules('member_agree', 'Agree', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required|xss_clean');
 		$this->form_validation->set_rules('nationality', 'Nationality', 'required|xss_clean');
 		$this->form_validation->set_rules('qualifications', 'Qualifications', 'required|xss_clean');
 		$this->form_validation->set_rules('designation', 'Designation', 'required|xss_clean');
 		$this->form_validation->set_rules('member_title', 'Title', 'required|xss_clean');
-		$this->form_validation->set_rules('company_id', 'Company', 'required|xss_clean');
 		
+		//company details validation
+		$this->form_validation->set_rules('company_name', 'Company Name', 'required|xss_clean');
+		$this->form_validation->set_rules('company_physical_address', 'Physical Address', 'required|xss_clean');
+		$this->form_validation->set_rules('company_postal_address', 'Postal Address', 'required|xss_clean');
+		$this->form_validation->set_rules('company_postal_code', 'Postal Code', 'required|xss_clean');
+		$this->form_validation->set_rules('company_town', 'Town', 'required|xss_clean');
+		$this->form_validation->set_rules('company_email', 'Email', 'required|xss_clean');
+		$this->form_validation->set_rules('company_phone', 'Phone', 'required|xss_clean');
+		$this->form_validation->set_rules('company_cell_phone', 'Cell Phone', 'required|xss_clean');
+		$this->form_validation->set_rules('company_facsimile', 'Company Fax', 'required|xss_clean');
+		$this->form_validation->set_rules('company_activity', 'Company Activity', 'required|xss_clean');
 		//if form conatins invalid data
 		if ($this->form_validation->run())
 		{

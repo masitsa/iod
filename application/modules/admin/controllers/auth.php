@@ -22,7 +22,7 @@ class Auth extends MX_Controller
 		$this->form_validation->set_error_delimiters('', '');
 		$this->form_validation->set_rules('user_email', 'Email', 'required|xss_clean|exists[user.user_email]|valid_email');
 		$this->form_validation->set_rules('user_password', 'Password', 'required|xss_clean');
-		
+	
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{

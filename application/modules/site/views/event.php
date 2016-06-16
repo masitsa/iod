@@ -6,7 +6,7 @@
             	<!--KF INR BANNER DES Wrap Start-->
                 <div class="kf_inr_ban_des">
                 	<div class="inr_banner_heading">
-						<h3>Courses List</h3>
+						<h3>Event Lists</h3>
                 	</div>
                    
                     <div class="kf_inr_breadcrumb">
@@ -47,25 +47,29 @@ if($query->num_rows() > 0)
 		$created = date('jS M Y',strtotime($created));
 		$day = date('d',strtotime($start_date));
 		$month = date('M',strtotime($start_date));
+		$category_web_name = $this->site_model->create_web_name($training_name);
 
 		$result .= '
 					<div class="col-md-6">
-					<div class="edu2_event_wrap side_change">
-						<div class="edu2_event_des">
-							<h4>'.$month.'</h4>
-							<p>'.$training_name.'</p>
-							<ul class="post-option">
-									<li> <a href="#">From :</a>'.$start_date.' <a href="#">To :</a>'.$end_date.' </li>
-							</ul>
-							<a href="#" class="readmore">read more<i class="fa fa-long-arrow-right"></i></a>
-							<span>11</span>
+						<div class="edu2_event_wrap">
+							<div class="edu2_event_des">
+								<h4>'.$month.'</h4>
+								<p>'.$training_name.'</p>
+								<ul class="post-option">
+										<li><strong>From :</strong> '.$start_date.' <strong>To: </strong> '.$end_date.'</li>
+										<li>10 <a href="'.site_url().'view-single-event/'.$category_web_name.'/comments">Comments</a></li>
+								</ul>
+								<a class="readmore" href="'.site_url().'view-single-event/'.$category_web_name.'">read more<i class="fa fa-long-arrow-right"></i></a>
+								<span> '.$day.'</span>
+							</div>
+								
+							<figure><img alt="" src="'.$training_location.''.$training_image_name.'">
+								<figcaption><a href="'.$training_location.''.$training_image_name.'"><i class="fa fa-plus"></i></a></figcaption>
+							</figure>
 						</div>
-							
-						<figure><img src="'.$training_location.''.$training_image_name.'" alt=""/>
-							<figcaption><a href="'.$training_location.''.$training_image_name.'"><i class="fa fa-plus"></i></a></figcaption>
-						</figure>
 					</div>
-				</div>
+
+				
 					';
 		
 	}
