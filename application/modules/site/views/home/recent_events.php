@@ -32,9 +32,12 @@
 											        <span class="list-daynumber">'.$day.'</span>
 											    </div>
                                             <div class="kode-text">
-                                                <h6><a href="'.site_url().'view-single-event/'.$category_web_name.'">'.$training_name.' From '.$start_date.' To '.$end_date.'</a> <br />
-                                                	<a href="'.site_url().'view-single-event/'.$category_web_name.'" class="buttton"> Book Now &gt; </a>
-                                                 </h6>
+
+                                                <div class="item-title-row">
+                            <div class="item-title">'.$training_name.'</div>
+                          </div>
+                           <div class="item-subtitle"> Seminar </div>
+                          <div class="item-text"><span><i class="fa fa-calendar"></i> From :</span> '.$start_date.'  <span><i class="fa fa-calendar"></i> To :</span> '.$end_date.'</div>
 
                                                 
                                             </div>
@@ -53,7 +56,7 @@
 			<!-- COURSES DETAIL DES START -->
 			<div class="kf_courses_detail_des">
 				<div class="widget widget-recent-posts">
-					<ul class="sidebar_rpost_des">
+					<ul class="sidebar_rpost_des event-items">
                     	<?php echo $result_trainings;?>
 
 					</ul>

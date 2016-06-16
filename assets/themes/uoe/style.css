@@ -462,10 +462,11 @@ section,
 }
 /*navigation header 2*/
 .kode_navigation{
-	float: left;
-	width: 100%;
-	background: #fff;
-	position: relative;
+	background: #fff none repeat scroll 0 0;
+    border-bottom: 2px solid #fa9c2a;
+    float: left;
+    position: relative;
+    width: 100%;
 }
 .logo_wrap{
 	float: left;
@@ -488,8 +489,9 @@ section,
 }
 .nav_2 ul li a{
 	display: block;
-	color: #666666;
-	font-size: 14px;
+	/*color: #021849;*/
+	color: #fa9c2a;
+	font-size: 15px;
 	text-transform:uppercase;
 	font-weight: bold;
 	padding:10px  18px;
@@ -637,7 +639,7 @@ section,
 	width: 100%;
 	position: relative;
 	margin-left: 25px; 
-	margin-top: 15px !important;
+	margin-top: 0px !important;
 }
 .edu2_main_bn_wrap figure{
 	float: left;
@@ -863,7 +865,7 @@ section,
 	bottom: 0;
 	height: 2px;
 	width: 25px;
-	background-color: #666666;
+	background-color: #021849;
 	position: absolute;
 }
 .kf_edu2_heading1 h3:after{
@@ -888,7 +890,7 @@ section,
 	padding-bottom: 15px;
 }
 .kf_edu2_heading2 h3:before {
-    background-color: #666666;
+    background-color: #021849;
     bottom: 0;
     content: "";
     height: 2px;
@@ -1098,7 +1100,7 @@ section,
 	border-radius: 100%;
 	font-size: 32px;
 	background-color: #fff;
-	color: #666666;
+	color: #021849;
 	margin: 0 0 26px 0;
 	border: solid 1px #ddd;
 }
@@ -1121,7 +1123,7 @@ section,
 .kf_intro_des_caption a{
 	display: inline-block;
 	font-weight: bold;
-	color: #666666;
+	color: #021849;
 	text-transform: capitalize;
 	/*margin-bottom: 45px;*/
 	font-size: 14px;
@@ -1163,7 +1165,7 @@ section,
 .kf_edu2_tab_wrap .nav-tabs > li > a {
     border-radius: 0;
     border: none;
-    color: #666666;
+    color: #021849;
     font-size: 18px;
     font-weight: normal;
     padding: 4px 0 8px;
@@ -2124,7 +2126,7 @@ section,
 }
 .kf_courses_des > p{
 	margin: 0 0 23px ;
-	color:#666666;
+	color:#021849;
 	float: left;
 }
 /*rating stars css start*/
@@ -2294,6 +2296,7 @@ section,
 	font-weight: bold;
 	color: #e79800 !important;
 	text-transform: uppercase;
+
 }
 .widget-recent-posts .kode-text a.buttton
 {
@@ -2335,13 +2338,14 @@ section,
 	float: none;
 	padding: 0 0 0 70px;
 	margin-top: 0px;
+	line-height: 20px;
 }
 .widget-recent-posts h6{
 	font-size: 16px;
 	margin-bottom: 15px;
 }
 .widget-recent-posts span{
-	font-size: 10px;
+	font-size: 13px;
 	font-weight: normal;
 	font-style: italic;
 	color: #999999;
@@ -2491,7 +2495,7 @@ section,
 	width: 100%;
 	text-align: left;
 	font-size: 16px;
-	color: #666666;
+	color: #021849;
 	margin-bottom: 7px;
 }
 .sidebar_register_des li > span{
@@ -3571,7 +3575,7 @@ section,
 	float: left;
 	border-right: 1px solid #dcdcdc;
 	font-size: 15px;
-	color:#666666;
+	color:#021849;
 	 margin: -5px 0 -2px;
 	 padding-right:15px;
 }
@@ -3776,7 +3780,7 @@ section,
 }
 .label {
     background:  transparent;
-    color: #666666;
+    color: #021849;
     display: block;
     font-size: 16px;
     font-weight: normal;
@@ -4871,7 +4875,7 @@ a .button{
 	padding-bottom:26px;
 }
 .location_meta li {
-    color: #666666;
+    color: #021849;
     float: left;
     font-size: 16px;
     font-weight: normal;
@@ -4887,7 +4891,7 @@ a .button{
 	margin-right:10px;
 }
 .location_meta li a {
-    color: #666666;
+    color: #021849;
     display: inline-block;
     font-size: 16px;
     font-weight: normal;
@@ -5389,7 +5393,7 @@ a .button{
 .event_link{
 	display: inline-block;
 	font-size: 15px;
-	color: #666666;
+	color: #021849;
 	font-weight: normal;
 	padding:8px 20px ;
 	border: 1px solid #dbdbdb;
@@ -5795,10 +5799,10 @@ input:checked + .radio-value {
 
 
 .list-date {
-    background: #e79800 none repeat scroll 0 0 !important;
+    background: #fa9c2a none repeat scroll 0 0 !important;
 }
 .list-date {
-    background: #e79800 none repeat scroll 0 0 !important;
+    background: #011949 none repeat scroll 0 0 !important;
     box-sizing: border-box;
     display: inline;
     float: left;
@@ -5810,11 +5814,12 @@ input:checked + .radio-value {
     width: 15%;
 }
 .list-date .list-dayname {
-    background: #fff none repeat scroll 0 0;
+     background: #fff none repeat scroll 0 0;
     box-sizing: border-box;
     color: #666;
     display: block;
-    font-size: 9px;
+    font-size: 13px;
+    font-weight: bolder;
     padding: 3px;
     text-align: center;
     text-transform: uppercase;
@@ -5827,4 +5832,36 @@ input:checked + .radio-value {
     line-height: 22px;
     text-align: center;
     width: 100%;
+}
+ul.event-items .item-title,ul.resources-items .item-title
+{
+  	/*color: #FA9C2A;*/
+  	color: #021849;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+ul.event-items .item-text, ul.resources-items .item-text
+{
+  font-size:14px;
+  color: #3c3c3c;
+  height: 20px;
+}
+
+ul.event-items .item-text, ul.resources-items .item-text
+{
+  font-size:14px;
+  color: #3c3c3c;
+  height: 20px;
+  /*line-height: 19px !important;*/
+}
+ul.event-items .item-text span, ul.resources-items .item-text span
+{
+  color: #011949;
+}
+
+ul.event-items .item-subtitle , ul.resources-items .item-subtitle
+{
+  font-size:14px;
+  /*color: #fa9c2a;*/
 }

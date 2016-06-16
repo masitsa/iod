@@ -44,6 +44,7 @@
                                                     <!-- EDU COURSES WRAP START -->			
                                                     <div class="col-md-4">
                                                         <div class="edu2_cur_wrap">
+                                                        	
                                                             <figure>
                                                                 <img src="<?php echo base_url().'assets/training/'.$training_image_name;?>" alt=""/>
                                                                 <figcaption><a href="courses-detail.html">See More</a></figcaption>
