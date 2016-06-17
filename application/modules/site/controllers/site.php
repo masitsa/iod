@@ -8,6 +8,7 @@ class Site extends MX_Controller
 	var $training_location;
 	var $partners_location;
 	var $resource_location;
+	var $directors_location;
 	
 	function __construct()
 	{
@@ -25,6 +26,7 @@ class Site extends MX_Controller
 		$this->training_location = base_url().'assets/training/';
 		$this->partners_location = base_url().'assets/partners/';
 		$this->resource_location = base_url().'assets/resource/';
+		$this->directors_location = base_url().'assets/directors/';
 	}
 	
 	public function without_jquery()
@@ -290,6 +292,9 @@ class Site extends MX_Controller
 	}
 
 
+
+
+
 	/*
 	*
 	*	about
@@ -300,8 +305,10 @@ class Site extends MX_Controller
 		$contacts = $this->site_model->get_contacts();
 		$v_data['contacts'] = $contacts;
 		$v_data['items'] = $this->site_model->get_front_end_items();
+		$v_data['directors'] = $this->site_model->get_directors();
 		$data['title'] = $this->site_model->display_page_title();
 		$v_data['title'] = $data['title'];
+		$v_data['directors_location'] = $this->directors_location;
 		$data['contacts'] = $contacts;
 		$data['content'] = $this->load->view("board", $v_data, TRUE);
 		
@@ -886,6 +893,22 @@ class Site extends MX_Controller
 		$v_data['contacts'] = $contacts;
 		$v_data['resource'] = $resource;
 		$data['content'] = $this->load->view('single_resource', $v_data, true);
+		$this->load->view("site/templates/general_page", $data);
+	}
+
+	public function about_us($about_name)
+	{
+		$about_title = $this->site_model->decode_web_name($about_name);
+		$title = $about_title ;
+
+		$v_data['title'] = $title;
+		$service_id = $this->site_model->get_service_id($title);
+		$about = $this->site_model->get_about_item($service_id);
+		$contacts = $this->site_model->get_contacts();
+
+		$v_data['contacts'] = $contacts;
+		$v_data['services'] = $about;
+		$data['content'] = $this->load->view('single_about', $v_data, true);
 		$this->load->view("site/templates/general_page", $data);
 	}
 }

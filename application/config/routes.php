@@ -247,6 +247,7 @@ $route['event'] = 'site/trainings';
 $route['blog'] = 'site/blog/index';
 $route['event/facilitators'] = 'site/facilitators';
 $route['about/board'] = 'site/board';
+$route['about/(:any)'] = 'site/about_us/$1';
 $route['about'] = 'site/about';
 $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
