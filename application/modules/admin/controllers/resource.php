@@ -106,27 +106,29 @@ class Resource extends admin {
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
 		$this->form_validation->set_rules('resource_name', 'Title', 'trim|xss_clean');
 		$this->form_validation->set_rules('resource_description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('resource_button_text', 'Button Text', 'trim|xss_clean');
-		$this->form_validation->set_rules('resource_link', 'Link', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
 			if(empty($resource_error))
 			{
-				$data2 = array(
-					'resource_name'=>$this->input->post("resource_name"),
-					'resource_description'=>$this->input->post("resource_description"),
-					'resource_image_name'=>$this->session->userdata('resource_file_name'),
-					'resource_button_text'=>$this->input->post("resource_button_text"),
-					'resource_link'=>$this->session->userdata('resource_link')
-				);
+				// $data2 = array(
+				// 	'resource_name'=>$this->input->post("resource_name"),
+				// 	'resource_description'=>$this->input->post("resource_description"),
+				// 	'resource_image_name'=>$this->session->userdata('resource_file_name'),
+				// 	'resource_button_text'=>$this->input->post("resource_button_text"),
+				// 	'resource_link'=>$this->session->userdata('resource_link')
+				// );
 				
-				$table = "resource";
-				$this->db->insert($table, $data2);
+				// $table = "resource";
+				// $this->db->insert($table, $data2);
 				$this->session->unset_userdata('resource_file_name');
 				$this->session->unset_userdata('resource_thumb_name');
 				$this->session->unset_userdata('resource_error_message');
 				$this->session->set_userdata('success_message', 'resource has been added');
+				
+				$resize['width'] = 800;
+				$resize['height'] = 600;
+				$response = $this->file_model->upload_resource($this->resource_path, $resize);
 				
 				redirect('resource');
 			}

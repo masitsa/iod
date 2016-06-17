@@ -56,14 +56,6 @@
                             <input type="text" class="form-control" name="resource_name" placeholder="Enter Title" value="<?php echo set_value("resource_name");?>">
                         </div>
                         <div class="form-group">
-                            <label for="resource_name">Button Text</label>
-                            <input type="text" class="form-control" name="resource_button_text" placeholder="Button Text" value="<?php echo set_value("resource_button_text");?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="resource_name">Link</label>
-                            <input type="text" class="form-control" name="resource_link" placeholder="Link" value="<?php echo set_value("resource_link");?>">
-                        </div>
-                        <div class="form-group">
                             <label for="resource_description">Description</label>
                             <textarea class="form-control" name="resource_description"><?php echo set_value("resource_description");?></textarea>
                         </div>
@@ -76,6 +68,17 @@
                                     <div>
                                         <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="resource_image"></span>
                                         <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                         <label class="col-lg-4 control-label" for="image">Resource Items</label>
+                                        <div class="col-lg-8">
+                                        <?php echo form_upload(array( 'name'=>'gallery[]', 'multiple'=>true, 'class'=>'btn'));?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

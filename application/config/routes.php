@@ -252,7 +252,7 @@ $route['services'] = 'site/services';
 $route['services/(:any)'] = 'site/service_item/$1';
 $route['membership'] = 'site/membership';
 $route['membership/(:any)'] = 'site/membership_item/$1';
-$route['resource'] = 'site/resource';
+$route['resources'] = 'site/resource';
 
 //
 $route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
@@ -286,3 +286,5 @@ $route['member/payment-success/(:num)/(:any)'] = 'member/payment_success/$1/$2';
 
 //member _account routes
 $route['update_profile/(:num)'] = 'member/update_profile/$1';
+
+$route['view-single-resource/(:any)'] = 'site/single_resource/$1';

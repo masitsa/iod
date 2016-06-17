@@ -18,7 +18,8 @@
         $working_weekend = $contacts['working_weekend'];
 
          $mission = $contacts['mission'];
-          $vision = $contacts['vision'];
+        $vision = $contacts['vision'];
+        $about = $contacts['about'];
     }
 ?>
 
@@ -74,7 +75,7 @@
                            
                             <div class="kf_inr_breadcrumb">
                                 <ul>
-                                    <li><a href="#">Home</a></li>
+                                    <li><a href="">Home</a></li>
                                     <li><a href="#">about us</a></li>
                                 </ul>
                             </div>
@@ -104,8 +105,7 @@
 
                                 <div class="abt_univ_des">
 
-                                    <?php echo $item_data;?>
-                                    <a href="#" class="btn-3">Know More</a>
+                                    <?php echo $about;?>
 
                                 </div>
                             </div>
