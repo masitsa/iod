@@ -94,6 +94,13 @@ $route['login'] = 'member/auth/login_member';
 $route['logout'] = 'member/sign_out';
 $route['account'] = 'member/my_account';
 $route['uploads'] = 'member/uploads';
+$route['member/notifications'] = 'member/messages/inbox';
+$route['member/invoices'] = 'member/my_account';
+$route['member/events'] = 'member/events/event_list';
+$route['member/events/event-name'] = 'member/events/event_single';
+$route['member/resources'] = 'member/resources';
+$route['member/offers'] = 'member/offers';
+$route['member/profile'] = 'member/profile';
 
 /*
 *	Accounts Routes

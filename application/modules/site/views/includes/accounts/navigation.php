@@ -1,9 +1,39 @@
+<?php
+$contacts = $this->site_model->get_contacts();
+	if(count($contacts) > 0)
+	{
+		$email = $contacts['email'];
+		$email2 = $contacts['email'];
+		$facebook = $contacts['facebook'];
+		$twitter = $contacts['twitter'];
+		$linkedin = $contacts['linkedin'];
+		$logo = $contacts['logo'];
+		$company_name = $contacts['company_name'];
+		$phone = $contacts['phone'];
+		
+		if(!empty($facebook))
+		{
+			//$facebook = '<li class="facebook"><a href="'.$facebook.'" target="_blank" title="Facebook">Facebook</a></li>';
+		}
+		
+	}
+	else
+	{
+		$email = '';
+		$facebook = '';
+		$twitter = '';
+		$linkedin = '';
+		$logo = '';
+		$company_name = '';
+		$google = '';
+	}
+?>
  <!-- HEADER -->
     <header id="header" class="header">
-        <div class="container">
+        <div class="container" style="overflow: hidden;">
 
             <!-- LOGO -->
-            <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""></a></div>
+            <div><a href="<?php echo site_url();?>"><img src="<?php echo base_url().'assets/logo/'.$logo;?>" alt="<?php echo $company_name;?>" class="account-logo"></a></div>
             <!-- END / LOGO -->
 
             <!-- NAVIGATION -->
@@ -17,93 +47,9 @@
 
                 <!-- MENU -->
                 <ul class="menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="menu-item-has-children current-menu-item megamenu col-4">
-                        <a href="account-assignment.html#">Pages</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item-has-children">
-                                <a href="account-assignment.html#">Account 1</a>
-                                <ul class="sub-menu">
-                                    <li class="current-menu-item"><a href="account-assignment.html">Account Assignment</a></li>
-                                    <li><a href="account-inbox.html">Account Inbox</a></li>
-                                    <li><a href="account-learning.html">Account Learning</a></li>
-                                    <li><a href="account-profile-owner-view.html">Account Profile Owner</a></li>
-                                    <li><a href="account-profile-guest-view.html">Account Profile Guest</a></li>
-                                    <li><a href="account-teaching.html">Account Teaching</a></li>
-                                    <li><a href="setting.html">Setting</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="menu-item-has-children">
-                                <a href="account-assignment.html#">Asignment 2</a>
-                                <ul class="sub-menu">
-                                    <li><a href="asignment-after-submit.html">Asignment After Submit</a></li>
-                                    <li><a href="asignment-list.html">Asignment List</a></li>
-                                    <li><a href="asignment-marking.html">Asignment Marking</a></li>
-                                    <li><a href="asignment-received.html">Asignment Received</a></li>
-                                    <li><a href="asignment-submit.html">Asignment Submit</a></li>
-                                    <li><a href="become-teacher.html">Become Teacher</a></li>
-                                    <li><a href="categories.html">Categories</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="account-assignment.html#">Course 3</a>
-                                <ul class="sub-menu">
-                                    <li><a href="course-intro.html">Course Intro</a></li>
-                                    <li><a href="course-learn.html">Course Learn</a></li>
-                                    <li><a href="create-basic-information.html">Create Basic Information</a></li>
-                                    <li><a href="create-design-course.html">Create Design Course</a></li>
-                                    <li><a href="create-publish-course.html">Create Publish Course</a></li>
-                                    <li><a href="request-teacher.html">Request Teacher</a></li>
-                                    <li><a href="search-result-found.html">Search Result Found</a></li>
-                                    <li><a href="search-result-not-found.html">Search Result Found</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="account-assignment.html#">Learn 3</a>
-                                <ul class="sub-menu">
-                                    <li><a href="learning.html">Learning</a></li>
-                                    <li><a href="quizz-1.html">Quizz 1</a></li>
-                                    <li><a href="quizz-2.html">Quizz 2</a></li>
-                                    <li><a href="quizz-3.html">Quizz 3</a></li>
-                                    <li><a href="quizz-5.html">Quizz 5</a></li>
-                                    <li><a href="quizz-20.html">Quizz 20</a></li>
-                                    <li><a href="quizz-finish.html">Quizz Finish</a></li>
-                                    <li><a href="quizz-intro.html">Quizz Intro</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="blog-list.html">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-list.html">Blog list</a></li>
-                            <li><a href="blog-single.html">Blog single</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="account-assignment.html#">Login</a>
-                        <ul class="sub-menu">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="register.html">Register</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="categories.html">Course</a>
-                    </li>
+                    <li><a href="<?php echo site_url();?>">Website</a></li>
                 </ul>
                 <!-- END / MENU -->
-
-                <!-- SEARCH BOX -->
-                <div class="search-box">
-                    <i class="icon md-search"></i>
-                    <div class="search-inner">
-                        <form>
-                            <input type="text" placeholder="key words">
-                        </form>
-                    </div>
-                </div>
-                <!-- END / SEARCH BOX -->
 
                 <!-- LIST ACCOUNT INFO -->
                 <ul class="list-account-info">
@@ -111,14 +57,14 @@
                     <!-- MESSAGE INFO -->
                     <li class="list-item messages">
                         <div class="message-info item-click">
-                            <i class="icon md-email"></i>
+                            <i class="fa fa-envelope"></i>
                             <span class="itemnew"></span>
                         </div>
                         <div class="toggle-message toggle-list">
                             <div class="list-profile-title">
                                 <h4>Inbox message</h4>
                                 <span class="count-value">3</span>
-                                <a href="account-assignment.html#" class="new-message"><i class="icon md-pencil"></i></a>
+                                <a href="account-assignment.html#" class="new-message"><i class="fa fa-pencil"></i></a>
                             </div>
                             <ul class="list-message">
 
@@ -138,7 +84,7 @@
                                                 <span>12:53</span>
                                             </div>
                                             <div class="indicator">
-                                                <i class="icon md-paperclip"></i>
+                                                <i class="fa fa-paperclip"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -256,7 +202,7 @@
                     <!-- NOTIFICATION -->
                     <li class="list-item notification">
                         <div class="notification-info item-click">
-                            <i class="icon md-bell"></i>
+                            <i class="fa fa-bell"></i>
                             <span class="itemnew"></span>
                         </div>
                         <div class="toggle-notification toggle-list">
@@ -400,8 +346,8 @@
                         </div>
                         <div class="toggle-account toggle-list">
                             <ul class="list-account">
-                                <li><a href="setting.html"><i class="icon md-config"></i>Setting</a></li>
-                                <li><a href="login.html"><i class="icon md-arrow-right"></i>Sign Out</a></li>
+                                <li><a href="setting.html"><i class="fa fa-config"></i>Setting</a></li>
+                                <li><a href="login.html"><i class="fa fa-arrow-right"></i>Sign Out</a></li>
                             </ul>
                         </div>
                     </li>

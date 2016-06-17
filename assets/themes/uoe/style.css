@@ -489,7 +489,7 @@ section,
 }
 .nav_2 ul li a{
 	display: block;
-	/*color: #021849;*/
+	/*color: #FA9C2A;*/
 	color: #fa9c2a;
 	font-size: 15px;
 	text-transform:uppercase;
@@ -848,10 +848,11 @@ section,
 	  ==============================================================
 */
 .kf_edu2_heading1{
-	float: left;
 	width: 100%;
 	text-align: left;
 	margin:-7px 0 30px 0; 
+	/*border-bottom:#bbbbbb thin solid;
+	border-height:50px;*/
 }
 .kf_edu2_heading1 h3{
 	text-transform: uppercase;
@@ -859,13 +860,25 @@ section,
 	position: relative;
 	padding-bottom: 15px;
 }
-.kf_edu2_heading1 h3:before{
+.colorgraph {
+  background: #c4e17f linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4) repeat scroll 0 0;
+  border-radius: 5px;
+  border-top: 0 none;
+  height: 5px;
+}
+.colorgraph_original {
+  background: #c4e17f linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4) repeat scroll 0 0;
+  border-radius: 5px;
+  border-top: 0 none;
+  height: 5px;
+}
+/*.kf_edu2_heading1 h3:before{
 	content: "";
 	left: 0;
 	bottom: 0;
 	height: 2px;
 	width: 25px;
-	background-color: #021849;
+	background-color: #FA9C2A;
 	position: absolute;
 }
 .kf_edu2_heading1 h3:after{
@@ -876,7 +889,7 @@ section,
 	width: 50px;
 	background-color: #bbbbbb;
 	position: absolute;
-}
+}*/
 /*heading 2*/
 .kf_edu2_heading2{
 	float: left;
@@ -890,7 +903,7 @@ section,
 	padding-bottom: 15px;
 }
 .kf_edu2_heading2 h3:before {
-    background-color: #021849;
+    background-color: #FA9C2A;
     bottom: 0;
     content: "";
     height: 2px;
@@ -1100,7 +1113,7 @@ section,
 	border-radius: 100%;
 	font-size: 32px;
 	background-color: #fff;
-	color: #021849;
+	color: #FA9C2A;
 	margin: 0 0 26px 0;
 	border: solid 1px #ddd;
 }
@@ -1123,7 +1136,7 @@ section,
 .kf_intro_des_caption a{
 	display: inline-block;
 	font-weight: bold;
-	color: #021849;
+	color: #FA9C2A;
 	text-transform: capitalize;
 	/*margin-bottom: 45px;*/
 	font-size: 14px;
@@ -1165,7 +1178,7 @@ section,
 .kf_edu2_tab_wrap .nav-tabs > li > a {
     border-radius: 0;
     border: none;
-    color: #021849;
+    color: #FA9C2A;
     font-size: 18px;
     font-weight: normal;
     padding: 4px 0 8px;
@@ -2126,7 +2139,7 @@ section,
 }
 .kf_courses_des > p{
 	margin: 0 0 23px ;
-	color:#021849;
+	color:#FA9C2A;
 	float: left;
 }
 /*rating stars css start*/
@@ -2495,7 +2508,7 @@ section,
 	width: 100%;
 	text-align: left;
 	font-size: 16px;
-	color: #021849;
+	color: #FA9C2A;
 	margin-bottom: 7px;
 }
 .sidebar_register_des li > span{
@@ -3575,7 +3588,7 @@ section,
 	float: left;
 	border-right: 1px solid #dcdcdc;
 	font-size: 15px;
-	color:#021849;
+	color:#FA9C2A;
 	 margin: -5px 0 -2px;
 	 padding-right:15px;
 }
@@ -3780,7 +3793,7 @@ section,
 }
 .label {
     background:  transparent;
-    color: #021849;
+    color: #FA9C2A;
     display: block;
     font-size: 16px;
     font-weight: normal;
@@ -4875,7 +4888,7 @@ a .button{
 	padding-bottom:26px;
 }
 .location_meta li {
-    color: #021849;
+    color: #FA9C2A;
     float: left;
     font-size: 16px;
     font-weight: normal;
@@ -4891,7 +4904,7 @@ a .button{
 	margin-right:10px;
 }
 .location_meta li a {
-    color: #021849;
+    color: #FA9C2A;
     display: inline-block;
     font-size: 16px;
     font-weight: normal;
@@ -5393,7 +5406,7 @@ a .button{
 .event_link{
 	display: inline-block;
 	font-size: 15px;
-	color: #021849;
+	color: #FA9C2A;
 	font-weight: normal;
 	padding:8px 20px ;
 	border: 1px solid #dbdbdb;
@@ -5836,7 +5849,7 @@ input:checked + .radio-value {
 ul.event-items .item-title,ul.resources-items .item-title
 {
   	/*color: #FA9C2A;*/
-  	color: #021849;
+  	color: #FA9C2A;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.5px;

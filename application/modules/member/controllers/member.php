@@ -478,5 +478,25 @@ class member extends MX_Controller
 		
 		$this->load->view('site/templates/general_page', $data);
 	}
-    
+	
+	public function resources()
+	{
+		$data['content'] = $this->load->view('account/resources', '', true);
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('site/templates/account', $data);
+	}
+	
+	public function offers()
+	{
+		$data['content'] = $this->load->view('account/offers', '', true);
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('site/templates/account', $data);
+	}
+	
+	public function profile()
+	{
+		$data['content'] = $this->load->view('account/profile', '', true);
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('site/templates/account', $data);
+	}
 }

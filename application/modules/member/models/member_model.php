@@ -6,16 +6,16 @@ class Member_model extends CI_Model
 	public function register_member_details()
 	{
 		  $companydata = array(
-		  'company_name' => $this->input->post('company_name'),
-		  'company_physical_address' => $this->input->post('company_physical_address'),
-		  'company_postal_address' => $this->input->post('company_postal_address'),
-		  'company_post_code' => $this->input->post('company_postal_code'),
-		  'company_town' => $this->input->post('company_town'),
-		  'company_email' => $this->input->post('company_email'),
-		  'company_phone' => $this->input->post('company_phone'),
-		  'company_cell_phone' => $this->input->post('company_cell_phone'),
-		  'company_facsimile' => $this->input->post('company_facsimile'),
-		  'company_activity' => $this->input->post('company_activity'),
+			  'company_name' => $this->input->post('company_name'),
+			  'company_physical_address' => $this->input->post('company_physical_address'),
+			  'company_postal_address' => $this->input->post('company_postal_address'),
+			  'company_post_code' => $this->input->post('company_postal_code'),
+			  'company_town' => $this->input->post('company_town'),
+			  'company_email' => $this->input->post('company_email'),
+			  'company_phone' => $this->input->post('company_phone'),
+			  'company_cell_phone' => $this->input->post('company_cell_phone'),
+			  'company_facsimile' => $this->input->post('company_facsimile'),
+			  'company_activity' => $this->input->post('company_activity'),
 		  );
 		  
 		if($this->db->insert('company',$companydata))
@@ -30,7 +30,7 @@ class Member_model extends CI_Model
 				   'member_email'				=> strtolower($this->input->post('member_email')),
 				   'member_password'			=> md5($this->input->post('member_password')),
 				   'member_title'				=> $this->input->post('member_title'),
-				   'date_of_birth'				=> $this->input->post('date_of_birth'),
+				   'date_of_birth'				=> date('Y-m-d', strtotime($this->input->post('date_of_birth'))),
 				   'nationality'				=> $this->input->post('nationality'),
 				   'company_id'					=> $company_id,
 				   'qualifications'				=> $this->input->post('qualifications'),

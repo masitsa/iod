@@ -23,6 +23,7 @@
         <!--Bootstrap core JavaScript-->
 		<script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.js"></script>
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url()."assets/themes/custom/";?>js/bootstrap-datepicker.js"></script>
         <!--Bx-Slider JavaScript-->
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.bxslider.min.js"></script>
         <!--Owl Carousel JavaScript-->
@@ -47,6 +48,8 @@
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.sidr.min.js"></script>
         <!--Custom JavaScript-->
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/custom.js"></script>
+        <!--Custom JavaScript-->
+        <script src="<?php echo base_url()."assets/themes/custom/";?>js/custom.js"></script>
         
 	</body>
 </html>

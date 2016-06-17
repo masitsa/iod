@@ -185,11 +185,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     vertical-align: middle;
 }
 
-form p {
+/*form p {
     float: left;
     position: relative;
     width: 100%;
-}
+}*/
 
 form p span i {
     color: #474747;

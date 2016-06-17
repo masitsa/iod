@@ -93,6 +93,90 @@ class Site_model extends CI_Model
 		return $range;
 	}
 	
+	public function get_account_navigation()
+	{
+		$page = explode("/",uri_string());
+		$total = count($page);
+		
+		$name = strtolower($page[1]);
+		
+		$resources = '';
+		$events = '';
+		$notifications = '';
+		$offers = '';
+		$invoices = '';
+		$profile = '';
+		
+		if($name == 'resources')
+		{
+			$resources = 'current';
+		}
+		
+		if($name == 'events')
+		{
+			$events = 'current';
+		}
+		if($name == 'notifications')
+		{
+			$notifications = 'current';
+		}
+		if($name == 'offers')
+		{
+			$offers = 'current';
+		}
+		if($name == 'invoices')
+		{
+			$invoices = 'current';
+		}
+		if($name == 'profile')
+		{
+			$profile = 'current';
+		}
+		
+		$navigation = 
+		'
+			<li class="'.$resources.'">
+				<a href="'.site_url().'member/resources">
+					<i class="fa fa-book"></i>
+					Resources
+				</a>
+			</li>
+			<li class="'.$events.'">
+				<a href="'.site_url().'member/events">
+					<i class="fa fa-newspaper-o"></i>
+					Events
+				</a>
+			</li>
+			<li class="'.$notifications.'">
+				<a href="'.site_url().'member/notifications">
+					<i class="fa fa-bell"></i>
+					Notifications
+				</a>
+			</li>
+			<li class="'.$offers.'">
+				<a href="'.site_url().'member/offers">
+					<i class="fa fa-plus-square"></i>
+					Offers
+				</a>
+			</li>
+			<li class="'.$invoices.'">
+				<a href="'.site_url().'member/invoices">
+					<i class="fa fa-money"></i>
+					Invoices
+				</a>
+			</li>
+			<li class="'.$profile.'">
+				<a href="'.site_url().'member/profile">
+					<i class="fa fa-user"></i>
+					Profile
+				</a>
+			</li>
+			
+			';
+		
+		return $navigation;
+	}
+	
 	public function get_navigation()
 	{
 		$page = explode("/",uri_string());
@@ -554,6 +638,99 @@ class Site_model extends CI_Model
 		
 		return $training_id;
 	}
+	
+	public function get_crumbs()
+	{
+		$page = explode("/",uri_string());
+		$total = count($page);
+		
+		$crumb[0]['name'] = ucwords(strtolower($page[0]));
+		$crumb[0]['link'] = $page[0];
+		
+		if($total > 1)
+		{
+			$sub_page = explode("-",$page[1]);
+			$total_sub = count($sub_page);
+			$page_name = '';
+			
+			for($r = 0; $r < $total_sub; $r++)
+			{
+				$page_name .= ' '.$sub_page[$r];
+			}
+			$crumb[1]['name'] = ucwords(strtolower($page_name));
+			
+			if($page[1] == 'category')
+			{
+				$category_id = $page[2];
+				$category_details = $this->categories_model->get_category($category_id);
+				
+				if($category_details->num_rows() > 0)
+				{
+					$category = $category_details->row();
+					$category_name = $category->category_name;
+				}
+				
+				else
+				{
+					$category_name = 'No Category';
+				}
+				
+				$crumb[1]['link'] = 'products/all-products/';
+				$crumb[2]['name'] = ucwords(strtolower($category_name));
+				$crumb[2]['link'] = 'products/category/'.$category_id;
+			}
+			
+			else if($page[1] == 'brand')
+			{
+				$brand_id = $page[2];
+				$brand_details = $this->brands_model->get_brand($brand_id);
+				
+				if($brand_details->num_rows() > 0)
+				{
+					$brand = $brand_details->row();
+					$brand_name = $brand->brand_name;
+				}
+				
+				else
+				{
+					$brand_name = 'No Brand';
+				}
+				
+				$crumb[1]['link'] = 'products/all-products/';
+				$crumb[2]['name'] = ucwords(strtolower($brand_name));
+				$crumb[2]['link'] = 'products/brand/'.$brand_id;
+			}
+			
+			else if($page[1] == 'view-product')
+			{
+				$product_id = $page[2];
+				$product_details = $this->products_model->get_product($product_id);
+				
+				if($product_details->num_rows() > 0)
+				{
+					$product = $product_details->row();
+					$product_name = $product->product_name;
+				}
+				
+				else
+				{
+					$product_name = 'No Product';
+				}
+				
+				$crumb[1]['link'] = 'products/all-products/';
+				$crumb[2]['name'] = ucwords(strtolower($product_name));
+				$crumb[2]['link'] = 'products/view-product/'.$product_id;
+			}
+			
+			else
+			{
+				$crumb[1]['link'] = '#';
+			}
+		}
+		
+		return $crumb;
+	}
+	
 }
 
 ?>

@@ -22,6 +22,7 @@
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/typography.css" rel="stylesheet">
 	<!-- Shortcodes CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/shortcodes.css" rel="stylesheet">
+	<link rel="stylesheet" href="<?php echo base_url()."assets/themes/";?>custom/css/bootstrap-datepicker.min.css">
 	<!-- Custom Main StyleSheet CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>style.css" rel="stylesheet">
 	<!-- Color CSS -->

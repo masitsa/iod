@@ -29,7 +29,7 @@ class Auth extends MX_Controller
 		//member data validation
 		$this->form_validation->set_rules('member_first_name', 'First name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_surname', 'Surname', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('member_password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('member_password', 'Password', 'trim|required|xss_clean|matches[password_confirmation]');
 		$this->form_validation->set_rules('member_phone', 'Phone', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('member_email', 'Email', 'trim|valid_email|is_unique[member.member_email]|required|xss_clean');
 		//$this->form_validation->set_rules('member_agree', 'Agree', 'trim|required|xss_clean');
@@ -50,12 +50,13 @@ class Auth extends MX_Controller
 		$this->form_validation->set_rules('company_cell_phone', 'Cell Phone', 'required|xss_clean');
 		$this->form_validation->set_rules('company_facsimile', 'Company Fax', 'required|xss_clean');
 		$this->form_validation->set_rules('company_activity', 'Company Activity', 'required|xss_clean');
+		$this->form_validation->set_rules('member_agree', 'Agreement to T&C', 'required|xss_clean');
 		//if form conatins invalid data
 		if ($this->form_validation->run())
 		{
 			if($this->member_model->register_member_details())
 			{
-				$this->session->set_userdata('success_message', 'Your account has been created successfully :). Please check your email for further information on Dobi. You can now send clothes to a Dobi. Happy washing!');
+				$this->session->set_userdata('success_message', 'Your account has been created successfully. Please check your email for further information on IOD Kenya. You can now receive member services. Welcome');
 					
 				redirect('account');
 			}

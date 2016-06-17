@@ -44,9 +44,10 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- Css -->
-    <link rel="stylesheet" href="<?php echo base_url()."assets/";?>themes/fontawesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/library/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/library/owl.carousel.css">
+	<!-- Font Awesome StyleSheet CSS -->
+    <link rel="stylesheet" href="<?php echo base_url()."assets/themes/";?>fontawesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/md-font.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/style.css">
     <!--[if lt IE 9]>
@@ -72,8 +73,8 @@
     </div>
     <!-- END / PRELOADER -->
 
-   <?php echo $this->load->view("site/includes/accounts/navigation","",TRUE);?>
-   <?php echo $this->load->view("member/account/member_details","",TRUE);?>
+	<?php echo $this->load->view("site/includes/accounts/navigation","",TRUE);?>
+    <?php echo $this->load->view("member/account/member_details","",TRUE);?>
 	<?php echo $this->load->view("member/account/acount_navigation","",TRUE);?>
     <?php echo $content;?>
     

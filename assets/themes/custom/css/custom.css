@@ -59,3 +59,23 @@
   height: 75px
 }
 /* End carousel */
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+.form-control{border-color:#011949 !important;}
+.label-primary { 
+	background-color: #011949; position:static; padding:0;
+	border-radius: 0.25em;
+	color: #fff;
+	display: inline;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.2em 0.6em 0.3em;
+	text-align: center;
+	vertical-align: baseline;
+	white-space: nowrap;
+	margin-left:0;
+}
+.datepicker{padding: 10px 16px;}
