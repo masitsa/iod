@@ -264,13 +264,27 @@ class Site_model extends CI_Model
 				$membership_sub_menu_services .= '<li><a href="'.site_url().'membership/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
+
+		// service number two
+		$about_query = $this->get_active_departments('About');
+		$about_sub_menu_services = '';
+		if($about_query->num_rows() > 0)
+		{
+			foreach($about_query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$web_name = $this->create_web_name($service_name);
+				$about_sub_menu_services .= '<li><a href="'.site_url().'about/'.$web_name.'">'.$service_name.'</a></li>';
+			}
+		}
 		$navigation = 
 		'
 			<li><a class="'.$home.'" href="'.site_url().'home">Home</a></li>
 			<li>
 				<a class="'.$about.'" href="'.site_url().'about">About</a>
 				<ul>
-					<li><a href="'.site_url().'about">The Institute</a></li>
+					<li><a href="'.site_url().'about">About IoD (Kenya)</a></li>
+					'.$about_sub_menu_services.'
 					<li><a href="'.site_url().'about/board">Our Board</a></li>
 				</ul>
 			</li>
@@ -747,7 +761,21 @@ class Site_model extends CI_Model
 		
 		return $resource_category_id;
 	}
-
+	public function get_service_id($about_name)
+	{
+		$this->db->from('service');
+		$this->db->select('service_id');
+		$this->db->where('service_name', $about_name);
+		$query = $this->db->get();
+		$service_id = FALSE;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$service_id = $row->service_id;
+		}
+		
+		return $service_id;
+	}
 
 	public function get_resource_item($resource_category_id)
 	{
@@ -762,6 +790,22 @@ class Site_model extends CI_Model
 		$this->db->select('*');
 		return $query = $this->db->get('resource_category');
 
+	}
+	public function get_about_item($service_id)
+	{
+		$this->db->where('service_id  = '.$service_id);
+		$this->db->select('*');
+		return $query = $this->db->get('service');
+	}
+	public function get_directors()
+	{
+		$table = "directors";
+		$where = "directors_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
 	}
 }
 
