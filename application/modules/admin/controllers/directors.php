@@ -2,36 +2,36 @@
 
 require_once "./application/modules/admin/controllers/admin.php";
 
-class Partners extends admin {
-	var $partners_path;
-	var $partners_location;
+class directors extends admin {
+	var $directors_path;
+	var $directors_location;
 	
 	function __construct()
 	{
 		parent:: __construct();
 		$this->load->model('users_model');
-		$this->load->model('partners_model');
+		$this->load->model('directors_model');
 		$this->load->model('file_model');
 		$this->load->library('image_lib');
 		
 		//path to image directory
-		$this->partners_path = realpath(APPPATH . '../assets/partners');
-		$this->partners_location = base_url().'assets/partners/';
+		$this->directors_path = realpath(APPPATH . '../assets/directors');
+		$this->directors_location = base_url().'assets/directors/';
 	}
     
 	/*
 	*
-	*	Default action is to show all the registered partners
+	*	Default action is to show all the registered directors
 	*
 	*/
 	public function index() 
 	{
-		$where = 'partners_id > 0';
-		$table = 'partners';
+		$where = 'directors_id > 0';
+		$table = 'directors';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'partners';
+		$config['base_url'] = base_url().'directors';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 5;
@@ -63,250 +63,250 @@ class Partners extends admin {
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
         $data["links"] = $this->pagination->create_links();
-		$query = $this->partners_model->get_all_partners($table, $where, $config["per_page"], $page);
+		$query = $this->directors_model->get_all_directors($table, $where, $config["per_page"], $page);
 		
-		$data['title'] = $v_data['title'] = 'partners';
+		$data['title'] = $v_data['title'] = 'directors';
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
 			$v_data['page'] = $page;
-			$v_data['partners_location'] = $this->partners_location;
-			$data['content'] = $this->load->view('partners/all_partners', $v_data, true);
+			$v_data['directors_location'] = $this->directors_location;
+			$data['content'] = $this->load->view('directors/all_directors', $v_data, true);
 		}
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'administration/add-partner" class="btn btn-success pull-right">Add partner</a>There are no partners';
+			$data['content'] = '<a href="'.site_url().'administration/add-director" class="btn btn-success pull-right">Add director</a>There are no directors';
 		}
 		
 		$this->load->view('templates/general_page', $data);
 	}
 	
-	function add_partner()
+	function add_director()
 	{
-		$v_data['partners_location'] = 'http://placehold.it/300x300';
+		$v_data['directors_location'] = 'http://placehold.it/300x300';
 		
-		$this->session->unset_userdata('partners_error_message');
+		$this->session->unset_userdata('directors_error_message');
 		
 		//upload image if it has been selected
-		$response = $this->partners_model->upload_partners_image($this->partners_path);
+		$response = $this->directors_model->upload_directors_image($this->directors_path);
 		if($response)
 		{
-			$v_data['partners_location'] = $this->partners_location.$this->session->userdata('partners_file_name');
+			$v_data['directors_location'] = $this->directors_location.$this->session->userdata('directors_file_name');
 		}
 		
 		//case of upload error
 		else
 		{
-			$v_data['partners_error'] = $this->session->userdata('partners_error_message');
+			$v_data['directors_error'] = $this->session->userdata('directors_error_message');
 		}
 		
-		$partners_error = $this->session->userdata('partners_error_message');
+		$directors_error = $this->session->userdata('directors_error_message');
 		
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_name', 'Title', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_button_text', 'Button Text', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_link', 'Link', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_button_text', 'Button Text', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_link', 'Link', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
-			if(empty($partners_error))
+			if(empty($directors_error))
 			{
 				$data2 = array(
-					'partners_name'=>$this->input->post("partners_name"),
-					'partners_description'=>$this->input->post("partners_description"),
-					'partners_image_name'=>$this->session->userdata('partners_file_name'),
-					'partners_button_text'=>$this->input->post("partners_button_text"),
-					'partners_link'=>$this->session->userdata('partners_link')
+					'directors_name'=>$this->input->post("directors_name"),
+					'directors_description'=>$this->input->post("directors_description"),
+					'directors_image_name'=>$this->session->userdata('directors_file_name'),
+					'directors_button_text'=>$this->input->post("directors_button_text"),
+					'directors_link'=>$this->session->userdata('directors_link')
 				);
 				
-				$table = "partners";
+				$table = "directors";
 				$this->db->insert($table, $data2);
-				$this->session->unset_userdata('partners_file_name');
-				$this->session->unset_userdata('partners_thumb_name');
-				$this->session->unset_userdata('partners_error_message');
-				$this->session->set_userdata('success_message', 'partner has been added');
+				$this->session->unset_userdata('directors_file_name');
+				$this->session->unset_userdata('directors_thumb_name');
+				$this->session->unset_userdata('directors_error_message');
+				$this->session->set_userdata('success_message', 'director has been added');
 				
-				redirect('partners');
+				redirect('directors');
 			}
 		}
 		
-		$table = "partners";
-		$where = "partners_id > 0";
+		$table = "directors";
+		$where = "directors_id > 0";
 		
 		$this->db->where($where);
-		$v_data['partners'] = $this->db->get($table);
+		$v_data['directors'] = $this->db->get($table);
 		
-		$partners = $this->session->userdata('partners_file_name');
+		$directors = $this->session->userdata('directors_file_name');
 		
-		if(!empty($partners))
+		if(!empty($directors))
 		{
-			$v_data['partners_location'] = $this->partners_location.$this->session->userdata('partners_file_name');
+			$v_data['directors_location'] = $this->directors_location.$this->session->userdata('directors_file_name');
 		}
-		$v_data['error'] = $partners_error;
-		$data['title'] = $v_data['title'] = 'Add partner';
+		$v_data['error'] = $directors_error;
+		$data['title'] = $v_data['title'] = 'Add director';
 		
-		$data['content'] = $this->load->view("partners/add_partner", $v_data, TRUE);
+		$data['content'] = $this->load->view("directors/add_director", $v_data, TRUE);
 		
 		$this->load->view('templates/general_page', $data);
 	}
 	
-	function edit_partner($partners_id, $page)
+	function edit_director($directors_id, $page)
 	{
-		//get partners data
-		$table = "partners";
-		$where = "partners_id = ".$partners_id;
+		//get directors data
+		$table = "directors";
+		$where = "directors_id = ".$directors_id;
 		
 		$this->db->where($where);
-		$partners_query = $this->db->get($table);
-		$partner_row = $partners_query->row();
-		$v_data['partner_row'] = $partner_row;
-		$v_data['partners_location'] = $this->partners_location.$partner_row->partners_image_name;
+		$directors_query = $this->db->get($table);
+		$director_row = $directors_query->row();
+		$v_data['director_row'] = $director_row;
+		$v_data['directors_location'] = $this->directors_location.$director_row->directors_image_name;
 		
-		$this->session->unset_userdata('partners_error_message');
+		$this->session->unset_userdata('directors_error_message');
 		
 		//upload image if it has been selected
-		$response = $this->partners_model->upload_partners_image($this->partners_path, $edit = $partner_row->partners_image_name);
+		$response = $this->directors_model->upload_directors_image($this->directors_path, $edit = $director_row->directors_image_name);
 		if($response)
 		{
-			$v_data['partners_location'] = $this->partners_location.$this->session->userdata('partners_file_name');
+			$v_data['directors_location'] = $this->directors_location.$this->session->userdata('directors_file_name');
 		}
 		
 		//case of upload error
 		else
 		{
-			$v_data['partners_error'] = $this->session->userdata('partners_error_message');
+			$v_data['directors_error'] = $this->session->userdata('directors_error_message');
 		}
 		
-		$partners_error = $this->session->userdata('partners_error_message');
+		$directors_error = $this->session->userdata('directors_error_message');
 		
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_name', 'Title', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_button_text', 'Button Text', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_link', 'Link', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_button_text', 'Button Text', 'trim|xss_clean');
+		$this->form_validation->set_rules('directors_link', 'Link', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
 		{	
-			if(empty($partners_error))
+			if(empty($directors_error))
 			{
 		
-				$partners = $this->session->userdata('partners_file_name');
+				$directors = $this->session->userdata('directors_file_name');
 				
-				if($partners == FALSE)
+				if($directors == FALSE)
 				{
-					$partners = $partner_row->partners_image_name;
+					$directors = $director_row->directors_image_name;
 				}
 				$data2 = array(
-					'partners_name'=>$this->input->post("partners_name"),
-					'partners_description'=>$this->input->post("partners_description"),
-					'partners_image_name'=>$partners,
-					'partners_button_text'=>$this->input->post("partners_button_text"),
-					'partners_link'=>$this->session->userdata('partners_link')
+					'directors_name'=>$this->input->post("directors_name"),
+					'directors_description'=>$this->input->post("directors_description"),
+					'directors_image_name'=>$directors,
+					'directors_button_text'=>$this->input->post("directors_button_text"),
+					'directors_link'=>$this->session->userdata('directors_link')
 				);
 				
-				$table = "partners";
-				$this->db->where('partners_id', $partners_id);
+				$table = "directors";
+				$this->db->where('directors_id', $directors_id);
 				$this->db->update($table, $data2);
-				$this->session->unset_userdata('partners_file_name');
-				$this->session->unset_userdata('partners_thumb_name');
-				$this->session->unset_userdata('partners_error_message');
-				$this->session->set_userdata('success_message', 'partner has been edited');
+				$this->session->unset_userdata('directors_file_name');
+				$this->session->unset_userdata('directors_thumb_name');
+				$this->session->unset_userdata('directors_error_message');
+				$this->session->set_userdata('success_message', 'director has been edited');
 				
-				redirect('partners/'.$page);
+				redirect('directors/'.$page);
 			}
 		}
 		
-		$partners = $this->session->userdata('partners_file_name');
+		$directors = $this->session->userdata('directors_file_name');
 		
-		if(!empty($partners))
+		if(!empty($directors))
 		{
-			$v_data['partners_location'] = $this->partners_location.$this->session->userdata('partners_file_name');
+			$v_data['directors_location'] = $this->directors_location.$this->session->userdata('directors_file_name');
 		}
-		$v_data['error'] = $partners_error;
+		$v_data['error'] = $directors_error;
 		
-		$data['title'] = $v_data['title'] = 'Edit partner';
-		$data['content'] = $this->load->view("partners/edit_partner", $v_data, TRUE);
+		$data['title'] = $v_data['title'] = 'Edit director';
+		$data['content'] = $this->load->view("directors/edit_director", $v_data, TRUE);
 		
 		$this->load->view('templates/general_page', $data);
 	}
     
 	/*
 	*
-	*	Delete an existing partners
-	*	@param int $partners_id
+	*	Delete an existing directors
+	*	@param int $directors_id
 	*
 	*/
-	function delete_partner($partners_id, $page)
+	function delete_director($directors_id, $page)
 	{
-		//get partners data
-		$table = "partners";
-		$where = "partners_id = ".$partners_id;
+		//get directors data
+		$table = "directors";
+		$where = "directors_id = ".$directors_id;
 		
 		$this->db->where($where);
-		$partners_query = $this->db->get($table);
-		$partner_row = $partners_query->row();
-		$partners_path = $this->partners_path;
+		$directors_query = $this->db->get($table);
+		$director_row = $directors_query->row();
+		$directors_path = $this->directors_path;
 		
-		$image_name = $partner_row->partners_image_name;
+		$image_name = $director_row->directors_image_name;
 		
 		//delete any other uploaded image
-		$this->file_model->delete_file($partners_path."\\".$image_name, $this->partners_path);
+		$this->file_model->delete_file($directors_path."\\".$image_name, $this->directors_path);
 		
 		//delete any other uploaded thumbnail
-		$this->file_model->delete_file($partners_path."\\thumbnail_".$image_name, $this->partners_path);
+		$this->file_model->delete_file($directors_path."\\thumbnail_".$image_name, $this->directors_path);
 		
-		if($this->partners_model->delete_partners($partners_id))
+		if($this->directors_model->delete_directors($directors_id))
 		{
-			$this->session->set_userdata('success_message', 'partner has been deleted');
+			$this->session->set_userdata('success_message', 'director has been deleted');
 		}
 		
 		else
 		{
-			$this->session->set_userdata('error_message', 'partner could not be deleted');
+			$this->session->set_userdata('error_message', 'director could not be deleted');
 		}
-		redirect('partners/'.$page);
+		redirect('directors/'.$page);
 	}
     
 	/*
 	*
-	*	Activate an existing partners
-	*	@param int $partners_id
+	*	Activate an existing directors
+	*	@param int $directors_id
 	*
 	*/
-	public function activate_partner($partners_id, $page)
+	public function activate_director($directors_id, $page)
 	{
-		if($this->partners_model->activate_partners($partners_id))
+		if($this->directors_model->activate_directors($directors_id))
 		{
-			$this->session->set_userdata('success_message', 'partner has been activated');
+			$this->session->set_userdata('success_message', 'director has been activated');
 		}
 		
 		else
 		{
-			$this->session->set_userdata('error_message', 'partner could not be activated');
+			$this->session->set_userdata('error_message', 'director could not be activated');
 		}
-		redirect('partners/'.$page);
+		redirect('directors/'.$page);
 	}
     
 	/*
 	*
-	*	Deactivate an existing partners
-	*	@param int $partners_id
+	*	Deactivate an existing directors
+	*	@param int $directors_id
 	*
 	*/
-	public function deactivate_partner($partners_id, $page)
+	public function deactivate_director($directors_id, $page)
 	{
-		if($this->partners_model->deactivate_partners($partners_id))
+		if($this->directors_model->deactivate_directors($directors_id))
 		{
-			$this->session->set_userdata('success_message', 'partner has been disabled');
+			$this->session->set_userdata('success_message', 'director has been disabled');
 		}
 		
 		else
 		{
-			$this->session->set_userdata('error_message', 'partner could not be disabled');
+			$this->session->set_userdata('error_message', 'director could not be disabled');
 		}
-		redirect('partners/'.$page);
+		redirect('directors/'.$page);
 	}
 }
 ?>
