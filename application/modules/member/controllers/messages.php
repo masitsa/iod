@@ -11,7 +11,6 @@ class Messages extends member
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('admin/users_model');
 		$this->load->model('member/messages_model');
 		$this->messages_path = realpath(APPPATH . '../assets/messages');
 		$this->profile_image_path = realpath(APPPATH . '../assets/images/profile');

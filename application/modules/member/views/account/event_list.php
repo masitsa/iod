@@ -1,118 +1,75 @@
-<section id="quizz-intro-section" class="quizz-intro-section learn-section">
+	<section id="quizz-intro-section" class="quizz-intro-section learn-section">
         <div class="container">
-
-            <div class="title-ct">
-                <h3><strong>Events</strong></h3>
-            </div>
-
             <div class="table-student-submission">
                 <table class="mc-table">
                     <thead>
                         <tr>
                             <th class="submissions">Event Title</th>
-                            <th class="author">Venue <span class="caret"></span></th>
-                            <th class="score">Price <span class="caret"></span></th>
-                            <th class="submit-date">Date <span class="caret"></span></th>
+                            <th class="author">Venue</th>
+                            <th class="score">Price</th>
+                            <th class="submit-date">Date</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr class="new">
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">--</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
+						<?php
+						$result = ''; 
+						if($query->num_rows() > 0)
+						{
+							foreach($query->result() as $cat)
+							{
+								$training_id = $cat->training_id;
+								$training_status = $cat->training_status;
+								$training_date = $cat->training_date;
+								$start_date = $cat->start_date;
+								$end_date = $cat->end_date;
+								$created = $cat->created;
+								$training_name = $cat->training_name;
+								$training_venue = $cat->training_venue;
+								$training_price = number_format($cat->training_price, 2);
+								$training_image_name = $cat->training_image_name;
+								$start_date = date('jS M Y',strtotime($start_date));
+								$end_date = date('jS M Y',strtotime($end_date));
+								$created = date('jS M Y',strtotime($created));
+								$day = date('d',strtotime($start_date));
+								$month = date('M',strtotime($start_date));
+								$web_name = $this->site_model->create_web_name($training_name);
 
-                        <tr class="new">
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">How to design a fish</a></td>
-                            <td class="author">Daniel</td>
-                            <td class="score">--</td>
-                            <td class="submit-date">14. May , 2014</td>
-                        </tr>
-
-                        <tr class="new">
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Become a pro in 12 days</a></td>
-                            <td class="author">Trasory</td>
-                            <td class="score">--</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr class="new">
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">IOS 8 101 - easiest giudeline</a></td>
-                            <td class="author">Blue</td>
-                            <td class="score">--</td>
-                            <td class="submit-date">11. Mar, 2014</td>
-                        </tr>
-
-                        <tr class="new">
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">IOS 8 101 - easiest giudeline</a></td>
-                            <td class="author">Neo</td>
-                            <td class="score">--</td>
-                            <td class="submit-date">11. Mar, 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Taksi</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Byrj</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
-
-                        <tr>
-                            <td class="submissions"><a href="<?php echo site_url().'member/events/event-name';?>">Title of submission</a></td>
-                            <td class="author">Johnson</td>
-                            <td class="score">90/100</td>
-                            <td class="submit-date">11. Jul , 2014</td>
-                        </tr>
+								$result .= '
+									<tr class="new">
+										<td class="submissions"><a href="'.site_url().'member/events/'.$web_name.'-'.$training_id.'">'.$training_name.'</a></td>
+										<td class="author">'.$training_venue.'</td>
+										<td class="score">'.$training_price.'</td>
+										<td class="submit-date">'.$start_date.'</td>
+									</tr>
+								';
+								
+							}
+						}
+						else
+						{
+							$result = '
+							<tr class="new">
+								<td class="submissions"><a href="#">There are no events</a></td>
+								<td class="author"></td>
+								<td class="score"></td>
+								<td class="submit-date"></td>
+							</tr>
+							';
+						}
+						
+						echo $result;
+						?>
 
                     </tbody>
                 </table>
             </div>
-
-            
+				
+            <div class="row">
+                <div class="col-md-12">
+                    <?php if(isset($links)){echo $links;} ?>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -76,7 +76,7 @@ if($query->num_rows() > 0)
 }
 else
 {
-	$result = 'There are no trainings';
+	$result = 'There are no events';
 }
 
 ?>

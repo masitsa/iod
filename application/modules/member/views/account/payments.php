@@ -23,14 +23,14 @@
             <div class="table-asignment">
 
                 <ul class="nav-tabs" role="tablist">
-                    <li class="active"><a href="<?php echo site_url().'register';?>" role="tab" data-toggle="tab">My Invoices</a></li>
-                    <li><a href="account-assignment.html#studentssubmissions" role="tab" data-toggle="tab">My Payments</a></li>
+                    <li class="active"><a href="#invoices" role="tab" data-toggle="tab">My Invoices</a></li>
+                    <li><a href="#payments" role="tab" data-toggle="tab">My Payments</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!-- MY SUBMISSIONS -->
-                    <div class="tab-pane fade in active" id="mysubmissions">
+                    <div class="tab-pane fade in active" id="invoices">
                     	<!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -164,7 +164,7 @@
                     <!-- END / MY SUBMISSIONS -->
 
                     <!-- MY SUBMISSIONS -->
-                    <div class="tab-pane fade" id="studentssubmissions">
+                    <div class="tab-pane fade" id="payments">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">

@@ -87,22 +87,6 @@ class Member_model extends CI_Model
 		}
 	}
 	
-	public function get_neighbourhoods()
-	{
-		$this->db->where('neighbourhood_parent', NULL);
-		$this->db->order_by('neighbourhood_name');
-		$query = $this->db->get('neighbourhood');
-		
-		$this->db->where('neighbourhood_parent > 0');
-		$this->db->order_by('neighbourhood_name');
-		$query2 = $this->db->get('neighbourhood');
-		
-		$data['neighbourhood_parents'] = $query;
-		$data['neighbourhood_children'] = $query2;
-		
-		return $data;
-	}
-	
 	public function check_email($member_email)
 	{
 		$this->db->where('member_email', $member_email);
@@ -426,5 +410,31 @@ class Member_model extends CI_Model
 		}
 		
 		return $reciept_number;
+	}
+	
+	public function get_resource_categories()
+	{
+		$this->db->order_by('resource_category_name');
+		
+		return $this->db->get('resource_category');
+	}
+	
+	public function get_resources()
+	{
+		$this->db->order_by('resource_category_name');
+		
+		return $this->db->get('resource_category');
+	}
+
+    public function get_all_resources($table, $where, $per_page, $page)
+	{
+		//retrieve all trainings
+		$this->db->from($table);
+		$this->db->select('*');
+		$this->db->where($where);
+		$this->db->order_by('resource_name');
+		$query = $this->db->get('', $per_page, $page);
+		
+		return $query;
 	}
 }

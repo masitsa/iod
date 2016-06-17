@@ -2,30 +2,31 @@
 		
 // include autoloader
 require_once "./application/libraries/dompdf/autoload.inc.php";
-	
-// reference the Dompdf namespace
-//use Dompdf\Dompdf;
 
 class member extends MX_Controller 
 {
 	var $member_id;
 	var $uploads_path;
 	var $uploads_location;
+	var $resource_location;
 		
 	function __construct()
 	{
 		parent:: __construct();
 		
 		$this->load->model('site/site_model');
+		$this->load->model('admin/users_model');
 		$this->load->model('member/member_model');
 		$this->load->model('site/banner_model');
 		$this->load->model('member/invoices_model');
 		$this->load->model('member/uploads_model');
 		$this->load->model('admin/file_model');
 		$this->load->model('admin/companies_model');
+		$this->load->model('admin/training_model');
 
 		$this->uploads_path = realpath(APPPATH . '../assets/uploads');
 		$this->uploads_location = base_url().'assets/uploads/';
+		$this->resource_location = base_url().'assets/resource/';
 		
 		//user has logged in
 		if($this->member_model->check_login())
@@ -74,80 +75,6 @@ class member extends MX_Controller
 		$data['content'] = $this->load->view('account/orders', $v_data, true);
 		
 		$this->load->view('site/templates/general_page', $data);
-	}
-    
-	/*
-	*
-	*	Open the user's details page
-	*
-	*/
-	public function my_details()
-	{
-		//page data
-		$v_data['title'] = $data['title'] = $this->site_model->display_page_title();
-		$neighbourhoods_query = $this->member_model->get_neighbourhoods();
-		$v_data['neighbourhood_parents'] = $neighbourhoods_query['neighbourhood_parents'];
-		$v_data['neighbourhood_children'] = $neighbourhoods_query['neighbourhood_children'];
-		$v_data['member_query'] = $this->member_model->get_member_details($this->member_id);
-		$data['content'] = $this->load->view('account/my_details', $v_data, true);
-		
-		$this->load->view('site/templates/general_page', $data);
-	}
-    
-	/*
-	*
-	*	Open the user's shipping page
-	*
-	*/
-	public function edit_shipping()
-	{
-		//page data
-		$v_data['surburbs_query'] = $this->vendor_model->get_all_surburbs();
-		$v_data['shipping_query'] = $this->checkout_model->get_shipping_details($this->member_id);
-		$data['content'] = $this->load->view('account/shipping_address', $v_data, true);
-		
-		$data['title'] = $this->site_model->display_page_title();
-		$this->load->view('site/templates/general_page', $data);
-	}
-    
-	/*
-	*
-	*	Open the user's wishlist
-	*
-	*/
-	public function my_addresses()
-	{
-		$v_data['surburbs_query'] = $this->vendor_model->get_all_surburbs();
-		$v_data['member_query'] = $this->checkout_model->get_member_details($this->member_id);
-		$v_data['shipping_query'] = $this->checkout_model->get_shipping_details($this->member_id);
-		$data['content'] = $this->load->view('account/my_addresses', $v_data, true);
-		
-		$data['title'] = $this->site_model->display_page_title();
-		$this->load->view('site/templates/general_page', $data);
-	}
-    
-	/*
-	*
-	*	Open the user's wishlist
-	*
-	*/
-	public function wishlist()
-	{
-		$v_data['products_path'] = $this->products_path;
-		$v_data['products_location'] = $this->products_location;
-		$v_data['wishlist'] = $this->orders_model->get_user_wishlist($this->member_id);
-		$data['content'] = $this->load->view('account/wishlist', $v_data, true);
-		
-		$data['title'] = $this->site_model->display_page_title();
-		$this->load->view('site/templates/general_page', $data);
-	}
-	
-	public function delete_wishlist_item($wishlist_id)
-	{
-		$this->db->where('wishlist_id', $wishlist_id);
-		$this->db->delete('wishlist');
-		echo 'true';
-		redirect('account/wishlist');
 	}
     
 	/*
@@ -223,23 +150,6 @@ class member extends MX_Controller
 		
 			redirect('member-account/about-me');
 		}
-	}
-	
-	public function cancel_order($order_preffix, $order_number)
-	{
-		$number = $order_preffix.'/'.$order_number;
-		//confirm order is for the member
-		if($this->orders_model->request_cancel($number, $this->member_id))
-		{
-			$this->session->set_userdata('success_message', 'Your cancel request for order number '.$number.' has been received. You will be notified once the request is confirmed');
-		}
-		
-		else
-		{
-			$this->session->set_userdata('error_message', 'Unable to cancel your order. Please try again');
-		}
-		
-		redirect('account/orders-list');
 	}
 	
 	public function make_payment($order_preffix, $order_number)
@@ -479,9 +389,62 @@ class member extends MX_Controller
 		$this->load->view('site/templates/general_page', $data);
 	}
 	
-	public function resources()
+	public function resources($category = NULL)
 	{
-		$data['content'] = $this->load->view('account/resources', '', true);
+		$v_data['resource_categories'] = $this->member_model->get_resource_categories();
+		$where = 'resource_category.resource_category_id = resource.resource_category_id';
+		$table = 'resource, resource_category';
+		
+		if(($category != NULL) && (is_numeric($category) == FALSE))
+		{
+			$where .= ' AND resource_category.resource_category_name = \''.$this->site_model->decode_web_name($category).'\'';
+			$segment = 4;
+		}
+		else
+		{
+			$segment = 3;
+			$category = NULL;
+		}
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'member/resources/'.$category;
+		$config['total_rows'] = $this->users_model->count_items($table, $where);
+		$config['uri_segment'] = $segment;
+		$config['per_page'] = 20;
+		$config['num_links'] = 5;
+		
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = 'Next';
+		$config['next_tag_close'] = '</span>';
+		
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        $v_data["links"] = $this->pagination->create_links();
+		$v_data['resource_location'] = $this->resource_location;
+		$v_data['query'] = $this->member_model->get_all_resources($table, $where, $config["per_page"], $page);
+		$data['title'] = $v_data['title'] = 'Resources';
+		$v_data['total_rows'] = $config['total_rows'];
+		$v_data['page'] = $page;
+		$data['content'] = $this->load->view('account/resources', $v_data, true);
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('site/templates/account', $data);
 	}

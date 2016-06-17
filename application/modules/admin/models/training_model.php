@@ -66,13 +66,13 @@ class Training_model extends CI_Model
 		}
 	}
 	
-	public function get_all_trainings($table, $where, $per_page, $page)
+	public function get_all_trainings($table, $where, $per_page, $page, $order = 'training.start_date', $order_method = 'ASC')
 	{
 		//retrieve all trainings
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->order_by('training.training_date', 'DESC');
+		$this->db->order_by($order, $order_method);
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
