@@ -212,7 +212,7 @@ class Site_model extends CI_Model
 					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
 				</ul>
 			</li>
-			<li><a class="'.$resources.'" href="'.site_url().'resource">Resources</a></li>
+			<li><a class="'.$resources.'" href="'.site_url().'resources">Resources</a></li>
 			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
 			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
 			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
@@ -553,6 +553,38 @@ class Site_model extends CI_Model
 		}
 		
 		return $training_id;
+	}
+	public function get_resource_category_id($resource_category_name)
+	{
+		//retrieve all users
+		$this->db->from('resource_category');
+		$this->db->select('resource_category_id');
+		$this->db->where('resource_category_name', $resource_category_name);
+		$query = $this->db->get();
+		$resource_category_id = FALSE;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$resource_category_id = $row->resource_category_id;
+		}
+		
+		return $resource_category_id;
+	}
+
+
+	public function get_resource_item($resource_category_id)
+	{
+		$this->db->where('resource_category_id  = '.$resource_category_id);
+		$this->db->select('*');
+		return $query = $this->db->get('resource');
+	}
+	public function get_resource_category($resource_category_id)
+	{
+
+		$this->db->where('resource_category_id  = '.$resource_category_id);
+		$this->db->select('*');
+		return $query = $this->db->get('resource_category');
+
 	}
 }
 

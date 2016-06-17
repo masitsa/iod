@@ -135,4 +135,23 @@ class Resource_model extends CI_Model
 			return FALSE;
 		}
 	}
+
+	public function save_resource_file($resource)
+	{
+		//save the image data to the database
+		$data = array(
+			'resource_name'=>$this->input->post("resource_name"),
+			'resource_description'=>$this->input->post("resource_description"),
+			'resource_image_name'=>$resource
+		);
+		
+		if($this->db->insert('resource', $data))
+		{
+			return $this->db->insert_id();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 }

@@ -214,15 +214,48 @@
 										$resource_button_text = $resource->resource_button_text;
 										$description = $this->site_model->limit_text($description, 8);
 
+										$array = explode('.', $resource_image);
+										$suffix = $array[1];
 
+										if($suffix == 'pdf' OR $suffix == 'PDF')
+										{
+											$fa = 'fa-file-pdf-o';
+										}
+										else if($suffix == 'xls' OR $suffix == 'XLS')
+										{
+											$fa = 'fa-file-excel-o';
+										}
+										else if($suffix == 'doc' OR $suffix == 'Doc')
+										{
+											$fa = 'fa-file-word-o';
+										}
+										else if($suffix == 'docx' OR $suffix == 'DOCX')
+										{
+											$fa = 'fa-file-word-o';
+										}
+										else if($suffix == 'ppt' OR $suffix == 'PPT')
+										{
+											$fa = 'fa-file-powerpoint-o';
+										}
+										else if($suffix == 'pptx' OR $suffix == 'PPTX')
+										{
+											$fa = 'fa-file-powerpoint-o';
+										}
+										else
+										{
+											$fa = 'fa-file-o';
+
+										}
 										// if ($counter % 3 == 0) {
 										//    echo 'image file';
 										// }
 										$resource_result .= ' 
 															  	<li>
+
+
 								                                	<figure>
-								                                    	<img alt="" src="'.$resource_location.''.$resource_image.'">
-																		<a href="#">Download</a>
+								                                    	<i  class="fa '.$fa.'" aria-hidden="true"></i>
+																		<a href="'.$resource_location.''.$resource_image.'" target="_blank">Download</a>
 																	</figure>
 																</li>';
 									}

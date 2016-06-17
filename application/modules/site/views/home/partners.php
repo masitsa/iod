@@ -17,9 +17,15 @@
 			//    echo 'image file';
 			// }
 			$partners_result .= ' 
-					              <div class="col-md-2">
-					                <a class="thumbnail" href="#"><img alt="" src="'.$partners_location.''.$partners_image.'"></a>
-					              </div>';
+								<div class="item" style="width:200px !important;">
+			                        <!-- FACULTY DES START-->
+			                        <div class="edu2_faculty_des">
+			                            <figure><img src="'.$partners_location.''.$partners_image.'" alt=""/>
+			                                
+			                            </figure>
+			                        </div>
+			                        <!-- FACULTY DES END-->
+			                    </div>';
 		}
 	}
 	else
@@ -29,17 +35,26 @@
 
  ?>
 
- <div class='col-md-12'>
+<section>
+    <div class="container">
+        <div class="row">
+            <!-- HEADING 1 START-->
+            <div class="col-md-12">
+                <div class="kf_edu2_heading1">
+                    <h3>Our Partners</h3>
+                </div>
+            </div>
+            <!-- HEADING 1 END-->
 
-  <div class="carousel slide media-carousel" id="media">
-    <div class="carousel-inner">
-    	<div class="item  active">
-			<div class="row">
-      			<?php echo $partners_result;?>
-      		</div>
-      	</div>
+            <!-- FACULTY SLIDER WRAP START-->
+            <div class="edu2_faculty_wrap">
+                <div id="owl-demo-8" class="owl-carousel owl-theme">
+                    
+                    <?php echo $partners_result;?>
+                </div>
+            </div>
+            <!-- FACULTY SLIDER WRAP END-->
+        </div>
     </div>
-    <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-    <a data-slide="next" href="#media" class="right carousel-control">›</a>
-  </div>                          
-</div>
+</section>
+<!-- FACULTY WRAP START-->

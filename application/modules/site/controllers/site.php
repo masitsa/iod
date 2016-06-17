@@ -846,6 +846,7 @@ class Site extends MX_Controller
 		$contacts = $this->site_model->get_contacts();
 		$v_data['contacts'] = $contacts;
 		$v_data['query'] = $query;
+		$v_data['total_rows'] = $config['total_rows'];
 		$v_data['page'] = $page;
 		$v_data['training_location'] = $this->training_location;
 		$data['content'] = $this->load->view('resource', $v_data, true);
@@ -868,6 +869,23 @@ class Site extends MX_Controller
 		$v_data['contacts'] = $contacts;
 		$v_data['query'] = $query;
 		$data['content'] = $this->load->view('single_event', $v_data, true);
+		$this->load->view("site/templates/general_page", $data);
+	}
+	public function single_resource($resource_name)
+	{
+		$resource_title = $this->site_model->decode_web_name($resource_name);
+		$title = $resource_title ;
+
+		$v_data['title'] = $title;
+		$resource_category_id = $this->site_model->get_resource_category_id($title);
+		$resource = $this->site_model->get_resource_item($resource_category_id);
+		$contacts = $this->site_model->get_contacts();
+		$v_data['resource_category'] = $this->site_model->get_resource_category($resource_category_id);
+		// $v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
+		$v_data['resource_location'] = $this->resource_location;
+		$v_data['contacts'] = $contacts;
+		$v_data['resource'] = $resource;
+		$data['content'] = $this->load->view('single_resource', $v_data, true);
 		$this->load->view("site/templates/general_page", $data);
 	}
 }

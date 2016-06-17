@@ -1,3 +1,39 @@
+ <?php
+    // $services = $this->site_model->get_active_services();
+    $checking_items = '';
+    if($query->num_rows() > 0)
+    {   $count = 0;
+        foreach($query->result() as $res)
+        {
+            $resource_category_name = $res->resource_category_name;
+            $resource_category_id = $res->resource_category_id;
+            $resource_category_description = $res->resource_category_description;
+            $mini_desc = implode(' ', array_slice(explode(' ', $resource_category_description), 0, 100));
+            $maxi_desc = implode(' ', array_slice(explode(' ', $resource_category_description), 0, 40));
+            $web_name = $this->site_model->create_web_name($resource_category_name);
+
+            $where = 'resource_category_id ='.$resource_category_id;
+			$table = 'resource';
+
+			$total_rows_item = $this->users_model->count_items($table, $where);
+
+            $count ++;
+
+            $checking_items .=
+                            '
+							<div class="edu2_col_3_des">
+								<h6>'.$resource_category_name.'</h6>
+								<p>'.$resource_category_description.' </p>
+
+								<div class="edu2_col_3_ftr">
+									<a href="'.site_url().'view-single-resource/'.$web_name.'" class="button">VIEW ATTACHMENTS ('.$total_rows_item.')</a>
+								</div>
+							</div>'; 
+           
+        }
+    }
+    
+?>
 <div class="kf_inr_banner">
     <div class="container">
         <div class="row">
@@ -35,22 +71,7 @@
 								<figcaption><a href="our-courses.html#"><i class="fa fa-play"></i></a></figcaption>
 							</figure>
 
-							<!--EDU2 COLUM 3 Des Start-->
-							<div class="edu2_col_3_des">
-								<h6>Agriculture Online Guide</h6>
-								<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. </p>
-								<div class="video_link_wrap">
-									<a href="our-courses.html#">Attachments (27)</a>
-									
-								</div>
-
-								<!--EDU2 COLUM 3 Ftr Start-->
-								<div class="edu2_col_3_ftr">
-									<a class="button">VIEW</a>
-								</div>
-								<!--EDU2 COLUM 3 Ftr End-->
-							</div>
-							<!--EDU2 COLUM 3 Des End-->
+							<?php echo $checking_items;?>
 
 
 						</div>
