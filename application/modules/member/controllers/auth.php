@@ -58,7 +58,7 @@ class Auth extends MX_Controller
 			{
 				$this->session->set_userdata('success_message', 'Your account has been created successfully. Please check your email for further information on IOD Kenya. You can now receive member services. Welcome');
 					
-				redirect('account');
+				redirect('member/notifications');
 			}
 			
 			else
@@ -119,7 +119,7 @@ class Auth extends MX_Controller
 				}
 				$this->session->set_userdata('success_message', 'Welcome back');
 					
-				redirect('account');
+				redirect('member/notifications');
 			}
 			
 			else
@@ -161,7 +161,7 @@ class Auth extends MX_Controller
 		$this->load->view('site/templates/general_page', $data);
 	}
 	
-	public function logout_admin()
+	public function logout_member()
 	{
 		$this->session->sess_destroy();
 		redirect('login');

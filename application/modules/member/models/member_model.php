@@ -437,4 +437,16 @@ class Member_model extends CI_Model
 		
 		return $query;
 	}
+
+    public function get_all_notifications()
+	{
+		//retrieve all trainings
+		$this->db->from('notification');
+		$this->db->where('notification_status = 1');
+		$this->db->order_by('created', 'DESC');
+		$query = $this->db->get();
+		
+		return $query;
+	}
+	
 }

@@ -94,7 +94,7 @@ $route['login'] = 'member/auth/login_member';
 $route['logout'] = 'member/sign_out';
 $route['account'] = 'member/my_account';
 $route['uploads'] = 'member/uploads';
-$route['member/notifications'] = 'member/messages/inbox';
+$route['member/notifications'] = 'member/notifications';
 $route['member/invoices'] = 'member/my_account';
 $route['member/events'] = 'member/events/event_list';
 $route['member/events/(:num)'] = 'member/events/event_list/$1';
@@ -177,6 +177,12 @@ $route['administration/edit-gallery/(:num)/(:num)'] = 'admin/gallery/edit_galler
 $route['administration/activate-gallery/(:num)/(:num)'] = 'admin/gallery/activate_gallery/$1/$2';
 $route['administration/deactivate-gallery/(:num)/(:num)'] = 'admin/gallery/deactivate_gallery/$1/$2';
 $route['administration/delete-gallery/(:num)/(:num)'] = 'admin/gallery/delete_gallery/$1/$2';
+
+$route['notifications'] = 'admin/notification/index';
+$route['add-notification'] = 'admin/notification/add_notification';
+$route['edit-notification/(:num)'] = 'admin/notification/edit_notification/$1';
+$route['activate-notification/(:num)'] = 'admin/notification/activate_notification/$1';
+$route['deactivate-notification/(:num)'] = 'admin/notification/deactivate_notification/$1';
 
 //blog routes
 $route['posts'] = 'admin/blog';

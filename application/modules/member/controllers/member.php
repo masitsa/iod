@@ -456,6 +456,14 @@ class member extends MX_Controller
 		$this->load->view('site/templates/account', $data);
 	}
 	
+	public function notifications()
+	{
+		$v_data['query'] = $this->member_model->get_all_notifications();
+		$data['content'] = $this->load->view('account/notifications', $v_data, true);
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('site/templates/account', $data);
+	}
+	
 	public function profile()
 	{
 		$data['content'] = $this->load->view('account/profile', '', true);

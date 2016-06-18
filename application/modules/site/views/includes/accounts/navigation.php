@@ -47,7 +47,7 @@ $contacts = $this->site_model->get_contacts();
 
                 <!-- MENU -->
                 <ul class="menu">
-                    <li><a href="<?php echo site_url();?>">Website</a></li>
+                    <li><a href="<?php echo site_url().'logout';?>">Sign Out</a></li>
                 </ul>
                 <!-- END / MENU -->
 
