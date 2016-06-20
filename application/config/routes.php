@@ -184,6 +184,12 @@ $route['edit-notification/(:num)'] = 'admin/notification/edit_notification/$1';
 $route['activate-notification/(:num)'] = 'admin/notification/activate_notification/$1';
 $route['deactivate-notification/(:num)'] = 'admin/notification/deactivate_notification/$1';
 
+$route['offers'] = 'admin/offer/index';
+$route['add-offer'] = 'admin/offer/add_offer';
+$route['edit-offer/(:num)'] = 'admin/offer/edit_offer/$1';
+$route['activate-offer/(:num)'] = 'admin/offer/activate_offer/$1';
+$route['deactivate-offer/(:num)'] = 'admin/offer/deactivate_offer/$1';
+
 //blog routes
 $route['posts'] = 'admin/blog';
 $route['blog/posts'] = 'admin/blog';
@@ -291,7 +297,7 @@ $route['administration/deactivate-resource/(:num)/(:num)'] = 'admin/resource/dea
 $route['administration/delete-resource/(:num)/(:num)'] = 'admin/resource/delete_resource/$1/$2';
 
 //pesa pal payments
-$route['payment/(:num)/(:any)/(:num)/(:num)'] = 'member/payment/$1/$2/$3/$4';
+$route['member/invoices/payment/(:num)/(:any)/(:num)/(:num)'] = 'member/payment/$1/$2/$3/$4';
 $route['member/payment-success/(:num)/(:any)'] = 'member/payment_success/$1/$2';
 
 

@@ -72,7 +72,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li class="ac-new">
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -95,7 +95,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li class="ac-new">
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -115,7 +115,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li class="ac-new">
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -135,7 +135,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li>
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -155,7 +155,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li>
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -175,7 +175,7 @@ $contacts = $this->site_model->get_contacts();
                                 <li>
                                     <a href="account-assignment.html#">
                                         <div class="image">
-                                            <img src="images/team-13.jpg" alt="">
+                                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                         </div>
                                         <div class="list-body">
                                             <div class="author">
@@ -223,7 +223,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -243,7 +243,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -263,7 +263,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -283,7 +283,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -303,7 +303,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -323,7 +323,7 @@ $contacts = $this->site_model->get_contacts();
                                             </div>
                                             <p>attend Salary for newbie course</p>
                                             <div class="image">
-                                                <img src="images/feature/img-1.jpg" alt="">
+                                                <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                                             </div>
                                             <div class="time">
                                                 <span>5 minutes ago</span>
@@ -342,7 +342,7 @@ $contacts = $this->site_model->get_contacts();
 
                     <li class="list-item account">
                         <div class="account-info item-click">
-                            <img src="images/team-13.jpg" alt="">
+                            <img src="<?php echo base_url().'assets/images/avatar.png';?>" alt="">
                         </div>
                         <div class="toggle-account toggle-list">
                             <ul class="list-account">

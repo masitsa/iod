@@ -2,7 +2,25 @@
     <!-- COURSE CONCERN -->
     <section id="course-concern" class="course-concern">
         <div class="container">
-
+        	<div class="row">
+            	<div class="col-md-12">
+                	<?php
+                        $success_message = $this->session->userdata('success_message');
+                        if(!empty($success_message))
+                        {
+                            $this->session->unset_userdata('success_message');
+                            echo '<div class="alert alert-success">'.$success_message.'</div>';
+                        }
+                        
+                        $error_message = $this->session->userdata('error_message');
+                        if(!empty($error_message))
+                        {
+                            $this->session->unset_userdata('error_message');
+                            echo '<div class="alert alert-danger">'.$error_message.'</div>';
+                        }
+                    ?>
+                </div>
+            </div>
             <div class="message-body">
                 <div class="row">
                     <div class="col-md-4">

@@ -407,7 +407,7 @@ class Site_model extends CI_Model
 	
 	public function image_display($base_path, $location, $image_name = NULL)
 	{
-		$default_image = 'http://placehold.it/300x300&text=Dobi';
+		$default_image = 'http://placehold.it/300x300&text=IOD';
 		$file_path = $base_path.'/'.$image_name;
 		//echo $file_path.'<br/>';
 		

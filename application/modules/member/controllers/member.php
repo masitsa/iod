@@ -2,6 +2,8 @@
 		
 // include autoloader
 require_once "./application/libraries/dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class member extends MX_Controller 
 {
@@ -242,7 +244,7 @@ class member extends MX_Controller
 			$this->session->set_userdata('error_message', 'Could not upload document. Please try again');
 		}
 		
-		redirect('uploads');
+		redirect('member/profile');
 	}
     
 	/*
@@ -268,6 +270,7 @@ class member extends MX_Controller
 	public function download_invoice($invoice_id)
 	{
 		//$this->load->helper(array('dompdf', 'pdfFilePath'));
+		$v_data['contacts'] = $this->site_model->get_contacts();
 		$v_data['invoices'] = $this->invoices_model->get_invoice($invoice_id);
 		$v_data['invoice_items'] = $this->invoices_model->get_invoice_items($invoice_id);
 		$v_data['contacts'] = $this->site_model->get_contacts();
@@ -278,22 +281,15 @@ class member extends MX_Controller
 
 		$invoice_number = $row->invoice_number;
 	
- 
+ 		//echo $html; die();
         //this the the PDF filename that user will get to download
         $pdfFilePath = 'Invoice '.$invoice_number.".pdf";
+ 
+        //load mPDF library
+        $this->load->library('mpdf');
 		
-		// instantiate and use the dompdf class
-		$dompdf = new Dompdf();
-		$dompdf->loadHtml($html);
-		
-		// (Optional) Setup the paper size and orientation
-		$dompdf->setPaper('A4', 'potrait');
-		
-		// Render the HTML as PDF
-		$dompdf->render();
-		
-		// Output the generated PDF to Browser
-		$dompdf->stream();
+		$this->mpdf->WriteHTML($html);
+		$this->mpdf->Output();
 	}
 	
 	//payment for invoices
@@ -451,7 +447,8 @@ class member extends MX_Controller
 	
 	public function offers()
 	{
-		$data['content'] = $this->load->view('account/offers', '', true);
+		$v_data['query'] = $this->member_model->get_all_offers();
+		$data['content'] = $this->load->view('account/offers', $v_data, true);
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('site/templates/account', $data);
 	}
@@ -466,7 +463,12 @@ class member extends MX_Controller
 	
 	public function profile()
 	{
-		$data['content'] = $this->load->view('account/profile', '', true);
+		$v_data['uploads_path'] = $this->uploads_path;
+		$v_data['uploads_location'] = $this->uploads_location;
+		$v_data['member_id'] = $this->member_id;
+		$v_data['uploads'] = $this->uploads_model->get_member_uploads($this->member_id);
+		$v_data['member_details'] = $this->member_model->get_member_details($this->member_id);
+		$data['content'] = $this->load->view('account/profile', $v_data, true);
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('site/templates/account', $data);
 	}

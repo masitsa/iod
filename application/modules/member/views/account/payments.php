@@ -76,10 +76,10 @@
 												<td><?php echo $invoice_date;?></td>
 												<td><?php echo $button;?></td>
                                                 <td>
-                                                	<a href="<?php echo site_url().'member/download_invoice/'.$invoice_id;?>" class="btn btn-danger btn-sm" target="_blank"><i class="fa fa-print"></i></a>
+                                                	<a href="<?php echo site_url().'member/download_invoice/'.$invoice_id;?>" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-file-pdf-o"></i> Download</a>
                                                 </td>
 												<td>
-                                                	<a title="View Invoice <?php echo $invoice_number;?>" class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#view_invoice<?php echo $invoice_id;?>"><i class="fa fa-plus"></i></a>
+                                                	<a title="View Invoice <?php echo $invoice_number;?>" class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#view_invoice<?php echo $invoice_id;?>"><i class="fa fa-plus"></i> View</a>
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="view_invoice<?php echo $invoice_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                         <div class="modal-dialog" role="document">
@@ -143,7 +143,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                	<a href="<?php echo site_url().'payment/'.$total.'/'.$invoice_number.'/'.$invoice_id.'/'.$member_id;?>" class="btn btn-danger btn-sm" target="_blank"><i class="fa fa-print"></i></a> Pay
+                                                	<a href="<?php echo site_url().'member/invoices/payment/'.$total.'/'.$invoice_number.'/'.$invoice_id.'/'.$member_id;?>" class="btn btn-success btn-sm"><i class="fa fa-money"></i> Pay</a>
                                                 </td>
 											</tr>
                                         <?php

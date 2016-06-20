@@ -6,8 +6,7 @@
             <!-- Tittle -->
             <div class="heading-block text-center margin-bottom-80">
                 <h2>Make Payment</h2>
-                
-                <span>Thank you for registering. Please pay online.</span>
+                <a href="<?php echo site_url().'member/invoices';?>" class="btn btn-primary pull-right"><i class="fa fa-arrow-left"> Back</i></a>
                 
                 <div class="row">
                     <div class="col-md-12">

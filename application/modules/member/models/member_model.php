@@ -448,5 +448,16 @@ class Member_model extends CI_Model
 		
 		return $query;
 	}
+
+    public function get_all_offers()
+	{
+		//retrieve all trainings
+		$this->db->from('offer');
+		$this->db->where('offer_status = 1');
+		$this->db->order_by('created', 'DESC');
+		$query = $this->db->get();
+		
+		return $query;
+	}
 	
 }

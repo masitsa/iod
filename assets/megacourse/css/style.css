@@ -1326,28 +1326,7 @@ table.mc-table tbody .new .submissions a:before {
 .ps-container:active > .ps-scrollbar-y-rail > .ps-scrollbar-y {
   opacity: 1;
 }
-/* Background demo */
-.bg-section1-demo {
-  background-image: url('../images/bg/parallax-1.jpg');
-}
-.bg-news_letter {
-  background-image: url("../images/bg-newletter.jpg");
-}
-.bg-profile-feature {
-  background-image: url('../images/bg/parallax-1.jpg');
-}
-.bg-featured-request-teacher {
-  background-image: url('../images/bg/parallax-1.jpg');
-}
-.bg-sub-banner-course {
-  background-image: url('../images/bg/sub-banner-course.jpg');
-}
-.bg-login-content {
-  background-image: url('../images/homeslider/bg.jpg');
-}
-.bg-featured-request-teacher {
-  background-image: url('../images/bg/parallax-1.jpg');
-}
+
 .awe-overlay {
   position: absolute;
   width: 100%;
@@ -5323,7 +5302,6 @@ footer#footer.footer-style-2 {
 }
 .img-acount {
   width: 120px;
-  height: 120px;
   overflow: hidden;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -8470,3 +8448,7 @@ footer#footer.footer-style-2 {
 .fa-file-excel-o{color: #388e3c !important;}
 .fa-file-word-o{color: #0277bd !important;}
 .display-none{display:none;}
+.modal-title {color:#000;}
+.btn-primary, .btn-primary:hover{background-color:#FA9C2A; border-color:#FA9C2A;}
+.btn-success, .btn-success:hover{background-color:#011949; border-color:#011949;}
+.btn-primary:hover, .btn-success:hover{opacity:0.8}

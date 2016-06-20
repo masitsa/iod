@@ -47,6 +47,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/library/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/library/owl.carousel.css">
 	<!-- Font Awesome StyleSheet CSS -->
+    <link href="<?php echo base_url()."assets/themes/jasny/css/jasny-bootstrap.css"?>" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo base_url()."assets/themes/";?>fontawesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/md-font.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/megacourse/";?>css/style.css">
@@ -86,6 +87,7 @@
 
 <script type="text/javascript" src="<?php echo base_url()."assets/megacourse/";?>js/library/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()."assets/megacourse/";?>js/library/jquery.owl.carousel.js"></script>
+<script src="<?php echo base_url()."assets/themes/jasny/js/jasny-bootstrap.js";?>"></script>
 <script type="text/javascript" src="<?php echo base_url()."assets/megacourse/";?>js/library/jquery.appear.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()."assets/megacourse/";?>js/library/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()."assets/megacourse/";?>js/library/jquery.easing.min.js"></script>
