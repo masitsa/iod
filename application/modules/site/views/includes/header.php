@@ -34,4 +34,36 @@
 	<!-- SIDE MENU -->
 	<link rel="stylesheet" href="<?php echo base_url()."assets/themes/uoe/";?>css/jquery.sidr.dark.css">
 	<link href="<?php echo base_url()."assets/themes/custom/";?>css/custom.css" rel="stylesheet">
+	 <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/themes/"?>slick/slick.css">
+  		<link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/themes/"?>slick/slick-theme.css">
+  	<style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .slider {
+        width: 50%;
+       /* margin: 100px auto;*/
+       margin-top: 0%;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        color: black;
+    }
+  </style>
+  
 </head>

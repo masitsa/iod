@@ -61,8 +61,13 @@ footer{
 	width:100%;
 }
 footer{
-	background-color: #1b1b1b;
+	background-color: #011949;
 	padding: 40px 0 30px;
+}
+.edu2_copyright_wrap
+{
+	background-color: #1b1b1b !important;
+	padding: 5px 0 !important;
 }
 
 .kode_wrapper,
@@ -858,7 +863,9 @@ section,
 	text-transform: uppercase;
 	font-weight: normal;
 	position: relative;
-	padding-bottom: 15px;
+	/*padding-bottom: 15px;*/
+	padding-bottom: 0px;
+
 }
 .colorgraph {
   background: #c4e17f linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4) repeat scroll 0 0;
@@ -5887,7 +5894,7 @@ li figure .fa
 	font-size: 75px;
     margin: 0 auto;
     text-align: center;
-    color: #011949;
+    color: #011949 !important;
 }
 .fa-file-pdf-o{color: #b71c1c !important;}
 .fa-file-excel-o{color: #388e3c !important;}
@@ -5900,4 +5907,17 @@ li figure .fa
 .kf_event_speakers_des a
 {
 	color: #011949 !important;
+}
+button {
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 15px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    background-color: #011949;
+    margin-bottom: 0%;
 }

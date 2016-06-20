@@ -22,6 +22,33 @@
         
         <!--Bootstrap core JavaScript-->
 		<script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.js"></script>
+        <script src="<?php echo base_url()."assets/themes/"?>slick/slick.js" type="text/javascript" charset="utf-8"></script>
+      <script type="text/javascript">
+        $(document).on('ready', function() {
+
+          $(".regular").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 5,
+            autoplay: true,
+            slidesToScroll: 3
+          });
+          $(".center").slick({
+            dots: true,
+            infinite: true,
+            centerMode: true,
+            slidesToShow: 3,
+            autoplay: true,
+            slidesToScroll: 3
+          });
+          $(".variable").slick({
+            dots: true,
+            infinite: true,
+            autoplay: true,
+            variableWidth: true
+          });
+        });
+      </script>
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url()."assets/themes/custom/";?>js/bootstrap-datepicker.js"></script>
         <!--Bx-Slider JavaScript-->
