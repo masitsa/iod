@@ -16,16 +16,9 @@
 			// if ($counter % 3 == 0) {
 			//    echo 'image file';
 			// }
-			$partners_result .= ' 
-								<div class="item" style="width:200px !important;">
-			                        <!-- FACULTY DES START-->
-			                        <div class="edu2_faculty_des">
-			                            <figure><img src="'.$partners_location.''.$partners_image.'" alt=""/>
-			                                
-			                            </figure>
-			                        </div>
-			                        <!-- FACULTY DES END-->
-			                    </div>';
+			$partners_result .= ' <div>
+								      <img src="'.$partners_location.''.$partners_image.'">
+								    </div>';
 		}
 	}
 	else
@@ -47,11 +40,9 @@
             <!-- HEADING 1 END-->
 
             <!-- FACULTY SLIDER WRAP START-->
-            <div class="edu2_faculty_wrap">
-                <div id="owl-demo-8" class="owl-carousel owl-theme">
-                    
-                    <?php echo $partners_result;?>
-                </div>
+            <div class="edu2_faculty_wrap regular slider">
+              
+			    <?php echo $partners_result;?>
             </div>
             <!-- FACULTY SLIDER WRAP END-->
         </div>

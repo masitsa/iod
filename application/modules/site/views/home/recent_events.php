@@ -91,16 +91,22 @@
 					# code...
 					$result_accouncements .='<!--LIST ITEM START-->
 	                                   		<li>
-	                                            <div class="list-date">
-												        <span class="list-dayname">'.$month.'</span>
-												        <span class="list-daynumber">'.$day.'</span>
-												    </div>
-	                                            <div class="kode-text">
-	                                                <h6><a href="courses-detail.html#">'.$training_name.' From '.$start_date.' To '.$end_date.'</a></h6>
-	                                                
-	                                            </div>
-	    									</li>
-	                                        <!--LIST ITEM START-->';
+                                            <div class="list-date">
+											        <span class="list-dayname">'.$month.'</span>
+											        <span class="list-daynumber">'.$day.'</span>
+											    </div>
+                                            <div class="kode-text">
+
+                                                <div class="item-title-row">
+				                            <div class="item-title">'.$training_name.'</div>
+				                          </div>
+				                           <div class="item-subtitle"> Seminar </div>
+				                          <div class="item-text"><span><i class="fa fa-calendar"></i> From :</span> '.$start_date.'  <span><i class="fa fa-calendar"></i> To :</span> '.$end_date.'</div>
+
+                                                
+                                            </div>
+    									</li>
+                                        <!--LIST ITEM START-->';
 				}
 			}
 			else
@@ -113,7 +119,7 @@
 			<!-- COURSES DETAIL DES START -->
 			<div class="kf_courses_detail_des">
 				<div class="widget widget-recent-posts">
-					<ul class="sidebar_rpost_des">
+					<ul class="sidebar_rpost_des event-items">
                     	<!--LIST ITEM START-->
                    		<?php echo $result_accouncements?>
                         <!--LIST ITEM START-->

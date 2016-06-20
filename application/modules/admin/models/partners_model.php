@@ -5,8 +5,8 @@ class Partners_model extends CI_Model
 	public function upload_partners_image($partners_path, $edit = NULL)
 	{
 		//upload product's gallery images
-		$resize['width'] = 150;
-		$resize['height'] = 150;
+		$resize['width'] = 1900;
+		$resize['height'] = 1600;
 		
 		if(!empty($_FILES['partners_image']['tmp_name']))
 		{

@@ -20,6 +20,7 @@ $contacts = $this->site_model->get_contacts();
 	}
 ?>
 
+
 		<!--NEWS LETTERS START-->
 		<div class="edu2_ft_topbar_wrap">
 			<div class="container">
