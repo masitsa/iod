@@ -115,9 +115,7 @@ $contacts = $this->site_model->get_contacts();
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						<div class="edu2_ft_logo_wrap">
-							<a href="#"><img src="<?php echo base_url().'assets/logo/'.$logo;?>" alt="<?php echo $company_name;?>"></a>
-						</div>
+						
 					</div>
 
 					<div class="col-md-6">
@@ -127,9 +125,7 @@ $contacts = $this->site_model->get_contacts();
 					</div>
 
 					<div class="col-md-3">
-						<ul class="cards_wrap">
-							<li><a href="#"><?php echo base_url().'assets/images/mpesa-logo.jpg';?></a></li>
-						</ul>
+						
 					</div>
 				</div>
 			</div>

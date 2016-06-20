@@ -34,10 +34,10 @@
                                             <div class="kode-text">
 
                                                 <div class="item-title-row">
-                            <div class="item-title">'.$training_name.'</div>
-                          </div>
-                           <div class="item-subtitle"> Seminar </div>
-                          <div class="item-text"><span><i class="fa fa-calendar"></i> From :</span> '.$start_date.'  <span><i class="fa fa-calendar"></i> To :</span> '.$end_date.'</div>
+				                            <div class="item-title">'.$training_name.'</div>
+				                          </div>
+				                           <div class="item-subtitle"> Seminar </div>
+				                          <div class="item-text"><span><i class="fa fa-calendar"></i> From :</span> '.$start_date.'  <span><i class="fa fa-calendar"></i> To :</span> '.$end_date.'</div>
 
                                                 
                                             </div>
@@ -60,7 +60,9 @@
                     	<?php echo $result_trainings;?>
 
 					</ul>
-					
+					<div class="inputs_des des_2">
+	                        <button type="submit">view all </button>
+	                 </div>
 				</div>
 			</div>
 			<!-- COURSES DETAIL DES END -->
@@ -88,17 +90,17 @@
 					$end_date = date('jS M Y',strtotime($end_date));
 					# code...
 					$result_accouncements .='<!--LIST ITEM START-->
-                                   		<li>
-                                            <div class="list-date">
-											        <span class="list-dayname">'.$month.'</span>
-											        <span class="list-daynumber">'.$day.'</span>
-											    </div>
-                                            <div class="kode-text">
-                                                <h6><a href="courses-detail.html#">'.$training_name.' From '.$start_date.' To '.$end_date.'</a></h6>
-                                                
-                                            </div>
-    									</li>
-                                        <!--LIST ITEM START-->';
+	                                   		<li>
+	                                            <div class="list-date">
+												        <span class="list-dayname">'.$month.'</span>
+												        <span class="list-daynumber">'.$day.'</span>
+												    </div>
+	                                            <div class="kode-text">
+	                                                <h6><a href="courses-detail.html#">'.$training_name.' From '.$start_date.' To '.$end_date.'</a></h6>
+	                                                
+	                                            </div>
+	    									</li>
+	                                        <!--LIST ITEM START-->';
 				}
 			}
 			else
@@ -115,6 +117,7 @@
                     	<!--LIST ITEM START-->
                    		<?php echo $result_accouncements?>
                         <!--LIST ITEM START-->
+
 					</ul>
 				</div>
 			</div>
