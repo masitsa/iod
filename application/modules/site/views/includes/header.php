@@ -8,7 +8,7 @@
 	<!-- Full Calender CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/fullcalendar.css" rel="stylesheet">
 	<!-- Owl Carousel CSS -->
-	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/owl.carousel.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url()."assets/themes/uoe/";?>owlcarousel/assets/owl.carousel.css">
 	<!-- Pretty Photo CSS -->
 	<link href="<?php echo base_url()."assets/themes/uoe/";?>css/prettyPhoto.css" rel="stylesheet">
 	<!-- Bx-Slider StyleSheet CSS -->

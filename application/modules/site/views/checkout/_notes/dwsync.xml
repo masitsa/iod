@@ -40,4 +40,14 @@
 <file name="order.php" server="nairobisingles.com/public_html/installify/" local="130519956480000000" remote="130993090200000000" Dst="0" />
 <file name="payment.php" server="nairobisingles.com/public_html/installify/" local="130844335895690189" remote="130993090200000000" Dst="0" />
 <file name="reset_password.php" server="nairobisingles.com/public_html/installify/" local="130530148820000000" remote="130993090200000000" Dst="0" />
+<file name="checkout.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="checkout_header.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="confirm_message.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="my_details.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="delivery.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="error_message.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="order.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="order_steps.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="payment.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="reset_password.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
 </dwsync>

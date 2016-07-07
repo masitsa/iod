@@ -192,7 +192,7 @@ class Site_model extends CI_Model
 		$gallery = '';
 		$membership = '';
 		$blog = '';
-		$events = '';
+		$calendar = '';
 		$resources = '';
 		
 		if($name == 'home')
@@ -204,13 +204,13 @@ class Site_model extends CI_Model
 		{
 			$about = 'active';
 		}
-		if($name == 'services')
+		if($name == 'director-development')
 		{
 			$services = 'active';
 		}
-		if($name == 'events')
+		if($name == 'calendar')
 		{
-			$events = 'active';
+			$calendar = 'active';
 		}
 		if($name == 'contact')
 		{
@@ -228,9 +228,9 @@ class Site_model extends CI_Model
 		{
 			$membership = 'active';
 		}
-		if($name == 'events')
+		if($name == 'calendar')
 		{
-			$events = 'active';
+			$calendar = 'active';
 		}
 		if($name == 'resources')
 		{
@@ -248,7 +248,7 @@ class Site_model extends CI_Model
 			{
 				$service_name = $res->service_name;
 				$web_name = $this->create_web_name($service_name);
-				$services_sub_menu_services .= '<li><a href="'.site_url().'services/'.$web_name.'">'.$service_name.'</a></li>';
+				$services_sub_menu_services .= '<li><a href="'.site_url().'director-development/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
 
@@ -291,7 +291,7 @@ class Site_model extends CI_Model
 			
 			<!-- Service Menu -->
 			<li>
-				<a class="'.$services.'"  href="'.site_url().'services">Services</a>
+				<a class="'.$services.'"  href="'.site_url().'director-development">Director Development</a>
 				<ul>
 					'.$services_sub_menu_services.'
 				</ul>
@@ -299,13 +299,13 @@ class Site_model extends CI_Model
 			<!-- Service Menu -->
 			<!-- Portfolio Menu -->
 			<li>
-				<a class="'.$membership.'" href="#">Membership</a>
+				<a class="'.$membership.'" href="'.site_url().'membership">Membership</a>
 				<ul>
 					'.$membership_sub_menu_services.'
 				</ul>
 			</li>
 			<li>
-				<a class="'.$events.'" href="'.site_url().'event">Events</a>
+				<a class="'.$calendar.'" href="'.site_url().'calendar">Calendar</a>
 				<ul>
 					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
 				</ul>
@@ -493,16 +493,16 @@ class Site_model extends CI_Model
 				{
 					if($r == 1)
 					{
-						$crumbs .= '<li><a href="'.site_url().$page[$r-1].'/'.strtolower($name).'">'.strtoupper($name).'</a></li>';
+						$crumbs .= '<li><a href="'.site_url().$this->create_web_name($page[$r-1]).'/'.$this->create_web_name(strtolower($name)).'">'.strtoupper($name).'</a></li>';
 					}
 					else
 					{
-						$crumbs .= '<li><a href="'.site_url().strtolower($name).'">'.strtoupper($name).'</a></li>';
+						$crumbs .= '<li><a href="'.$this->create_web_name(site_url().strtolower($name)).'">'.strtoupper($name).'</a></li>';
 					}
 				}
 				else
 				{
-					$crumbs .= '<li><a href="'.site_url().strtolower($name).'">'.strtoupper($name).'</a></li>';
+					$crumbs .= '<li><a href="'.$this->create_web_name(site_url().strtolower($name)).'">'.strtoupper($name).'</a></li>';
 				}
 			}
 		}
@@ -806,6 +806,23 @@ class Site_model extends CI_Model
 		$query = $this->db->get($table);
 		
 		return $query;
+	}
+	
+	public function get_tweets()
+	{
+		$this->load->library('twitterfetcher');
+	
+		$tweets = $this->twitterfetcher->getTweets(array(
+			'consumerKey'       => 'fZvEA9Mw24i2jT3VIn1sIz92y',
+			'consumerSecret'    => 'NW3rzs0jEv39JdSmNeurZvKL577vxPVLuV95vedROczQtQIbDp',
+			'accessToken'       => '588425913-dHNleDnlFPdfHGYjZpUnph7MEhKTXqULJ6OaP6IP',
+			'accessTokenSecret' => 'iMmuv0bADX4CbG3i0T1vDvGo1uRYlAWfb5khB9Qfm7v3m',
+			'usecache'          => true,
+			'count'             => 5,  //this how many tweets to fectch
+			'numdays'           => 3000
+		));
+		
+		return $tweets;
 	}
 }
 

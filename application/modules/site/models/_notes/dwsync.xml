@@ -42,4 +42,17 @@
 <file name="subscription_model.php" server="nairobisingles.com/public_html/installify/" local="130998333638818475" remote="130997974200000000" Dst="0" />
 <file name="blog_model.php" server="nairobisingles.com/public_html/installify/" local="130996551951090001" remote="130997927400000000" Dst="0" />
 <file name="site_model.php" server="setson.co.ke/public_html/" local="131040855468326168" remote="131040855000000000" Dst="0" />
+<file name="site_model.php" server="195.42.142.18//www/www/development/" local="131122880259939490" remote="131122772400000000" Dst="0" />
+<file name="auth_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121947400000000" Dst="0" />
+<file name="blog_model.php" server="195.42.142.18//www/www/development/" local="130994075240000000" remote="131121947400000000" Dst="0" />
+<file name="banner_model.php" server="195.42.142.18//www/www/development/" local="131013123820000000" remote="131121947400000000" Dst="0" />
+<file name="dates_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121947400000000" Dst="0" />
+<file name="cart_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121947400000000" Dst="0" />
+<file name="charts_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121947400000000" Dst="0" />
+<file name="email_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="orders_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="payments_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="reports_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
+<file name="subscription_model.php" server="195.42.142.18//www/www/development/" local="131010631220000000" remote="131121948000000000" Dst="0" />
+<file name="stripe_model.php" server="195.42.142.18//www/www/development/" local="130994067700000000" remote="131121948000000000" Dst="0" />
 </dwsync>

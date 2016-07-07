@@ -18,6 +18,7 @@ $contacts = $this->site_model->get_contacts();
          $working_weekday = $contacts['working_weekday'];
         $working_weekend = $contacts['working_weekend'];
 	}
+	$tweets = $this->site_model->get_tweets();
 ?>
 
 
@@ -53,13 +54,18 @@ $contacts = $this->site_model->get_contacts();
 								<h5>Let's Get Social</h5>
 								<ul>
 									<li>
-                                        <a href="<?php echo $facebook;?>">
-                                            <i class="fa fa-facebook"></i>
+                                        <a href="https://twitter.com/IODKenya">
+                                            <i class="fa fa-twitter"></i> @IODKenya
                                         </a>
                                     </li>
 									<li>
-                                    <a href="<?php echo $linkedin;?>">
-                                        <i class="fa fa-linkedin"></i>
+                                        <a href="https://web.facebook.com/IODKenya">
+                                            <i class="fa fa-facebook"></i> Institute of Directors Kenya
+                                        </a>
+                                    </li>
+									<li>
+                                    <a href="https://www.linkedin.com/groups/3239622">
+                                        <i class="fa fa-linkedin"></i> Institute of Directors Kenya
                                     </a>
                     				</li>
 								</ul>
@@ -87,9 +93,7 @@ $contacts = $this->site_model->get_contacts();
 						<div class="col-md-3">
 							<div class="widget wiget-instagram">
 								<h5>Twitter Feed</h5>
-								<ul>
-									<li><a href="#"><img src="extra-images/instagram-1.jpg" alt=""/></a></li>
-								</ul>
+								<?php //echo $tweets;?>
 							</div>
 						</div>
 						<!--EDU2 FOOTER CONTANT DES END-->
@@ -116,7 +120,9 @@ $contacts = $this->site_model->get_contacts();
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						
+						<div class="edu2_ft_logo_wrap">
+							<a href="#"><img alt="" src="<?php echo site_url().'assets/images/acgn';?>.png"></a>
+						</div>
 					</div>
 
 					<div class="col-md-6">

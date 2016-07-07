@@ -6,13 +6,13 @@
             	<!--KF INR BANNER DES Wrap Start-->
                 <div class="kf_inr_ban_des">
                 	<div class="inr_banner_heading">
-						<h3>Event Lists</h3>
+						<h3>Calendar</h3>
                 	</div>
                    
                     <div class="kf_inr_breadcrumb">
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Event</a></li>
+							<li><a href="<?php echo site_url();?>">Home</a></li>
+							<li><a href="#">Calendar</a></li>
 						</ul>
 					</div>
                 </div>
@@ -27,44 +27,34 @@
 $result = ''; 
 if($query->num_rows() > 0)
 {
-	foreach($query->result() as $cat)
+	foreach($query->result() as $value)
 	{
-		$training_id = $cat->training_id;
-		$training_status = $cat->training_status;
-		$training_date = $cat->training_date;
-		$start_date = $cat->start_date;
-		$end_date = $cat->end_date;
-		$created = $cat->created;
-		$training_name = $cat->training_name;
-		$training_image_name = $cat->training_image_name;
-		$trainees = $this->training_model->get_attendees($training_id);
-		$registered_attendees = $trainees->num_rows();
-		
-		$v_data['training_id'] = $training_id;
-		$v_data['trainees'] = $trainees;
+		$event_name = $value->event_name;
+		$event_web_name = $value->event_web_name;
+		$start_date = $value->event_start_time;
+		$end_date = $value->event_end_time;
+
 		$start_date = date('jS M Y',strtotime($start_date));
-		$end_date = date('jS M Y',strtotime($end_date));
-		$created = date('jS M Y',strtotime($created));
-		$day = date('d',strtotime($start_date));
 		$month = date('M',strtotime($start_date));
-		$category_web_name = $this->site_model->create_web_name($training_name);
+		$day = date('d',strtotime($start_date));
+		$end_date = date('jS M Y',strtotime($end_date));
 
 		$result .= '
 					<div class="col-md-6">
 						<div class="edu2_event_wrap">
 							<div class="edu2_event_des">
 								<h4>'.$month.'</h4>
-								<p>'.$training_name.'</p>
+								<p>'.$event_name.'</p>
 								<ul class="post-option">
-										<li><strong>From :</strong> '.$start_date.' <strong>To: </strong> '.$end_date.'</li>
-										<li>10 <a href="'.site_url().'view-single-event/'.$category_web_name.'/comments">Comments</a></li>
+									<li><strong>From :</strong> '.$start_date.' <strong>To: </strong> '.$end_date.'</li>
+									<li>10 <a href="'.site_url().'event/'.$event_web_name.'/comments">Comments</a></li>
 								</ul>
-								<a class="readmore" href="'.site_url().'view-single-event/'.$category_web_name.'">read more<i class="fa fa-long-arrow-right"></i></a>
+								<a class="readmore" href="'.site_url().'event/'.$event_web_name.'">read more<i class="fa fa-long-arrow-right"></i></a>
 								<span> '.$day.'</span>
 							</div>
 								
-							<figure><img alt="" src="'.$training_location.''.$training_image_name.'">
-								<figcaption><a href="'.$training_location.''.$training_image_name.'"><i class="fa fa-plus"></i></a></figcaption>
+							<figure><img alt="" src="'.base_url().'assets/images/iod_logo_cropped.jpg">
+								<figcaption><a href="'.site_url().'event/'.$event_web_name.'"><i class="fa fa-plus"></i></a></figcaption>
 							</figure>
 						</div>
 					</div>
@@ -76,7 +66,7 @@ if($query->num_rows() > 0)
 }
 else
 {
-	$result = 'There are no events';
+	$result = 'There are no caledar items';
 }
 
 ?>
@@ -89,7 +79,7 @@ else
 				<!-- HEADING 2 START-->
 				<div class="col-md-12">
 					<div class="kf_edu2_heading2">
-						<h3>Events</h3>
+						<h3>Upcoming</h3>
 					</div>
 				</div>
 				<!-- HEADING 2 END-->
@@ -99,23 +89,7 @@ else
 				<div class="col-md-12">
 					<!--KF_PAGINATION_WRAP START-->
 					<div class="kf_edu_pagination_wrap">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-								<span aria-hidden="true"><i class="fa fa-angle-left"></i>PREV</span>
-								</a>
-							</li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li>
-								<a href="#" aria-label="Next">
-								<span aria-hidden="true">Next<i class="fa fa-angle-right"></i></span>
-								</a>
-							</li>
-						</ul>
+						<?php if(isset($links)){echo $links;}?>
 					</div>
 					<!--KF_PAGINATION_WRAP END-->
 				</div>

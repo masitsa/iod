@@ -54,7 +54,7 @@
         <!--Bx-Slider JavaScript-->
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.bxslider.min.js"></script>
         <!--Owl Carousel JavaScript-->
-        <script src="<?php echo base_url()."assets/themes/uoe/";?>js/owl.carousel.min.js"></script>
+        <script src="<?php echo base_url()."assets/themes/uoe/";?>owlcarousel/owl.carousel.min.js"></script>
         <!--Pretty Photo JavaScript-->
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/jquery.prettyPhoto.js"></script>
         <!--Full Calender JavaScript-->

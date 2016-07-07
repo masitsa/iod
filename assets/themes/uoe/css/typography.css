@@ -1,27 +1,61 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic-ext,latin-ext,cyrillic,greek-ext,greek);
+@font-face {
+    font-family: 'proxima_nova_rgregular';
+    src: url('../fonts/proxima_nova_reg-webfont.eot');
+    src: url('../fonts/proxima_nova_reg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proxima_nova_reg-webfont.woff') format('woff'),
+         url('../fonts/proxima_nova_reg-webfont.ttf') format('truetype'),
+         url('../fonts/proxima_nova_reg-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
+@font-face {
+    font-family: 'proxima_nova_ltbold';
+    src: url('../fonts/proximanova-semibold-webfont.eot');
+    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-semibold-webfont.woff') format('woff'),
+         url('../fonts/proximanova-semibold-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-semibold-webfont.svg#proxima_nova_ltbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+@font-face {
+    font-family: 'brandon_grotesqueregular';
+    src: url('../fonts/brandon_re-webfont.eot');
+    src: url('../fonts/brandon_re-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/brandon_re-webfont.woff') format('woff'),
+         url('../fonts/brandon_re-webfont.ttf') format('truetype'),
+         url('../fonts/brandon_re-webfont.svg#brandon_grotesqueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700);
+}
 
-@import url(https://fonts.googleapis.com/css?family=Arimo:400,700);
+@font-face {
+    font-family: 'brandon_grotesquebold';
+    src: url('../fonts/brandongrotesque-bold-webfont.eot');
+    src: url('../fonts/brandongrotesque-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/brandongrotesque-bold-webfont.woff') format('woff'),
+         url('../fonts/brandongrotesque-bold-webfont.ttf') format('truetype'),
+         url('../fonts/brandongrotesque-bold-webfont.svg#brandon_grotesquebold') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
+}
 
-@import url(https://fonts.googleapis.com/css?family=Dosis:400,300,500,700,600);
+@font-face {
+    font-family: 'brandon_grotesquemedium';
+    src: url('../fonts/brandon_med-webfont.eot');
+    src: url('../fonts/brandon_med-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/brandon_med-webfont.woff') format('woff'),
+         url('../fonts/brandon_med-webfont.ttf') format('truetype'),
+         url('../fonts/brandon_med-webfont.svg#brandon_grotesquemedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
-/*
-    font-family: 'Open Sans', sans-serif;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-family: 'Arimo', sans-serif;
-    font-family: 'Roboto Slab', serif;
-    font-family: 'Dosis', sans-serif;
-*/
+}
 
 *{
 	box-sizing:border-box;
@@ -32,7 +66,7 @@
 }
 body {
     color: #777777;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "proxima_nova_rgregular",Arial,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: 300;
 	line-height:30px;
@@ -41,8 +75,8 @@ body {
 
 /* Heading Typo */
 body h1, body h2, body h3, body h4, body h5, body h6 {
-    color: #2f2f2f;
-    font-family: 'Roboto Slab', serif;
+    color: #011949;
+    font-family: "brandon_grotesquemedium",Arial,Helvetica,sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.2;
@@ -75,19 +109,18 @@ h6 {
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: #2f2f2f;
-    font-family: 'Roboto Slab', serif;
+    font-family: "brandon_grotesquemedium",Arial,Helvetica,sans-serif;
 }
 
-p a {
+/*p a {
     color: #fff;
-}
+}*/
 /* Peragraph Typo */
 
 
 a {
     color: #777777;
     text-decoration: none;
-	font-family: 'Open Sans', sans-serif;
 }
 
 a:hover, a:focus, a:active {
@@ -103,6 +136,8 @@ li {
     
     list-style: none;
 }
+.abt_univ_des ul li{list-style: outside;}
+
 ul ul {
     margin:0px;
 	padding:0px;

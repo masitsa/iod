@@ -32,7 +32,7 @@ class Events extends admin {
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'administration/all-events';
+		$config['base_url'] = base_url().'content/events';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 20;
@@ -80,7 +80,7 @@ class Events extends admin {
 		}
 		$data['title'] = 'All Events';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function add_event()
@@ -133,7 +133,7 @@ class Events extends admin {
 				$this->session->unset_userdata('event_error_message');
 				$this->session->set_userdata('success_message', 'Event has been added');
 				
-				redirect('administration/all-events');
+				redirect('content/events');
 			}
 		}
 		
@@ -148,7 +148,7 @@ class Events extends admin {
 		$data['content'] = $this->load->view("event/add_event", $v_data, TRUE);
 		$data['title'] = 'Add Event';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function edit_event($event_id, $page)
@@ -215,7 +215,7 @@ class Events extends admin {
 				$this->session->unset_userdata('event_error_message');
 				$this->session->set_userdata('success_message', 'Event has been edited');
 				
-				redirect('administration/all-events/'.$page);
+				redirect('content/events/'.$page);
 			}
 		}
 		
@@ -230,7 +230,7 @@ class Events extends admin {
 		$data['content'] = $this->load->view("event/edit_event", $v_data, TRUE);
 		$data['title'] = 'Edit Event';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
     
 	/*
@@ -267,7 +267,7 @@ class Events extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Event could not be deleted');
 		}
-		redirect('administration/all-events/'.$page);
+		redirect('content/events/'.$page);
 	}
     
 	/*
@@ -287,7 +287,7 @@ class Events extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Event could not be activated');
 		}
-		redirect('administration/all-events/'.$page);
+		redirect('content/events/'.$page);
 	}
     
 	/*
@@ -307,7 +307,32 @@ class Events extends admin {
 		{
 			$this->session->set_userdata('error_message', 'Event could not be disabled');
 		}
-		redirect('administration/all-events/'.$page);
+		redirect('content/events/'.$page);
+	}
+	
+	public function update_event_web_names()
+	{
+		$query = $this->db->get('event');
+		if($query->num_rows() > 0)
+		{
+			foreach($query->result() as $res)
+			{
+				$event_id = $res->event_id;
+				$event_name = $res->event_name;
+				$event_start_time = ''.$res->event_start_time.'';
+				$event_web_name = $this->users_model->create_web_name($event_name.''.$event_start_time);
+				$data2 = array(
+					'event_web_name' => $event_web_name,
+				);
+				
+				$table = "event";
+				$this->db->where('event_id', $event_id);
+				if($this->db->update($table, $data2))
+				{
+					echo $event_name.' - '.$event_web_name.'<br/>';
+				}
+			}
+		}
 	}
 }
 ?>

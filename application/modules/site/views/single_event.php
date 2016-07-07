@@ -2,27 +2,19 @@
 $result = ''; 
 if($query->num_rows() > 0)
 {
-	foreach($query->result() as $cat)
+	foreach($query->result() as $value)
 	{
-		$training_id = $cat->training_id;
-		$training_status = $cat->training_status;
-		$training_date = $cat->training_date;
-		$start_date = $cat->start_date;
-		$end_date = $cat->end_date;
-		$created = $cat->created;
-		$training_name = $cat->training_name;
-		$training_image_name = $cat->training_image_name;
-		$training_description = $cat->training_description;
-		$trainees = $this->training_model->get_attendees($training_id);
-		$registered_attendees = $trainees->num_rows();
-		
-		$v_data['training_id'] = $training_id;
-		$v_data['trainees'] = $trainees;
+		$event_name = $value->event_name;
+		$event_type_name = $value->event_type_name;
+		$event_description = $value->event_description;
+		$event_web_name = $value->event_web_name;
+		$start_date = $value->event_start_time;
+		$end_date = $value->event_end_time;
+
 		$start_date = date('jS M Y',strtotime($start_date));
-		$end_date = date('jS M Y',strtotime($end_date));
-		$created = date('jS M Y',strtotime($created));
-		$day = date('d',strtotime($start_date));
 		$month = date('M',strtotime($start_date));
+		$day = date('d',strtotime($start_date));
+		$end_date = date('jS M Y',strtotime($end_date));
 	}
 }
 ?>
@@ -33,14 +25,14 @@ if($query->num_rows() > 0)
             	<!--KF INR BANNER DES Wrap Start-->
                 <div class="kf_inr_ban_des">
                 	<div class="inr_banner_heading">
-						<h3><?php echo $title;?></h3>
+						<h3><?php echo $event_type_name;?></h3>
                 	</div>
                    
                     <div class="kf_inr_breadcrumb">
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#"><?php echo $title;?></a></li>
+							<li><a href="<?php echo site_url();?>">Home</a></li>
+							<li><a href="<?php echo site_url().'calendar';?>">Calendar</a></li>
+							<li><a href="#"><?php echo $event_type_name;?></a></li>
 						</ul>
 					</div>
                 </div>
@@ -56,45 +48,36 @@ if($query->num_rows() > 0)
 		<div class="row">
 			<div class="col-md-8">
 
-				<!--EVENT CONVOCATION OUTER Wrap START-->
 				<div class="kf_convocation_outer_wrap">	
-					<div class="convocation_slider">
+					<!--<div class="convocation_slider">
 						<figure>
-							<img src="<?php echo $training_location;?>/<?php echo $training_image_name;?>" alt=""/>
+							<img src="<?php echo base_url().'assets/images/iod_logo_cropped.jpg';?>" alt=""/>
 						</figure>
-					</div>
+					</div>-->
 
-					<!--EVENT CONVOCATION  Wrap START-->
 					<div class="kf_convocation_wrap">
-						<h4><span><?php echo $title;?></span> </h4>
+						<h4><span><?php echo $event_name;?></span> </h4>
 						<ul class="convocation_timing">
 							<li><i class="fa fa-calendar"></i><?php echo $start_date;?> to: <?php echo $end_date;?></li>
 							<li><i class="fa fa-clock-o"></i>10:00 am - 04:00 pm</li>
 						</ul>
 
-						<!--EVENT CONVOCATION DES START-->
 						<div class="kf_convocation_des">
-							<p><?php echo $training_description;?></p>
-							<a href="#"><i class="fa fa-plus"></i>Google Calender</a>
-							<a href="#"><i class="fa fa-plus"></i>Local Expert</a>
+							<p><?php echo $event_description;?></p>
 
-							<!--EVENT CONVOCATION MAP  Wrap START-->
 							<div class="kf_convocation_map">
 								 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8527541847375!2d36.78480584990425!3d-1.2605522359486399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1763f94bbe07%3A0x99634989c4997a05!2sAll+Africa+Conference+of+Churches!5e0!3m2!1sen!2ske!4v1464154893311" width="600" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
-								<a href="#" class="convocation_link">Book Now</a>
-								<a href="#" class="convocation_link">Organizer</a>
-								<a href="#" class="convocation_link">Venue</a>
+								
 							</div>
-							<!--EVENT CONVOCATION MAP  Wrap END-->
+                            
+							<a href="#"><i class="fa fa-plus"></i>Google Calender</a>
+							<a href="#"><i class="fa fa-plus"></i>Book Now</a>
 
 						</div>
-						<!--EVENT CONVOCATION DES END-->
 
 					</div>
-					<!--EVENT CONVOCATION  Wrap END-->
-
-					<!--EVENT SPEAKER Wrap START-->
-					<div class="kf_event_speakers">
+                    
+					<!--<div class="kf_event_speakers">
 						<div class="heading_5">
 							<h4><span>Event</span> Speakers</h4>
 						</div>
@@ -124,9 +107,7 @@ if($query->num_rows() > 0)
 							</div>
 						</div>
 					</div>
-					<!--EVENT SPEAKER Wrap End-->
-
-					<!--EVENT GALLERY Wrap STAT-->
+                    
 					<div class="kf_event_gallery">
 						<div class="heading_5">
 							<h4><span>Event</span> Gallery</h4>
@@ -143,8 +124,7 @@ if($query->num_rows() > 0)
 						</ul>
 						<a href="#" class="event_link next">NEXT EVENT<i class="fa fa-angle-right"></i></a>
 						<a href="#" class="event_link prev"><i class="fa fa-angle-left"></i>PREVIOUS EVENT</a>
-					</div>
-					<!--EVENT GALLERY Wrap End-->
+					</div>-->
 
 				</div>
 				<!--EVENT CONVOCATION OUTER Wrap END-->
@@ -157,11 +137,25 @@ if($query->num_rows() > 0)
 
 					<!--KF EDU SIDEBAR COURSES CATEGORieS WRAP START-->
 					<div class="widget widget-categories">
-						<h2>Categories</h2>
+						<h2>Similar</h2>
 						<ul class="blog">
-							<li><a href="event-detail.html"><i class="fa fa-caret-right"></i>Seminars</a></li>
-							<li><a href="event-detail.html"><i class="fa fa-caret-right"></i>Conferences</a></li>
-							<li><a href="event-detail.html"><i class="fa fa-caret-right"></i>Special Events</a></li>
+                        	<?php
+                            if($similar_events->num_rows() > 0)
+							{
+								foreach ($similar_events->result() as $value) {
+									$event_name = $value->event_name;
+									$event_web_name = $value->event_web_name;
+									$start_date = $value->event_start_time;
+									$end_date = $value->event_end_time;
+						
+									$start_date = date('jS M Y',strtotime($start_date));
+									$month = date('M',strtotime($start_date));
+									$day = date('d',strtotime($start_date));
+									$end_date = date('jS M Y',strtotime($end_date));
+									echo '<li><a href="'.site_url().'event/'.$event_web_name.'"><i class="fa fa-caret-right"></i> '.$event_name.'</a></li>';
+								}
+							}
+							?>
 						</ul>
 					</div>
 					<!--KF EDU SIDEBAR COURSES CATEGORieS WRAP END-->

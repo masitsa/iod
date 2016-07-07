@@ -146,7 +146,7 @@ $route['administration/deactivate-section/(:num)/(:num)'] = 'admin/sections/deac
 //add members
 $route['members/add-member'] = 'admin/members/add_member';
 //imort of members
-$route['members'] = 'admin/members/index';
+$route['users/members'] = 'admin/members/index';
 $route['members/validate-import'] = 'admin/members/do_members_import';
 $route['import/members-template'] = 'admin/members/import_members_template';
 $route['members/import-members'] = 'admin/members/import_members';
@@ -159,7 +159,7 @@ $route['admin/company-profile'] = 'admin/contacts/show_contacts';
 $route['front-page-about'] = 'admin/blog/front_post/32';
 
 //company services
-$route['company-services'] = 'admin/services/index';
+$route['content/services'] = 'admin/services/index';
 $route['administration/all-services'] = 'admin/services/index';
 $route['administration/all-services/(:num)'] = 'admin/services/index/$1';//with a page number
 $route['administration/add-service'] = 'admin/services/add_service';
@@ -169,7 +169,7 @@ $route['administration/deactivate-service/(:num)/(:num)'] = 'admin/services/deac
 $route['administration/delete-service/(:num)/(:num)'] = 'admin/services/delete_service/$1/$2';
 
 //company routes
-$route['company-gallery'] = 'admin/gallery';
+$route['content/gallery'] = 'admin/gallery';
 $route['administration/all-gallery-images'] = 'admin/gallery/index';
 $route['administration/all-gallery-images/(:num)'] = 'admin/gallery/index/$1';//with a page number
 $route['administration/add-gallery'] = 'admin/gallery/add_gallery';
@@ -178,13 +178,13 @@ $route['administration/activate-gallery/(:num)/(:num)'] = 'admin/gallery/activat
 $route['administration/deactivate-gallery/(:num)/(:num)'] = 'admin/gallery/deactivate_gallery/$1/$2';
 $route['administration/delete-gallery/(:num)/(:num)'] = 'admin/gallery/delete_gallery/$1/$2';
 
-$route['notifications'] = 'admin/notification/index';
+$route['member-account/notifications'] = 'admin/notification/index';
 $route['add-notification'] = 'admin/notification/add_notification';
 $route['edit-notification/(:num)'] = 'admin/notification/edit_notification/$1';
 $route['activate-notification/(:num)'] = 'admin/notification/activate_notification/$1';
 $route['deactivate-notification/(:num)'] = 'admin/notification/deactivate_notification/$1';
 
-$route['offers'] = 'admin/offer/index';
+$route['member-account/offers'] = 'admin/offer/index';
 $route['add-offer'] = 'admin/offer/add_offer';
 $route['edit-offer/(:num)'] = 'admin/offer/edit_offer/$1';
 $route['activate-offer/(:num)'] = 'admin/offer/activate_offer/$1';
@@ -236,7 +236,7 @@ $route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
 
 
 //trainings
-$route['trainings'] = 'admin/trainings/index';
+$route['content/trainings'] = 'admin/trainings/index';
 $route['trainings/(:num)'] = 'admin/trainings/index/$1';//with a page number
 $route['administration/add-training'] = 'admin/trainings/add_training';
 $route['administration/edit-training/(:num)/(:num)'] = 'admin/trainings/edit_training/$1/$2';
@@ -244,7 +244,7 @@ $route['administration/activate-training/(:num)/(:num)'] = 'admin/trainings/acti
 $route['administration/deactivate-training/(:num)/(:num)'] = 'admin/trainings/deactivate_training/$1/$2';
 $route['administration/delete-training/(:num)/(:num)'] = 'admin/trainings/delete_training/$1/$2';
 
-$route['slideshow'] = 'admin/slideshow/index';
+$route['content/slideshow'] = 'admin/slideshow/index';
 $route['slideshow/(:num)'] = 'admin/slideshow/index/$1';
 $route['administration/all-slides/(:num)'] = 'admin/slideshow/index/$1';//with a page number
 $route['administration/add-slide'] = 'admin/slideshow/add_slide';
@@ -253,30 +253,40 @@ $route['administration/activate-slide/(:num)/(:num)'] = 'admin/slideshow/activat
 $route['administration/deactivate-slide/(:num)/(:num)'] = 'admin/slideshow/deactivate_slide/$1/$2';
 $route['administration/delete-slide/(:num)/(:num)'] = 'admin/slideshow/delete_slide/$1/$2';
 
+//trainings
+$route['content/events'] = 'admin/events/index';
+$route['content/events/(:num)'] = 'admin/events/index/$1';//with a page number
+$route['administration/add-event'] = 'admin/events/add_event';
+$route['administration/edit-event/(:num)/(:num)'] = 'admin/events/edit_event/$1/$2';
+$route['administration/activate-event/(:num)/(:num)'] = 'admin/events/activate_event/$1/$2';
+$route['administration/deactivate-event/(:num)/(:num)'] = 'admin/events/deactivate_event/$1/$2';
+$route['administration/delete-event/(:num)/(:num)'] = 'admin/events/delete_event/$1/$2';
+
 
 /*
 *	Site contacts Routes
 */
 $route['contact'] = 'site/contact';
 $route['gallery'] = 'site/gallery';
-$route['event'] = 'site/trainings';
+$route['calendar'] = 'site/calendar';
+$route['calendar/{:num}'] = 'site/calendar/$1';
 $route['blog'] = 'site/blog/index';
 $route['event/facilitators'] = 'site/facilitators';
 $route['about/board'] = 'site/board';
 $route['about/(:any)'] = 'site/about_us/$1';
 $route['about'] = 'site/about';
-$route['services'] = 'site/services';
-$route['services/(:any)'] = 'site/service_item/$1';
+$route['director-development'] = 'site/services';
+$route['director-development/(:any)'] = 'site/service_item/$1';
 $route['membership'] = 'site/membership';
 $route['membership/(:any)'] = 'site/membership_item/$1';
 $route['resources'] = 'site/resource';
 
 //
 $route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
-$route['view-single-event/(:any)'] = 'site/view_event_details/$1';
+$route['event/(:any)'] = 'site/view_event_details/$1';
 
 
-$route['partners'] = 'admin/partners/index';
+$route['content/partners'] = 'admin/partners/index';
 $route['partners/(:num)'] = 'admin/partners/index/$1';
 $route['administration/all-partners/(:num)'] = 'admin/partners/index/$1';//with a page number
 $route['administration/add-partner'] = 'admin/partners/add_partner';
@@ -287,7 +297,7 @@ $route['administration/delete-partner/(:num)/(:num)'] = 'admin/partners/delete_p
 
 
 
-$route['resource'] = 'admin/resource/index';
+$route['member-account/resources'] = 'admin/resource/index';
 $route['resource/(:num)'] = 'admin/resource/index/$1';
 $route['administration/all-resources/(:num)'] = 'admin/resource/index/$1';//with a page number
 $route['administration/add-resource'] = 'admin/resource/add_resource';
@@ -308,7 +318,7 @@ $route['view-single-resource/(:any)'] = 'site/single_resource/$1';
 
 
 
-$route['directors'] = 'admin/directors/index';
+$route['content/directors'] = 'admin/directors/index';
 $route['directors/(:num)'] = 'admin/directors/index/$1';
 $route['administration/all-directors/(:num)'] = 'admin/directors/index/$1';//with a page number
 $route['administration/add-director'] = 'admin/directors/add_director';

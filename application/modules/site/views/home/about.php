@@ -33,7 +33,7 @@
 						<ul role="tablist" class="nav nav-tabs">
 							
 							<li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="coursedetails2" href="<?php echo base_url();?>home#coursedetails2" aria-expanded="true">ABOUT IOD KENYA</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="entryrequirment" href="<?php echo base_url();?>home#entryrequirment" aria-expanded="true">OUR SERVICES</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="entryrequirment" href="<?php echo base_url();?>home#entryrequirment" aria-expanded="true">DIRECTOR DEVELOPMENT</a></li>
 							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="placements" href="<?php echo base_url();?>home#placements" aria-expanded="true">IOD MEMBERSHIP</a></li>
 						</ul>
 
@@ -42,15 +42,15 @@
 
 							<div id="coursedetails2" class="tab-pane active" role="tabpanel">
 								<div class="course_heading">
-									<h3>IOD KENYA</h3>
+									<h3>IOD Kenya</h3>
 								</div>
-								<p><?php echo $about;?></p>
-								<a href="<?php echo site_url();?>about" class="btn-3">Know More</a>
+								<p><?php echo $about;?>
+								<a href="<?php echo site_url();?>about">Know More ></a></p>
 							</div>
 
 							<div id="entryrequirment" class="tab-pane" role="tabpanel">
 								<div class="course_heading">
-									<h3>OUR SERVICES</h3>
+									<h3>Director Development</h3>
 								</div>
 								<?php
 								 $services = $this->site_model->get_active_services();
@@ -68,7 +68,7 @@
 			                            					'
 			                            					<div class="service-list">
 			                            						<h6>'.$service_name.'</h6>
-																<p>'.$mini_desc.' <a href="'.site_url().'services/'.$web_name.'">  Know More > </a> </p>
+																<p>'.$mini_desc.' <a href="'.site_url().'director-development/'.$web_name.'">  Know More > </a> </p>
 
 															</div>
 			                            					';
@@ -88,6 +88,7 @@
 								</p>
 								<p>
 									Applicants who fulfill the required criteria are then invited to join the relevant category of membership in the Institute. The new member is supplied with a membership number, a membership certificate and a copy of the Memorandum and Articles of Association of the Institute.
+								<a href="<?php echo site_url();?>register">Register ></a>
 								</p>
 							</div>
 
@@ -98,9 +99,9 @@
 
 			<div class="col-md-4">
 
-					 <form>
+					 <form action="<?php echo site_url().'login';?>" method="post" role="form">
                         <div class="contact_des">
-                             <div class="kf_edu2_heading1">
+                            <div class="kf_edu2_heading2">
 								<h3>Member sign in</h3>
 							</div>
 							<div class="abt_univ_des">
@@ -255,6 +256,7 @@
 
 								                                	<figure>
 								                                    	<i  class="fa '.$fa.'" aria-hidden="true"></i>
+																		'.$resource_name.'
 																		<a href="'.$resource_location.''.$resource_image.'" target="_blank">Download</a>
 																	</figure>
 																</li>';

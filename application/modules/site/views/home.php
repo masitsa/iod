@@ -1,10 +1,12 @@
-<div class="col-md-12">
-	<div class="col-md-8">
-		<?php echo $this->load->view('home/slider', '', TRUE); ?>
-	</div>
-	<div class="col-md-4">
-		<?php echo $this->load->view('home/recent_events', '', TRUE); ?>
-	</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <?php echo $this->load->view('home/slider', '', TRUE); ?>
+        </div>
+        <div class="col-md-4">
+            <?php echo $this->load->view('home/recent_events', '', TRUE); ?>
+        </div>
+    </div>
 </div>
 
 <?php 

@@ -6,13 +6,12 @@
                 <!--KF INR BANNER DES Wrap Start-->
                 <div class="kf_inr_ban_des">
                     <div class="inr_banner_heading">
-                        <h3>Our <?php echo $title?></h3>
+                        <h3><?php echo $title?></h3>
                     </div>
                    
                     <div class="kf_inr_breadcrumb">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Our Courses</a></li>
+                            <?php echo $this->site_model->get_breadcrumbs();?>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +60,7 @@
                                                         <h6>'.$service_name.'</h6>
                                                         <p>'.$maxi_desc.' </p>
                                                         <div class="video_link_wrap">
-                                                            <a href="'.base_url().'services/'.$web_name.'">Read More</a>
+                                                            <a href="'.base_url().'director-development/'.$web_name.'">Read More</a>
                                                           
                                                         </div>
                                                     </div>

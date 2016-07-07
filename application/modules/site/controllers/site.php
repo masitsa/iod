@@ -18,6 +18,7 @@ class Site extends MX_Controller
 		$this->load->model('admin/blog_model');
 		$this->load->model('site/banner_model');
 		$this->load->model('admin/training_model');
+		$this->load->model('admin/event_model');
 		$this->load->model('admin/users_model');
 
 		$this->slideshow_location = base_url().'assets/slideshow/';
@@ -84,9 +85,12 @@ class Site extends MX_Controller
 		$v_data['items'] = $this->site_model->get_front_end_items();
 		$v_data['slides'] = $this->site_model->get_slides();
 		$v_data['partners'] = $this->site_model->get_partners();
-		$v_data['resource'] = $this->site_model->get_resource(5);
+		$v_data['resource'] = $this->site_model->get_resource(6);
 		$v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
 		$v_data['trainings'] = $this->training_model->get_recent_trainings(5);
+		$v_data['seminars'] = $this->event_model->get_recent_events(1, 4);
+		$v_data['events'] = $this->event_model->get_recent_events(2, 4);
+		$v_data['conferences'] = $this->event_model->get_recent_events(3, 4);
 		$v_data['training_location'] = $this->training_location;
 		$v_data['resource_location'] = $this->resource_location;
 		$v_data['partners_location'] = $this->partners_location;
@@ -346,7 +350,7 @@ class Site extends MX_Controller
 		$data['title'] = $this->site_model->display_page_title();
 		$v_data['title'] = $data['title'];
 		$data['contacts'] = $contacts;
-		$data['content'] = $this->load->view("services", $v_data, TRUE);
+		$data['content'] = $this->load->view("membership", $v_data, TRUE);
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
@@ -807,6 +811,61 @@ class Site extends MX_Controller
 		
 		$this->load->view("site/templates/general_page", $data);
 	}
+	/*
+	*
+	*	Default action is to show all the registered training
+	*
+	*/
+	public function calendar() 
+	{
+		$where = 'event_status = 1 AND event.event_type_id = event_type.event_type_id AND event_start_time >= CURDATE()';
+		$table = 'event, event_type';
+		$segment = 2;
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'calendar';
+		$config['total_rows'] = $this->users_model->count_items($table, $where);
+		$config['uri_segment'] = $segment;
+		$config['per_page'] = 20;
+		$config['num_links'] = 5;
+		
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = '<span aria-hidden="true"> Next<i class="fa fa-angle-right"></i></span>';
+		$config['next_tag_close'] = '</span>';
+		
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = '<span aria-hidden="true"><i class="fa fa-angle-left"></i> PREV</span>';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        $v_data["links"] = $this->pagination->create_links();
+		$query = $this->event_model->get_all_events($table, $where, $config["per_page"], $page);
+		
+		$data['title'] = $v_data['title'] = 'All Events';
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+		$v_data['query'] = $query;
+		$v_data['page'] = $page;
+		$data['content'] = $this->load->view('event', $v_data, true);
+		
+		$this->load->view("site/templates/general_page", $data);
+	}
 
 	public function resource()
 	{
@@ -861,21 +920,27 @@ class Site extends MX_Controller
 		$this->load->view("site/templates/general_page", $data);
 	}
 	
-	public function view_event_details($training_name)
+	public function view_event_details($event_web_name)
 	{
-		$training_title = $this->site_model->decode_web_name($training_name);
-		$title = $training_title ;
-
-		$v_data['title'] = $title;
-		$trainig_id = $this->site_model->get_event_id($title);
-		$query = $this->site_model->get_event($trainig_id);
+		$query = $this->event_model->get_event2($event_web_name);
 		$contacts = $this->site_model->get_contacts();
-		// $v_data['comments_query'] = $this->blog_model->get_post_comments($post_id);
-		// $v_data['latest_posts'] = $this->blog_model->get_recent_posts(4);
-		$v_data['training_location'] = $this->training_location;
-		$v_data['contacts'] = $contacts;
-		$v_data['query'] = $query;
-		$data['content'] = $this->load->view('single_event', $v_data, true);
+		$data['title'] = 'Calendar';
+		
+		if($query->num_rows() > 0)
+		{
+			//get event type id
+			$row = $query->row();
+			$event_type_id = $row->event_type_id;
+			$v_data['contacts'] = $contacts;
+			$v_data['query'] = $query;
+			$v_data['similar_events'] = $this->event_model->get_similar_event($event_type_id, 5);
+			$data['content'] = $this->load->view('single_event', $v_data, true);
+		}
+		
+		else
+		{
+			$data['content'] = 'Unable to find item';
+		}
 		$this->load->view("site/templates/general_page", $data);
 	}
 	public function single_resource($resource_name)
@@ -910,6 +975,11 @@ class Site extends MX_Controller
 		$v_data['services'] = $about;
 		$data['content'] = $this->load->view('single_about', $v_data, true);
 		$this->load->view("site/templates/general_page", $data);
+	}
+
+	public function get_tweets()
+	{
+		$tweets = $this->site_model->get_tweets();
 	}
 }
 ?>

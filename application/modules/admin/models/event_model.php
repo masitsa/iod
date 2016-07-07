@@ -72,7 +72,7 @@ class Event_model extends CI_Model
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->order_by('event_name');
+		$this->db->order_by('event_start_time');
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
@@ -182,11 +182,21 @@ class Event_model extends CI_Model
 		return $query;
 	}
 	
+	public function get_event2($event_web_name)
+	{
+		//retrieve all users
+		$this->db->from('event, event_type');
+		$this->db->where('event.event_type_id = event_type.event_type_id AND event_web_name = \''.$event_web_name.'\'');
+		$query = $this->db->get();
+		
+		return $query;
+	}
+	
 	/*
 	*	Retrieve recent events
 	*
 	*/
-	public function get_recent_events($num = 6)
+	public function get_recent_events_old($num = 6)
 	{
 		$this->db->select('event.*');
 		$this->db->where('event_status = 1');
@@ -222,5 +232,29 @@ class Event_model extends CI_Model
 		$query = $this->db->get('event', $num);
 		
 		return $query;
+	}
+	
+	public function get_recent_events($event_type_id = 1, $limit = NULL)
+	{
+		if($limit != NULL)
+		{
+			$this->db->limit($limit);
+		}
+		
+		$this->db->where('event_status = 1 AND event_type_id = '.$event_type_id.' AND event_start_time >= CURDATE()');
+		$this->db->order_by('event_start_time', 'ASC');
+		return $this->db->get('event');
+	}
+	
+	public function get_similar_event($event_type_id, $limit = NULL)
+	{
+		if($limit != NULL)
+		{
+			$this->db->limit($limit);
+		}
+		
+		$this->db->where('event_status = 1 AND event_type_id = '.$event_type_id.' AND event_start_time >= CURDATE()');
+		$this->db->order_by('event_start_time', 'ASC');
+		return $this->db->get('event');
 	}
 }

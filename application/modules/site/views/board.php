@@ -76,15 +76,28 @@
     	<div class="kf_content_wrap">
     		<section class="edu2_teachers_page">
     			<div class="container">
-    				<div class="row">
-    					
-    					<?php echo $directors_result;?>
-
+                	<div class="row">
     					<div class="col-md-12">
-    						<div class="loadmore">
-    							<a href="#" class="btn-3">load more</a>
+    						<div class="abt_univ_wrap">
+								<!-- HEADING 1 START-->
+								<div class="kf_edu2_heading1">
+									<h5>Our Board</h5>
+									<h3>About</h3>
+								</div>
+								<!-- HEADING 1 END-->
+
+								<div class="abt_univ_des">
+
+									<span>The Board of IOD (K) comprises Duncan Watta (Chairman), John Cheruiyot Kiplagat, Marilyn Kamuru, Lucy Munjuga, Allen Ndungu, Dr. Peter Muthoka, Celestine Otieno, Henry Kiema, and Margaret Chege.</span>
+
+								</div>
     						</div>
     					</div>
+
+    				</div>
+                
+    				<div class="row">
+    					<?php echo $directors_result;?>
     				</div>
     			</div>
     		</section>
