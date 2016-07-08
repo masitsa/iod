@@ -1,94 +1,51 @@
 <?php
-if ($query->num_rows() > 0)
-{
-            
-	foreach ($query->result() as $row)
-	{
-		
-	      $id = $row->post_id;
+if($query->num_rows() > 0)
+{   $count = 0;
+    foreach($query->result() as $res)
+    {
+        $resource_category_name = $res->resource_category_name;
+        $resource_category_id = $res->resource_category_id;
+        $resource_category_description = $res->resource_category_description;
+        $mini_desc = implode(' ', array_slice(explode(' ', $resource_category_description), 0, 100));
+        $maxi_desc = implode(' ', array_slice(explode(' ', $resource_category_description), 0, 40));
 
-	        $title = $row->post_title;
-
-	        $title_alias = $row->post_name;
-	        $fulltext  = $row->post_content;
-	        $post_content = $row->post_content;
-
-	        // $post_date = $row->post_date;
-	         $date = date('jS M Y',strtotime($row->post_date));
-
-	        $publish_up = date('jS M Y',strtotime($row->post_date));
-
-	         $day = date('j',strtotime($row->post_date));
-
-	         $month = date('M',strtotime($row->post_date));
-
-
-
-	        $mini_string = (strlen($post_content) > 15) ? substr($post_content,0,50).'...' : $post_content;
-
-	        $title = $row->post_title;
-
-	        $mini_title = (strlen($title) > 15) ? substr($title,0,50).'...' : $title;
-
-        // get the articles attached to this 
-
-        $attachments = $this->resources_model->get_attachments($id);
+        $attachments = $this->resources_model->get_attachments($resource_category_id);
        
-
-        // $meeting_mini_string = (strlen($meeting_content) > 15) ? substr($meeting_content,0,50).'...' : $meeting_content;
-   		$title = strip_tags($row->post_title,'<p><a>');
-        $mini_title = (strlen($title) > 30) ? substr($title,0,52).'...' : $title;
 	}
-	$result = '<h2 class="page_title">'.strip_tags($title).'</h2>
-	 
-		          <div class="post_single">
-		                 
-		            <div class="page_content"> 
-
-		              <div class="entry">
-		              	'.$post_content.'
+	$result = '
+				<div class="content-block-title">
+		            <div class="row">
+		              <div class="col-100">
+		                <span class="event-title">'.strip_tags($resource_category_name).'</span>
 		              </div>
-		            </div>
-		             <div class="page_content">';
-		             	if ($attachments->num_rows() > 0)
+		             </div>
+		        </div>
+		        <div class="content-block">
+		            <div class="content-block-inner">
+		              <p>'.$resource_category_description.'</p>';
+		              	if ($attachments->num_rows() > 0)
 						{
 						       
 								$result .=' 
 				             	<ul class="simple_list">';
 				             		foreach ($attachments->result() as $row_item)
 									{
-
-
-								         $id = $row_item->post_id;
-
-								        $title = $row_item->post_title;
-
-								        $title_alias = $row_item->post_name;
-								        $fulltext  = $row_item->post_content;
-								        $post_content = $row_item->post_content;
-								         $kb_download = $row_item->guid;
-
-								        // $post_date = $row_item->post_date;
-								         $date = date('jS M Y',strtotime($row_item->post_date));
-
-								        $publish_up = date('jS M Y',strtotime($row_item->post_date));
-
-								         $day = date('j',strtotime($row_item->post_date));
-
-								         $month = date('M',strtotime($row_item->post_date));
-
-				             			// $result .='<li><a href="#" onclick="window.open("http://www.icpak.com/download.php?a_id='.$article_id.'&download='.$kb_download.', "_system", "location=yes"")">'.$download_title.'</a> </li>';
-				             			$result .="<li><a href='#' onclick='get_download(".$id.",".$kb_download.");'>".$title."</a></li>";
+										$resource_name = $row_item->resource_name;
+										$description = $row_item->resource_description;
+										$resource_image = $row_item->resource_image_name;
+										$resource_image_name = $row_item->resource_image_name;
+										$resource_button_text = $row_item->resource_button_text;
+										$resource_link = site_url().'assets/resource/'.$resource_image_name;
+								        
+				             			 $result .="<li><a href='#' class='download-resource' download_file='".$resource_link."'>".$resource_name."</a></li>";
 
 				             		}
 				             	$result .='	
 				             	<ul>';
 				         }
-				     $result .='
-		             </div>
-		            
-		          </div>
-	          ';
+		               $result .='
+		            </div>
+		        </div>';
 }else
 {
 	$result = 'Data not found';

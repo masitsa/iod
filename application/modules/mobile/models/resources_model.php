@@ -6,7 +6,22 @@ class Resources_model extends CI_Model
 
 {
 
-
+	/*
+	*	Count all items from a table
+	*	@param string $table
+	* 	@param string $where
+	*
+	*/
+	public function count_items($table, $where, $limit = NULL)
+	{
+		if($limit != NULL)
+		{
+			$this->db->limit($limit);
+		}
+		$this->db->from($table);
+		$this->db->where($where);
+		return $this->db->count_all_results();
+	}
 
 	/*
 
@@ -20,32 +35,34 @@ class Resources_model extends CI_Model
 
 	{
 
-		$this->db->where('wp_vhxu_posts.ID = wp_vhxu_postmeta.post_id AND wp_vhxu_posts.post_type = "resource" AND wp_vhxu_posts.post_status = "publish" AND wp_vhxu_posts.post_parent = 0');
+		$this->db->where('resource_category_id > 0');
 
-		$this->db->order_by('wp_vhxu_posts.post_date','DESC');
-		$this->db->limit(10);
-		$this->db->group_by('wp_vhxu_posts.ID');
+		$query = $this->db->get('resource_category');
+		return $query;
 
-		$query = $this->db->get('wp_vhxu_posts, wp_vhxu_postmeta');
-
-		
+	}
+	public function get_publications()
+	{
+		$this->db->where('publication_status = 1');
+		$query = $this->db->get('publications');
+		return $query;
+	}
+	public function get_publication_detail($id)
+	{
+		$this->db->where('publication_id = '.$id);
+		$query = $this->db->get('publications');
 
 		return $query;
 
 	}
 
 
-
 	public function get_resources_detail($id)
 
 	{
+		$this->db->where('resource_category_id ='.$id);
 
-
-
-			$this->db->where('wp_vhxu_posts.ID = wp_vhxu_postmeta.post_id AND wp_vhxu_posts.ID = '.$id);
-
-		$query = $this->db->get('wp_vhxu_posts,wp_vhxu_postmeta');
-
+		$query = $this->db->get('resource_category');
 		return $query;
 
 	}
@@ -54,12 +71,9 @@ class Resources_model extends CI_Model
 	{
 
 		$this->db->select('*');
-
-		$this->db->where('wp_vhxu_posts.ID = wp_vhxu_postmeta.post_id AND wp_vhxu_posts.post_type = "attachment" AND wp_vhxu_posts.post_status = "inherit" AND wp_vhxu_posts.post_parent ='.$id);
-
-		$this->db->order_by('wp_vhxu_posts.post_date','ASC');
-
-		$query = $this->db->get('wp_vhxu_posts, wp_vhxu_postmeta');
+		$this->db->where('resource_category_id ='.$id);
+		$this->db->order_by('resource_category_id','DESC');
+		$query = $this->db->get('resource');
 
 		return $query;
 
