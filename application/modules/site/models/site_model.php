@@ -277,6 +277,20 @@ class Site_model extends CI_Model
 				$about_sub_menu_services .= '<li><a href="'.site_url().'about/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
+
+		// resources
+		$this->db->order_by('resource_category_name', 'ASC');
+		$resources_query = $this->db->get('resource_category');
+		$resources_menu = '';
+		if($resources_query->num_rows() > 0)
+		{
+			foreach($resources_query->result() as $res)
+			{
+				$resource_category_name = $res->resource_category_name;
+				$web_name = $this->create_web_name($resource_category_name);
+				$resources_menu .= '<li><a href="'.site_url().'resource/'.$web_name.'">'.$resource_category_name.'</a></li>';
+			}
+		}
 		$navigation = 
 		'
 			<li><a class="'.$home.'" href="'.site_url().'home">Home</a></li>
@@ -294,6 +308,9 @@ class Site_model extends CI_Model
 				<a class="'.$services.'"  href="'.site_url().'director-development">Director Development</a>
 				<ul>
 					'.$services_sub_menu_services.'
+					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
+					<li><a href="'.site_url().'event/training-partners">Training Partners</a></li>
+					<li><a href="'.site_url().'event/training-programmes">Training Programmes '.date('Y').'</a></li>
 				</ul>
 			</li>
 			<!-- Service Menu -->
@@ -302,15 +319,20 @@ class Site_model extends CI_Model
 				<a class="'.$membership.'" href="'.site_url().'membership">Membership</a>
 				<ul>
 					'.$membership_sub_menu_services.'
+					<li><a href="'.site_url().'register">Register</a></li>
+					<li><a href="'.site_url().'login">Update Member Profile</a></li>
+					<li><a href="#">List of Members</a></li>
 				</ul>
 			</li>
 			<li>
 				<a class="'.$calendar.'" href="'.site_url().'calendar">Calendar</a>
+			</li>
+			<li>
+				<a class="'.$resources.'" href="'.site_url().'resources">Resources</a>
 				<ul>
-					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
+					'.$resources_menu.'
 				</ul>
 			</li>
-			<li><a class="'.$resources.'" href="'.site_url().'resources">Resources</a></li>
 			<li><a class="'.$blog.'" href="'.site_url().'blog">Blog</a></li>
 			<li><a class="'.$gallery.'" href="'.site_url().'gallery">Gallery</a></li>
 			<li><a class="'.$contact.'" href="'.site_url().'contact">Contact</a></li>
@@ -327,7 +349,7 @@ class Site_model extends CI_Model
 		$this->db->select('service.*');
 		$this->db->where($where);
 		$this->db->group_by('service_name');
-		$this->db->order_by('service_id', 'ASC');
+		$this->db->order_by('service_name', 'ASC');
 		$query = $this->db->get($table);
 		
 		return $query;
@@ -341,7 +363,7 @@ class Site_model extends CI_Model
 		$this->db->select('service.*');
 		$this->db->where($where);
 		$this->db->group_by('service_name');
-		$this->db->order_by('position', 'ASC');
+		$this->db->order_by('service_name', 'ASC');
 		$query = $this->db->get($table);
 		
 		return $query;

@@ -315,11 +315,12 @@ $route['member/payment-success/(:num)/(:any)'] = 'member/payment_success/$1/$2';
 $route['update_profile/(:num)'] = 'member/update_profile/$1';
 
 $route['view-single-resource/(:any)'] = 'site/single_resource/$1';
+$route['resource/(:any)'] = 'site/single_resource/$1';
 
-
-
+$route['directors'] = 'admin/directors/index';
 $route['content/directors'] = 'admin/directors/index';
 $route['directors/(:num)'] = 'admin/directors/index/$1';
+$route['content/directors/(:num)'] = 'admin/directors/index/$1';
 $route['administration/all-directors/(:num)'] = 'admin/directors/index/$1';//with a page number
 $route['administration/add-director'] = 'admin/directors/add_director';
 $route['administration/edit-director/(:num)/(:num)'] = 'admin/directors/edit_director/$1/$2';

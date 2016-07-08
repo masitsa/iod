@@ -128,7 +128,7 @@ class directors extends admin {
 				$this->session->unset_userdata('directors_error_message');
 				$this->session->set_userdata('success_message', 'director has been added');
 				
-				redirect('directors');
+				redirect('content/directors');
 			}
 		}
 		
@@ -214,7 +214,7 @@ class directors extends admin {
 				$this->session->unset_userdata('directors_error_message');
 				$this->session->set_userdata('success_message', 'director has been edited');
 				
-				redirect('directors/'.$page);
+				redirect('content/directors/'.$page);
 			}
 		}
 		
@@ -266,7 +266,7 @@ class directors extends admin {
 		{
 			$this->session->set_userdata('error_message', 'director could not be deleted');
 		}
-		redirect('directors/'.$page);
+		redirect('content/directors/'.$page);
 	}
     
 	/*
@@ -286,7 +286,7 @@ class directors extends admin {
 		{
 			$this->session->set_userdata('error_message', 'director could not be activated');
 		}
-		redirect('directors/'.$page);
+		redirect('content/directors/'.$page);
 	}
     
 	/*
@@ -306,7 +306,7 @@ class directors extends admin {
 		{
 			$this->session->set_userdata('error_message', 'director could not be disabled');
 		}
-		redirect('directors/'.$page);
+		redirect('content/directors/'.$page);
 	}
 }
 ?>

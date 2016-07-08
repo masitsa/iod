@@ -68,6 +68,7 @@ $contacts = $this->site_model->get_contacts();
                                         <i class="fa fa-linkedin"></i> Institute of Directors Kenya
                                     </a>
                     				</li>
+                                    <a href="#"><img alt="" class="img-responsive" src="<?php echo site_url().'assets/images/acgn';?>.png"></a>
 								</ul>
 							</div>
 						</div>
@@ -121,13 +122,13 @@ $contacts = $this->site_model->get_contacts();
 				<div class="row">
 					<div class="col-md-3">
 						<div class="edu2_ft_logo_wrap">
-							<a href="#"><img alt="" src="<?php echo site_url().'assets/images/acgn';?>.png"></a>
+							
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="copyright_des">
-							<span>&copy; All Rights reserved. Powered By <a href="https://www.omnis.co.ke">Omnis Limited</a></span>
+							<span>&copy; All Rights reserved. Powered By <a href="https://www.omnis.co.ke" target="_blank">Omnis Limited</a></span>
 						</div>
 					</div>
 

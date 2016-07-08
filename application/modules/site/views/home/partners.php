@@ -33,18 +33,18 @@
         <div class="row">
             <!-- HEADING 1 START-->
             <div class="col-md-12">
-                <div class="kf_edu2_heading1">
+                <div class="kf_edu2_heading2">
                     <h3>Our Partners</h3>
                 </div>
+
+                <!-- FACULTY SLIDER WRAP START-->
+                <div class="edu2_faculty_wrap regular slider">
+                  
+                    <?php echo $partners_result;?>
+                </div>
+                <!-- FACULTY SLIDER WRAP END-->
             </div>
             <!-- HEADING 1 END-->
-
-            <!-- FACULTY SLIDER WRAP START-->
-            <div class="edu2_faculty_wrap regular slider">
-              
-			    <?php echo $partners_result;?>
-            </div>
-            <!-- FACULTY SLIDER WRAP END-->
         </div>
     </div>
 </section>

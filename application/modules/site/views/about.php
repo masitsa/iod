@@ -14,10 +14,10 @@
         $floor = $contacts['floor'];
         $location = $contacts['location'];
 
-         $working_weekday = $contacts['working_weekday'];
+        $working_weekday = $contacts['working_weekday'];
         $working_weekend = $contacts['working_weekend'];
 
-         $mission = $contacts['mission'];
+        $mission = $contacts['mission'];
         $vision = $contacts['vision'];
         $about = $contacts['about'];
     }
