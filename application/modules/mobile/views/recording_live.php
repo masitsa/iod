@@ -1,4 +1,5 @@
  <?php
+
 $result = '';
 if($query->num_rows() > 0)
 {
@@ -11,22 +12,35 @@ if($query->num_rows() > 0)
         $recording_status = $key->recording_status;
     
 		 $result .='
-
-			 <div class="page_content">
-			        <h3>'.$recording_title.'</h3>
-			        <div class="videocontainer">
-			       		 <iframe width="100%" height="180" src="http://www.youtube.com/embed/'.$recording_link.'" frameborder="0"></iframe>
-			        </div>
-			      
-
-			  </div>
-		  ';
+		 			  <li>
+					      <a href="event-single.html" class="item-link item-content">
+					        <div class="item-media">
+				        	  	<img src="http://img.youtube.com/vi/'.$recording_link.'/0.jpg" width="70">
+				        	</div>
+					        <div class="item-inner">
+					          <div class="item-title-row">
+					            <div class="item-title">'.$recording_title.'</div>
+					            <div class="item-after">FREE</div>
+					          </div>
+					          <div class="item-text"><span><i class="fa fa-calendar"></i> Published :</span> 5th May 2016 <span><i class="fa fa-eye"></i> Views :</span> 6 </div>
+					        </div>
+					      </a>
+					    </li>';
 	}
 }
 else
 {
-	$result = 'No streaming event currently';
+	$result .= ' <li>
+					<a href="#" class="item-link item-content">
+					        
+					        <div class="item-inner">
+					          <div class="item-title-row">
+					            <div class="item-title">No videos added</div>
+					          </div>
+					        </div>
+					      </a>
+				</li>';
 }
-echo $result;
 
+echo $result;
 ?>

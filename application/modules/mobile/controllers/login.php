@@ -86,116 +86,35 @@ class Login extends MX_Controller {
 	// 	echo json_encode($response);
 	// }
 	
-	public function login_member($member_no = NULL, $password = NULL, $member_password = NULL) 
+	public function login_member() 
 	{
+		$member_no = $this->input->post('member_no');
+		$password = $this->input->post('password');
 
 		if($member_no == NULL)
 		{
-			$response['message'] = 'fail';
-			$response['result'] = 'Something went wrong';
+			$result_other['message'] = 'fail';
+			$result_other['result'] = 'Something went wrong';
 		}
 		else
 		{
-			if($member_password == NULL)
+			$response = $this->login_model->validate_member($member_no,$password);
+			if($response['status'] = TRUE)
 			{
-			  $member_password = $password;
-			  $member_no = $member_no;
+				$result_other['message'] = 'success';
+				$result_other['result'] = $response['message'];
+
 			}
 			else
 			{
-			  $member_password = $member_password;
-			  $member_no = $member_no.'/'.$password;
+				$result_other['message'] = 'fail';
+				$result_other['result'] = 'Something went wrong';
 			}
-
-
-			$url = 'http://www.icpak.com:8080/icpakportal/api/users/auth2';
-			//Encode the array into JSON.
-			$data = array('username'=> $member_no,'password'=>$password,"actionType"=>'VIA_CREDENTIALS','loggedInCookie'=>null);
-
-			//The JSON data.
-			$data_string = json_encode($data);
-			// echo $data_string;
 		
-			try{                                                                                                         
-
-				$ch = curl_init($url);                                                                      
-				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                 
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
-					'Content-Type: application/json',                                                                                
-					'Content-Length: ' . strlen($data_string))                                                                       
-				);                                                                                
-				$result = curl_exec($ch);
-				curl_close($ch);
-				// $decoded_json = json_decode($result);
-
-				$json = json_decode($result, true);
-				if(!isset($json['status']) OR $json['status'] != 'UNAUTHORIZED' )
-				{
-					$loggedIn = $json['currentUserDto']['loggedIn'];
-
-					if($loggedIn == true)
-					{
-						$redId = $json['currentUserDto']['user']['refId'];
-						$name = $json['currentUserDto']['user']['name'];
-						$userId = $json['currentUserDto']['user']['userId'];
-						$memberRefId = $json['currentUserDto']['user']['memberRefId'];
-						$memberNo = $json['currentUserDto']['user']['memberNo'];
-						$member_email = $json['currentUserDto']['user']['email'];
-						$surname = $json['currentUserDto']['user']['surname'];
-						$fullName = $json['currentUserDto']['user']['fullName'];
-
-						$newdata = array(
-		                   'member_login_status'    => TRUE,
-		                   'member_email'     		=> $member_email,
-		                   'member_first_name'     	=> $fullName,
-		                   'member_id'  			=> $memberNo,
-		                   'memberRefId'  			=> $memberRefId,
-		                   'member_code'  			=> md5($memberNo)
-		               );
-		               					
-						$this->session->set_userdata($newdata);
-
-						$response['message'] = 'success';
-						$response['result'] = $newdata;
-					}
-					else
-					{
-						$response['message'] = 'fail';
-						$response['result'] = 'Something went wrong';
-
-					}
-				}else
-				{
-					$response['message'] = 'fail';
-						$response['result'] = 'Something went wrong';
-				}
-				
-				echo json_encode($response);
-				// var_dump($result);
-				// // print_r($decoded_json['currentUserDto']['user']);
-				// // echo $decoded_json->loggedIn;
-				// foreach ($decoded_json->currentUserDto as $key => $value) {
-				//    print_r($key);
-				//     // $refID =$key->refId;
-				//     // echo $key->user->refId;
-				   
-				   
-				// }
-				// echo $refID;
-				 
-			}
-			catch(Exception $e)
-			{
-				$response['message'] = 'fail';
-				$response['result'] = 'Something went wrong';
-				
-				echo json_encode($response.' '.$e);
-			}
+			
 		}	
 		
-		
+			echo json_encode($result_other);
 	}
 
 	public function dummy()
@@ -290,15 +209,13 @@ class Login extends MX_Controller {
 		redirect('mobile/login/success');
 	}
 	
-	public function get_client_profile()
-	{
-			
-
-		// $v_data['profile_query'] = $this->login_model->get_profile_details();
-		// //var_dump($v_data) or die();
-		$v_data['memberRefId'] = $this->session->userdata('memberRefId');
+	public function get_client_profile($member_no)
+	{	
+		$v_data['member_no'] = $member_no;
+		
 		$response['message'] = 'success';
 		$response['result'] = $this->load->view('member_profile', $v_data, true);
+		$response['cpd_questions'] = $this->load->view('cpd_message', $v_data, true);
 		
 		echo json_encode($response);
 	}
@@ -350,5 +267,92 @@ class Login extends MX_Controller {
 			}
 		}
 		echo json_encode($response);
+	}
+	public function edit_member_contact()
+	{
+
+		$email_address = $this->input->post('email_address');
+		$telephone1 = $this->input->post('telephone1');
+		$address1 = $this->input->post('address1');
+		$applicationRefId = $this->input->post('applicationRefId');
+		
+		$details_url = 'http://www.icpak.com:8080/icpakportal/api/applications/'.$applicationRefId;
+		//Encode the array into JSON.			
+
+		$details = '';
+		try{                                                                                                         
+
+			//  Initiate curl
+			$ch = curl_init();
+			// Disable SSL verification
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			// Will return the response, if false it print the response
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			// Set the url
+			curl_setopt($ch, CURLOPT_URL,$details_url);
+			// Execute
+			$details_array=curl_exec($ch);
+			// Closing
+			curl_close($ch);
+
+			// Will dump a beauty json :3
+
+			$details_obj = json_decode($details_array, TRUE);
+			$details_obj['email'] = $email_address;
+			$details_obj['telephone1'] = $telephone1;
+			$details_obj['address1'] = $address1;
+			$details_obj['refId'] = $applicationRefId;
+
+
+			$url = 'http://www.icpak.com:8080/icpakportal/api/applications/'.$applicationRefId;
+			// var_dump($url); die();
+			//Encode the array into JSON.
+			// $data = array('email'=> $email_address,'mobileNumber'=>$mobileNumber, 'telphone1'=>$telphone1);
+
+			//The JSON data.
+			$data_string = json_encode($details_obj);
+			
+			// echo $data_string;
+		
+			try{                                                                                                         
+
+				$ch = curl_init($url);            
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+				curl_setopt($ch, CURLOPT_HEADER, false);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+						'Content-Type: application/json',
+						'Content-Length: ' . strlen($data_string))
+						);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                               
+				$result = curl_exec($ch);
+				curl_close($ch);
+				// $decoded_json = json_decode($result);
+
+				$json = json_decode($result, true);
+
+				$response['message'] = 'success';
+				$response['result'] = $result;
+				echo json_encode($response);
+				 
+			}
+			catch(Exception $e)
+			{
+				$response['message'] = 'fail';
+				$response['result'] = 'Something went wrong';
+				
+				echo json_encode($response.' '.$e);
+			}
+			
+		}catch(Exception $e)
+		{
+			$response['message'] = 'fail';
+			$response['result'] = 'Something went wrong';
+				
+			echo json_encode($response.' '.$e);
+			
+		}
+
+
 	}
 }

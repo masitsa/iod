@@ -87,7 +87,8 @@ if ($query->num_rows() > 0)
 								         $month = date('M',strtotime($row_item->post_date));
 
 				             			// $result .='<li><a href="#" onclick="window.open("http://www.icpak.com/download.php?a_id='.$article_id.'&download='.$kb_download.', "_system", "location=yes"")">'.$download_title.'</a> </li>';
-				             			$result .="<li><a href='#' onclick='get_download(".$id.",".$kb_download.");'>".$title."</a></li>";
+				             			//$result .="<li><a href='#' onclick='get_download(".$id.",".$kb_download.");'>".$title."</a></li>";
+										$result .="<li><a href='#' class='download-resource' download_file='".$kb_download."'>".$title."</a></li>";
 
 				             		}
 				             	$result .='	

@@ -182,7 +182,19 @@ class Login_model extends CI_Model
 	// 	}
 	// }
 
-
+	/*
+	*	Reset a user's password
+	*
+	*/
+	public function get_profile_items($member_no)
+	{
+		// 9530
+		//.$this->session->userdata('member_id')
+		$this->db->select('*');
+		$this->db->where('member_number = "'.$member_no.'"');
+		$query = $this->db->get('member');
+		return $query;
+	}
 	/*
 	*	Validate a member's login request
 	*
@@ -191,8 +203,8 @@ class Login_model extends CI_Model
 	{
 		//select the user by email from the database
 		$this->db->select('*');
-		$this->db->where('username = "'.$member_no.'" AND password= "'.md5($member_password).'"');
-		$query = $this->db->get('jos_users');
+		$this->db->where('member_number = "'.$member_no.'" AND member_password= "'.md5($member_password).'"');
+		$query = $this->db->get('member');
 		
 		//if users exists
 		if ($query->num_rows() > 0)
@@ -201,14 +213,29 @@ class Login_model extends CI_Model
 			
 			//update user's last login date time
 			// $this->update_member_login($result[0]->member_id);
-			return $result;
+
+			$newdata = array(
+		                   'member_login_status'    => TRUE,
+		                   'member_id'     		=> $result[0]->member_id,
+		                   'member_email'     		=> $result[0]->member_email,
+		                   'member_first_name'     	=> $result[0]->member_first_name,
+		                   'member_surname'     	=> $result[0]->member_surname,
+		                   'member_number'  			=> $result[0]->member_number,
+		                   'member_code'  			=> md5($result[0]->member_number)
+		               );
+		               					
+			$this->session->set_userdata($newdata);
+			$response['status'] = TRUE;
+			$response['message'] = $newdata;
 		}
 		
 		//if user doesn't exist
 		else
 		{
-			return FALSE;
+			$response['status'] = FALSE;
+			$response['message'] = '';
 		}
+		return $response;
 	}
 	
 	/*
