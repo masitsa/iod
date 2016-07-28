@@ -37,6 +37,13 @@
                 	<input type="text" class="form-control" name="post_title" placeholder="Post Title" value="<?php echo set_value('post_title');?>" required>
                 </div>
             </div>
+            <!-- post Name -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Video ID</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="post_video" placeholder="Video ID" value="<?php echo set_value('post_video');?>">
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label">Post Date</label>
                 

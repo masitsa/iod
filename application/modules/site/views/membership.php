@@ -34,14 +34,13 @@
     						<div class="abt_univ_wrap">
 								<!-- HEADING 1 START-->
 								<div class="kf_edu2_heading1">
-									<h5>Membership</h5>
-									<h3>Membership and Programs</h3>
+									<h3>Membership</h3>
 								</div>
 								<!-- HEADING 1 END-->
 
 								<div class="abt_univ_des">
 
-									<span>IOD (K) currently comprises a membership of 900 directors all having received orientation training in corporate governance. Over 3000 directors in Kenya currently qualify for membership and recruitment is on-going.</span>
+									<p>IOD (K) currently comprises a membership of 900 directors all having received orientation training in corporate governance. Over 3000 directors in Kenya currently qualify for membership and recruitment is on-going.</p>
                                     
                                     <span>Member Services and Benefits</span>
                                     
@@ -55,7 +54,6 @@
                                         <li>Peer networking through luncheons, workshops, conferences and roundtables.</li>
                                         <li>Advocacy and lobbying for improvements in the environment for doing business.</li>
                                     </ul>
-
 								</div>
     						</div>
     					</div>

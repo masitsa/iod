@@ -99,6 +99,8 @@
 			else{
 				echo "There are no directors to display :-(";
 			}
+			
+			if(isset($links)){echo $links;}
 		?>
                 </div>
             </section>

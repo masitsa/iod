@@ -27,8 +27,8 @@ class Events extends admin {
 	*/
 	public function index() 
 	{
-		$where = 'event_id > 0';
-		$table = 'event';
+		$where = 'event.event_type_id = event_type.event_type_id';
+		$table = 'event, event_type';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
@@ -63,7 +63,7 @@ class Events extends admin {
 		$this->pagination->initialize($config);
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
-        $data["links"] = $this->pagination->create_links();
+        $v_data["links"] = $this->pagination->create_links();
 		$query = $this->event_model->get_all_events($table, $where, $config["per_page"], $page);
 		
 		if ($query->num_rows() > 0)
@@ -104,7 +104,8 @@ class Events extends admin {
 		
 		$event_error = $this->session->userdata('event_error_message');
 		
-		$this->form_validation->set_rules('event_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('event_type_id', 'Event Type', 'required|xss_clean');
+		$this->form_validation->set_rules('event_name', 'Title', 'required|xss_clean');
 		$this->form_validation->set_rules('event_description', 'Description', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
@@ -112,6 +113,7 @@ class Events extends admin {
 			if(empty($event_error))
 			{
 				$data2 = array(
+					'event_type_id'=>$this->input->post("event_type_id"),
 					'event_name'=>$this->input->post("event_name"),
 					'event_venue'=>$this->input->post("event_venue"),
 					'event_start_time'=>$this->input->post("event_start_time"),
@@ -144,6 +146,7 @@ class Events extends admin {
 			$v_data['event_location'] = $this->event_location.$this->session->userdata('event_file_name');
 		}
 		$v_data['error'] = $event_error;
+		$v_data['event_types'] = $this->db->get('event_type');
 		
 		$data['content'] = $this->load->view("event/add_event", $v_data, TRUE);
 		$data['title'] = 'Add Event';
@@ -180,8 +183,8 @@ class Events extends admin {
 		
 		$event_error = $this->session->userdata('event_error_message');
 		
-		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
-		$this->form_validation->set_rules('event_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('event_type_id', 'Event Type', 'required|xss_clean');
+		$this->form_validation->set_rules('event_name', 'Title', 'required|xss_clean');
 		$this->form_validation->set_rules('event_description', 'Description', 'trim|xss_clean');
 
 		if ($this->form_validation->run())
@@ -195,6 +198,7 @@ class Events extends admin {
 					$event = $event_row->event_image_name;
 				}
 				$data2 = array(
+					'event_type_id'=>$this->input->post("event_type_id"),
 					'event_name'=>$this->input->post("event_name"),
 					'event_venue'=>$this->input->post("event_venue"),
 					'event_start_time'=>$this->input->post("event_start_time"),
@@ -226,6 +230,7 @@ class Events extends admin {
 			$v_data['event_location'] = $this->event_location.$this->session->userdata('event_file_name');
 		}
 		$v_data['error'] = $event_error;
+		$v_data['event_types'] = $this->db->get('event_type');
 		
 		$data['content'] = $this->load->view("event/edit_event", $v_data, TRUE);
 		$data['title'] = 'Edit Event';

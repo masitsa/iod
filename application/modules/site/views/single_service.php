@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="widget widget-archive ">
-                        <h4> SERVICES LISTS</h4>
+                        <h4>DIRECTOR DEVELOPMENT</h4>
                         <ul class="sidebar_archive_des">
                             <?php
                             $services = $this->site_model->get_active_services();
@@ -41,8 +41,8 @@
                                 {
                                     $service_name = $res->service_name;
                                     $service_description = $res->service_description;
-                                     $mini_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 10));
-                                     $maxi_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 30));
+                                    $mini_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 10));
+                                    $maxi_desc = implode(' ', array_slice(explode(' ', $service_description), 0, 30));
                                     $web_name = $this->site_model->create_web_name($service_name);
                                     if($title == $service_name)
                                     {
@@ -52,10 +52,16 @@
                                     {
                                         $item_active = '';
                                     }
-                                    $checking_items .=' <li><a href="'.base_url().'services/'.$web_name.'" > <i class="fa fa-angle-right"></i> '.$service_name.'</a> </li>';
+                                    $checking_items .=' <li><a href="'.base_url().'director-development/'.$web_name.'" > <i class="fa fa-angle-right"></i> '.$service_name.'</a> </li>';
                                 }
                             }
                             echo $checking_items;
+							
+							echo '
+							<li><a href="'.site_url().'director-development/facilitators"> <i class="fa fa-angle-right"></i> Facilitators</a></li>
+							<li><a href="'.site_url().'director-development/training-partners"> <i class="fa fa-angle-right"></i> Training Partners</a></li>
+							<li><a href="'.site_url().'director-development/training-programmes"> <i class="fa fa-angle-right"></i> Training Programmes '.date('Y').'</a></li>
+							';
                             ?>
                            
                         </ul>
@@ -111,15 +117,9 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="course_detail_thumbnail">
-                            <figure>
-                                <img src="extra-images/course-thumbnail.jpg" alt=""/>
-                                <figcaption><a href="#"><i class="fa fa-play"></i></a></figcaption>
-                            </figure>
-                        </div>
                         <div class="blog_thumb_wrap" style="margin-top:5px;">
                             <div class="kf_edu2_heading1">
-                                <h4>SERVICE GALLERY</h4>
+                                <h4>GALLERY</h4>
                             </div>
                             <div class="row">
                                <?php echo $service_gallery_items;?>

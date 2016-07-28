@@ -3,29 +3,40 @@ if($query->num_rows()>0)
 {
 	foreach($query->result() as $row)
 	{
-$post_id = $row->post_id;
-$blog_category_name = $row->blog_category_name;
-$blog_category_id = $row->blog_category_id;
-$post_image = $row->post_image;
-$post_content = $row->post_content;
-$post_title = $row->post_title;
-$post_comments = $row->post_comments;
-$post_status = $row->post_status;
-$post_views = $row->post_views;
-$image = base_url().'assets/images/posts/'.$row->post_image;
-$created_by = $row->created_by;
-$modified_by = $row->modified_by;
-$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
-$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
-$description = $row->post_content;
-$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 50));
-$created = $row->created;
-$day = date('j',strtotime($created));
-$month = date('M Y',strtotime($created));
-$created_on = date('jS M Y H:i a',strtotime($row->created));
-
-$categories = '';
-$count = 0;
+		$post_id = $row->post_id;
+		$blog_category_name = $row->blog_category_name;
+		$blog_category_id = $row->blog_category_id;
+		$post_image = $row->post_image;
+		$post_content = $row->post_content;
+		$post_title = $row->post_title;
+		$post_comments = $row->post_comments;
+		$post_status = $row->post_status;
+		$post_views = $row->post_views;
+		$image = base_url().'assets/images/posts/'.$row->post_image;
+		$created_by = $row->created_by;
+		$modified_by = $row->modified_by;
+		$comments = $this->users_model->count_items('post_comment', 'post_id = '.$post_id);
+		$categories_query = $this->blog_model->get_all_post_categories($blog_category_id);
+		$description = $row->post_content;
+		$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 50));
+		$created = $row->created;
+		$day = date('j',strtotime($created));
+		$month = date('M Y',strtotime($created));
+		$created_on = date('jS M Y H:i a',strtotime($row->created));
+		
+		$categories = '';
+		$count = 0;
+		$post_video = $row->post_video;
+		
+		if(empty($post_video))
+		{
+			$image = '<img src="'.$image.'" alt=""/>';
+		}
+		
+		else
+		{
+			$image = '<div class="youtube" id="'.$post_video.'"></div>';
+		}
 	}
 }
 //get all administrators
@@ -147,7 +158,7 @@ $count = 0;
     							<!--EDUCATION BLOG PAGE WRAP START-->
     						<div class="edu2_blogpg_wrap">
     							<figure>
-    								<img src="<?php echo base_url()?>assets/images/posts/<?php echo $post_image;?>" alt=""/>
+    								<?php echo $image;?>
     							</figure>
 
 								<div class="edu2_blogpg_des">

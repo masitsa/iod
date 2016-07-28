@@ -60,7 +60,7 @@ class Blog extends admin {
 		$this->pagination->initialize($config);
 		
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $data["links"] = $this->pagination->create_links();
+        $v_data["links"] = $this->pagination->create_links();
 		$query = $this->blog_model->get_all_posts($table, $where, $config["per_page"], $page);
 		
 		$data['title'] = $v_data['title'] = 'All posts';
@@ -92,6 +92,7 @@ class Blog extends admin {
 		$this->form_validation->set_rules('post_title', 'Post Name', 'required|xss_clean');
 		$this->form_validation->set_rules('post_status', 'Post Status', 'required|xss_clean');
 		$this->form_validation->set_rules('post_content', 'Post Description', 'required|xss_clean');
+		$this->form_validation->set_rules('post_video', 'Video ID', 'xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -175,6 +176,7 @@ class Blog extends admin {
 		$this->form_validation->set_rules('post_title', 'Post Name', 'required|xss_clean');
 		$this->form_validation->set_rules('post_status', 'Post Status', 'required|xss_clean');
 		$this->form_validation->set_rules('post_content', 'Post Name', 'required|xss_clean');
+		$this->form_validation->set_rules('post_video', 'Video ID', 'xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -306,6 +308,7 @@ class Blog extends admin {
 		$this->form_validation->set_rules('post_title', 'Post Name', 'required|xss_clean');
 		$this->form_validation->set_rules('post_status', 'Post Status', 'required|xss_clean');
 		$this->form_validation->set_rules('post_content', 'Post Name', 'required|xss_clean');
+		$this->form_validation->set_rules('post_video', 'Video ID', 'xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -364,10 +367,11 @@ class Blog extends admin {
 				$thumb_name = 'thumbnail_'.$this->input->post('current_image');
 			}
 			//update post
+			
 			if($this->blog_model->update_post($file_name, $thumb_name, $post_id))
 			{
 				$this->session->set_userdata('success_message', 'Post updated successfully');
-				redirect('blog/posts');
+				//redirect('blog/posts');
 			}
 			
 			else

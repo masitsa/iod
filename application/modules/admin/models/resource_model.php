@@ -72,7 +72,8 @@ class Resource_model extends CI_Model
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->order_by('resource_name');
+		$this->db->order_by('resource_category.resource_category_name');
+		$this->db->order_by('resource.resource_name');
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
@@ -136,22 +137,38 @@ class Resource_model extends CI_Model
 		}
 	}
 
-	public function save_resource_file($resource)
+	public function save_resource_file($resource, $resource_id = NULL)
 	{
 		//save the image data to the database
 		$data = array(
 			'resource_name'=>$this->input->post("resource_name"),
-			'resource_description'=>$this->input->post("resource_description"),
+			'resource_category_id'=>$this->input->post("resource_category_id"),
 			'resource_image_name'=>$resource
 		);
 		
-		if($this->db->insert('resource', $data))
+		if($resource_id == NULL)
 		{
-			return $this->db->insert_id();
+			if($this->db->insert('resource', $data))
+			{
+				return $this->db->insert_id();
+			}
+			else
+			{
+				return FALSE;
+			}
 		}
+		
 		else
 		{
-			return FALSE;
+			$this->db->where('resource_id', $resource_id);
+			if($this->db->update('resource', $data))
+			{
+				return $resource_id;
+			}
+			else
+			{
+				return FALSE;
+			}
 		}
 	}
 }

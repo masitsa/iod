@@ -55,13 +55,25 @@
 	                        <label for="service_name">Department Name</label>
 	                        <select class="form-control" name="department_id">
 	                        	<?php
+									$selected_department_id = $service_row->department_id;
 	                        		foreach ($active_departments->result() as $key) {
 	                        			# code...
 	                        			$department_id = $key->department_id;
 	                        			$department_name = $key->department_name;
+										
+										if($selected_department_id == $department_id)
+										{
+	                        			?>
+	                        			<option value="<?php echo $department_id;?>" selected="selected"><?php echo $department_name;?></option>
+	                        			<?php
+										}
+										
+										else
+										{
 	                        			?>
 	                        			<option value="<?php echo $department_id;?>" ><?php echo $department_name;?></option>
 	                        			<?php
+										}
 	                        		}
 	                        	?>
 	                        	

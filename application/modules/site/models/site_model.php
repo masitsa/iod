@@ -22,6 +22,16 @@ class Site_model extends CI_Model
 		
 		return $query;
 	}
+	public function get_corporates()
+	{
+  		$table = "corporates";
+		$where = "corporates_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 	
 	public function get_all_services()
 	{
@@ -237,22 +247,44 @@ class Site_model extends CI_Model
 			$resources = 'active';
 		}
 		
-		//get departments
-		
-		// service number two
-		$services_query = $this->get_active_departments('Services');
-		$services_sub_menu_services = '';
+		// service
+		$services_query = $this->get_active_departments('Director Development');
+		$director_development_services = '';
 		if($services_query->num_rows() > 0)
 		{
 			foreach($services_query->result() as $res)
 			{
 				$service_name = $res->service_name;
 				$web_name = $this->create_web_name($service_name);
-				$services_sub_menu_services .= '<li><a href="'.site_url().'director-development/'.$web_name.'">'.$service_name.'</a></li>';
+				$director_development_services .= '<li><a href="'.site_url().'director-development/'.$web_name.'">'.$service_name.'</a></li>';
+			}
+		}
+		
+		// service
+		$services_query = $this->get_active_departments('Services');
+		$services_menu = '';
+		if($services_query->num_rows() > 0)
+		{
+			foreach($services_query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$web_name = $this->create_web_name($service_name);
+				$services_menu .= '<li><a href="'.site_url().'director-development/'.$web_name.'">'.$service_name.'</a></li>';
+			}
+		}
+		$services_query = $this->get_active_departments('Board Development');
+		$board_menu = '';
+		if($services_query->num_rows() > 0)
+		{
+			foreach($services_query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$web_name = $this->create_web_name($service_name);
+				$board_menu .= '<li><a href="'.site_url().'director-development/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
 
-		// service number two
+		// Membership
 		$membership_query = $this->get_active_departments('Membership');
 		$membership_sub_menu_services = '';
 		if($membership_query->num_rows() > 0)
@@ -261,11 +293,15 @@ class Site_model extends CI_Model
 			{
 				$service_name = $res->service_name;
 				$web_name = $this->create_web_name($service_name);
+				if($service_name == 'Code of Ethics and Professional Conduct')
+				{
+					$service_name = 'Code of Ethics';
+				}
 				$membership_sub_menu_services .= '<li><a href="'.site_url().'membership/'.$web_name.'">'.$service_name.'</a></li>';
 			}
 		}
 
-		// service number two
+		// About
 		$about_query = $this->get_active_departments('About');
 		$about_sub_menu_services = '';
 		if($about_query->num_rows() > 0)
@@ -280,6 +316,7 @@ class Site_model extends CI_Model
 
 		// resources
 		$this->db->order_by('resource_category_name', 'ASC');
+		//$this->db->where('member_only', 0);
 		$resources_query = $this->db->get('resource_category');
 		$resources_menu = '';
 		if($resources_query->num_rows() > 0)
@@ -289,6 +326,20 @@ class Site_model extends CI_Model
 				$resource_category_name = $res->resource_category_name;
 				$web_name = $this->create_web_name($resource_category_name);
 				$resources_menu .= '<li><a href="'.site_url().'resource/'.$web_name.'">'.$resource_category_name.'</a></li>';
+			}
+		}
+
+		// event type
+		$this->db->order_by('event_type_name', 'ASC');
+		$events_query = $this->db->get('event_type');
+		$events_menu = '';
+		if($events_query->num_rows() > 0)
+		{
+			foreach($events_query->result() as $res)
+			{
+				$event_type_name = $res->event_type_name;
+				$web_name = $this->create_web_name($event_type_name);
+				$events_menu .= '<li><a href="'.site_url().'calendar/'.$web_name.'">'.$event_type_name.'</a></li>';
 			}
 		}
 		$navigation = 
@@ -307,10 +358,22 @@ class Site_model extends CI_Model
 			<li>
 				<a class="'.$services.'"  href="'.site_url().'director-development">Director Development</a>
 				<ul>
-					'.$services_sub_menu_services.'
-					<li><a href="'.site_url().'event/facilitators">Facilitators</a></li>
-					<li><a href="'.site_url().'event/training-partners">Training Partners</a></li>
-					<li><a href="'.site_url().'event/training-programmes">Training Programmes '.date('Y').'</a></li>
+					<li>
+						<a href="#">Board Development</a>
+						<ul>
+							'.$board_menu.'
+						</ul>
+					</li>
+					'.$director_development_services.'
+					<li>
+						<a href="#">Services</a>
+						<ul>
+							'.$services_menu.'
+						</ul>
+					</li>
+					<li><a href="'.site_url().'director-development/facilitators">Facilitators</a></li>
+					<li><a href="'.site_url().'director-development/training-partners">Training Partners</a></li>
+					<li><a href="'.site_url().'calendar/Training">Training Programmes '.date('Y').'</a></li>
 				</ul>
 			</li>
 			<!-- Service Menu -->
@@ -326,6 +389,9 @@ class Site_model extends CI_Model
 			</li>
 			<li>
 				<a class="'.$calendar.'" href="'.site_url().'calendar">Calendar</a>
+				<ul>
+					'.$events_menu.'
+				</ul>
 			</li>
 			<li>
 				<a class="'.$resources.'" href="'.site_url().'resources">Resources</a>
@@ -344,7 +410,7 @@ class Site_model extends CI_Model
 	public function get_active_departments($service_name)
 	{
   		$table = "service, department";
-		$where = "department.department_status = 1 AND service.department_id = department.department_id AND department.department_name = '".$service_name."'";
+		$where = "service.service_status = 1 AND department.department_status = 1 AND service.department_id = department.department_id AND department.department_name = '".$service_name."'";
 		
 		$this->db->select('service.*');
 		$this->db->where($where);
@@ -491,6 +557,24 @@ class Site_model extends CI_Model
 			$contacts['about'] = $row->about;
 			$contacts['objectives'] = $row->objectives;
 			$contacts['core_values'] = $row->core_values;
+			$contacts['corporate_values'] = '';
+		}
+		
+		// about
+		$services_query = $this->get_active_departments('About');
+		$director_development_services = '';
+		if($services_query->num_rows() > 0)
+		{
+			foreach($services_query->result() as $res)
+			{
+				$service_name = $res->service_name;
+				$service_description = $res->service_description;
+				
+				if($service_name == 'Corporate Values & Principles')
+				{
+					$contacts['corporate_values'] = $service_description;
+				}
+			}
 		}
 		return $contacts;
 	}
@@ -771,17 +855,18 @@ class Site_model extends CI_Model
 	{
 		//retrieve all users
 		$this->db->from('resource_category');
-		$this->db->select('resource_category_id');
 		$this->db->where('resource_category_name', $resource_category_name);
 		$query = $this->db->get();
-		$resource_category_id = FALSE;
+		$return['resource_category_id'] = FALSE;
+		$return['member_only'] = FALSE;
 		if($query->num_rows() > 0)
 		{
 			$row = $query->row();
-			$resource_category_id = $row->resource_category_id;
+			$return['resource_category_id'] = $row->resource_category_id;
+			$return['member_only'] = $row->member_only;
 		}
 		
-		return $resource_category_id;
+		return $return;
 	}
 	public function get_service_id($about_name)
 	{
@@ -797,6 +882,30 @@ class Site_model extends CI_Model
 		}
 		
 		return $service_id;
+	}
+	
+	public function get_event_type_id($event_type_name)
+	{
+		//retrieve all users
+		$this->db->from('event_type');
+		$this->db->select('event_type_id');
+		$this->db->where('event_type_name', $event_type_name);
+		$query = $this->db->get();
+		$event_type_id = FALSE;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$event_type_id = $row->event_type_id;
+		}
+		
+		return $event_type_id;
+	}
+
+	public function get_event_item($event_type_id)
+	{
+		$this->db->where('event_type.event_type_id = event.event_type_id AND event_start_time >= CURDATE() AND event_type.event_type_id = '.$event_type_id);
+		$this->db->select('*');
+		return $query = $this->db->get('event, event_type');
 	}
 
 	public function get_resource_item($resource_category_id)
@@ -829,8 +938,28 @@ class Site_model extends CI_Model
 		
 		return $query;
 	}
+	public function get_member_details($directors_name)
+	{
+  		$table = "directors";
+		$where = "directors_name = '".$directors_name."'";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
+	public function get_facilitators()
+	{
+		$table = "facilitators";
+		$where = "facilitators_status = 1";
+		
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		
+		return $query;
+	}
 	
-	public function get_tweets()
+	public function get_tweets_old()
 	{
 		$this->load->library('twitterfetcher');
 	
@@ -845,6 +974,21 @@ class Site_model extends CI_Model
 		));
 		
 		return $tweets;
+	}
+	
+	public function get_tweets()
+	{
+		$this->load->library('twitteroauth');
+		$consumer = 'fZvEA9Mw24i2jT3VIn1sIz92y';
+		$consumer_secret = 'NW3rzs0jEv39JdSmNeurZvKL577vxPVLuV95vedROczQtQIbDp';
+		$access_token = '588425913-dHNleDnlFPdfHGYjZpUnph7MEhKTXqULJ6OaP6IP';
+		$access_token_secret = 'iMmuv0bADX4CbG3i0T1vDvGo1uRYlAWfb5khB9Qfm7v3m';
+		
+		//Create an instance
+		$connection = $this->twitteroauth->create($consumer, $consumer_secret, $access_token, $access_token_secret);
+	
+		//Verify your authentication details
+		$content = $connection->get('account/verify_credentials');
 	}
 }
 

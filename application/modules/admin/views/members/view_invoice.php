@@ -166,7 +166,7 @@ if(count($contacts) > 0)
                 </table>
                 
                 <h4>How to Pay</h4>
-                <p>Payments can be made to<br> <strong>Chase Bank Kenya</strong><br> <strong>Strathmore Branch</strong><br> <strong>A/C No 0012254444788</strong><br>Please bring your deposit slips once you have made payments<br>You can also pay by Mpesa <br>Paybill no <strong>55879</strong> <br>Acc no <strong>IOD/INV/16-000001</strong></p>
+                 <p>Mpesa Paybill or Standard Chartered Bank Account - The Mpesa Paybill No. is <strong>176760</strong>. Use account no. <strong>YourName-EventName(for training)/ YourName-Memberno. (for Subscriptions)</strong> You may also choose to use our Standard Chartered Bank <strong>A/c no. 0102097001400, Westlands Branch</strong>. A receipt shall be issued.</p>
             </div>
         </div>
         

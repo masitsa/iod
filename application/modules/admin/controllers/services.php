@@ -29,8 +29,8 @@ class Services extends admin {
 	*/
 	public function index() 
 	{
-		$where = 'service.service_status > 0';
-		$table = 'service';
+		$where = 'service.department_id = department.department_id';
+		$table = 'service, department';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
@@ -247,25 +247,28 @@ class Services extends admin {
 		
 		$this->db->where($where);
 		$services_query = $this->db->get($table);
-		$service_row = $services_query->row();
 		$service_path = $this->service_path;
 		
-		$image_name = $service_row->service_image_name;
-		
-		//delete any other uploaded image
-		$this->file_model->delete_file($service_path."\\".$image_name);
-		
-		//delete any other uploaded thumbnail
-		$this->file_model->delete_file($service_path."\\thumbnail_".$image_name);
-		
-		if($this->service_model->delete_service($service_id))
+		if($services_query->num_rows() > 0)
 		{
-			$this->session->set_userdata('success_message', 'Service has been deleted');
-		}
-		
-		else
-		{
-			$this->session->set_userdata('error_message', 'Service could not be deleted');
+			$service_row = $services_query->row();
+			$image_name = $service_row->service_image_name;
+			
+			//delete any other uploaded image
+			$this->file_model->delete_file($service_path."\\".$image_name, $service_path);
+			
+			//delete any other uploaded thumbnail
+			$this->file_model->delete_file($service_path."\\thumbnail_".$image_name, $service_path);
+			
+			if($this->service_model->delete_service($service_id))
+			{
+				$this->session->set_userdata('success_message', 'Service has been deleted');
+			}
+			
+			else
+			{
+				$this->session->set_userdata('error_message', 'Service could not be deleted');
+			}
 		}
 		redirect('administration/all-services/'.$page);
 	}

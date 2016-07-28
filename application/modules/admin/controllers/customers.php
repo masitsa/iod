@@ -320,5 +320,18 @@ class Customers extends admin
 		$this->session->set_userdata('success_message', 'Customer disabled successfully');
 		redirect('admin/customers');
 	}
+    
+	/*
+	*
+	*	Deactivate an existing customer
+	*	@param int $customer_id
+	*
+	*/
+	public function view_invoice($customer_id)
+	{
+		$this->customers_model->deactivate_customer($customer_id);
+		$this->session->set_userdata('success_message', 'Customer disabled successfully');
+		redirect('admin/customers');
+	}
 }
 ?>

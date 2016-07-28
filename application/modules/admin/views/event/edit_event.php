@@ -44,6 +44,34 @@
                 <div class="row">
                 	<div class="col-md-6">
                         <div class="form-group">
+                            <label for="event_type_id">Event Type</label>
+                            <select class="form-control" name="event_type_id">
+                                <?php
+                                    foreach ($event_types->result() as $key) {
+                                        # code...
+                                        $event_type_id = $key->event_type_id;
+                                        $event_type_name = $key->event_type_name;
+                                        $selected_event_type_id = $event_row->event_type_id;
+                                            
+                                        if($selected_event_type_id == $event_type_id)
+                                        {
+                                        ?>
+                                        <option value="<?php echo $event_type_id;?>" selected="selected"><?php echo $event_type_name;?></option>
+                                        <?php
+                                        }
+                                        
+                                        else
+                                        {
+                                        ?>
+                                        <option value="<?php echo $event_type_id;?>" ><?php echo $event_type_name;?></option>
+                                        <?php
+                                        }
+                                    }
+                                ?>
+                                    
+                            </select>
+	                    </div>
+                        <div class="form-group">
                             <label for="event_name">Event Name</label>
                             <input type="text" class="form-control" name="event_name" placeholder="Event Name" value="<?php echo $event_row->event_name;?>">
                         </div>

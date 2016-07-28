@@ -11,8 +11,7 @@
                    
                     <div class="kf_inr_breadcrumb">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="<?php echo site_url();?>services">Services</a></li>
+                            <?php echo $this->site_model->get_breadcrumbs();?>
                         </ul>
                     </div>
                 </div>
@@ -112,15 +111,6 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="course_detail_thumbnail">
-                            <figure>
-                                <img src="extra-images/course-thumbnail.jpg" alt=""/>
-                                <figcaption><a href="#"><i class="fa fa-play"></i></a></figcaption>
-                            </figure>
-                        </div>
-                        
-                        <!--KF_BLOG DETAIL_DES END-->
-
 
                     </div>
                     <!-- COURSES DETAIL WRAP END -->

@@ -34,4 +34,7 @@
 <file name="comments.php" server="192.186.246.118/public_html/installify/" local="130972470512347942" remote="130972135800000000" Dst="0" />
 <file name="edit_blog_category.php" server="192.186.246.118/public_html/installify/" local="130972466312884736" remote="130972135800000000" Dst="0" />
 <file name="edit_post.php" server="192.186.246.118/public_html/installify/" local="130972466359410895" remote="130972135800000000" Dst="0" />
+<file name="all_posts.php" server="195.42.142.18//www/www/development/" local="131129788287907902" remote="131129680200000000" Dst="0" />
+<file name="add_post.php" server="195.42.142.18//www/www/development/" local="131130757557901577" remote="131130651600000000" Dst="0" />
+<file name="edit_post.php" server="195.42.142.18//www/www/development/" local="131130757627593851" remote="131130651000000000" Dst="0" />
 </dwsync>

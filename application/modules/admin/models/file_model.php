@@ -77,19 +77,40 @@ class File_model extends CI_Model
 		return $response;
 	}
 	
+	public function validate_min_dimensions($data, $width_check = 300, $height_check = 300)
+	{
+		return TRUE;
+		/*list($width, $height) = getimagesize($data['full_path']);
+		
+		if(($width < $width_check) || ($height < $height_check))
+		{
+			//delete the uploaded file
+			$this->file_model->delete_file($image_upload_data['full_path']);
+			
+			return FALSE;
+		}
+		
+		else
+		{
+			return TRUE;
+		}*/
+	}
+	
 	/*
 	*	Upload file
 	*	@param string $upload_path
 	* 	@param string $field_name
 	*
 	*/
-	public function upload_file($upload_path, $field_name, $resize, $master_dim = 'width')
+	public function upload_file($upload_path, $field_name, $resize)
 	{
 		$config = array(
 				'allowed_types'	=> 'JPG|JPEG|jpg|jpeg|gif|png',
 				'upload_path' 	=> $upload_path,
 				'quality' 		=> "100%",
 				'max_size'      => '0',
+				'min_width'      => '300',
+				'min_height'      => '300',
 				'file_name' 	=> md5(date('Y-m-d H:i:s'))
 			);
 			
@@ -104,48 +125,59 @@ class File_model extends CI_Model
 		
 		else
 		{
-			// otherwise, put the upload datas here.
+			// otherwise, put the upload data here.
 			// if you want to use database, put insert query in this loop
 			$image_upload_data = $this->upload->data();
 			
-			$file_name = $image_upload_data['file_name'];
+			//check for minimum dimensions (300px by 300px)
+			if($this->file_model->validate_min_dimensions($image_upload_data))
+			{
 			
-			// set the resize config
-			$resize_conf = array(
-					'source_image'  => $image_upload_data['full_path'], 
-					'width' => $resize['width'],
-					'height' => $resize['height'],
-					'master_dim' => $master_dim,
-					'maintain_ratio' => TRUE
-				);
-
-			// initializing
-			$this->image_lib->initialize($resize_conf);
-
-			// do it!
-			if ( ! $this->image_lib->resize())
-			{
-				$response['check'] = FALSE;
-				$response['error'] =  $this->image_lib->display_errors();
-			}
-			else
-			{
-				//Create thumbnail
-				$create = $this->resize_image($image_upload_data['full_path'], $image_upload_data['file_path'].'thumbnail_'.$file_name, 400, 400);
+				$file_name = $image_upload_data['file_name'];
 				
-				if($create)
-				{
-					$response['check'] = TRUE;
-					$response['file_name'] =  $file_name;
-					$response['thumb_name'] =  'thumbnail_'.$file_name;
-					$response['upload_data'] =  $image_upload_data;
-				}
-				
-				else
+				// set the resize config
+				$resize_conf = array(
+						'source_image'  => $image_upload_data['full_path'], 
+						'width' => $resize['width'],
+						'height' => $resize['height'],
+						'master_dim' => 'width',
+						'maintain_ratio' => TRUE
+					);
+	
+				// initializing
+				$this->image_lib->initialize($resize_conf);
+	
+				// do it!
+				if ( ! $this->image_lib->resize())
 				{
 					$response['check'] = FALSE;
 					$response['error'] =  $this->image_lib->display_errors();
 				}
+				else
+				{
+					//Create thumbnail
+					$create = $this->resize_image($image_upload_data['full_path'], $image_upload_data['file_path'].'thumbnail_'.$file_name, 80, 80);
+					
+					if($create)
+					{
+						$response['check'] = TRUE;
+						$response['file_name'] =  $file_name;
+						$response['thumb_name'] =  'thumbnail_'.$file_name;
+						$response['upload_data'] =  $image_upload_data;
+					}
+					
+					else
+					{
+						$response['check'] = FALSE;
+						$response['error'] =  $this->image_lib->display_errors();
+					}
+				}
+			}
+				
+			else
+			{
+				$response['check'] = FALSE;
+				$response['error'] =  'Please upload an image that is at least 300px by 300px';
 			}
 		}
 		
@@ -205,7 +237,7 @@ class File_model extends CI_Model
 	}
 	
 	// Upload & Resize in action
-    function upload_gallery($department_id, $gallery_path, $resize)
+    function upload_gallery($product_id, $gallery_path, $resize)
     {
 		$this->load->library('upload');
 		$this->load->library('image_lib');
@@ -256,7 +288,7 @@ class File_model extends CI_Model
 				$file_name = $upload_data['file_name'];
 				
 				$thumbs['full_path'][$count] = $upload_data['full_path'];
-				$thumbs['file_path'][$count] = $upload_data['file_path'].'thumbnail_'.$file_name;
+				$thumbs['file_path'][$count] = $upload_data['file_path'].'thumb_'.$file_name;
 				$count++;
                 
                 // set the resize config
@@ -282,22 +314,10 @@ class File_model extends CI_Model
                 }
                 else
                 {
-					$data2 = array(
-						'department_id'=>$department_id,
-						'gallery_status'=>1,
-						'gallery_image_name'=>$file_name
-					);
-					
-					$table = "gallery";
-					if($this->db->insert($table, $data2))
+					if($this->products_model->save_gallery_file($product_id, $file_name, 'thumb_'.$file_name))
 					{
 						// otherwise, put each upload data to an array.
 						$success[] = $upload_data;
-					}
-					
-					else
-					{
-						$error['resize'][] = 'Unable to upload image';
 					}
                 }
             }
@@ -312,8 +332,8 @@ class File_model extends CI_Model
 				// and it's "/full/path/to/the/" + "thumb_" + "image.jpg
 				// or you can use 'create_thumbs' => true option instead
 				'new_image'     => $thumbs['file_path'][$r],
-				'width' => 400,
-				'height' => 200,
+				'width' => 80,
+				'height' => 80,
 				'maintain_ratio' => true,
 				);
 
@@ -356,236 +376,184 @@ class File_model extends CI_Model
 		if ( ! $this->image_lib->crop())
 		{
 			$error = $this->image_lib->display_errors();
-			$return['response'] = FALSE;
-			$return['message'] = $error;
-			return $return;
+			return $error;
 		}
 		
 		else
 		{
-			$return['response'] = TRUE;
-			return $return;
+			return TRUE;
 		}
 	}
 	
-	// Upload & Resize in action
-    function upload_service($service_id, $service_path, $resize)
-    {
-		$this->load->library('upload');
-		
-        $upload_conf = array(
-				'upload_path'   => $service_path,
-				'allowed_types' => 'JPG|JPEG|jpg|jpeg|gif|png',
-				'max_size'      => '300000',
-				'quality' => "100%",
+	/*
+	*	Upload csv
+	*	@param string $upload_path
+	* 	@param string $field_name
+	*
+	*/
+	public function upload_csv($upload_path, $field_name)
+	{
+		$config = array(
+				'allowed_types' => '*',
+				'upload_path' => $upload_path,
 				'file_name' => md5(date('Y-m-d H:i:s'))
-            );
-    
-        $this->upload->initialize( $upload_conf );
-    	
-        // Change $_FILES to new vars and loop them
-        foreach($_FILES['gallery'] as $key=>$val)
-        {
-            $i = 1;
-            foreach($val as $v)
-            {
-                $field_name = "file_".$i;
-                $_FILES[$field_name][$key] = $v;
-                $i++;   
-            }
-        }
-        // Unset the useless one ;)
-        unset($_FILES['gallery']);
-    
-        // Put each errors and upload data to an array
-        $error = array();
-        $success = array();
-		$count = 0;
+			);
+			
+		$this->load->library('upload', $config);
 		
-        // main action to upload each file
-        foreach($_FILES as $image_field_name => $file)
-        {
-            if ( ! $this->upload->do_upload($image_field_name))
-            {
-                // if upload fail, grab error 
-                $error['upload'][] = $this->upload->display_errors();
-            }
-            else
-            {
-                // otherwise, put the upload datas here.
-                // if you want to use database, put insert query in this loop
-                $upload_data = $this->upload->data();
-				
-				$file_name = $upload_data['file_name'];
-				
-				$thumbs['full_path'][$count] = $upload_data['full_path'];
-				$thumbs['file_path'][$count] = $upload_data['file_path'].'thumb_'.$file_name;
-				$count++;
-                
-                // set the resize config
-                $resize_conf = array(
-						// it's something like "/full/path/to/the/image.jpg" maybe
-						'source_image'  => $upload_data['full_path'], 
-						// and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-						// or you can use 'create_thumbs' => true option instead
-						'new_image'     => $upload_data['file_path'].$file_name,
-						'width' => $resize['width'],
-						'height' => $resize['height'],
-						'maintain_ratio' => true
-                    );
-
-                // initializing
-                $this->image_lib->initialize($resize_conf);
-
-                // do it!
-                if ( ! $this->image_lib->resize())
-                {
-                    // if got fail.
-                    $error['resize'][] = $this->image_lib->display_errors();
-                }
-                else
-                {
-					if($this->service_model->save_service_file($service_id,$file_name, 'thumb_'.$file_name))
-					{
-						// otherwise, put each upload data to an array.
-						$success[] = $upload_data;
-					}
-                }
-            }
-        }
-		
-		for($r = 0; $r < $count; $r++)
+		if ( ! $this->upload->do_upload($field_name))
 		{
-			// create thumbnails
-			$resize_conf2 = array(
-				// it's something like "/full/path/to/the/image.jpg" maybe
-				'source_image'  => $thumbs['full_path'][$r], 
-				// and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-				// or you can use 'create_thumbs' => true option instead
-				'new_image'     => $thumbs['file_path'][$r],
-				'width' => 80,
-				'height' => 80,
-				'maintain_ratio' => true,
+			// if upload fail, grab error
+			$upload_data = $this->upload->data();
+			$response['check'] = FALSE;
+			$response['error'] =  $this->upload->display_errors().'<br/>'.$upload_data['file_ext'].'<br/>'.$upload_data['file_path'];
+		}
+		
+		else
+		{
+			$file_upload_data = $this->upload->data();
+			$file_name = $file_upload_data['file_name'];
+			
+			$response['check'] = TRUE;
+			$response['file_name'] =  $file_name;
+		}
+		$upload_data = $this->upload->data();
+		$file_name = $upload_data['file_name'];
+		
+        unset($_FILES[$field_name]);
+		return $response;
+	}
+	
+	public function get_array_from_csv($path)
+	{
+		//$csv = array_map('str_getcsv', file($path));
+		
+			
+		$data = array();
+		$fp = fopen($path, 'rb');
+		while(!feof($fp)) {
+			$data[] = fgetcsv($fp);
+		}
+		fclose($fp);
+		
+		return $data;
+	}
+	
+	/*
+	*	Upload banner
+	*	@param string $upload_path
+	* 	@param string $field_name
+	*
+	*/
+	public function upload_banner($upload_path, $field_name, $resize, $master_dim = 'width')
+	{
+		$config = array(
+				'allowed_types'	=> 'JPG|JPEG|jpg|jpeg|gif|png',
+				'upload_path' 	=> $upload_path,
+				'quality' 		=> "100%",
+				'max_size'      => '0',
+				'file_name' 	=> md5(date('Y-m-d H:i:s'))
+			);
+			
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload($field_name))
+		{
+			// if upload fail, grab error
+			$response['check'] = FALSE;
+			$response['error'] =  $this->upload->display_errors();
+		}
+		
+		else
+		{
+			// otherwise, put the upload datas here.
+			// if you want to use database, put insert query in this loop
+			$image_upload_data = $this->upload->data();
+			
+			$file_name = $image_upload_data['file_name'];
+			
+			// set the resize config
+			$resize_conf = array(
+					'source_image'  => $image_upload_data['full_path'], 
+					'width' => $resize['width'],
+					'height' => $resize['height'],
+					'master_dim' => $master_dim,
+					'maintain_ratio' => TRUE
 				);
 
 			// initializing
-			$this->image_lib->initialize($resize_conf2);
+			$this->image_lib->initialize($resize_conf);
 
 			// do it!
 			if ( ! $this->image_lib->resize())
 			{
-				// if got fail.
-				$error['resize'][] = $this->image_lib->display_errors();
+				$response['check'] = FALSE;
+				$response['error'] =  $this->image_lib->display_errors();
 			}
-		}
-
-        // see what we get
-        if(count($error) > 0)
-        {
-            return $error;
-        }
-        else
-        {
-            return TRUE;
-        }
-    }
-
-    // Upload & Resize in action
-    function upload_resource($resource_path, $resize)
-    {
-		$this->load->library('upload');
-		
-        $upload_conf = array(
-				'upload_path'   => $resource_path,
-				'allowed_types' => 'JPG|JPEG|jpg|jpeg|gif|png|csv|CSV|xls|XLS|pdf|PDF|docx|DOCX|doc|DOC',
-				'max_size'      => '300000',
-				'quality' => "100%",
-				'file_name' => md5(date('Y-m-d H:i:s'))
-            );
-    
-        $this->upload->initialize( $upload_conf );
-    	
-        // Change $_FILES to new vars and loop them
-        foreach($_FILES['gallery'] as $key=>$val)
-        {
-            $i = 1;
-            foreach($val as $v)
-            {
-                $field_name = "file_".$i;
-                $_FILES[$field_name][$key] = $v;
-                $i++;   
-            }
-        }
-        // Unset the useless one ;)
-        unset($_FILES['gallery']);
-    
-        // Put each errors and upload data to an array
-        $error = array();
-        $success = array();
-		$count = 0;
-		
-        // main action to upload each file
-        foreach($_FILES as $image_field_name => $file)
-        {
-            if ( ! $this->upload->do_upload($image_field_name))
-            {
-                // if upload fail, grab error 
-                $error['upload'][] = $this->upload->display_errors();
-            }
-            else
-            {
-                // otherwise, put the upload datas here.
-                // if you want to use database, put insert query in this loop
-                $upload_data = $this->upload->data();
+			else
+			{
+				//Create thumbnail
+				$create = $this->resize_image($image_upload_data['full_path'], $image_upload_data['file_path'].'thumbnail_'.$file_name, 80, 80);
 				
-				$file_name = $upload_data['file_name'];
-				
-				$thumbs['full_path'][$count] = $upload_data['full_path'];
-				$thumbs['file_path'][$count] = $upload_data['file_path'].'thumb_'.$file_name;
-				$count++;
-                
-                if($this->resource_model->save_resource_file($file_name))
+				if($create)
 				{
-					// otherwise, put each upload data to an array.
-					$success[] = $upload_data;
+					$response['check'] = TRUE;
+					$response['file_name'] =  $file_name;
+					$response['thumb_name'] =  'thumbnail_'.$file_name;
+					$response['upload_data'] =  $image_upload_data;
 				}
-            }
-        }
-		
-		for($r = 0; $r < $count; $r++)
-		{
-			// create thumbnails
-			$resize_conf2 = array(
-				// it's something like "/full/path/to/the/image.jpg" maybe
-				'source_image'  => $thumbs['full_path'][$r], 
-				// and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-				// or you can use 'create_thumbs' => true option instead
-				'new_image'     => $thumbs['file_path'][$r],
-				'width' => 80,
-				'height' => 80,
-				'maintain_ratio' => true,
-				);
-
-			// initializing
-			$this->image_lib->initialize($resize_conf2);
-
-			// do it!
-			if ( ! $this->image_lib->resize())
-			{
-				// if got fail.
-				$error['resize'][] = $this->image_lib->display_errors();
+				
+				else
+				{
+					$response['check'] = FALSE;
+					$response['error'] =  $this->image_lib->display_errors();
+				}
 			}
 		}
-
-        // see what we get
-        if(count($error) > 0)
-        {
-            return $error;
-        }
-        else
-        {
-            return TRUE;
-        }
-    }
+		
+        unset($_FILES[$field_name]);
+		return $response;
+	}
+	
+	/*
+	*	Upload csv
+	*	@param string $upload_path
+	* 	@param string $field_name
+	*
+	*/
+	public function upload_any_file($upload_path, $field_name)
+	{
+		$config = array(
+				'allowed_types' => 'csv|CSV|JPG|JPEG|jpg|jpeg|gif|png|pdf|PDF|doc|docx|xls|xlsx|sql',
+				'upload_path' 	=> $upload_path,
+				'max_size'      => '0',
+				'file_name' 	=> md5(date('Y-m-d H:i:s'))
+			);
+			
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload($field_name))
+		{
+			// if upload fail, grab error
+			$response['check'] = FALSE;
+			$response['error'] =  $this->upload->display_errors();
+		}
+		
+		else
+		{
+			// otherwise, put the upload data here.
+			// if you want to use database, put insert query in this loop
+			$image_upload_data = $this->upload->data();
+			
+			//check for minimum dimensions (300px by 300px)
+			$file_name = $image_upload_data['file_name'];
+			$response['check'] = TRUE;
+			$response['file_name'] =  $file_name;
+			$response['upload_data'] =  $image_upload_data;
+		}
+		
+        unset($_FILES[$field_name]);
+		return $response;
+	}
 }
 ?>

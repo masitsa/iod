@@ -31,7 +31,7 @@ class directors extends admin {
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'directors';
+		$config['base_url'] = base_url().'content/directors';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 5;
@@ -62,10 +62,10 @@ class directors extends admin {
 		$this->pagination->initialize($config);
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
-        $data["links"] = $this->pagination->create_links();
+        $v_data["links"] = $this->pagination->create_links();
 		$query = $this->directors_model->get_all_directors($table, $where, $config["per_page"], $page);
 		
-		$data['title'] = $v_data['title'] = 'directors';
+		$data['title'] = $v_data['title'] = 'Directors';
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;

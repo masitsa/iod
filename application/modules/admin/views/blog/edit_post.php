@@ -21,7 +21,8 @@
 			$post_status = $post[0]->post_status;
 			$post_content = $post[0]->post_content;
 			$image = $post[0]->post_image;
-			$created = date('Y-m-d',strtotime($post[0]->created));
+			$post_video = $post[0]->post_video;
+			$created = $post[0]->created;
             
             $validation_errors = validation_errors();
             
@@ -50,6 +51,13 @@
                 <label class="col-lg-4 control-label">Post Title</label>
                 <div class="col-lg-4">
                 	<input type="text" class="form-control" name="post_title" placeholder="Post Title" value="<?php echo $post_title;?>" required>
+                </div>
+            </div>
+            <!-- post Name -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Video ID</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="post_video" placeholder="Video ID" value="<?php echo $post_video;?>">
                 </div>
             </div>
             <div class="form-group">

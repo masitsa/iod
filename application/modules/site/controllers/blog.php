@@ -43,20 +43,24 @@ class Blog extends MX_Controller {
 		$config['base_url'] = $base_url;
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
-		$config['per_page'] = 5;
+		$config['per_page'] = 6;
 		$config['num_links'] = 5;
 		
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		
-		$config['next_link'] = '<i class="material-icons">chevron_right</i>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = '<span aria-hidden="true">Next<i class="fa fa-angle-right"></i></span>';
+		$config['next_tag_close'] = '</span>';
 		
-		$config['prev_link'] = '<i class="material-icons">chevron_left</i>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = '<span aria-hidden="true"><i class="fa fa-angle-left"></i>PREV</span>';
+		$config['prev_tag_close'] = '</li>';
 		
 		$config['cur_tag_open'] = '<li class="active"><a href="#">';
 		$config['cur_tag_close'] = '</a></li>';
 		
-		$config['num_tag_open'] = '<li class="waves-effect">';
+		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$this->pagination->initialize($config);
 		

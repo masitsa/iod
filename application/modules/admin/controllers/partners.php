@@ -26,12 +26,12 @@ class Partners extends admin {
 	*/
 	public function index() 
 	{
-		$where = 'partners_id > 0';
-		$table = 'partners';
+		$where = 'partners.partner_type_id = partner_type.partner_type_id';
+		$table = 'partners, partner_type';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'partners';
+		$config['base_url'] = base_url().'content/partners';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 5;
@@ -62,7 +62,7 @@ class Partners extends admin {
 		$this->pagination->initialize($config);
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
-        $data["links"] = $this->pagination->create_links();
+        $v_data["links"] = $this->pagination->create_links();
 		$query = $this->partners_model->get_all_partners($table, $where, $config["per_page"], $page);
 		
 		$data['title'] = $v_data['title'] = 'partners';
@@ -104,7 +104,8 @@ class Partners extends admin {
 		$partners_error = $this->session->userdata('partners_error_message');
 		
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('partners_name', 'Title', 'required|xss_clean');
+		$this->form_validation->set_rules('partner_type_id', 'Type', 'required|xss_clean');
 		$this->form_validation->set_rules('partners_description', 'Description', 'trim|xss_clean');
 		$this->form_validation->set_rules('partners_button_text', 'Button Text', 'trim|xss_clean');
 		$this->form_validation->set_rules('partners_link', 'Link', 'trim|xss_clean');
@@ -114,6 +115,7 @@ class Partners extends admin {
 			if(empty($partners_error))
 			{
 				$data2 = array(
+					'partner_type_id'=>$this->input->post("partner_type_id"),
 					'partners_name'=>$this->input->post("partners_name"),
 					'partners_description'=>$this->input->post("partners_description"),
 					'partners_image_name'=>$this->session->userdata('partners_file_name'),
@@ -146,6 +148,7 @@ class Partners extends admin {
 		}
 		$v_data['error'] = $partners_error;
 		$data['title'] = $v_data['title'] = 'Add partner';
+		$v_data['partner_types'] = $this->db->get('partner_type');
 		
 		$data['content'] = $this->load->view("partners/add_partner", $v_data, TRUE);
 		
@@ -182,7 +185,8 @@ class Partners extends admin {
 		$partners_error = $this->session->userdata('partners_error_message');
 		
 		$this->form_validation->set_rules('check', 'check', 'trim|xss_clean');
-		$this->form_validation->set_rules('partners_name', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('partners_name', 'Title', 'required|xss_clean');
+		$this->form_validation->set_rules('partner_type_id', 'Type', 'required|xss_clean');
 		$this->form_validation->set_rules('partners_description', 'Description', 'trim|xss_clean');
 		$this->form_validation->set_rules('partners_button_text', 'Button Text', 'trim|xss_clean');
 		$this->form_validation->set_rules('partners_link', 'Link', 'trim|xss_clean');
@@ -199,6 +203,7 @@ class Partners extends admin {
 					$partners = $partner_row->partners_image_name;
 				}
 				$data2 = array(
+					'partner_type_id'=>$this->input->post("partner_type_id"),
 					'partners_name'=>$this->input->post("partners_name"),
 					'partners_description'=>$this->input->post("partners_description"),
 					'partners_image_name'=>$partners,
@@ -225,6 +230,7 @@ class Partners extends admin {
 			$v_data['partners_location'] = $this->partners_location.$this->session->userdata('partners_file_name');
 		}
 		$v_data['error'] = $partners_error;
+		$v_data['partner_types'] = $this->db->get('partner_type');
 		
 		$data['title'] = $v_data['title'] = 'Edit partner';
 		$data['content'] = $this->load->view("partners/edit_partner", $v_data, TRUE);

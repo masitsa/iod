@@ -52,6 +52,22 @@
                 <div class="row">
                 	<div class="col-md-6">
                         <div class="form-group">
+	                        <label for="service_name">Type</label>
+	                        <select class="form-control" name="partner_type_id">
+	                        	<?php
+	                        		foreach ($partner_types->result() as $key) {
+	                        			# code...
+	                        			$partner_type_id = $key->partner_type_id;
+	                        			$partner_type_name = $key->partner_type_name;
+	                        			?>
+	                        			<option value="<?php echo $partner_type_id;?>" ><?php echo $partner_type_name;?></option>
+	                        			<?php
+	                        		}
+	                        	?>
+	                        	
+	                        </select>
+	                    </div>
+                        <div class="form-group">
                             <label for="partners_name">Title</label>
                             <input type="text" class="form-control" name="partners_name" placeholder="Enter Title" value="<?php echo set_value("partners_name");?>">
                         </div>
@@ -83,7 +99,7 @@
                 </div>
 				
 				<div class="form-group center-align">
-					<input type="submit" value="Add Slide" class="login_btn btn btn-success btn-lg">
+					<input type="submit" value="Add Partner" class="login_btn btn btn-success">
 				</div>
 				<?php
 					form_close();

@@ -138,6 +138,21 @@ class Members_model extends CI_Model
 		$report[$row_count][18] = 'Company Email';
 		$report[$row_count][19] = 'Company Activity';
 		$report[$row_count][20] = 'Position';
+		$report[$row_count][21] = 'Directorship';
+		$report[$row_count][22] = 'Major Business Responsibility';
+		$report[$row_count][23] = 'Work Experience (Years)';
+		$report[$row_count][24] = 'Years as a Director';
+		$report[$row_count][25] = 'Other Companies as a Director';
+		$report[$row_count][26] = 'Marital Status';
+		$report[$row_count][27] = 'next_of_kin';
+		$report[$row_count][28] = 'Residential Postal Address';
+		$report[$row_count][29] = 'Residential Phone';
+		$report[$row_count][30] = 'Residential Fax';
+		$report[$row_count][31] = 'Alternate Email';
+		$report[$row_count][32] = 'Preffered Correspondence Address';
+		$report[$row_count][33] = 'Joining Year';
+		$report[$row_count][34] = 'Other Physical Location';
+		$report[$row_count][35] = 'Company Fax';
 		
 		$row_count++;
 		
@@ -160,7 +175,6 @@ class Members_model extends CI_Model
 		if($response['check'])
 		{
 			$file_name = $response['file_name'];
-			
 			$array = $this->file_model->get_array_from_csv($upload_path.'/'.$file_name);
 			//var_dump($array); die();
 			$response2 = $this->sort_member_data($array);
@@ -185,7 +199,7 @@ class Members_model extends CI_Model
 		$total_columns = count($array[0]);//var_dump($array);die();
 		
 		//if products exist in array
-		if(($total_rows > 0) && ($total_columns == 21))
+		if(($total_rows > 0) && ($total_columns == 36))
 		{
 			$items['modified_by'] = $this->session->userdata('personnel_id');
 			$response = '
@@ -201,7 +215,7 @@ class Members_model extends CI_Model
 					  </thead>
 					  <tbody>
 			';
-			
+			//var_dump($array);die();
 			//retrieve the data from array
 			for($r = 1; $r < $total_rows; $r++)
 			{
@@ -215,7 +229,7 @@ class Members_model extends CI_Model
 					   'member_email'				=> strtolower($array[$r][5]),
 					   'member_phone'				=> $array[$r][6],
 					   'member_password'			=> md5(123456),
-					   'nationality'				=> $array[$r][7],
+					   'nationality'				=> (!isset($array[$r][7])) ? $array[$r][7] : NULL,
 					   'qualifications'				=> $array[$r][8],
 					   'designation'				=> $array[$r][9],
 					   'company'					=> $array[$r][10],
@@ -228,9 +242,24 @@ class Members_model extends CI_Model
 					   'company_cell_phone'			=> $array[$r][17],
 					   'company_email'				=> $array[$r][18],
 					   'company_activity'			=> $array[$r][19],
-					   'member_title'				=> $array[$r][20],
-					   'created'     				=> date('Y-m-d H:i:s'),
-					   'member_status'     			=> 1
+					   'position'					=> $array[$r][20],
+					   'directorship'				=> $array[$r][21],
+					   'major_business_responsibility'	=> $array[$r][22],
+					   'work_experience_years'			=> $array[$r][23],
+					   'director_years'					=> $array[$r][24],
+					   'other_director_companies'		=> $array[$r][25],
+					   'marital_status'					=> $array[$r][26],
+					   'next_of_kin'					=> $array[$r][27],
+					   'residential_postal_address'		=> $array[$r][28],
+					   'residential_phone'				=> $array[$r][29],
+					   'residential_fax'				=> $array[$r][30],
+					   'alternate_email'				=> $array[$r][31],
+					   'correspondance_address'			=> $array[$r][32],
+					   'joining_year'					=> $array[$r][33],
+					   'physical_location_2'			=> $array[$r][34],
+					   'company_fax'					=> $array[$r][35],
+					   'created'     					=> date('Y-m-d H:i:s'),
+					   'member_status'     				=> 1
 				   );
 				$comment = '';
 				
@@ -240,8 +269,18 @@ class Members_model extends CI_Model
 					if($this->check_current_number_exisits($items['member_number']))
 					{
 						//number exists
-						$comment .= '<br/>Duplicate member number entered';
-						$class = 'danger';
+						$this->db->where('member_number', $items['member_number']);
+						if($this->db->update('member', $items))
+						{
+							$comment .= '<br/>Member successfully updated to the database';
+							$class = 'warning';
+						}
+						
+						else
+						{
+							$comment .= '<br/>Internal error. Could not add member to the database. Please contact the site administrator';
+							$class = 'danger';
+						}
 					}
 					else
 					{
@@ -256,7 +295,7 @@ class Members_model extends CI_Model
 						else
 						{
 							$comment .= '<br/>Internal error. Could not add member to the database. Please contact the site administrator';
-							$class = 'warning';
+							$class = 'danger';
 						}
 					}
 				}

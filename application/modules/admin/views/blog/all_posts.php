@@ -116,7 +116,7 @@
 				'
 					<tr>
 						<td>'.$count.'</td>
-						<td><img src="'.base_url()."assets/images/posts/thumbnail_".$image.'"></td>
+						<td><img src="'.base_url()."assets/images/posts/thumbnail_".$image.'" width="100"></td>
 						<td>'.$blog_category_name.'</td>
 						<td>'.$post_title.'</td>
 						<td>'.date('jS M Y',strtotime($row->created)).'</td>

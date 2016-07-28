@@ -18,7 +18,7 @@ $contacts = $this->site_model->get_contacts();
          $working_weekday = $contacts['working_weekday'];
         $working_weekend = $contacts['working_weekend'];
 	}
-	$tweets = $this->site_model->get_tweets();
+	//$tweets = $this->site_model->get_tweets();
 ?>
 
 
@@ -94,7 +94,7 @@ $contacts = $this->site_model->get_contacts();
 						<div class="col-md-3">
 							<div class="widget wiget-instagram">
 								<h5>Twitter Feed</h5>
-								<?php //echo $tweets;?>
+								<a class="twitter-timeline" data-height="300" href="https://twitter.com/IODKenya">Tweets by IODKenya</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 							</div>
 						</div>
 						<!--EDU2 FOOTER CONTANT DES END-->

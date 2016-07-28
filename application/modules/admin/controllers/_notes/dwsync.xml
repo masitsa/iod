@@ -60,7 +60,13 @@
 <file name="plans.php" server="192.186.246.118/public_html/installify/" local="130972315147311528" remote="130971969600000000" Dst="-1" />
 <file name="cron.php" server="nairobisingles.com/public_html/installify/" local="130982235392123278" remote="130981875000000000" Dst="-1" />
 <file name="plans.php" server="nairobisingles.com/public_html/installify/" local="130998336887083574" remote="130997977800000000" Dst="-1" />
-<file name="events.php" server="195.42.142.18//www/www/development/" local="131122917581639425" remote="131122809600000000" Dst="0" />
+<file name="events.php" server="195.42.142.18//www/www/development/" local="131135717634511023" remote="131135609400000000" Dst="0" />
 <file name="db_search.php" server="195.42.142.18//www/www/development/" local="131122828483422736" remote="131122741800000000" Dst="0" />
-<file name="directors.php" server="195.42.142.18//www/www/development/" local="131124456705297414" remote="131124348600000000" Dst="0" />
+<file name="directors.php" server="195.42.142.18//www/www/development/" local="131130603172899416" remote="131130495000000000" Dst="0" />
+<file name="partners.php" server="195.42.142.18//www/www/development/" local="131134067108674721" remote="131133958800000000" Dst="0" />
+<file name="blog.php" server="195.42.142.18//www/www/development/" local="131129948105321164" remote="131129840400000000" Dst="0" />
+<file name="services.php" server="195.42.142.18//www/www/development/" local="131133162832007806" remote="131133054600000000" Dst="0" />
+<file name="facilitators.php" server="195.42.142.18//www/www/development/" local="131130610351179990" remote="131130504000000000" Dst="0" />
+<file name="resource.php" server="195.42.142.18//www/www/development/" local="131130716350034319" remote="131130609000000000" Dst="0" />
+<file name="corporates.php" server="195.42.142.18//www/www/development/" local="131134098952142255" remote="131133990600000000" Dst="0" />
 </dwsync>

@@ -34,9 +34,8 @@
 				?>
                 <table class="table table-condensed table-striped table-hover">
                     <tr>
-                    	<th>Resource</th>
+                    	<th>Category</th>
                     	<th>Title</th>
-                    	<th>Description</th>
                     	<th>Status</th>
                     	<th>Actions</th>
                     </tr>
@@ -47,7 +46,8 @@
 					$resource_status = $cat->resource_status;
 					$resource_name = $cat->resource_name;
 					$resource_description = $cat->resource_description;
-					$resource_image_name = 'thumbnail_'.$cat->resource_image_name;
+					$resource_category_name = $cat->resource_category_name;
+					$resource_image_name = $cat->resource_image_name;
 					
 					if($resource_status == 1){
 						$status = '<span class="label label-success">Active</span>';
@@ -57,12 +57,12 @@
 					}
 					?>
                     <tr>
-                    	<td>
-                        <img src="<?php echo $resource_location.$resource_image_name;?>" width="" class="img-responsive img-thumbnail">
-                        </td>
+                    	<td><?php echo $resource_category_name?></td>
                     	<td><?php echo $resource_name?></td>
-                    	<td><?php echo $resource_description?></td>
                     	<td><?php echo $status?></td>
+                    	<td>
+                        	<a href="<?php echo $resource_location.$resource_image_name;?>" class="btn btn-info btn-sm" target="_blank" title="Download">Download</a>
+                    	</td>
                     	<td>
                         	<a href="<?php echo site_url()."administration/edit-resource/".$resource_id.'/'.$page;?>" class="i_size" title="Edit">
                             <button class="btn btn-success btn-sm" type="button" ><i class="fa fa-pencil-square-o"></i> Edit</button>
@@ -99,6 +99,8 @@
 			else{
 				echo "There are no resources to display :-(";
 			}
+			
+			if(isset($links)){echo $links;}
 		?>
                 </div>
             </section>

@@ -4,6 +4,7 @@ if($query->num_rows() > 0)
 {
 	foreach($query->result() as $value)
 	{
+		$event_type_id = $value->event_type_id;
 		$event_name = $value->event_name;
 		$event_type_name = $value->event_type_name;
 		$event_description = $value->event_description;
@@ -15,6 +16,13 @@ if($query->num_rows() > 0)
 		$month = date('M',strtotime($start_date));
 		$day = date('d',strtotime($start_date));
 		$end_date = date('jS M Y',strtotime($end_date));
+		
+		$download = '';
+		
+		if($event_type_id == 4)
+		{
+			$download = '<a href="'.site_url().'assets/resource/8b59457becbbe3c6c187df4cca1c7974.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>Nomination Form</a>';
+		}
 	}
 }
 ?>
@@ -72,6 +80,7 @@ if($query->num_rows() > 0)
                             
 							<a href="#"><i class="fa fa-plus"></i>Google Calender</a>
 							<a href="#"><i class="fa fa-plus"></i>Book Now</a>
+							<?php echo $download;?>
 
 						</div>
 

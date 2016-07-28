@@ -185,10 +185,12 @@ class Event_model extends CI_Model
 	public function get_event2($event_web_name)
 	{
 		//retrieve all users
-		$this->db->from('event, event_type');
-		$this->db->where('event.event_type_id = event_type.event_type_id AND event_web_name = \''.$event_web_name.'\'');
-		$query = $this->db->get();
-		
+		$where = '`event`.`event_type_id` = `event_type`.`event_type_id` AND `event`.`event_web_name` = "'.$event_web_name.'"';
+		$tables = 'event,event_type';
+		$this->db->where($where);
+		$query = $this->db->get($tables);
+		//echo 'SELECT * FROM '.$tables.' WHERE '.$where;
+		//echo $query->num_rows();die();
 		return $query;
 	}
 	

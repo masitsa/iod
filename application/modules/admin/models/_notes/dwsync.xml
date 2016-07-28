@@ -53,5 +53,14 @@
 <file name="emails_model.php" server="nairobisingles.com/public_html/installify/" local="130982162946392779" remote="130981872000000000" Dst="-1" />
 <file name="blog_model.php" server="nairobisingles.com/public_html/installify/" local="130996783194079619" remote="130997051400000000" Dst="-1" />
 <file name="plans_model.php" server="nairobisingles.com/public_html/installify/" local="130998337143939329" remote="130997977800000000" Dst="-1" />
-<file name="event_model.php" server="195.42.142.18//www/www/development/" local="131122908266865287" remote="131122801200000000" Dst="0" />
+<file name="event_model.php" server="195.42.142.18//www/www/development/" local="131137359218448812" remote="131137251000000000" Dst="0" />
+<file name="partners_model.php" server="195.42.142.18//www/www/development/" local="131134044479907062" remote="131133959400000000" Dst="0" />
+<file name="blog_model.php" server="195.42.142.18//www/www/development/" local="131129972693264964" remote="131129864400000000" Dst="0" />
+<file name="facilitators_model.php" server="195.42.142.18//www/www/development/" local="131130610636446306" remote="131130504000000000" Dst="0" />
+<file name="personnel_model.php" server="195.42.142.18//www/www/development/" local="131078588698009849" remote="131130554400000000" Dst="0" />
+<file name="resource_model.php" server="195.42.142.18//www/www/development/" local="131130722469634196" remote="131130614400000000" Dst="0" />
+<file name="file_model.php" server="195.42.142.18//www/www/development/" local="131137428747975250" remote="131137320600000000" Dst="0" />
+<file name="service_model.php" server="195.42.142.18//www/www/development/" local="131133219921573142" remote="131133111600000000" Dst="0" />
+<file name="corporates_model.php" server="195.42.142.18//www/www/development/" local="131134099195826193" remote="131133991200000000" Dst="0" />
+<file name="members_model.php" server="195.42.142.18//www/www/development/" local="131137428524152448" remote="131137320600000000" Dst="0" />
 </dwsync>

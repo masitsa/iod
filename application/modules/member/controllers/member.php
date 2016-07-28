@@ -289,7 +289,7 @@ class member extends MX_Controller
         $this->load->library('mpdf');
 		
 		$this->mpdf->WriteHTML($html);
-		$this->mpdf->Output();
+		$this->mpdf->Output('IoD Kenya Invoice.pdf', 'I');
 	}
 	
 	//payment for invoices

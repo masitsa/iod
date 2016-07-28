@@ -11,6 +11,7 @@
 			$directors_link = $directors->directors_link;
 			$directors_button_text = $directors->directors_button_text;
 			$description = $this->site_model->limit_text($description, 8);
+			$web_name = $this->site_model->create_web_name($directors_name);
 
 			$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 10));
 			// if ($counter % 3 == 0) {
@@ -21,15 +22,15 @@
 		    						<!-- FACULTY DES START-->
 									<div class="edu2_faculty_des">
 										<figure><img src="'.$directors_location.''.$directors_image.'" alt=""/>
-											<figcaption>
+											<!--<figcaption>
 												<a href="#"><i class="fa fa-facebook"></i></a>
 												<a href="#"><i class="fa fa-twitter"></i></a>
 												<a href="#"><i class="fa fa-linkedin"></i></a>
 												<a href="#"><i class="fa fa-google-plus"></i></a>
-											</figcaption>
+											</figcaption>-->
 										</figure>
 										<div class="edu2_faculty_des2">
-											<h6><a href="#">'.$directors_name.'</a></h6>
+											<h6><a href="'.site_url().'about/board/'.$web_name.'">'.$directors_name.'</a></h6>
 											<strong>'.$directors_button_text.'</strong>
 											<p>'.$mini_desc.'...</p>
 										</div>
@@ -58,9 +59,7 @@
                            
                             <div class="kf_inr_breadcrumb">
 								<ul>
-									<li><a href="<?php echo site_url();?>home">Home</a></li>
-									<li><a href="<?php echo site_url();?>about">About</a></li>
-									<li><a href="<?php echo site_url();?>about/board">Board</a></li>
+									<?php echo $this->site_model->get_breadcrumbs();?>
 								</ul>
 							</div>
                         </div>

@@ -5,8 +5,8 @@ class Partners_model extends CI_Model
 	public function upload_partners_image($partners_path, $edit = NULL)
 	{
 		//upload product's gallery images
-		$resize['width'] = 1900;
-		$resize['height'] = 1600;
+		$resize['width'] = 300;
+		$resize['height'] = 300;
 		
 		if(!empty($_FILES['partners_image']['tmp_name']))
 		{
@@ -31,24 +31,11 @@ class Partners_model extends CI_Model
 				$file_name = $response['file_name'];
 				$thumb_name = $response['thumb_name'];
 				
-				//crop file to 1920 by 1010
-				$response_crop = $this->file_model->crop_file($partners_path."/".$file_name, $resize['width'], $resize['height']);
-				
-				if(!$response_crop['response'])
-				{
-					$this->session->set_userdata('error_message', 'Cannot crop image. '.$response_crop['message']);
-				
-					return FALSE;
-				}
-				
-				else
-				{
-					//Set sessions for the image details
-					$this->session->set_userdata('partners_file_name', $file_name);
-					$this->session->set_userdata('partners_thumb_name', $thumb_name);
-				
-					return TRUE;
-				}
+				//Set sessions for the image details
+				$this->session->set_userdata('partners_file_name', $file_name);
+				$this->session->set_userdata('partners_thumb_name', $thumb_name);
+			
+				return TRUE;
 			}
 		
 			else
@@ -72,6 +59,7 @@ class Partners_model extends CI_Model
 		$this->db->from($table);
 		$this->db->select('*');
 		$this->db->where($where);
+		$this->db->order_by('partner_type_name');
 		$this->db->order_by('partners_name');
 		$query = $this->db->get('', $per_page, $page);
 		

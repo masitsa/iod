@@ -20,6 +20,7 @@
         $mission = $contacts['mission'];
         $vision = $contacts['vision'];
         $about = $contacts['about'];
+        $core_values = $contacts['core_values'];
     }
 ?>
 
@@ -75,8 +76,7 @@
                            
                             <div class="kf_inr_breadcrumb">
                                 <ul>
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="#">about us</a></li>
+									<?php echo $this->site_model->get_breadcrumbs();?>
                                 </ul>
                             </div>
                         </div>
@@ -117,10 +117,15 @@
                                 <h6>Our Mission</h6>
                                 <p><?php echo $mission;?></p>
                             </div>
-                        <!-- INTERO DES END-->
+                            
                             <div class="abt_univ_des">
                                 <h6>Our Vision</h6>
                                 <p><?php echo $vision;?></p>
+                            </div>
+                            
+                            <div class="abt_univ_des">
+                                <h6>Strategic Pillars</h6>
+                                <p><?php echo $core_values;?></p>
                             </div>
                         </div>
 

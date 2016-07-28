@@ -31,6 +31,7 @@
                         <tr>
                             <th>#</th>
                             <th>Image</th>
+		                    <th>Event Type</th>
                             <th>Event</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -42,6 +43,7 @@
                         $event_id = $cat->event_id;
                         $event_status = $cat->event_status;
                         $event_name = $cat->event_name;
+                        $event_type_name = $cat->event_type_name;
                         $event_image_name = 'thumbnail_'.$cat->event_image_name;
                         $count++;
                         
@@ -57,6 +59,7 @@
                             <td>
                             <img src="<?php echo $event_location.$event_image_name;?>" width="100" class="img-responsive img-thumbnail">
                             </td>
+                            <td><?php echo $event_type_name?></td>
                             <td><?php echo $event_name?></td>
                             <td><?php echo $status?></td>
                             <td>
@@ -90,6 +93,8 @@
                     ?>
                     </table>
                     <?php
+					
+					if(isset($links)){echo $links;}
                 }
                 
                 else{

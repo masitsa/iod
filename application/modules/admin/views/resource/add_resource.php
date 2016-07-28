@@ -56,37 +56,45 @@
                             <input type="text" class="form-control" name="resource_name" placeholder="Enter Title" value="<?php echo set_value("resource_name");?>">
                         </div>
                         <div class="form-group">
-                            <label for="resource_description">Description</label>
-                            <textarea class="form-control" name="resource_description"><?php echo set_value("resource_description");?></textarea>
+                            <label for="resource_description">Category</label>
+                            <select class="form-control" name="resource_category_id">
+                            	<option value="">--Select Category--</option>
+								<?php
+                                if($resource_categories->num_rows() > 0)
+                                {
+                                    $former_resource_category_id = set_value('resource_category_id');
+                                    foreach($resource_categories->result() as $res)
+                                    {
+                                        $resource_category_id = $res->resource_category_id;
+                                        $resource_category_name = $res->resource_category_name;
+                                        
+                                        if($former_resource_category_id == $resource_category_id)
+                                        {
+                                            echo '<option value="'.$resource_category_id.'" selected="selected">'.$resource_category_name.'</option>';
+                                        }
+                                        
+                                        else
+                                        {
+                                            echo '<option value="'.$resource_category_id.'">'.$resource_category_name.'</option>';
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <input type="hidden" name="check" value="1"/>
 					</div>
                 	<div class="col-md-6">
-                        <label class="control-label" for="image">Slide Image</label>
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                    <div>
-                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="resource_image"></span>
-                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                    </div>
-                                </div>
-
+                        <div class="form-group">
+                             <label class="col-lg-4 control-label" for="image">Resource</label>
+                            <div class="col-lg-8">
+                            	<?php echo form_upload(array( 'name'=>'gallery[]', 'multiple'=>true, 'class'=>'btn'));?>
                             </div>
-                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                         <label class="col-lg-4 control-label" for="image">Resource Items</label>
-                                        <div class="col-lg-8">
-                                        <?php echo form_upload(array( 'name'=>'gallery[]', 'multiple'=>true, 'class'=>'btn'));?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
                 	</div>
                 </div>
 				
 				<div class="form-group center-align">
-					<input type="submit" value="Add Slide" class="login_btn btn btn-success btn-lg">
+					<input type="submit" value="Add Resource" class="login_btn btn btn-success">
 				</div>
 				<?php
 					form_close();

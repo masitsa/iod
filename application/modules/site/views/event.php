@@ -11,8 +11,7 @@
                    
                     <div class="kf_inr_breadcrumb">
 						<ul>
-							<li><a href="<?php echo site_url();?>">Home</a></li>
-							<li><a href="#">Calendar</a></li>
+							<?php echo $this->site_model->get_breadcrumbs();?>
 						</ul>
 					</div>
                 </div>
@@ -29,6 +28,7 @@ if($query->num_rows() > 0)
 {
 	foreach($query->result() as $value)
 	{
+		$event_type_name = $value->event_type_name;
 		$event_name = $value->event_name;
 		$event_web_name = $value->event_web_name;
 		$start_date = $value->event_start_time;
@@ -47,14 +47,14 @@ if($query->num_rows() > 0)
 								<p>'.$event_name.'</p>
 								<ul class="post-option">
 									<li><strong>From :</strong> '.$start_date.' <strong>To: </strong> '.$end_date.'</li>
-									<li>10 <a href="'.site_url().'event/'.$event_web_name.'/comments">Comments</a></li>
+									<li>10 <a href="'.site_url().'calendar/'.$event_type_name.'/'.$event_web_name.'/comments">Comments</a></li>
 								</ul>
-								<a class="readmore" href="'.site_url().'event/'.$event_web_name.'">read more<i class="fa fa-long-arrow-right"></i></a>
+								<a class="readmore" href="'.site_url().'calendar/'.$event_type_name.'/'.$event_web_name.'">read more<i class="fa fa-long-arrow-right"></i></a>
 								<span> '.$day.'</span>
 							</div>
 								
 							<figure><img alt="" src="'.base_url().'assets/images/iod_logo_cropped.jpg">
-								<figcaption><a href="'.site_url().'event/'.$event_web_name.'"><i class="fa fa-plus"></i></a></figcaption>
+								<figcaption><a href="'.site_url().'calendar/'.$event_type_name.'/'.$event_web_name.'"><i class="fa fa-plus"></i></a></figcaption>
 							</figure>
 						</div>
 					</div>
@@ -83,9 +83,17 @@ else
 					</div>
 				</div>
 				<!-- HEADING 2 END-->
-
+				<div class="row">
+                	<div class="col-md-4 col-md-offset-4">
+                		<a class="btn-3" href="<?php echo site_url().'assets/resource/IoDCalendar2016.pdf';?>" target="_blank">Download Full Calendar</a>
+                    </div>
+                </div>
 				<?php echo $result;?>
-
+				<div class="row">
+                	<div class="col-md-4 col-md-offset-4">
+                		<a class="btn-3" href="<?php echo site_url().'assets/resource/IoDCalendar2016.pdf';?>" target="_blank">Download Full Calendar</a>
+                    </div>
+                </div>
 				<div class="col-md-12">
 					<!--KF_PAGINATION_WRAP START-->
 					<div class="kf_edu_pagination_wrap">

@@ -52,8 +52,7 @@
                            
                             <div class="kf_inr_breadcrumb">
                                 <ul>
-                                    <li><a href="<?php echo site_url();?>home">Home</a></li>
-                                    <li><a href="<?php echo site_url();?>about">About Us</a></li>
+									<?php echo $this->site_model->get_breadcrumbs();?>
                                 </ul>
                             </div>
                         </div>

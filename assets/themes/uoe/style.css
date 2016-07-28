@@ -476,7 +476,7 @@ section,
 .logo_wrap{
 	float: left;
 	width: 100%;
-	padding:22px 0; 
+	padding-top: 8px;
 }
 .nav_2{
 	float: left;
@@ -656,7 +656,7 @@ section,
 	top: 0;
 	bottom: 0;
 	position: absolute;
-	background-color: #000000;
+	background-color: #fff;
 	opacity: 0.5;
 }
 .edu2_main_bn_wrap figure figcaption{
@@ -2611,7 +2611,6 @@ section,
 */
 .edu2_teachers_page .edu2_faculty_des{
 	margin-bottom: 30px;
-	min-height: 500px;
 }
 /*
 	  ==============================================================
@@ -4540,7 +4539,7 @@ section,
 }
 .kf_courses_tabs .nav-tabs > li > a
 {
-    font-size: 14px;
+    font-size: 0.8em;
     text-transform: uppercase;
     font-weight: bold;
     color: #666;
@@ -4548,6 +4547,7 @@ section,
     margin:0; 
     background-color: #fff;
     border: none;
+	padding: 10px;
 }
 .kf_courses_tabs .nav-tabs > li.active > a:focus,
 .kf_courses_tabs .nav-tabs > li.active > a:hover {

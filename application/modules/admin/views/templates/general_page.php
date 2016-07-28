@@ -10,7 +10,7 @@
 <!doctype html>
 <html class="fixed">
 	<head>
-        <?php echo $this->load->view('includes/header', '', TRUE); ?>
+        <?php echo $this->load->view('admin/includes/header', '', TRUE); ?>
     </head>
 
 	<body>
@@ -19,10 +19,10 @@
         <![endif]-->
     	<section class="body">
             <!-- Top Navigation -->
-            <?php echo $this->load->view('includes/top_navigation', $data, TRUE); ?>
+            <?php echo $this->load->view('admin/includes/top_navigation', $data, TRUE); ?>
             
             <div class="inner-wrapper">
-            	<?php echo $this->load->view('includes/sidebar', '', TRUE); ?>
+            	<?php echo $this->load->view('admin/includes/sidebar', '', TRUE); ?>
                 
                 <section role="main" class="content-body">
                 	
@@ -95,5 +95,6 @@
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/javascripts/dashboard/examples.dashboard.js"></script>
 		<!-- Theme Custom -->
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/javascripts/theme.custom.js"></script>
+		<script src="<?php echo base_url();?>assets/themes/custom/js/youtube.js"></script>
 	</body>
 </html>

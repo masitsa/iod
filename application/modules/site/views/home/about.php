@@ -20,6 +20,7 @@
 		$mission = $contacts['mission'];
 		$vision = $contacts['vision'];
 		$about = $contacts['about'];
+		$corporate_values =  $contacts['corporate_values'];
     }
 ?>
 <section>
@@ -35,6 +36,7 @@
 							<li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="coursedetails2" href="<?php echo base_url();?>home#coursedetails2" aria-expanded="true">ABOUT IOD KENYA</a></li>
 							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="entryrequirment" href="<?php echo base_url();?>home#entryrequirment" aria-expanded="true">DIRECTOR DEVELOPMENT</a></li>
 							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="placements" href="<?php echo base_url();?>home#placements" aria-expanded="true">IOD MEMBERSHIP</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="placements" href="<?php echo base_url();?>home#values" aria-expanded="true">Corporate Values & Principles</a></li>
 						</ul>
 
 						<!-- Tab panes -->
@@ -45,6 +47,14 @@
 									<h3>IOD Kenya</h3>
 								</div>
 								<p><?php echo $about;?>
+								<a href="<?php echo site_url();?>about">Know More ></a></p>
+							</div>
+
+							<div id="values" class="tab-pane corporate-values" role="tabpanel">
+								<div class="course_heading">
+									<h3>Corporate Values & Principles</h3>
+								</div>
+								<p><?php echo $corporate_values;?>
 								<a href="<?php echo site_url();?>about">Know More ></a></p>
 							</div>
 

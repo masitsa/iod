@@ -31,6 +31,7 @@
 		                    <tr>
 		                    	<th>#</th>
 		                    	<!--<th>Image</th>-->
+		                    	<th>Category</th>
 		                    	<th>Service</th>
 		                    	<th>Status</th>
 		                    	<th>Actions</th>
@@ -40,6 +41,7 @@
 						foreach($query->result() as $cat){
 							
 							$dept_id = $cat->department_id;
+							$department_name = $cat->department_name;
 							$service_id = $cat->service_id;
 							$service_status = $cat->service_status;
 							$service_name = $cat->service_name;
@@ -55,6 +57,7 @@
 							?>
 		                    <tr>
 		                    	<td><?php echo $count?></td>
+		                    	<td><?php echo $department_name?></td>
 		                    	<!--<td>
 		                        <img src="<?php echo $service_location.$service_image_name;?>" width="100" class="img-responsive img-thumbnail">
 		                        </td>-->

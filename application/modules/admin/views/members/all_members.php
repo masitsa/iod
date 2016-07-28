@@ -10,18 +10,6 @@
 			$result .= 
 			
 			'
-			<div class="row">
-    		<div class="col-md-12">
-			<section class="panel panel-featured panel-featured-info">
-				<header class="panel-heading">
-					<h2 class="panel-title pull-left"><?php echo $title;?></h2>
-					 <div class="widget-icons pull-right">
-					 <a href="import-members" class="btn btn-warning btn-sm fa fa-plus"> Import Members</a>
-                      </div>
-		    	</header>
-		    </section>
-			</div>
-			</div>
 			<table class="table table-bordered table-striped table-condensed">
 				<thead>
 					<tr>
@@ -505,7 +493,12 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-heading"><?php echo $title;?></div>
+    <div class="panel-heading">
+		<?php echo $title;?>
+        <div class="widget-icons pull-right">
+        	<a href="<?php echo site_url().'users/import-members';?>" class="btn btn-warning btn-sm fa fa-plus"> Import Members</a>
+        </div>
+    </div>
     <div class="panel-body">
         <div class="table-responsive">
             

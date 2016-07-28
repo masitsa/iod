@@ -38,7 +38,17 @@ if ($query->num_rows() > 0)
 		$day = date('j',strtotime($created));
 		$month = date('M',strtotime($created));
 		$created_on = date('jS M Y',strtotime($row->created));
-
+		$post_video = $row->post_video;
+		
+		if(empty($post_video))
+		{
+			$image = '<img src="'.$image.'" alt=""/>';
+		}
+		
+		else
+		{
+			$image = '<div class="youtube" id="'.$post_video.'"></div>';
+		}
 		
 		$categories = '';
 		$count = 0;
@@ -144,7 +154,7 @@ if ($query->num_rows() > 0)
 						<!--BLOG 3 DES START-->
 						<div class="blog_3_des">
 							<figure>
-								<img src="'.$image.'" alt=""/>
+								'.$image.'
 								<figcaption><a href="'.site_url().'blog/'.$web_name.'"><i class="fa fa-search-plus"></i></a></figcaption>
 							</figure>
 							<ul>
@@ -153,7 +163,7 @@ if ($query->num_rows() > 0)
 							</ul>
 							<h5>'.$post_title.'</h5>
 							<p>'.$mini_desc.'</p>
-							<a class="readmore" href="'.site_url().'blog/view-single/'.$web_name.'">
+							<a class="readmore" href="'.site_url().'blog/'.$web_name.'">
 								read more
 								<i class="fa fa-long-arrow-right"></i>
 							</a>
@@ -210,26 +220,9 @@ if ($query->num_rows() > 0)
 				<?php echo $result;?>
 
 				<div class="col-md-12">
-				<?php if(isset($links)){echo $links;}?>
 						<!--KF_PAGINATION_WRAP START-->
 					<div class="kf_edu_pagination_wrap">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-								<span aria-hidden="true"><i class="fa fa-angle-left"></i>PREV</span>
-								</a>
-							</li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li>
-								<a href="#" aria-label="Next">
-								<span aria-hidden="true">Next<i class="fa fa-angle-right"></i></span>
-								</a>
-							</li>
-						</ul>
+						<?php if(isset($links)){echo $links;}?>
 					</div>
 					<!--KF_PAGINATION_WRAP END-->
 					</div>

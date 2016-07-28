@@ -71,30 +71,6 @@
                     echo $checking_items;
                 ?>
 
-                <div class="col-md-12">
-                    <!--KF_PAGINATION_WRAP START-->
-                    <div class="kf_edu_pagination_wrap">
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                <span aria-hidden="true"><i class="fa fa-angle-left"></i>PREV</span>
-                                </a>
-                            </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                <span aria-hidden="true">Next<i class="fa fa-angle-right"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--KF_PAGINATION_WRAP END-->
-                </div>
-
             </div>
         </div>
     </section>

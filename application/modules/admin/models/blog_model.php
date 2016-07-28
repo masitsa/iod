@@ -155,6 +155,7 @@ class Blog_model extends CI_Model
 				'created'=>$this->input->post('created'),
 				'created_by'=>$this->session->userdata('user_id'),
 				'modified_by'=>$this->session->userdata('user_id'),
+				'blog_category_id'=>$this->input->post('post_video'),
 				'post_thumb'=>$thumb_name,
 				'post_image'=>$image_name
 			);
@@ -200,6 +201,7 @@ class Blog_model extends CI_Model
 	*/
 	public function update_post($image_name, $thumb_name, $post_id)
 	{
+		//$created = $this->input->post('created'); var_dump($created); die();
 		$data = array(
 				'post_title'=>ucwords(strtolower($this->input->post('post_title'))),
 				'post_status'=>$this->input->post('post_status'),
@@ -207,6 +209,7 @@ class Blog_model extends CI_Model
 				'blog_category_id'=>$this->input->post('blog_category_id'),
 				'created'=>$this->input->post('created'),
 				'modified_by'=>$this->session->userdata('user_id'),
+				'post_video'=>$this->input->post('post_video'),
 				'post_thumb'=>$thumb_name,
 				'post_image'=>$image_name,
 				'tiny_url'=>$this->getTinyUrl(site_url()."blog/post/".$post_id)
@@ -231,7 +234,7 @@ class Blog_model extends CI_Model
 	{
 		//retrieve all users
 		$this->db->from('post,blog_category');
-		$this->db->select('*');
+		$this->db->select('post.*, blog_category.blog_category_name');
 		$this->db->where('post.blog_category_id = blog_category.blog_category_id AND post_id = '.$post_id);
 		$query = $this->db->get();
 		
@@ -618,15 +621,24 @@ class Blog_model extends CI_Model
 		$this->db->where(array('blog_category_id' => $blog_category_id));
 		$this->db->select('post_id');
 		$query = $this->db->get('post');
-		$row = $query->row();
-		$post_id = $row->post_id;
 		
-		if($this->db->delete('post_comment', array('post_id' => $post_id)))
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$post_id = $row->post_id;
+			
+			if($this->db->delete('post_comment', array('post_id' => $post_id)))
+			{
+				return TRUE;
+			}
+			else{
+				return FALSE;
+			}
+		}
+		
+		else
 		{
 			return TRUE;
-		}
-		else{
-			return FALSE;
 		}
 	}
 	

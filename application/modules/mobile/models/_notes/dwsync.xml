@@ -1,7 +1,20 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<dwsync>
-<file name="email_model.php" server="C:/xampp/htdocs/icpak/" local="130756289552756107" remote="130756289550000000" Dst="0" />
-<file name="login_model.php" server="C:/xampp/htdocs/icpak/" local="130756301935101377" remote="130756301930000000" Dst="0" />
-<file name="email_model.php" server="62.210.146.138/public_html/icpak/" local="130756289552756107" remote="130756342800000000" Dst="0" />
-<file name="login_model.php" server="62.210.146.138/public_html/icpak/" local="130756379116431422" remote="130756379400000000" Dst="0" />
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="email_model.php" server="C:/xampp/htdocs/icpak/" local="130756289552756107" remote="130756289550000000" Dst="0" />
+<file name="login_model.php" server="C:/xampp/htdocs/icpak/" local="130756301935101377" remote="130756301930000000" Dst="0" />
+<file name="email_model.php" server="62.210.146.138/public_html/icpak/" local="130756289552756107" remote="130756342800000000" Dst="0" />
+<file name="login_model.php" server="62.210.146.138/public_html/icpak/" local="130756379116431422" remote="130756379400000000" Dst="0" />
+<file name="events_model.php" server="195.42.142.18//www/www/development/" local="131124559283319485" remote="131124453000000000" Dst="0" />
+<file name="email_model.php" server="195.42.142.18//www/www/development/" local="131105335688518596" remote="131124453000000000" Dst="0" />
+<file name="file_model.php" server="195.42.142.18//www/www/development/" local="131124559283519488" remote="131124453000000000" Dst="0" />
+<file name="icpak_social.php" server="195.42.142.18//www/www/development/" local="131105335688518596" remote="131124453000000000" Dst="0" />
+<file name="login_model.php" server="195.42.142.18//www/www/development/" local="131124559284089508" remote="131124453000000000" Dst="0" />
+<file name="login_model_working.php" server="195.42.142.18//www/www/development/" local="131105335688543596" remote="131124453000000000" Dst="0" />
+<file name="messages_model.php" server="195.42.142.18//www/www/development/" local="131124559284114508" remote="131124453000000000" Dst="0" />
+<file name="mobile_model.php" server="195.42.142.18//www/www/development/" local="131105335691043635" remote="131124453000000000" Dst="0" />
+<file name="news_model.php" server="195.42.142.18//www/www/development/" local="131105335691043635" remote="131124453000000000" Dst="0" />
+<file name="profile_model.php" server="195.42.142.18//www/www/development/" local="131124559284114508" remote="131124453000000000" Dst="0" />
+<file name="queries_model.php" server="195.42.142.18//www/www/development/" local="131105335691043635" remote="131124453000000000" Dst="0" />
+<file name="resources_model.php" server="195.42.142.18//www/www/development/" local="131124559284139509" remote="131124453000000000" Dst="0" />
+<file name="streaming_model.php" server="195.42.142.18//www/www/development/" local="131105335691068635" remote="131124453000000000" Dst="0" />
 </dwsync>

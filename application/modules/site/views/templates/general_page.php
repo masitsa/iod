@@ -77,6 +77,7 @@
         <script src="<?php echo base_url()."assets/themes/uoe/";?>js/custom.js"></script>
         <!--Custom JavaScript-->
         <script src="<?php echo base_url()."assets/themes/custom/";?>js/custom.js"></script>
+		<script src="<?php echo base_url();?>assets/themes/custom/js/youtube.js"></script>
         
 	</body>
 </html>

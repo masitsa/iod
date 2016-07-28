@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<dwsync>
-<file name="icpak_news.php" server="62.210.146.138/public_html/icpak/" local="130757130649288601" remote="130757130600000000" Dst="0" />
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="icpak_news.php" server="62.210.146.138/public_html/icpak/" local="130757130649288601" remote="130757130600000000" Dst="0" />
+<file name="cpd_hours.php" server="195.42.142.18//www/www/development/" local="131124559284139509" remote="131124453000000000" Dst="0" />
+<file name="cpd_message.php" server="195.42.142.18//www/www/development/" local="131124559284464514" remote="131124453000000000" Dst="0" />
+<file name="event_accomodations.php" server="195.42.142.18//www/www/development/" local="131124559284489514" remote="131124453000000000" Dst="0" />
+<file name="event_detail.php" server="195.42.142.18//www/www/development/" local="131124559284489514" remote="131124453600000000" Dst="0" />
+<file name="icpak_events.php" server="195.42.142.18//www/www/development/" local="131124559284514514" remote="131124453600000000" Dst="0" />
+<file name="icpak_news.php" server="195.42.142.18//www/www/development/" local="131105335691093635" remote="131124453600000000" Dst="0" />
+<file name="icpak_resources.php" server="195.42.142.18//www/www/development/" local="131124559284739518" remote="131124453600000000" Dst="0" />
+<file name="icpak_social.php" server="195.42.142.18//www/www/development/" local="131105335691118636" remote="131124453600000000" Dst="0" />
+<file name="member_profile.php" server="195.42.142.18//www/www/development/" local="131124559284764518" remote="131124453600000000" Dst="0" />
+<file name="news_detail.php" server="195.42.142.18//www/www/development/" local="131124559285064523" remote="131124453600000000" Dst="0" />
+<file name="publication_detail.php" server="195.42.142.18//www/www/development/" local="131124559285064523" remote="131124453600000000" Dst="0" />
+<file name="publication_list.php" server="195.42.142.18//www/www/development/" local="131124559285089523" remote="131124453600000000" Dst="0" />
+<file name="queries_model.php" server="195.42.142.18//www/www/development/" local="131105335691143636" remote="131124453600000000" Dst="0" />
+<file name="recording_live.php" server="195.42.142.18//www/www/development/" local="131124559285089523" remote="131124453600000000" Dst="0" />
+<file name="resources_detail.php" server="195.42.142.18//www/www/development/" local="131124559285114523" remote="131124453600000000" Dst="0" />
+<file name="resources_model.php" server="195.42.142.18//www/www/development/" local="131105335691168636" remote="131124453600000000" Dst="0" />
+<file name="session_question.php" server="195.42.142.18//www/www/development/" local="131105335691168636" remote="131124453600000000" Dst="0" />
+<file name="streaming_live.php" server="195.42.142.18//www/www/development/" local="131105335691168636" remote="131124453600000000" Dst="0" />
+<file name="visible_question.php" server="195.42.142.18//www/www/development/" local="131105335691193637" remote="131124453600000000" Dst="0" />
 </dwsync>

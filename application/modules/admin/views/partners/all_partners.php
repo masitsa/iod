@@ -34,7 +34,8 @@
 				?>
                 <table class="table table-condensed table-striped table-hover">
                     <tr>
-                    	<th>partner</th>
+                    	<th>Partner</th>
+                    	<th>Type</th>
                     	<th>Title</th>
                     	<th>Description</th>
                     	<th>Status</th>
@@ -44,6 +45,7 @@
 				foreach($query->result() as $cat){
 					
 					$partners_id = $cat->partners_id;
+					$partner_type_name = $cat->partner_type_name;
 					$partners_status = $cat->partners_status;
 					$partners_name = $cat->partners_name;
 					$partners_description = $cat->partners_description;
@@ -60,6 +62,7 @@
                     	<td>
                         <img src="<?php echo $partners_location.$partners_image_name;?>" width="" class="img-responsive img-thumbnail">
                         </td>
+                    	<td><?php echo $partner_type_name?></td>
                     	<td><?php echo $partners_name?></td>
                     	<td><?php echo $partners_description?></td>
                     	<td><?php echo $status?></td>
@@ -99,6 +102,9 @@
 			else{
 				echo "There are no partners to display :-(";
 			}
+			
+			if(isset($links)){echo $links;}
 		?>
+        
                 </div>
             </section>

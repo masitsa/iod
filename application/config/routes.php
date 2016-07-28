@@ -78,7 +78,7 @@ $route['admin-profile/(:num)'] = 'admin/users/admin_profile/$1';
 /*
 *	Customers Routes
 */
-$route['view-invoice/(:num)'] = 'admin/customers/view_invoice/$1';
+$route['view-invoice/(:num)'] = 'member/download_invoice/$1';
 $route['all-members'] = 'admin/members';
 $route['all-members/(:num)'] = 'admin/members/index/$1';
 $route['delete-member/(:num)'] = 'admin/members/delete_member/$1';
@@ -88,7 +88,6 @@ $route['deactivate-member/(:num)'] = 'admin/members/deactivate_member/$1';
 /*
 *	Member Routes
 */
-
 $route['register'] = 'member/auth/register_member';
 $route['login'] = 'member/auth/login_member';
 $route['logout'] = 'member/sign_out';
@@ -149,7 +148,8 @@ $route['members/add-member'] = 'admin/members/add_member';
 $route['users/members'] = 'admin/members/index';
 $route['members/validate-import'] = 'admin/members/do_members_import';
 $route['import/members-template'] = 'admin/members/import_members_template';
-$route['members/import-members'] = 'admin/members/import_members';
+$route['import/individuals-template'] = 'admin/members/import_members_template';
+$route['users/import-members'] = 'admin/members/import_members';
 
 //contact 
 $route['administration/contacts']='admin/contacts/show_contacts';
@@ -193,6 +193,7 @@ $route['deactivate-offer/(:num)'] = 'admin/offer/deactivate_offer/$1';
 //blog routes
 $route['posts'] = 'admin/blog';
 $route['blog/posts'] = 'admin/blog';
+$route['blog/posts/(:num)'] = 'admin/blog/$1';
 $route['blog/categories'] = 'admin/blog/categories';
 $route['add-post'] = 'admin/blog/add_post';
 $route['edit-post/(:num)'] = 'admin/blog/edit_post/$1';
@@ -262,6 +263,16 @@ $route['administration/activate-event/(:num)/(:num)'] = 'admin/events/activate_e
 $route['administration/deactivate-event/(:num)/(:num)'] = 'admin/events/deactivate_event/$1/$2';
 $route['administration/delete-event/(:num)/(:num)'] = 'admin/events/delete_event/$1/$2';
 
+/*
+*	Blog Routes
+*/
+$route['blog'] = 'site/blog';
+$route['blog/(:num)'] = 'site/blog/index/__/__/$1';//going to different page without any filters
+$route['blog/category/(:any)'] = 'site/blog/index/$1';//category present
+$route['blog/category/(:any)/(:num)'] = 'site/blog/index/$1/$2';//category present going to next page
+$route['blog/search/(:any)'] = 'site/blog/index/__/$1';//search present
+$route['blog/search/(:any)/(:num)'] = 'site/blog/index/__/$1/$2';//search present going to next page
+$route['blog/(:any)'] = 'site/blog/view_single_post/$1';//going to single post page
 
 /*
 *	Site contacts Routes
@@ -270,24 +281,25 @@ $route['contact'] = 'site/contact';
 $route['gallery'] = 'site/gallery';
 $route['calendar'] = 'site/calendar';
 $route['calendar/{:num}'] = 'site/calendar/$1';
-$route['blog'] = 'site/blog/index';
 $route['event/facilitators'] = 'site/facilitators';
-$route['about/board'] = 'site/board';
-$route['about/(:any)'] = 'site/about_us/$1';
+$route['about/Affiliations-&-Partners'] = 'site/partners';
 $route['about'] = 'site/about';
+$route['about/board'] = 'site/board';
+$route['about/board/(:any)'] = 'site/member_details/$1';
+$route['about/(:any)'] = 'site/about_us/$1';
 $route['director-development'] = 'site/services';
+$route['director-development/facilitators'] = 'site/facilitators';
+$route['director-development/training-partners'] = 'site/training_partners';
 $route['director-development/(:any)'] = 'site/service_item/$1';
 $route['membership'] = 'site/membership';
 $route['membership/(:any)'] = 'site/membership_item/$1';
 $route['resources'] = 'site/resource';
 
-//
-$route['blog/view-single/(:any)'] = 'site/blog/view_single_post/$1';
-$route['event/(:any)'] = 'site/view_event_details/$1';
-
-
 $route['content/partners'] = 'admin/partners/index';
+$route['content/partners/(:num)'] = 'admin/partners/index/$1';
+$route['partners'] = 'admin/partners/index';
 $route['partners/(:num)'] = 'admin/partners/index/$1';
+$route['partners/(:num)/(:num)'] = 'admin/partners/index/$1/$2';
 $route['administration/all-partners/(:num)'] = 'admin/partners/index/$1';//with a page number
 $route['administration/add-partner'] = 'admin/partners/add_partner';
 $route['administration/edit-partner/(:num)/(:num)'] = 'admin/partners/edit_partner/$1/$2';
@@ -295,9 +307,20 @@ $route['administration/activate-partner/(:num)/(:num)'] = 'admin/partners/activa
 $route['administration/deactivate-partner/(:num)/(:num)'] = 'admin/partners/deactivate_partner/$1/$2';
 $route['administration/delete-partner/(:num)/(:num)'] = 'admin/partners/delete_partner/$1/$2';
 
-
+$route['content/corporates'] = 'admin/corporates/index';
+$route['content/corporates/(:num)'] = 'admin/corporates/index/$1';
+$route['corporates'] = 'admin/corporates/index';
+$route['corporates/(:num)'] = 'admin/corporates/index/$1';
+$route['corporates/(:num)/(:num)'] = 'admin/corporates/index/$1/$2';
+$route['administration/all-corporates/(:num)'] = 'admin/corporates/index/$1';//with a page number
+$route['administration/add-corporate'] = 'admin/corporates/add_corporate';
+$route['administration/edit-corporate/(:num)/(:num)'] = 'admin/corporates/edit_corporate/$1/$2';
+$route['administration/activate-corporate/(:num)/(:num)'] = 'admin/corporates/activate_corporate/$1/$2';
+$route['administration/deactivate-corporate/(:num)/(:num)'] = 'admin/corporates/deactivate_corporate/$1/$2';
+$route['administration/delete-corporate/(:num)/(:num)'] = 'admin/corporates/delete_corporate/$1/$2';
 
 $route['member-account/resources'] = 'admin/resource/index';
+$route['resource'] = 'admin/resource/index';
 $route['resource/(:num)'] = 'admin/resource/index/$1';
 $route['administration/all-resources/(:num)'] = 'admin/resource/index/$1';//with a page number
 $route['administration/add-resource'] = 'admin/resource/add_resource';
@@ -316,6 +339,11 @@ $route['update_profile/(:num)'] = 'member/update_profile/$1';
 
 $route['view-single-resource/(:any)'] = 'site/single_resource/$1';
 $route['resource/(:any)'] = 'site/single_resource/$1';
+$route['calendar/Training/(:any)'] = 'site/view_event_details/$1';
+$route['calendar/Seminar/(:any)'] = 'site/view_event_details/$1';
+$route['calendar/Event/(:any)'] = 'site/view_event_details/$1';
+$route['calendar/Conference/(:any)'] = 'site/view_event_details/$1';
+$route['calendar/(:any)'] = 'site/single_calendar/$1';
 
 $route['directors'] = 'admin/directors/index';
 $route['content/directors'] = 'admin/directors/index';
@@ -327,3 +355,63 @@ $route['administration/edit-director/(:num)/(:num)'] = 'admin/directors/edit_dir
 $route['administration/activate-director/(:num)/(:num)'] = 'admin/directors/activate_director/$1/$2';
 $route['administration/deactivate-director/(:num)/(:num)'] = 'admin/directors/deactivate_director/$1/$2';
 $route['administration/delete-director/(:num)/(:num)'] = 'admin/directors/delete_partner/$1/$2';
+
+$route['facilitators'] = 'admin/facilitators/index';
+$route['content/facilitators'] = 'admin/facilitators/index';
+$route['facilitators/(:num)'] = 'admin/facilitators/index/$1';
+$route['content/facilitators/(:num)'] = 'admin/facilitators/index/$1';
+$route['administration/all-facilitators/(:num)'] = 'admin/facilitators/index/$1';//with a page number
+$route['administration/add-facilitator'] = 'admin/facilitators/add_facilitator';
+$route['administration/edit-facilitator/(:num)/(:num)'] = 'admin/facilitators/edit_facilitator/$1/$2';
+$route['administration/activate-facilitator/(:num)/(:num)'] = 'admin/facilitators/activate_facilitator/$1/$2';
+$route['administration/deactivate-facilitator/(:num)/(:num)'] = 'admin/facilitators/deactivate_facilitator/$1/$2';
+$route['administration/delete-facilitator/(:num)/(:num)'] = 'admin/facilitators/delete_partner/$1/$2';
+
+/*
+*	Messaging Routes
+*/
+
+$route['messaging/dashboard'] = 'messaging/dashboard';
+$route['messages'] = 'messaging/unsent_messages';
+$route['messaging/unsent-messages'] = 'messaging/unsent_messages';
+$route['messaging/unsent-messages/(:num)'] = 'messaging/unsent_messages/$1';
+$route['messaging/sent-messages'] = 'messaging/sent_messages';
+$route['messaging/sent-messages/(:num)'] = 'messaging/sent_messages/$1';
+$route['messaging/spoilt-messages'] = 'messaging/spoilt_messages';
+$route['messaging/spoilt-messages/(:num)'] = 'messaging/spoilt_messages/$1';
+// import functions of messages
+$route['messaging/validate-import/(:num)'] = 'messaging/do_messages_import/$1';
+$route['messaging/import-template'] = 'messaging/import_template';
+$route['messaging/import-messages'] = 'messaging/import_messages';
+$route['messaging/send-messages'] = 'messaging/send_messages';
+
+$route['add-contact'] = 'administration/contacts/add_contact';
+$route['edit-contact/(:num)'] = 'administration/contacts/edit_contact/$1';
+$route['contacts'] = 'administration/contacts/index';
+$route['contacts/(:num)'] = 'administration/contacts/index/$1';
+$route['delete-contact/(:num)'] = 'administration/contacts/delete_contact/$1';
+$route['contacts/validate-import/(:num)'] = 'administration/contacts/do_messages_import/$1';
+$route['contacts/import-template'] = 'administration/contacts/import_template';
+$route['contacts/import-messages'] = 'administration/contacts/import_messages';
+
+$route['messaging/message-templates'] = 'messaging/message_templates';
+$route['messaging/add-template'] = 'messaging/add_message_template';
+$route['messaging/edit-message-template/(:num)'] = 'messaging/edit_message_template/$1';
+$route['messaging/activate-message-template/(:num)'] = 'messaging/activate_message_template/$1';
+$route['messaging/deactivate-message-template/(:num)'] = 'messaging/deactivate_message_template/$1';
+$route['template-detail/(:num)'] = 'messaging/template_detail/$1';
+$route['set-search-parameters/(:num)'] = 'messaging/set_search_parameters/$1';
+$route['create-batch-items/(:num)'] = 'messaging/create_batch_items/$1';
+
+$route['send-messages/(:num)/(:num)'] = 'messaging/send_batch_messages/$1/$2';
+$route['view-senders/(:num)/(:num)'] = 'messaging/view_persons_for_batch/$1/$2';
+$route['view-schedules/(:num)/(:num)'] = 'messaging/view_schedules/$1/$2';
+$route['messaging/dashboard'] = 'messaging/dashboard';
+$route['delete-message-contact/(:num)/(:num)/(:num)'] = 'messaging/delete_contact/$1/$2/$3';
+$route['create-new-schedule/(:num)/(:num)'] = 'messaging/create_new_schedule/$1/$2';
+
+$route['bulk-delete-contacts/(:num)'] = 'administration/contacts/bulk_delete_contacts/$1';
+
+$route['activate-schedule/(:num)/(:num)/(:num)'] = 'messaging/activate_schedule/$1/$2/$3';
+$route['deactivate-schedule/(:num)/(:num)/(:num)'] = 'messaging/deactivate_schedule/$1/$2/$3';
+$route['delete-schedule/(:num)/(:num)/(:num)'] = 'messaging/delete_schedule/$1/$2/$3';

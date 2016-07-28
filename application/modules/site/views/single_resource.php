@@ -16,9 +16,7 @@ $resource_category_description = $rs[0]->resource_category_description;
                    
                     <div class="kf_inr_breadcrumb">
 						<ul>
-							<li><a href="<?php echo site_url();?>home">Home</a></li>
-							<li><a href="<?php echo site_url();?>resources">Resources</a></li>
-							<li><a href="#"><?php echo $title;?></a></li>
+							<?php echo $this->site_model->get_breadcrumbs();?>
 						</ul>
 					</div>
                 </div>
@@ -110,7 +108,7 @@ $resource_category_description = $rs[0]->resource_category_description;
 													$resource_result .= ' <div class="col-md-4 col-sm-4">
 																			<div class="kf_event_speakers_des">
 																				<figure><i  class="fa '.$fa.'" aria-hidden="true"></i></figure>
-																				<h5><a href="'.$resource_location.''.$resource_image.'" target="_blank">Download</a></h5>
+																				<h5><a href="'.$resource_location.''.$resource_image.'" target="_blank">'.$resource_name.'</a></h5>
 																				
 																			</div>
 																		</div>';
