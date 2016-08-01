@@ -820,4 +820,9 @@ class Messaging extends MX_Controller
 			echo "no";
 		}
 	}
+	
+	public function test_messages($phone = '0726149351', $message = 'Hello World')
+	{
+		$this->messaging_model->sms($phone,$message);
+	}
 }

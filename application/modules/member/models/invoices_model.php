@@ -70,7 +70,7 @@ class Invoices_model extends CI_Model
 			$items = array(
 				   'invoice_id'					=> $invoice_id,
 				   'invoice_item_amount'		=> 12000,
-					'invoice_item_description'	=> 'Annual subscription'
+					'invoice_type_id'	=> 1
 			   );
 	
 			if($this->db->insert('invoice_item', $items))
@@ -512,175 +512,6 @@ class Invoices_model extends CI_Model
 		return $query;
 	}
 	
-	/*
-	*
-	*	Refund invoice
-	*
-	*/
-	public function refund_invoice($invoice_number, $dobi_id)
-	{
-		$dobi_data = array();
-		$invoice_items = array();
-		$invoice_details = array();
-		$created_invoice = '';
-		
-		$this->db->where(array('invoice_number' => $invoice_number, 'dobi_id' => $dobi_id));
-		$query = $this->db->get('invoice');
-		
-		if($query->num_rows() > 0)
-		{
-			$row = $query->row();
-			
-			$member_id = $row->member_id;
-			$invoice_id = $row->invoice_id;
-			$member_query = $this->get_member($member_id);
-			$member_email = '';
-			$member_total = 0;
-			$total_price = 0;
-			$total_additional_price = 0;
-			
-			if($member_query->num_rows() > 0)
-			{
-				$row = $member_query->row();
-				$member_email = $row->member_email;
-			}
-			$created_invoice .= $invoice_id.'-';
-			
-			//check number of invoice items
-			$invoice_items = $this->invoices_model->get_invoice_items($invoice_id);
-			$total_invoice_items = $invoice_items->num_rows();
-			
-			if($total_invoice_items > 0)
-			{
-				foreach($invoice_items->result() as $res)
-				{
-					$invoice_item_id = $res->invoice_item_id;
-					$product_id = $res->product_id;
-					$invoice_item_quantity = $res->invoice_item_quantity;
-					$invoice_item_price = $res->invoice_item_price;
-					$product_name = $res->product_name;
-					$total_price += ($invoice_item_quantity * $invoice_item_price);
-					
-					//features
-					$this->db->select('invoice_item_feature.*, product_feature.feature_value, product_feature.thumb, feature.feature_name');
-					$this->db->where('product_feature.feature_id = feature.feature_id AND invoice_item_feature.product_feature_id = product_feature.product_feature_id AND invoice_item_feature.invoice_item_id = '.$invoice_item_id);
-					$invoice_item_features = $this->db->get('invoice_item_feature, product_feature, feature');
-					
-					if($invoice_item_features->num_rows() > 0)
-					{
-						foreach($invoice_item_features->result() as $feat)
-						{
-							$product_feature_id = $feat->product_feature_id;
-							$added_price = $feat->additional_price;
-							$feature_name = $feat->feature_name;
-							$feature_value = $feat->feature_value;
-							$feature_image = $feat->thumb;
-							$total_additional_price += $added_price;
-						}
-					}
-					
-					//create invoice items
-					array_push($invoice_items, array(
-							"name" => $product_name,
-							"price" => ($total_price + $total_additional_price),
-							"identifier" => $invoice_item_id
-						)
-					);
-				}
-			}
-			$total = $total_price + $total_additional_price;
-			//add dobi data to the dobi_data array
-			array_push($dobi_data, array(
-					'email' => $member_email, 
-					'amount' => $total
-				)
-			);
-			array_push($invoice_details, array(
-					'receiver' => $member_email, 
-					'invoiceData' => array(
-						'item' => $invoice_items
-					)
-				)
-			);
-		}
-		
-		//create return data
-		$return['dobi_data'] = $dobi_data;
-		$return['invoice_details'] = $invoice_details;
-		$return['created_invoice'] = $created_invoice;
-		
-		return $return;
-	}
-	
-	public function create_invoice($dobi_id, $status = 4)
-	{
-		$invoice_number = $this->invoices_model->create_invoice_number();
-		$data = array(
-					'member_id'		=>	$this->session->userdata('member_id'),
-					'created'	=>	date('Y-m-d H:i:s'),
-					'invoice_status_id'	=>	$status,
-					'invoice_number'	=>	$invoice_number,
-					'dobi_id'			=>	$dobi_id,
-					'invoice_instructions'=>	$this->session->userdata('invoice_instructions'),
-					'payment_method_id'	=>	$this->input->post('payment_type')
-				);
-		
-		$options = $this->session->userdata('options');
-		$selected_iron_cost = 0;
-		$selected_fold_cost = 0;
-		$selected_delivery_cost = 0;
-		
-		if(is_array($options))
-		{
-			if(isset($options['iron_cost']))
-			{
-				$data['iron_cost'] = $options['iron_cost'];
-				$data['iron'] = 1;
-			}
-			if(isset($options['fold_cost']))
-			{
-				$data['fold_cost'] = $options['fold_cost'];
-				$data['fold'] = 1;
-			}
-			if(isset($options['delivery_cost']))
-			{
-				$data['delivery_cost'] = $options['delivery_cost'];
-				$data['delivery'] = 1;
-			}
-		}
-		
-		if($this->db->insert('invoice', $data))
-		{
-			//get invoice id
-			$invoice_id = $this->db->insert_id();
-			
-			//save invoice items
-			foreach ($this->cart->contents() as $items): 
-
-				//save invoice item
-				$data2 = array(
-					'category_id' => $items['id'],
-					'invoice_id' => $invoice_id,
-					'invoice_item_quantity' => $items['qty'],
-					'invoice_item_price' => $items['price']
-				);
-				
-				if($this->db->insert('invoice_item', $data2))
-				{
-					$invoice_item_id = $this->db->insert_id();
-				}
-	
-			endforeach;
-			
-			return $invoice_id;
-		}
-		
-		else
-		{
-			return FALSE;
-		}
-	}
-	
 	public function send_mpesa_receipt_email($invoice_id)
 	{
 		//send account registration email
@@ -808,7 +639,7 @@ class Invoices_model extends CI_Model
 		$this->db->where("invoice_number LIKE 'IOD-INV-".date('y')."-%'");
 		$this->db->select('MAX(invoice_number) AS number');
 		$query = $this->db->get();
-		$preffix = "IOD/INV/".date('y').'-';
+		$preffix = "IODk/";
 		
 		if($query->num_rows() > 0)
 		{
@@ -816,12 +647,12 @@ class Invoices_model extends CI_Model
 			$number =  $result[0]->number;
 			$real_number = str_replace($preffix, "", $number);
 			$real_number++;//go to the next number
-			$number = $preffix.sprintf('%06d', $real_number);
+			$number = $preffix.sprintf('%04d', $real_number);
 		}
 		else{//start generating receipt numbers
-			$number = $preffix.sprintf('%06d', 1);
+			$number = $preffix.sprintf('%04d', 1);
 		}
 		
-		return $number;
+		return $number.'/'.date('Y');
 	}
 }

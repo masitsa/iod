@@ -845,5 +845,33 @@ class Site extends MX_Controller
 	{
 		$tweets = $this->site_model->get_tweets();
 	}
+	
+	public function convertNumber($number)
+	{
+		$this->load->model('numbers_model');
+		$value = ucwords($this->numbers_model->convertNumber($number));
+		echo $value.' only ********************* KSH';
+	}
+	
+	public function create_invoices()
+	{
+		//get all members
+		$this->load->model('member/invoices_model');
+		$member_numbers = array('MIoD048', 'MIoD064', 'MIoD076', 'MIoD179', 'MIoD207', 'MIoD711', 'MIoD712', 'MIoD713', 'MIoD748', 'MIoD749', 'MIoD750', 'MIoD751', 'MIoD752', 'MIoD753', 'MIoD754', 'MIoD755', 'MIoD761', 'MIoD781', 'MIoD782', 'MIoD783', 'MIoD784', 'MIoD785', 'MIoD786', 'MIoD795', 'MIoD796', 'MIoD797', 'MIoD798', 'MIoD801', 'MIoD802', 'MIoD803', 'MIoD805', 'MIoD806', 'MIoD807', 'MIoD808', 'MIoD809', 'MIoD810', 'MIoD811', 'MIoD812', 'MIoD813', 'MIoD814', 'MIoD815', 'MIoD816', 'MIoD817', 'MIoD818', 'MIoD819', 'MIoD820', 'MIoD821', 'MIoD822', 'MIoD823', 'MIoD824', 'MIoD825', 'MIoD826', 'MIoD827', 'MIoD828', 'MIoD829', 'MIoD830', 'MIoD831', 'MIoD832', 'MIoD833', 'MIoD834', 'MIoD835', 'MIoD836', 'MIoD838', 'MIoD840', 'MIoD841', 'MIoD843', 'MIoD845', 'MIoD846', 'MIoD847', 'MIoD848', 'MIoD849', 'MIoD850', 'MIoD851', 'MIoD852', 'MIoD853', 'MIoD854', 'MIoD855', 'MIoD856', 'MIoD857', 'MIoD858', 'MIoD859', 'MIoD860', 'MIoD861', 'MIoD862', 'MIoD863', 'MIoD864', 'MIoD865', 'MIoD866', 'MIoD867', 'MIoD868', 'MIoD869', 'MIoD870');
+		$this->db->where_not_in('member_number', $member_numbers);
+		$this->db->where('member_number');
+		$query = $this->db->get('member');
+		
+		if($query->num_rows() > 0)
+		{
+			foreach($query->result() as $res)
+			{
+				$member_id = $res->member_id;
+				if($this->invoices_model->create_member_invoice($member_id))
+				{
+				}
+			}
+		}
+	}
 }
 ?>

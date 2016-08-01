@@ -384,7 +384,7 @@ class Messaging_model extends CI_Model
 	        $sms_suffix = '';
 
 	    }
-
+		$from = 'IoD-Kenya';
 	    $actual_message = $message.' '.$sms_suffix;
 	    // var_dump($actual_message); die();
 		// get the current branch code
@@ -396,7 +396,7 @@ class Messaging_model extends CI_Model
 		try 
 		{
 			//$results = $this->africastalkinggateway->sendMessage($phone_number, $actual_message, $sms_from=22384);
-			$results = $this->africastalkinggateway->sendMessage($phone_number, $actual_message);
+			$results = $this->africastalkinggateway->sendMessage($phone_number, $actual_message, $from);
 			
 			//var_dump($results);die();
 			foreach($results as $result) {

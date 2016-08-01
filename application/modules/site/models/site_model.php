@@ -990,6 +990,7 @@ class Site_model extends CI_Model
 		//Verify your authentication details
 		$content = $connection->get('account/verify_credentials');
 	}
+	
 }
 
 ?>
